@@ -3,7 +3,7 @@ import { List, Map } from 'immutable';
 
 export default function(state = Map({}), action) {
   switch (action.type) {
-    case types.GET_CHARACTER_INFO: {
+    case types.UPDATE_CHARACTER_STATS: {
       const character = action.payload;
       return state.merge(Map({
         maxHp: character.maxHp,

@@ -1,11 +1,8 @@
 import axios from 'axios';
 import _ from 'lodash';
-import sortedCards from '../utils/sort';
+import * as types from '../constants/action_types';
 
-const ROOT_URL = 'http://localhost:3000';
-// New ES6 injection uses back tick `` with ${} to pass in, very cool!!!
-
-export const GET_CHARACTER_INFO = 'GET_CHARACTER_INFO';
+export const ROOT_URL = 'http://localhost:3000';
 
 export function fetchCharacters() {
   const url = `${ROOT_URL}/characters`;
@@ -13,9 +10,48 @@ export function fetchCharacters() {
     .then(response => {
       return response.data[0];
     });
-
   return {
-    type: GET_CHARACTER_INFO,
+    type: types.GET_CHARACTER_INFO,
     payload: request
+  };
+}
+
+export function fetchEnemies() {
+  const url = `${ROOT_URL}/monsters`;
+  const request = axios.get(url)
+    .then(response => {
+      return response.data;
+    });
+  return {
+    type: types.GET_ENEMY_INFO,
+    payload: request
+  };
+}
+
+export function setBattleScene(area) {
+  return {
+    type: types.SET_BATTLE_SCENE,
+    payload: area
+  };
+}
+
+export function getEnemySelectedTarget(name, str) {
+  return {
+    type: types.SET_ENEMY_SELECTED_TARGET,
+    payload: { name, str }
+  };
+}
+
+export function updateCharacterStats(obj) {
+  return {
+    type: types.UPDATE_CHARACTER_STATS,
+    payload: obj
+  };
+}
+
+export function setEnemyAttacking(boolean) {
+  return {
+    type: types.SET_ENEMY_ATTACKING_BOOLEAN,
+    payload: boolean
   };
 }
