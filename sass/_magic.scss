@@ -1,0 +1,51 @@
+.fire1-magic {
+  background-image: url('../images/fire.png');
+  background-size: cover;
+  opacity: .8;
+  height: 100px;
+  width: 80px;
+  margin-left: 15px;
+}
+
+.fire1-magic-move {
+  margin-left: -10px;
+}
+
+.cure1-magic {
+  background-image: url('../images/cure.png');
+  background-size: 500px;
+  opacity: .8;
+  height: 100px;
+  width: 100px;
+  margin-left: 15px;
+  margin-top: -20px;
+}
+
+.cure1-magic-move {
+  margin-top: 0;
+  background-position: 5px -190px;
+}
+
+.lightning1-magic {
+  background-image: url('../images/lightning.png');
+  background-size: cover;
+  opacity: .6;
+  height: 100px;
+  width: 80px;
+  margin-left: 15px;
+}
+
+.cloud-magic {
+  background-image: url('../images/dark-cloud.png');
+  background-size: cover;
+  position: absolute;
+  opacity: .6;
+  height: 50px;
+  width: 130px;
+  left: -20px;
+  top: -30px;
+}
+
+.lightning1-magic-move {
+  margin-left: -10px;
+}

@@ -1,0 +1,36 @@
+
+.items {
+  background-image: url('../images/weapons.png');
+  background-size: 1300px;
+  height: 50px;
+  width: 50px;
+  background-position-y: -950px;
+}
+
+.health-tonic {
+  background-position-x: -540px;
+}
+
+.super-health-tonic {
+  background-position-x: -775px;
+}
+
+.magic-tonic {
+  background-position-x: -590px;
+}
+
+.super-magic-tonic {
+  background-position-x: -710px;
+}
+
+.elixir {
+  background-position-x: -240px;
+}
+
+.revive {
+  background-position-y: -1010px;
+}
+
+.item-sword {
+  background-position: 0 0;
+}

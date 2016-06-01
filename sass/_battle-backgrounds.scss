@@ -1,0 +1,22 @@
+.battle {
+  height: 100vh;
+  width: 100vw;
+  background-size: cover;
+  position: relative;
+}
+
+.forest-battle {
+  background-image: url('../images/forest-battle.png');
+}
+
+.desert-battle {
+  background-image: url('../images/desert-battle.png');
+}
+
+.grass-battle {
+  background-image: url('../images/grass-battle.png');
+}
+
+.boss-battle {
+  background-image: url('../images/boss-battle.png');
+}

@@ -1,0 +1,109 @@
+.battle-hero-position1-front {
+  position: absolute;
+  top: 30%;
+  right: 20%;
+}
+
+.battle-hero-position2-front {
+  position: absolute;
+  top: 50%;
+  right: 20%;
+}
+
+.battle-hero-position1-back {
+  position: absolute;
+  top: 30%;
+  right: 15%;
+}
+
+.battle-hero-position2-back {
+  position: absolute;
+  top: 50%;
+  right: 15%;
+}
+
+.battle-hero-red-boy {
+  background-position: .6rem .8rem;
+}
+
+.battle-hero-position1 {
+  position: absolute;
+  top: 30%;
+  background-position: -9.5rem .8rem;
+}
+
+.hero-turn {
+  right: 25%;
+}
+
+.battle-hero-white-girl {
+  background-position: .6rem -9rem;
+}
+
+.battle-hero-position2 {
+  position: absolute;
+  top: 50%;
+  background-position: -9.5rem -9.1rem;
+}
+
+.battle-ff-sprite {
+  background-image: url('../images/battle-sprites.png');
+  background-size: 70rem;
+  height: 10rem;
+  width: 10rem;
+}
+
+.dead {
+  background-position-x: -60rem;
+}
+
+.defense {
+  background-position-x: -31rem;
+}
+
+.battle-hero-red-boy-movement {
+  top: 30.5%;
+}
+
+.battle-hero-white-girl-movement {
+  top: 50.5%;
+}
+
+.run1 {
+  background-position-x: -40rem;
+  right: 10%;
+}
+
+.run2 {
+  background-position-x: -50rem;
+  right: 9.5%;
+}
+
+.battle-hero-attack {
+  background-position-x: -21rem;
+}
+
+.attack-enemy1 {
+  top: 31%;
+  right: 55%;
+}
+
+.attack-enemy2 {
+  right: 55%;
+  top: 47%;
+}
+
+.attack-enemy3 {
+  top: 43%;
+  right: 70%;
+}
+
+.attack-enemy4 {
+  top: 30%;
+  right: 73%;
+}
+
+.attack-enemy5 {
+  top: 60%;
+  right: 72%;
+}
