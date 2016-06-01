@@ -200,7 +200,7 @@
     {
       "id": 1,
       "name": "Lesser Hornet",
-      "classes": "enemy-sprites enemy-sprite-small enemy-blue-hornet",
+      "classes": "enemy-blue-hornet",
       "sections": [
         "desert",
         "grass"
@@ -227,7 +227,7 @@
     {
       "id": 2,
       "name": "Lesser Mouse",
-      "classes": "enemy-sprites enemy-sprite-small enemy-gray-mouse",
+      "classes": "enemy-gray-mouse",
       "sections": [
         "desert",
         "grass"
@@ -254,7 +254,7 @@
     {
       "id": 3,
       "name": "Lesser Antman",
-      "classes": "enemy-sprites enemy-sprite-small enemy-yellow-antman",
+      "classes": "enemy-yellow-antman",
       "sections": [
         "desert"
       ],
@@ -280,7 +280,7 @@
     {
       "id": 4,
       "name": "Lesser Baby Demon",
-      "classes": "enemy-sprites enemy-sprite-small enemy-orange-babydemon",
+      "classes": "enemy-orange-babydemon",
       "sections": [
         "desert"
       ],
@@ -306,7 +306,7 @@
     {
       "id": 5,
       "name": "Lesser Tapeworm",
-      "classes": "enemy-sprites enemy-sprite-small enemy-blue-tapeworm",
+      "classes": "enemy-blue-tapeworm",
       "sections": [
         "desert",
         "grass"
@@ -333,7 +333,7 @@
     {
       "id": 6,
       "name": "Lesser Blob",
-      "classes": "enemy-sprites enemy-sprite-small enemy-blue-blob",
+      "classes": "enemy-blue-blob",
       "sections": [
         "desert",
         "grass"
@@ -360,7 +360,7 @@
     {
       "id": 7,
       "name": "Lesser Eagle",
-      "classes": "enemy-sprites enemy-sprite-small enemy-green-eagle",
+      "classes": "enemy-green-eagle",
       "sections": [
         "grass",
         "forest"
@@ -387,7 +387,7 @@
     {
       "id": 8,
       "name": "Greater Eagle",
-      "classes": "enemy-sprites enemy-sprite-small enemy-red-eagle",
+      "classes": "enemy-red-eagle",
       "sections": [
         "forest"
       ],
@@ -413,7 +413,7 @@
     {
       "id": 9,
       "name": "Greater Hornet",
-      "classes": "enemy-sprites enemy-sprite-small enemy-green-hornet",
+      "classes": "enemy-green-hornet",
       "sections": [
         "forest"
       ],
@@ -439,7 +439,7 @@
     {
       "id": 10,
       "name": "Lesser Brain",
-      "classes": "enemy-sprites enemy-sprite-small enemy-flying-yellow-brain",
+      "classes": "enemy-flying-yellow-brain",
       "sections": [
         "grass",
         "forest"
@@ -466,7 +466,7 @@
     {
       "id": 11,
       "name": "Greater Brain",
-      "classes": "enemy-sprites enemy-sprite-small enemy-flying-red-brain",
+      "classes": "enemy-flying-red-brain",
       "sections": [
         "forest"
       ],
@@ -492,7 +492,7 @@
     {
       "id": 12,
       "name": "Lesser Fish",
-      "classes": "enemy-sprites enemy-sprite-small enemy-yellow-fish",
+      "classes": "enemy-yellow-fish",
       "sections": [
         "desert",
         "water"
@@ -519,7 +519,7 @@
     {
       "id": 13,
       "name": "Greater Fish",
-      "classes": "enemy-sprites enemy-sprite-small enemy-blue-fish",
+      "classes": "enemy-blue-fish",
       "sections": [
         "desert",
         "water"
@@ -546,7 +546,7 @@
     {
       "id": 14,
       "name": "Green Blob",
-      "classes": "enemy-sprites enemy-sprite-small enemy-green-blob",
+      "classes": "enemy-green-blob",
       "sections": [
         "grass",
         "forest"
