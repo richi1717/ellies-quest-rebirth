@@ -2,6 +2,7 @@ html {
   font-family: 'Orbitron', sans-serif;
   box-sizing: border-box;
   color: transparent;
+  font-size: 10px;
 }
 
 *, *::before, *::after {
@@ -12,7 +13,13 @@ html {
 body {
   margin: 0;
   background-color: #212527;
-  position: relative;
+  // font-size: 14px;
+  // position: relative;
+}
+
+.battle-scene-container {
+  flex: 1;
+  height: 50rem;
 }
 
 img {
@@ -25,23 +32,8 @@ h4 {
   color: #808080;
 }
 
-th {
-  text-align: left;
-  height: 1px;
-}
-
-tr + tr {
-  font-family: 'Istok Web', sans-serif;
-  font-size: 22pt;
-  height: 1px;
-}
-
-tr:nth-child(3) {
-  height: 85px;
-}
-
 .mountains {
-  background-image: url('../images/mountains.png');
+  background-image: url('/resources/images/mountains.png');
   background-size: cover;
   height: 200px;
   width: 790px;
@@ -247,7 +239,7 @@ ul.opening-right {
 }
 
 .home-bgi {
-  // background-image: url('../images/bombfallout.png');
+  // background-image: url('/resources/images/bombfallout.png');
   -webkit-background-size: cover;
   background-size: cover;
   height: 100px;
@@ -404,31 +396,31 @@ h1 {
 }
 
 .grass {
-  background-image: url('../images/grass.png');
+  background-image: url('/resources/images/grass.png');
   background-size: cover;
 }
 
 .forest {
-  background-image: url('../images/forest.png');
+  background-image: url('/resources/images/forest.png');
   background-size: 50px;
 }
 
 .trees {
-  // background-image: url('../images/trees.png');
+  // background-image: url('/resources/images/trees.png');
 }
 
 .desert {
-  background-image: url('../images/sand1.png');
+  background-image: url('/resources/images/sand1.png');
   background-size: cover;
 }
 
 .water {
-  background-image: url('../images/water5.png');
+  background-image: url('/resources/images/water5.png');
   background-size: cover;
 }
 
 .rain {
-  background-image: url('../images/rain.png');
+  background-image: url('/resources/images/rain.png');
   height: 100vh;
   width: 100vw;
   position: absolute;
@@ -457,7 +449,7 @@ h1 {
 }
 
 .ff-sprite {
-  background-image: url('../images/ff1-sprites.png');
+  background-image: url('/resources/images/ff1-sprites.png');
   background-position: 0 0;
   background-size: 1200px;
 }
@@ -523,36 +515,10 @@ h1 {
 
 
  .boss {
-   background-image: url('../images/grass.png');
+   background-image: url('/resources/images/grass.png');
    background-size: cover;
  }
 
-.battle-menu-main {
-  position: absolute;
-  color: #C2C3C7;
-  text-indent: 40px;
-  font-size: 20pt;
-  text-shadow: 2px 1px #8a8a7b;
-  bottom: 0;
-  left: 0;
-  height: 200px;
-  width: 600px;
-  border: 2px solid rgba(255, 255, 255, .20);
-  box-shadow: 3px 3px rgb(10, 10, 10), -3px -3px rgb(10, 10, 10), -3px 3px rgb(10, 10, 10), 3px -3px rgb(10, 10, 10);
-  background-color: rgba(15, 14, 45, .65);
-  border-radius: 5px;
-  z-index: 1;
-}
-
-.battle-menu-main > li {
-  font-family: 'Istok Web', sans-serif;
-  font-size: 22pt;
-  list-style-type: none;
-  margin-top: 0px;
-  margin-bottom: 20px;
-  text-indent: 40px;
-  text-shadow: 2px 1px #8a8a7b;
-}
 
 
 
@@ -575,104 +541,6 @@ h1 {
  *  Menus
  */
 
-.battle-menu-main-stats {
-  position: absolute;
-  color: #C2C3C7;
-  text-indent: 40px;
-  font-size: 20pt;
-  text-shadow: 2px 1px #8a8a7b;
-  bottom: 0;
-  right: 0;
-  height: 200px;
-  width: 676px;
-  border: 2px solid rgba(255, 255, 255, .20);
-  box-shadow: 3px 3px rgb(10, 10, 10), -3px -3px rgb(10, 10, 10), -3px 3px rgb(10, 10, 10), 3px -3px rgb(10, 10, 10);
-  background-color: rgba(15, 14, 45, .65);
-  border-radius: 5px;
-}
-
-.battle-menu-main-stats > li {
-  font-family: 'Istok Web', sans-serif;
-  font-size: 22pt;
-  list-style-type: none;
-  margin-top: -5px;
-  margin-bottom: 25px;
-  text-indent: 40px;
-  text-shadow: 2px 1px #8a8a7b;
-}
-
-.battle-menu-turn {
-  color: #C2C3C7;
-  text-indent: 40px;
-  font-size: 20pt;
-  text-shadow: 2px 1px #8a8a7b;
-  margin-top: -210px;
-  margin-left: 150px;
-  height: 200px;
-  min-width: 300px;
-  border: 2px solid rgba(255, 255, 255, .20);
-  box-shadow: 3px 3px rgb(10, 10, 10), -3px -3px rgb(10, 10, 10), -3px 3px rgb(10, 10, 10), 3px -3px rgb(10, 10, 10);
-  background-color: rgba(15, 14, 45, .85);
-  border-radius: 5px;
-  z-index: 1;
-}
-
-.battle-menu-turn > li {
-  font-family: 'Istok Web', sans-serif;
-  font-size: 22pt;
-  list-style-type: none;
-  margin-top: 0px;
-  margin-bottom: -5px;
-  text-indent: 10px;
-  text-shadow: 2px 1px #8a8a7b;
-}
-
-.battle-menu-turn > li:nth-child(6) {
-  position: absolute;
-  top: 0;
-  right: 10px;
-}
-
-.battle-menu-turn > ul > li{
-  font-family: 'Istok Web', sans-serif;
-  font-size: 22pt;
-  list-style-type: none;
-  margin-bottom: -5px;
-  text-shadow: 2px 1px #8a8a7b;
-}
-
-.menu-attack {
-  min-width: 600px;
-  margin-left: 200px;
-  margin-top: -230px;
-  z-index: 1;
-}
-
-.menu-magic {
-  min-width: 600px;
-  margin-left: 200px;
-  margin-top: -230px;
-  z-index: 1;
-}
-
-.magic-attack-menu {
-  margin-left: 250px;
-  margin-top: -250px;
-  z-index: 1;
-}
-
-.menu-magic {
-  min-width: 600px;
-  margin-left: 200px;
-  margin-top: -230px;
-  z-index: 1;
-}
-
-.sub-menu-row2 {
-  margin-left: 400px;
-  margin-top: -0px;
-  z-index: 1
-}
 
 span > div {
   font-family: 'Istok Web', sans-serif;
@@ -768,11 +636,7 @@ span > div:nth-child(7) {
   }
 }
 
-button.menu-select {
-  padding: 0 0px;
-  text-align: left;
-  text-shadow: 2px 1px #8a8a7b;
-}
+
 
 button.game-over-button {
   padding: 0 0px;
@@ -1076,7 +940,7 @@ button:focus {
   width: 670px;
   height: 353px;
   margin: 2% auto;
-  background: url('../images/ssscroll.png') left center;
+  background: url('/resources/images/ssscroll.png') left center;
   animation: play 10s steps(3) infinite;
 }
 

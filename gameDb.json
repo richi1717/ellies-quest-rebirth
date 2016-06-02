@@ -188,8 +188,7 @@
     },
     {
       "id": 3,
-      "type": "water",
-      "img": "../web/src/images/water3.png"
+      "type": "water"
     },
     {
       "id": 4,

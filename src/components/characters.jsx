@@ -2,16 +2,16 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import axios from 'axios';
-import { fetchCharacters, setBattleScene, setEnemyAttacking, updateCharacterStats, ROOT_URL } from '../actions/index';
 import classnames from 'classnames';
-import PureFunction from './pure-component';
-import { shallowEqual } from 'react-pure-render';
+import PureComponent from './pure-component';
+
+import { fetchCharacters, setBattleScene, setEnemyAttacking, updateCharacterStats, ROOT_URL } from '../actions/index';
 
 import '../../sass/style.scss';
 import '../../sass/_battle-character.scss';
 import '../../sass/_battle-backgrounds.scss';
 
-class Character extends PureFunction {
+class Character extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {

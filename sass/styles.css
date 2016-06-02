@@ -41,7 +41,7 @@ tr:nth-child(3) {
 }
 
 .mountains {
-  background-image: url('src/images/mountains.png');
+  background-image: url('src/resources/images/mountains.png');
   background-size: cover;
   height: 200px;
   width: 790px;
@@ -51,7 +51,7 @@ tr:nth-child(3) {
 }
 
 .boss {
-  background-image: url('src/images/grass.png');
+  background-image: url('src/resources/images/grass.png');
   background-size: cover; 
 }
 
@@ -251,7 +251,7 @@ ul.opening-right {
 }
 
 .home-bgi {
-  background-image: url('src/images/bombfallout.png');
+  background-image: url('src/resources/images/bombfallout.png');
   -webkit-background-size: cover;
   background-size: cover;
   height: 100px;
@@ -408,31 +408,31 @@ h1 {
 }
 
 .grass {
-  background-image: url('src/images/grass.png');
+  background-image: url('src/resources/images/grass.png');
   background-size: cover;    
 }
 
 .forest {
-  background-image: url('src/images/forest.png');
+  background-image: url('src/resources/images/forest.png');
   background-size: 50px;
 }
 
 .trees {
-  background-image: url('src/images/trees.png');
+  background-image: url('src/resources/images/trees.png');
 }
 
 .desert {
-  background-image: url('src/images/sand1.png');
+  background-image: url('src/resources/images/sand1.png');
   background-size: cover;
 }
 
 .water {
-  background-image: url('src/images/water5.png');
+  background-image: url('src/resources/images/water5.png');
   background-size: cover;
 }
 
 .rain {
-  background-image: url('src/images/rain.png');
+  background-image: url('src/resources/images/rain.png');
   height: 100vh;
   width: 100vw;
   position: absolute;
@@ -461,7 +461,7 @@ h1 {
 }
 
 .ff-sprite {
-  background-image: url('src/images/ff1-sprites.png');
+  background-image: url('src/resources/images/ff1-sprites.png');
   background-position: 0 0;
   background-size: 1200px;
 } 
@@ -536,19 +536,19 @@ h1 {
 }
 
 .forest > div {
-  background-image: url('src/images/forest-battle.png');
+  background-image: url('src/resources/images/forest-battle.png');
 }
 
 .desert > div {
-  background-image: url('src/images/desert-battle.png');
+  background-image: url('src/resources/images/desert-battle.png');
 }
 
 .grass > div {
-  background-image: url('src/images/grass-battle.png');
+  background-image: url('src/resources/images/grass-battle.png');
 }
 
 .boss > div {
-  background-image: url('src/images/boss-battle.png');
+  background-image: url('src/resources/images/boss-battle.png');
 }
 
 .battle-menu-main {
@@ -724,7 +724,7 @@ span > div:nth-child(7) {
 }
 
 .fire1-magic {
-  background-image: url('src/images/fire.png');
+  background-image: url('src/resources/images/fire.png');
   background-size: cover;
   opacity: .8;
   height: 100px;
@@ -737,7 +737,7 @@ span > div:nth-child(7) {
 }
 
 .cure1-magic {
-  background-image: url('src/images/cure.png');
+  background-image: url('src/resources/images/cure.png');
   background-size: 500px;
   opacity: .8;
   height: 100px;
@@ -752,7 +752,7 @@ span > div:nth-child(7) {
 }
 
 .lightning1-magic {
-  background-image: url('src/images/lightning.png');
+  background-image: url('src/resources/images/lightning.png');
   background-size: cover;
   opacity: .6;
   height: 100px;
@@ -761,7 +761,7 @@ span > div:nth-child(7) {
 }
 
 .cloud-magic {
-  background-image: url('src/images/dark-cloud.png');
+  background-image: url('src/resources/images/dark-cloud.png');
   background-size: cover;
   position: absolute;
   opacity: .6;
@@ -847,7 +847,7 @@ span > div:nth-child(7) {
 }
 
 .battle-ff-sprite {
-  background-image: url('src/images/battle-sprites.png');
+  background-image: url('src/resources/images/battle-sprites.png');
   background-size: 700px;
 } 
 
@@ -961,7 +961,7 @@ span > div:nth-child(7) {
  */
 
 .enemy-sprites {
-  background-image: url('src/images/monsters2.png');
+  background-image: url('src/resources/images/monsters2.png');
   background-size: 2220px;
 }
 
@@ -1126,7 +1126,7 @@ span > div:nth-child(7) {
 }
 
 .boss-ryan {
-  background-image: url('src/images/ryan.png');
+  background-image: url('src/resources/images/ryan.png');
   background-size: cover;
   height: 450px;
   width: 450px;
@@ -1453,7 +1453,7 @@ button:focus {
   width: 670px;
   height: 353px;
   margin: 2% auto;
-  background: url('src/images/ssscroll.png') left center;
+  background: url('src/resources/images/ssscroll.png') left center;
   animation: play 10s steps(3) infinite;
 }
 
@@ -1506,7 +1506,7 @@ button:focus {
  */
 
 .items {
-  background-image: url('src/images/weapons.png');
+  background-image: url('src/resources/images/weapons.png');
   background-size: 1300px;
   height: 50px;
   width: 50px;

@@ -59,9 +59,13 @@ module.exports = {
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
         loaders: [
-          'url?limit=8192',
+          'url?limit=8192?',
           'img'
         ]
+      },
+      {
+        test: /\.mp3$/,
+        loaders: ["file-loader"]
       }
     ]
   },

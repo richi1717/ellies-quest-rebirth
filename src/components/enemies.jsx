@@ -27,6 +27,7 @@ class Enemies extends Component {
           onClick={this.test.bind(this)}
           className={classnames(enemyClass) + " " + this.props.enemyClass + " enemy" + this.props.position}
         />
+        {this.state.isAttacking ? this.setMusic() : null}
       </div>
     );
   }
@@ -38,8 +39,24 @@ class Enemies extends Component {
       this.props.setEnemyAttacking(true);
     }
     this.setState({
-      isAttacking: !this.state.isAttacking
+      isAttacking: true
     });
+    setTimeout(() => {
+      this.setState({
+        isAttacking: false
+      });
+    }, 750);
+  }
+
+  setMusic() {
+    return (
+      <audio
+        controls name="media"
+        src="/resources/music/swipe.mp3"
+        autoPlay
+        type="audio/mpeg"
+      />
+    );
   }
 }
 

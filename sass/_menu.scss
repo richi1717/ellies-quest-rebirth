@@ -1,4 +1,146 @@
+.battle-menu-container {
+  display: flex;
+  min-height: 100vh;
+  .battle-menu-main {
+    flex: 1;
+    color: #C2C3C7;
+    text-indent: 40px;
+    font-size: 20pt;
+    text-shadow: 2px 1px #8a8a7b;
+    border: 2px solid rgba(255, 255, 255, .20);
+    box-shadow: 3px 3px rgb(10, 10, 10), -3px -3px rgb(10, 10, 10), -3px 3px rgb(10, 10, 10), 3px -3px rgb(10, 10, 10);
+    background-color: rgba(15, 14, 45, .65);
+    border-radius: 5px;
+    z-index: 1;
+    li {
+      font-family: 'Istok Web', sans-serif;
+      font-size: 22pt;
+      list-style-type: none;
+      margin-top: 0px;
+      margin-bottom: 20px;
+      text-indent: 40px;
+      text-shadow: 2px 1px #8a8a7b;
+    }
+  }
+
+  .battle-menu-main-stats {
+    flex: 1;
+    color: #C2C3C7;
+    text-indent: 40px;
+    font-size: 20pt;
+    text-shadow: 2px 1px #8a8a7b;
+    border: 2px solid rgba(255, 255, 255, .20);
+    box-shadow: 3px 3px rgb(10, 10, 10), -3px -3px rgb(10, 10, 10), -3px 3px rgb(10, 10, 10), 3px -3px rgb(10, 10, 10);
+    background-color: rgba(15, 14, 45, .65);
+    border-radius: 5px;
+    li {
+      font-family: 'Istok Web', sans-serif;
+      font-size: 22pt;
+      list-style-type: none;
+      margin-top: -5px;
+      margin-bottom: 25px;
+      text-indent: 40px;
+      text-shadow: 2px 1px #8a8a7b;
+    }
+
+    th {
+      text-align: left;
+      height: 1px;
+      font-size: 20pt;
+    }
+
+    tbody + tbody {
+      font-family: 'Istok Web', sans-serif;
+      font-size: 22pt;
+      height: 1px;
+    }
+  }
+}
+
+button.menu-select {
+  padding: 0 0px;
+  text-align: left;
+  text-shadow: 2px 1px #8a8a7b;
+  font-size: 22pt;
+}
+
 .character-turn {
   color: rgba(110, 110, 110, 1);
   text-shadow: 2px 1px rgba(250, 250, 250, .3);
+}
+
+
+
+
+.battle-menu-turn {
+  color: #C2C3C7;
+  text-indent: 40px;
+  font-size: 20pt;
+  text-shadow: 2px 1px #8a8a7b;
+  margin-top: -210px;
+  margin-left: 150px;
+  height: 200px;
+  min-width: 300px;
+  border: 2px solid rgba(255, 255, 255, .20);
+  box-shadow: 3px 3px rgb(10, 10, 10), -3px -3px rgb(10, 10, 10), -3px 3px rgb(10, 10, 10), 3px -3px rgb(10, 10, 10);
+  background-color: rgba(15, 14, 45, .85);
+  border-radius: 5px;
+  z-index: 1;
+}
+
+.battle-menu-turn > li {
+  font-family: 'Istok Web', sans-serif;
+  font-size: 22pt;
+  list-style-type: none;
+  margin-top: 0px;
+  margin-bottom: -5px;
+  text-indent: 10px;
+  text-shadow: 2px 1px #8a8a7b;
+}
+
+.battle-menu-turn > li:nth-child(6) {
+  position: absolute;
+  top: 0;
+  right: 10px;
+}
+
+.battle-menu-turn > ul > li{
+  font-family: 'Istok Web', sans-serif;
+  font-size: 22pt;
+  list-style-type: none;
+  margin-bottom: -5px;
+  text-shadow: 2px 1px #8a8a7b;
+}
+
+.menu-attack {
+  min-width: 600px;
+  margin-left: 200px;
+  margin-top: -230px;
+  z-index: 1;
+}
+
+.menu-magic {
+  min-width: 600px;
+  margin-left: 200px;
+  margin-top: -230px;
+  z-index: 1;
+}
+
+.magic-attack-menu {
+  margin-left: 250px;
+  margin-top: -250px;
+  z-index: 1;
+}
+
+.menu-magic {
+  min-width: 600px;
+  margin-left: 200px;
+  margin-top: -230px;
+  z-index: 1;
+}
+
+.sub-menu-row2 {
+  margin-left: 400px;
+  margin-top: -0px;
+  z-index: 1
 }
