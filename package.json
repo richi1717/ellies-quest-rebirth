@@ -4,6 +4,7 @@
   "description": "remake of the adventures of link and ellie",
   "main": "index.jsx",
   "license": "MIT",
+  "repository": "git@github.com:richi1717/ellies-quest-rebirth.git",
   "scripts": {
     "webpack-server": "webpack-dev-server --hot --progress --colors",
     "web-server": "json-server -w gameDb.json",
