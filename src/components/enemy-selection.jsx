@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchEnemies, setBattleScene, ROOT_URL } from '../actions/index';
-import Enemy from './enemies';
+import { setBattleScene, ROOT_URL } from '../actions/index';
+import Enemy from './enemy';
 import classnames from 'classnames';
 import axios from 'axios';
 import _ from 'lodash';
@@ -34,20 +34,6 @@ class Enemies extends Component {
     this.serverRequest.abort();
   }
 
-  render() {
-    const enemyClass = {
-      'enemy-sprites': true,
-      'enemy-attack-hero1': this.state.test,
-      'enemy-green-eagle': true,
-      'enemy1': true
-    };
-    return (
-      <div>
-        {this.state.done ? this.chooseEnemies(this.enemies) : null}
-      </div>
-    );
-  }
-
   chooseEnemies(x) {
     const e = [];
     const names = [];
@@ -60,7 +46,25 @@ class Enemies extends Component {
     }
     return e;
   }
+
+  render() {
+    const enemyClass = {
+      'enemy-sprites': true,
+      'enemy-attack-hero1': this.state.test,
+      'enemy-green-eagle': true,
+      'enemy1': true
+    };
+    return (
+      <div>
+      {this.state.done ? this.chooseEnemies(this.enemies) : null}
+      </div>
+    );
+  }
 }
+
+Enemies.propTypes = {
+  setBattleScene: PropTypes.func.isRequired
+};
 
 function mapStateToProps(state) {
   return {
@@ -69,7 +73,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchEnemies, setBattleScene }, dispatch);
+  return bindActionCreators({ setBattleScene }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Enemies);

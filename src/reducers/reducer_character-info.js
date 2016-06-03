@@ -23,6 +23,8 @@ export default function(state = Map({}), action) {
         refName: character.battleName
       }));
     }
+    default: {
+      return state;
+    }
   }
-  return state;
 }

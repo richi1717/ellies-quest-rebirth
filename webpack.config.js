@@ -13,6 +13,7 @@ const PATHS = {
 
 module.exports = {
   entry: [
+    'babel-polyfill',
     'webpack/hot/dev-server',
     'webpack-dev-server/client?http://localhost:8080',
     path.resolve(__dirname, 'src/index.jsx')
@@ -44,13 +45,15 @@ module.exports = {
     ],
     loaders: [
       {
-        test: /\.jsx?$/,
-        loaders: ["babel-loader"],
+        loader: "babel-loader",
         include: [
-          PATHS.app,
-          PATHS.components
+          path.resolve(__dirname, "src"),
         ],
-        exclude: /(node_modules|bower_components)/
+        test: /\.jsx?$/,
+        query: {
+          plugins: ['transform-runtime', 'transform-decorators-legacy'],
+          presets: ['es2015', 'es2016', 'stage-0', 'react'],
+        }
       },
       {
         test: /\.scss$/,

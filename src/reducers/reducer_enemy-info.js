@@ -6,6 +6,8 @@ export default function(state = Map({}), action) {
     case types.GET_ENEMY_INFO: {
       return state.merge(Map({enemies: action.payload}));
     }
+    default: {
+      return state;
+    }
   }
-  return state;
 }

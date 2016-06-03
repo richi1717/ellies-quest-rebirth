@@ -8,6 +8,8 @@ export default function(state = defaultState, action) {
     case types.SET_ENEMY_ATTACKING_BOOLEAN: {
       return state.merge(Map({isEnemyAttacking: action.payload}));
     }
+    default: {
+      return state;
+    }
   }
-  return state;
 }

@@ -1,5 +1,4 @@
-import '../../sass/_battle-backgrounds.scss';
-import React, { Component } from 'react';
+import React, { Component , PropTypes} from 'react';
 import { connect } from 'react-redux';
 
 import '../../sass/_battle-backgrounds.scss';
@@ -13,6 +12,11 @@ class BattleScene extends Component {
     );
   }
 }
+
+BattleScene.propTypes = {
+  battleScene: PropTypes.string,
+  children: PropTypes.node
+};
 
 function mapStateToProps(state) {
   return {

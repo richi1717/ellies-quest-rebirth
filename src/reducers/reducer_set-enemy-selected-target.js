@@ -9,6 +9,8 @@ export default function(state = Map({}), action) {
         enemyStr: action.payload.str
       }));
     }
+    default: {
+      return state;
+    }
   }
-  return state;
 }

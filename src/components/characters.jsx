@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import axios from 'axios';
 import classnames from 'classnames';
 import PureComponent from './pure-component';
+import { autobind } from 'core-decorators';
 
 import { fetchCharacters, setBattleScene, setEnemyAttacking, updateCharacterStats, ROOT_URL } from '../actions/index';
 
@@ -11,6 +12,7 @@ import '../../sass/style.scss';
 import '../../sass/_battle-character.scss';
 import '../../sass/_battle-backgrounds.scss';
 
+@autobind
 class Character extends PureComponent {
   constructor(props) {
     super(props);
@@ -19,8 +21,8 @@ class Character extends PureComponent {
       done: false
     };
 
-    this.getDamageAmount = this.getDamageAmount.bind(this);
-    this.setNewHeroStats = this.setNewHeroStats.bind(this);
+    // this.getDamageAmount = this.getDamageAmount.bind(this);
+    // this.setNewHeroStats = this.setNewHeroStats.bind(this);
   }
 
   componentDidMount() {
@@ -55,11 +57,11 @@ class Character extends PureComponent {
     };
     console.log('%cHealth: ' + this.props.heroCurrentHp, 'color: green');
     return (
-      <div onClick={this.test2.bind(this)}>
+      <div onClick={this.handleTest2}>
         <div>{this.props.heroCurrentHp}</div>
         <div
           ref={"hero" + this.props.numberTest}
-          onClick={this.test.bind(this)}
+          onClick={this.handleTest}
           className={classnames(heroClass)}
         />
       </div>
@@ -77,11 +79,11 @@ class Character extends PureComponent {
     return damage;
   }
 
-  test() {
+  handleTest() {
     this.setState({test: !this.state.test});
   }
 
-  test2() {
+  handleTest2() {
     this.props.fetchCharacters();
     this.props.setBattleScene('grass');
   }
