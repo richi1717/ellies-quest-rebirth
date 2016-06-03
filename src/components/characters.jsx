@@ -20,19 +20,20 @@ class Character extends PureComponent {
       test: false,
       done: false
     };
-
-    // this.getDamageAmount = this.getDamageAmount.bind(this);
-    // this.setNewHeroStats = this.setNewHeroStats.bind(this);
   }
 
-  componentDidMount() {
+  componentWillMount() {
     const url = `${ROOT_URL}/characters`;
-    axios.get(url)
+    this.getCharacters = axios.get(url)
       .then(response => {
         this.getInitialCharacterStats = response.data[0];
         this.props.updateCharacterStats(this.getInitialCharacterStats);
         this.setState({done: true});
       });
+  }
+
+  componentWillUnmount() {
+    this.getCharacters.abort();
   }
 
   componentDidUpdate() {
