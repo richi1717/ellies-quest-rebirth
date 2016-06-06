@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { setBattleScene, ROOT_URL } from '../actions/index';
+import { setBattleScene, updateEnemyStats, ROOT_URL } from '../actions/index';
 import Enemy from './enemy';
 import classnames from 'classnames';
 import axios from 'axios';
@@ -40,6 +40,7 @@ class Enemies extends Component {
     const areaEnemies = _.filter(x, { sections: ['forest'] });
     for (let key = 0; key < _.random(1, 5); key++) {
       const ranEnemy = _.sample(areaEnemies);
+      this.props.updateEnemyStats(ranEnemy, key + 1);
       e.push(
         <Enemy enemyClass={ranEnemy.classes} position={key + 1} key={key} {...ranEnemy}/>
       );
@@ -63,7 +64,8 @@ class Enemies extends Component {
 }
 
 Enemies.propTypes = {
-  setBattleScene: PropTypes.func.isRequired
+  setBattleScene: PropTypes.func.isRequired,
+  updateEnemyStats: PropTypes.func
 };
 
 function mapStateToProps(state) {
@@ -73,7 +75,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ setBattleScene }, dispatch);
+  return bindActionCreators({ setBattleScene, updateEnemyStats }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Enemies);

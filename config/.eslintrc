@@ -60,7 +60,7 @@
     "no-var": 2,
     "prefer-const": 1,
     "react/display-name": 1,
-    "react/forbid-prop-types": 1,
+    "react/forbid-prop-types": 0,
     "react/jsx-boolean-value": 0,
     "react/jsx-closing-bracket-location": 0,
     "react/jsx-curly-spacing": 1,

@@ -6,7 +6,7 @@ import classnames from 'classnames';
 import PureComponent from './pure-component';
 import { autobind } from 'core-decorators';
 
-import { fetchCharacters, setBattleScene, setEnemyAttacking, updateCharacterStats, ROOT_URL } from '../actions/index';
+import { fetchCharacters, setBattleScene, setEnemyAttacking, updateCharacterStats, setHeroAttacking, ROOT_URL } from '../actions/index';
 
 import '../../sass/style.scss';
 import '../../sass/_battle-character.scss';
@@ -51,10 +51,15 @@ class Character extends PureComponent {
   render() {
     const heroClass = {
       'battle-ff-sprite': true,
-      'battle-hero-position1-back': !this.state.test,
-      'battle-hero-position1-front': this.state.test,
+      'battle-hero-position1-back': !this.props.isHeroAttacking,
+      'battle-hero-position1-front': this.props.isHeroAttacking,
       'battle-hero-red-boy': true,
-      'battle-hero-position1': this.state.test
+      'battle-hero-position1': this.props.isHeroAttacking,
+      'attack-enemy1': this.props.isEnemyTarget1,
+      'attack-enemy2': this.props.isEnemyTarget2,
+      'attack-enemy3': this.props.isEnemyTarget3,
+      'attack-enemy4': this.props.isEnemyTarget4,
+      'attack-enemy5': this.props.isEnemyTarget5
     };
     console.log('%cHealth: ' + this.props.heroCurrentHp, 'color: green');
     return (
@@ -85,14 +90,15 @@ class Character extends PureComponent {
   }
 
   handleTest2() {
-    this.props.fetchCharacters();
-    this.props.setBattleScene('grass');
+    // this.props.fetchCharacters();
+    this.props.setHeroAttacking(!this.props.isHeroAttacking);
+    // this.props.setBattleScene('grass');
   }
 }
 
 function mapStateToProps(state) {
   const c = state.get('updateCharacterStats');
-  // console.log(c);
+  console.log(state.get('isEnemyTarget')[0].get('attacking'));
   // console.log(`%c${c.get('name')}`, 'color: green');
   return {
     heroMaxHp: c.get('maxHp'),
@@ -113,12 +119,18 @@ function mapStateToProps(state) {
     enemyStr: state.get('targetForAttack').get('enemyStr'),
     numberTest: 1,
     heroStats: c,
-    isEnemyAttacking: state.get('isEnemyAttacking').get('isEnemyAttacking')
+    isHeroAttacking: state.get('isHeroAttacking').isHeroAttacking,
+    isEnemyAttacking: state.get('isEnemyAttacking').get('isEnemyAttacking'),
+    isEnemyTarget1: state.get('isEnemyTarget')[0].get('attacking'),
+    isEnemyTarget2: state.get('isEnemyTarget')[1].get('attacking'),
+    isEnemyTarget3: state.get('isEnemyTarget')[2].get('attacking'),
+    isEnemyTarget4: state.get('isEnemyTarget')[3].get('attacking'),
+    isEnemyTarget5: state.get('isEnemyTarget')[4].get('attacking')
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchCharacters, setBattleScene, setEnemyAttacking, updateCharacterStats }, dispatch);
+  return bindActionCreators({ fetchCharacters, setBattleScene, setEnemyAttacking, updateCharacterStats, setHeroAttacking }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Character);

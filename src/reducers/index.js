@@ -5,13 +5,19 @@ import battleScene from './reducer_battle-scene';
 import targetForAttack from './reducer_set-enemy-selected-target';
 import updateCharacterStats from './reducer_update-character-stats';
 import isEnemyAttacking from './reducer_set-enemy-attacking-boolean';
+import isHeroAttacking from './reducer_set-hero-attacking-boolean';
+import isEnemyTarget from './reducer_set-hero-to-enemy-target-boolean';
+import enemyStats from './reducer_update-enemy-stats';
 
 const rootReducer = combineReducers({
   characterInfo,
   battleScene,
   targetForAttack,
   updateCharacterStats,
-  isEnemyAttacking
+  isEnemyAttacking,
+  isHeroAttacking,
+  isEnemyTarget,
+  enemyStats
 });
 
 export default rootReducer;

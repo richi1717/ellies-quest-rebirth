@@ -49,9 +49,32 @@ export function updateCharacterStats(obj) {
   };
 }
 
+export function updateEnemyStats(obj, id) {
+  return {
+    type: types.UPDATE_ENEMY_STATS,
+    id: id,
+    payload: obj
+  };
+}
+
 export function setEnemyAttacking(boolean) {
   return {
     type: types.SET_ENEMY_ATTACKING_BOOLEAN,
     payload: boolean
+  };
+}
+
+export function setHeroAttacking(boolean) {
+  return {
+    type: types.SET_HERO_ATTACKING_BOOLEAN,
+    payload: boolean
+  };
+}
+
+export function setHeroToEnemyTarget(boolean, target) {
+  return {
+    type: types.SET_HERO_TO_ENEMY_TARGET,
+    payload: boolean,
+    targetNum: target
   };
 }
