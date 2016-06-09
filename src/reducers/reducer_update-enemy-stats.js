@@ -1,12 +1,12 @@
 import * as types from '../constants/action_types';
-import { List, Map } from 'immutable';
+import { List, Map, fromJS } from 'immutable';
 
-export default function(state = Map({}), action) {
+export default function(state = fromJS([]), action) {
   switch (action.type) {
     case types.UPDATE_ENEMY_STATS: {
       const enemy = action.payload;
-      console.log(action.payload);
-      return [Map({
+
+      return state.setIn([action.id], Map({
         id: action.id,
         maxHp: enemy.maxHp,
         currentHp: enemy.currentHp,
@@ -28,7 +28,7 @@ export default function(state = Map({}), action) {
         itemHeld: enemy.itemHeld,
         rareItem: enemy.rareItem,
         level: enemy.level
-      }), ...state];
+      }));
     }
     default: {
       return state;

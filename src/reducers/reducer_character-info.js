@@ -20,7 +20,7 @@ export default function(state = Map({}), action) {
         def: character.def,
         evade: character.evade,
         classes: character.classes,
-        refName: character.battleName
+        battleName: character.battleName
       }));
     }
     default: {

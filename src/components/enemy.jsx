@@ -1,10 +1,14 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchEnemies, setBattleScene, getEnemySelectedTarget, setHeroToEnemyTarget, setEnemyAttacking, updateEnemyStats, setHeroAttacking } from '../actions/index';
+import { fetchEnemies, setBattleScene, setListOfTurnOrder, setNextTurnFromList, setHeroAttackingPos2, getEnemySelectedTarget, setHeroToEnemyTarget, setEnemyAttacking, updateEnemyStats, updateEnemyStatsFromAttack, setHeroAttacking } from '../actions/index';
 import classnames from 'classnames';
 import { autobind } from 'core-decorators';
 import PureComponent from './pure-component';
+import * as sounds from '../utils/sound-fx';
+import timer from '../utils/time-out';
+import damageCalcHelper from '../utils/damage-calc';
+import getBaseDamage from '../utils/base-damage';
 
 import '../../sass/style.scss';
 import '../../sass/_enemies.scss';
@@ -19,44 +23,86 @@ class Enemy extends PureComponent {
     };
   }
 
-  componentDidUpdate() {
-    if (this.props.isHeroAttacking) {
-      for (let i = 0; i < 5; i++) {
-        if (this.props.isEnemyTarget[i].toJSON().attacking
-        && (this.props.isEnemyTarget[i].toJSON().id === this.props.position)) {
-          console.log('nailed it' + i);
-          if (this.getDamageAmount(i) > 0) {
-            const newHp = this.props.enemyStats[i].get('currentHp') - this.getDamageAmount(i);
-            const newStats = this.props.enemyStats[i].set('currentHp', newHp);
-            this.props.setHeroAttacking(false);
-            console.log('%cdamage: ' + this.getDamageAmount(i), 'color: orange');
-            console.log(newHp, newStats.toJSON());
-            this.props.updateEnemyStats(newStats.toJSON(), i + 1);
-          }
-        }
-      }
-    }
+  componentDidMount() {
+    this.props.setListOfTurnOrder('enemy' + this.props.position);
   }
 
+  componentDidUpdate() {
+    this.handleHeroAttacking();
+  }
+
+  handleHeroAttacking() {
+    console.log('getNextTurn: ' + this.props.getNextTurn);
+    const enemyTarget = this.props['isEnemyTarget' + this.props.position];
+    if (this.props.isHeroAttacking && enemyTarget.attacking) {
+      const enemyStats = this.props['enemyStats' + this.props.position];
+      const newHp = enemyStats.currentHp - this.getDamageAmount(enemyStats);
+      const newStats = this.props.enemyStats.find(function (stat) {
+        return stat.get('id') === this.props.position;
+      }.bind(this)).set('currentHp', newHp);
+
+      this.props.setHeroAttacking(false);
+      this.props.updateEnemyStats(newStats.toJSON(), this.props.position);
+      this.props.setListOfTurnOrder(this.props.getNextTurn);
+
+      console.log('%cdamage: ' + this.getDamageAmount(enemyStats), 'color: orange');
+      console.log('%cEnemy Health: ' + newHp, 'color: green');
+      this.props.setNextTurnFromList(this.props.getListOfTurnOrder);
+      // console.log('enemyTarget: ' + enemyTarget);
+      // console.log(enemyTarget.attacking, this.props.isEnemyTarget[i].toJSON().attacking, this.props.position);
+      // console.log(this.props['isHeroAttacking']);
+      // console.log(this.props.enemyStats.find(function (stat) {
+      //   console.log(stat.toJS());
+      //   return stat.get('id') === this.props.position;
+      // }.bind(this)));
+      // var result = map.find(function(obj){return obj.get('id') === 4;});
+      // console.log(newHp, newStats.toJSON());
+      // console.log('nailed it' + this.props.position);
+    }
+  }
+  //
+  // handleHeroAttacking() {
+  //   // console.log(this.props['isHeroAttacking']);
+  //   for (let i = 0; i < 5; i++) {
+  //     const j = i + 1;
+  //     const enemyTarget = this.props['isEnemyTarget' + j];
+  //     // console.log(enemyTarget.attacking, this.props.isEnemyTarget[i].toJSON().attacking, this.props.position);
+  //     if (this.props.isHeroAttacking && enemyTarget.attacking && (enemyTarget.id === this.props.position)) {
+  //       const enemyStats = this.props['enemyStats' + j];
+  //       const newHp = enemyStats.currentHp - this.getDamageAmount(enemyStats);
+  //       const newStats = this.props.enemyStats[i].set('currentHp', newHp);
+  //
+  //       this.props.setHeroAttacking(false);
+  //       this.props.updateEnemyStats(newStats.toJSON(), j);
+  //
+  //       // console.log(newHp, newStats.toJSON());
+  //       console.log('nailed it' + i);
+  //       console.log('%cdamage: ' + this.getDamageAmount(enemyStats), 'color: orange');
+  //       console.log('%cEnemy Health: ' + newHp, 'color: green');
+  //     }
+  //   }
+  // }
+
   getDamageAmount(enemy) {
-    console.log(this.props.enemyStats[enemy].toJSON().def, this.props.heroStr);
-    const power = 1/16;
-    const damage = _.ceil((power * (512 - this.props.enemyStats[enemy].toJSON().def) * this.props.heroStr) / (0.16 * 512));
-    console.log(damage);
+    // console.log(enemy.def, this.props.heroStr);
+    const power = 4;
+    let damage = damageCalcHelper(power, enemy.def, this.props.heroStr);
+    damage = damage > 0 ? damage : 1;
     return damage;
   }
 
   handleTest(e) {
-    const baseDmg = this.props.str + (_.ceil((this.props.str + this.props.level) / 3.2) * _.ceil((this.props.str * this.props.level) / 3.2));
     if (this.props.isHeroAttacking) {
       this.props.setHeroToEnemyTarget(true, this.props.position);
-      setTimeout(function () {
-        this.props.setHeroToEnemyTarget(false, this.props.position);
-      }.bind(this), 750);
-    } else {
+      timer(550, this.props.setHeroAttackingPos2, true);
+      timer(1300, this.props.setHeroAttackingPos2, false);
+      timer(1300, this.props.setHeroToEnemyTarget, false, this.props.position);
+    } else if (this.props.position.toString() === this.props.getNextTurn.slice(5)) {
       if (!this.state.isAttacking) {
-        this.props.getEnemySelectedTarget('hero1', baseDmg);
+        this.props.getEnemySelectedTarget('hero1', getBaseDamage(this.props.str, this.props.level));
         this.props.setEnemyAttacking(true);
+        this.props.setNextTurnFromList(this.props.getListOfTurnOrder);
+        this.props.setListOfTurnOrder(this.props.getNextTurn);
       }
       this.setState({
         isAttacking: true
@@ -92,7 +138,7 @@ class Enemy extends PureComponent {
           onClick={this.handleTest}
           className={classnames(enemyClass) + " " + this.props.enemyClass + " enemy" + this.props.position}
         />
-        {this.state.isAttacking ? this.setMusic() : null}
+        {this.state.isAttacking ? sounds.enemyAttackFX() : null}
       </div>
     );
   }
@@ -117,28 +163,30 @@ Enemy.propTypes = {
 };
 
 function mapStateToProps(state) {
-  // console.log(state.get('isEnemyTarget'));
+  // console.log(state.get('enemyStats'));
   return {
     isEnemyAttacking: state.get('isEnemyAttacking').get('isEnemyAttacking'),
     isHeroAttacking: state.get('isHeroAttacking').isHeroAttacking,
     heroStr: state.get('updateCharacterStats').get('str'),
-    enemyStats: state.get('enemyStats'),
-    enemyStats1: state.get('enemyStats')[0] ? state.get('enemyStats')[0].toJSON() : null,
-    enemyStats2: state.get('enemyStats')[1] ? state.get('enemyStats')[1].toJSON() : null,
-    enemyStats3: state.get('enemyStats')[2] ? state.get('enemyStats')[2].toJSON() : null,
-    enemyStats4: state.get('enemyStats')[3] ? state.get('enemyStats')[3].toJSON() : null,
-    enemyStats5: state.get('enemyStats')[4] ? state.get('enemyStats')[4].toJSON() : null,
-    isEnemyTarget1: state.get('isEnemyTarget')[0].get('attacking'),
-    isEnemyTarget2: state.get('isEnemyTarget')[1].get('attacking'),
-    isEnemyTarget3: state.get('isEnemyTarget')[2].get('attacking'),
-    isEnemyTarget4: state.get('isEnemyTarget')[3].get('attacking'),
-    isEnemyTarget5: state.get('isEnemyTarget')[4].get('attacking'),
-    isEnemyTarget: state.get('isEnemyTarget')
+    enemyStats: state.get('enemyStats').toArray(),
+    enemyStats0: state.get('enemyStats').toArray()[0] ? state.get('enemyStats').toArray()[0].toJSON() : null,
+    enemyStats1: state.get('enemyStats').toArray()[1] ? state.get('enemyStats').toArray()[1].toJSON() : null,
+    enemyStats2: state.get('enemyStats').toArray()[2] ? state.get('enemyStats').toArray()[2].toJSON() : null,
+    enemyStats3: state.get('enemyStats').toArray()[3] ? state.get('enemyStats').toArray()[3].toJSON() : null,
+    enemyStats4: state.get('enemyStats').toArray()[4] ? state.get('enemyStats').toArray()[4].toJSON() : null,
+    isEnemyTarget0: state.get('isEnemyTarget')[0].toJSON(),
+    isEnemyTarget1: state.get('isEnemyTarget')[1].toJSON(),
+    isEnemyTarget2: state.get('isEnemyTarget')[2].toJSON(),
+    isEnemyTarget3: state.get('isEnemyTarget')[3].toJSON(),
+    isEnemyTarget4: state.get('isEnemyTarget')[4].toJSON(),
+    isEnemyTarget: state.get('isEnemyTarget'),
+    getNextTurn: state.get('getNextTurn').toJS()[0],
+    getListOfTurnOrder: state.get('getListOfTurnOrder')
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchEnemies, setBattleScene, getEnemySelectedTarget, setHeroToEnemyTarget, setEnemyAttacking, updateEnemyStats, setHeroAttacking }, dispatch);
+  return bindActionCreators({ fetchEnemies, setBattleScene, setListOfTurnOrder, setNextTurnFromList, setHeroAttackingPos2, getEnemySelectedTarget, setHeroToEnemyTarget, setEnemyAttacking, updateEnemyStats, updateEnemyStatsFromAttack, setHeroAttacking }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Enemy);

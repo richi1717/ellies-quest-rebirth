@@ -40,9 +40,9 @@ class Enemies extends Component {
     const areaEnemies = _.filter(x, { sections: ['forest'] });
     for (let key = 0; key < _.random(1, 5); key++) {
       const ranEnemy = _.sample(areaEnemies);
-      this.props.updateEnemyStats(ranEnemy, key + 1);
+      this.props.updateEnemyStats(ranEnemy, key);
       e.push(
-        <Enemy enemyClass={ranEnemy.classes} position={key + 1} key={key} {...ranEnemy}/>
+        <Enemy enemyClass={ranEnemy.classes} position={key} key={key} {...ranEnemy}/>
       );
     }
     return e;

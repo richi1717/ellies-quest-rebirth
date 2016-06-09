@@ -8,6 +8,8 @@ import isEnemyAttacking from './reducer_set-enemy-attacking-boolean';
 import isHeroAttacking from './reducer_set-hero-attacking-boolean';
 import isEnemyTarget from './reducer_set-hero-to-enemy-target-boolean';
 import enemyStats from './reducer_update-enemy-stats';
+import getListOfTurnOrder from './reducer_set-turn-order';
+import getNextTurn from './reducer_set-next-turn';
 
 const rootReducer = combineReducers({
   characterInfo,
@@ -17,7 +19,9 @@ const rootReducer = combineReducers({
   isEnemyAttacking,
   isHeroAttacking,
   isEnemyTarget,
-  enemyStats
+  enemyStats,
+  getListOfTurnOrder,
+  getNextTurn
 });
 
 export default rootReducer;

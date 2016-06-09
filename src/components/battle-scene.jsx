@@ -1,5 +1,6 @@
 import React, { Component , PropTypes} from 'react';
 import { connect } from 'react-redux';
+import * as sounds from '../utils/sound-fx';
 
 import '../../sass/_battle-backgrounds.scss';
 
@@ -7,7 +8,8 @@ class BattleScene extends Component {
   render() {
     return (
       <div className={this.props.battleScene + "-battle battle"}>
-          {this.props.children}
+        {/*{sounds.normalBattleMusic()}*/}
+        {this.props.children}
       </div>
     );
   }
