@@ -99,11 +99,15 @@ class Character extends PureComponent {
   }
 
   handleTest2() {
-    this.props.setNextTurnFromList(this.props.getListOfTurnOrder);
-    // this.props.fetchCharacters();
-    this.props.setHeroAttacking(!this.props.isHeroAttacking);
-    // this.props.setBattleScene('grass');
-    console.log('getListOfTurnOrder(): ' + this.props.getListOfTurnOrder);
+    if (this.props.isHeroAttacking) {
+
+    } else if (this.props.getListOfTurnOrder.toJS()[0] === 'hero1'){
+      this.props.setNextTurnFromList(this.props.getListOfTurnOrder);
+      // this.props.fetchCharacters();
+      this.props.setHeroAttacking(!this.props.isHeroAttacking);
+      // this.props.setBattleScene('grass');
+      console.log('getListOfTurnOrder(): ' + this.props.getListOfTurnOrder);
+    }
   }
 }
 
@@ -132,7 +136,7 @@ function mapStateToProps(state) {
     heroStats: c,
     // isHeroAttacking: state.get('isHeroAttacking').isHeroAttacking,
     isHeroAttacking: state.get('getNextTurn').toJS()[0] === 'hero1' ? true : false,
-    isEnemyAttacking: state.get('isEnemyAttacking').get('isEnemyAttacking'),
+    isEnemyAttacking: state.get('isEnemyAttacking').toJS()[0],
     isEnemyTarget0: state.get('isEnemyTarget')[0].get('attacking'),
     isEnemyTarget1: state.get('isEnemyTarget')[1].get('attacking'),
     isEnemyTarget2: state.get('isEnemyTarget')[2].get('attacking'),

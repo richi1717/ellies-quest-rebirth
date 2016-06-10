@@ -28,13 +28,22 @@ class Enemy extends PureComponent {
   }
 
   componentDidUpdate() {
-    this.handleHeroAttacking();
-  }
-
-  handleHeroAttacking() {
-    console.log('getNextTurn: ' + this.props.getNextTurn);
     const enemyTarget = this.props['isEnemyTarget' + this.props.position];
     if (this.props.isHeroAttacking && enemyTarget.attacking) {
+      this.handleHeroAttacking(enemyTarget);
+    } else if (!this.props.isEnemyAttacking && this.props.getNextTurn === 'enemy' + this.props.position) {
+      setTimeout(function () {
+        document.getElementById('enemy' + this.props.position).click();
+      }.bind(this), 2500);
+      // console.log('loop?');
+    } else if (this.props.isEnemyAttacking) {
+      // console.log('you attacking?!');
+    }
+    // console.log(this.props.getNextTurn);
+  }
+
+  handleHeroAttacking(enemyTarget) {
+    console.log('getNextTurn: ' + this.props.getNextTurn);
       const enemyStats = this.props['enemyStats' + this.props.position];
       const newHp = enemyStats.currentHp - this.getDamageAmount(enemyStats);
       const newStats = this.props.enemyStats.find(function (stat) {
@@ -48,40 +57,7 @@ class Enemy extends PureComponent {
       console.log('%cdamage: ' + this.getDamageAmount(enemyStats), 'color: orange');
       console.log('%cEnemy Health: ' + newHp, 'color: green');
       this.props.setNextTurnFromList(this.props.getListOfTurnOrder);
-      // console.log('enemyTarget: ' + enemyTarget);
-      // console.log(enemyTarget.attacking, this.props.isEnemyTarget[i].toJSON().attacking, this.props.position);
-      // console.log(this.props['isHeroAttacking']);
-      // console.log(this.props.enemyStats.find(function (stat) {
-      //   console.log(stat.toJS());
-      //   return stat.get('id') === this.props.position;
-      // }.bind(this)));
-      // var result = map.find(function(obj){return obj.get('id') === 4;});
-      // console.log(newHp, newStats.toJSON());
-      // console.log('nailed it' + this.props.position);
-    }
   }
-  //
-  // handleHeroAttacking() {
-  //   // console.log(this.props['isHeroAttacking']);
-  //   for (let i = 0; i < 5; i++) {
-  //     const j = i + 1;
-  //     const enemyTarget = this.props['isEnemyTarget' + j];
-  //     // console.log(enemyTarget.attacking, this.props.isEnemyTarget[i].toJSON().attacking, this.props.position);
-  //     if (this.props.isHeroAttacking && enemyTarget.attacking && (enemyTarget.id === this.props.position)) {
-  //       const enemyStats = this.props['enemyStats' + j];
-  //       const newHp = enemyStats.currentHp - this.getDamageAmount(enemyStats);
-  //       const newStats = this.props.enemyStats[i].set('currentHp', newHp);
-  //
-  //       this.props.setHeroAttacking(false);
-  //       this.props.updateEnemyStats(newStats.toJSON(), j);
-  //
-  //       // console.log(newHp, newStats.toJSON());
-  //       console.log('nailed it' + i);
-  //       console.log('%cdamage: ' + this.getDamageAmount(enemyStats), 'color: orange');
-  //       console.log('%cEnemy Health: ' + newHp, 'color: green');
-  //     }
-  //   }
-  // }
 
   getDamageAmount(enemy) {
     // console.log(enemy.def, this.props.heroStr);
@@ -98,20 +74,22 @@ class Enemy extends PureComponent {
       timer(1300, this.props.setHeroAttackingPos2, false);
       timer(1300, this.props.setHeroToEnemyTarget, false, this.props.position);
     } else if (this.props.position.toString() === this.props.getNextTurn.slice(5)) {
-      if (!this.state.isAttacking) {
-        this.props.getEnemySelectedTarget('hero1', getBaseDamage(this.props.str, this.props.level));
-        this.props.setEnemyAttacking(true);
-        this.props.setNextTurnFromList(this.props.getListOfTurnOrder);
-        this.props.setListOfTurnOrder(this.props.getNextTurn);
-      }
-      this.setState({
-        isAttacking: true
-      });
-      setTimeout(function () {
+      // setTimeout(function () {
+        if (!this.state.isAttacking) {
+          this.props.getEnemySelectedTarget('hero1', getBaseDamage(this.props.str, this.props.level));
+          this.props.setEnemyAttacking(true);
+          this.props.setNextTurnFromList(this.props.getListOfTurnOrder);
+          this.props.setListOfTurnOrder(this.props.getNextTurn);
+        }
         this.setState({
-          isAttacking: false
+          isAttacking: true
         });
-      }.bind(this), 750);
+        setTimeout(function () {
+          this.setState({
+            isAttacking: false
+          });
+        }.bind(this), 750);
+      // }.bind(this), 1000);
     }
   }
 
@@ -135,6 +113,7 @@ class Enemy extends PureComponent {
     return (
       <div>
         <div
+          id={"enemy" + this.props.position}
           onClick={this.handleTest}
           className={classnames(enemyClass) + " " + this.props.enemyClass + " enemy" + this.props.position}
         />
@@ -165,8 +144,9 @@ Enemy.propTypes = {
 function mapStateToProps(state) {
   // console.log(state.get('enemyStats'));
   return {
-    isEnemyAttacking: state.get('isEnemyAttacking').get('isEnemyAttacking'),
-    isHeroAttacking: state.get('isHeroAttacking').isHeroAttacking,
+    isEnemyAttacking: state.get('isEnemyAttacking').toJS()[0],
+    isHeroAttacking: state.get('getNextTurn').toJS()[0] === 'hero1' ? true : false,
+    // isHeroAttacking: state.get('isHeroAttacking').isHeroAttacking,
     heroStr: state.get('updateCharacterStats').get('str'),
     enemyStats: state.get('enemyStats').toArray(),
     enemyStats0: state.get('enemyStats').toArray()[0] ? state.get('enemyStats').toArray()[0].toJSON() : null,
