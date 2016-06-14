@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Map } from 'immutable';
+import { autobind } from 'core-decorators';
 // import axios from 'axios';
 // import { fetchCharacters, setBattleScene, setEnemyAttacking, updateCharacterStats, ROOT_URL } from '../actions/index';
 import classnames from 'classnames';
@@ -9,12 +10,20 @@ import PureComponent from './pure-component';
 
 import '../../sass/_menu.scss';
 
+@autobind
 class StatusWindow extends PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.showStatusPerCharacter = this.showStatusPerCharacter.bind(this);
+  showStatusPerCharacter() {
+    // this.props.heroStats.Map((h) => {
+    //
+    // });
+    return (
+      <tr>
+        <td>{this.props.heroCurrentHp}/{this.props.heroMaxHp}</td>
+        <td>{this.props.heroCurrentMp}/{this.props.heroMaxMp}</td>
+      </tr>
+    );
   }
+
   render() {
     return (
       <div className="battle-menu-container">
@@ -32,51 +41,27 @@ class StatusWindow extends PureComponent {
               </tr>
             </tbody>
             <tbody>
-              {this.showStatusPerCharacter()}
+            {this.showStatusPerCharacter()}
             </tbody>
           </table>
         </div>
+        {this.props.children}
       </div>
-    );
-  }
-
-  showStatusPerCharacter() {
-    // this.props.heroStats.Map((h) => {
-    //
-    // });
-    return (
-      <tr>
-        <td>{this.props.heroCurrentHp}/{this.props.heroMaxHp}</td>
-        <td>{this.props.heroCurrentMp}/{this.props.heroMaxMp}</td>
-      </tr>
     );
   }
 }
 
 function mapStateToProps(state) {
-  const c = state.get('updateCharacterStats');
+  const c = state.get('updateCharacterStats').toJS()[0] ? state.get('updateCharacterStats').toJS()[0] : state.get('updateCharacterStats').toJS();
   // console.log(c);
   // console.log(`%c${c.get('name')}`, 'color: green');
   return {
-    heroMaxHp: c.get('maxHp'),
-    heroCurrentHp: c.get('currentHp'),
-    heroMaxMp: c.get('maxMp'),
-    heroCurrentMp: c.get('currentMp'),
-    heroAgility: c.get('agility'),
-    accuracy: c.get('accuracy'),
-    heroStr: c.get('str'),
-    magic: c.get('magic'),
-    exp: c.get('exp'),
-    heroDef: c.get('def'),
-    evade: c.get('evade'),
-    heroName: c.get('name'),
-    classes: c.get('classes'),
-    refName: c.get('refName'),
-    targetForAttack: state.get('targetForAttack').get('targetForAttack'),
-    enemyStr: state.get('targetForAttack').get('enemyStr'),
-    numberTest: 1,
-    heroStats: c,
-    isEnemyAttacking: state.get('isEnemyAttacking').get('isEnemyAttacking')
+    heroMaxHp: c.maxHp,
+    heroCurrentHp: c.currentHp,
+    heroMaxMp: c.maxMp,
+    heroCurrentMp: c.currentMp,
+    heroName: c.name,
+    heroStats: c
   };
 }
 

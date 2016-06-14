@@ -1,14 +1,14 @@
 import * as types from '../constants/action_types';
-import { List, Map } from 'immutable';
+import { List, Map, fromJS } from 'immutable';
 
-export default function(state = Map({}), action) {
+export default function(state = fromJS([]), action) {
   switch (action.type) {
     case types.UPDATE_CHARACTER_STATS: {
       const character = action.payload;
-      return state.merge(Map({
+      return state.setIn([action.id], fromJS({
         maxHp: character.maxHp,
         currentHp: character.currentHp,
-        id: character.id,
+        id: action.id,
         maxMp: character.maxMp,
         currentMp: character.currentMp,
         name: character.name,

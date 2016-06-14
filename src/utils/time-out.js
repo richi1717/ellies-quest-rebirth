@@ -1,4 +1,4 @@
-export default function(time, func, arg1, arg2) {
+export function setTimeOutHelper(time, func, arg1, arg2) {
   setTimeout(function () {
     func(arg1, arg2);
   }, time);

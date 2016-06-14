@@ -69,23 +69,23 @@ button.menu-select {
   text-shadow: 2px 1px rgba(250, 250, 250, .3);
 }
 
-
-
-
 .battle-menu-turn {
   color: #C2C3C7;
-  text-indent: 40px;
-  font-size: 20pt;
   text-shadow: 2px 1px #8a8a7b;
-  margin-top: -210px;
-  margin-left: 150px;
-  height: 200px;
-  min-width: 300px;
-  border: 2px solid rgba(255, 255, 255, .20);
-  box-shadow: 3px 3px rgb(10, 10, 10), -3px -3px rgb(10, 10, 10), -3px 3px rgb(10, 10, 10), 3px -3px rgb(10, 10, 10);
-  background-color: rgba(15, 14, 45, .85);
+  height: 20rem;
+  min-width: 30rem;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 3px 3px #0a0a0a, -3px -3px #0a0a0a, -3px 3px #0a0a0a, 3px -3px #0a0a0a;
+  background-color: rgba(15, 14, 45, 0.85);
   border-radius: 5px;
   z-index: 1;
+  position: absolute;
+  left: 15rem;
+  bottom: 0;
+}
+
+.more-than-five {
+  min-width: 60rem;
 }
 
 .battle-menu-turn > li {
@@ -93,7 +93,7 @@ button.menu-select {
   font-size: 22pt;
   list-style-type: none;
   margin-top: 0px;
-  margin-bottom: -5px;
+  margin-bottom: .4rem;
   text-indent: 10px;
   text-shadow: 2px 1px #8a8a7b;
 }
@@ -101,7 +101,7 @@ button.menu-select {
 .battle-menu-turn > li:nth-child(6) {
   position: absolute;
   top: 0;
-  right: 10px;
+  right: 14rem;
 }
 
 .battle-menu-turn > ul > li{
@@ -113,10 +113,10 @@ button.menu-select {
 }
 
 .menu-attack {
-  min-width: 600px;
-  margin-left: 200px;
-  margin-top: -230px;
+  // min-width: 600px;
   z-index: 1;
+  bottom: 4rem;
+  left: 5rem;
 }
 
 .menu-magic {

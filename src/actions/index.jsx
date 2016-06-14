@@ -36,22 +36,22 @@ export function setBattleScene(area) {
   };
 }
 
-export function getEnemySelectedTarget(name, str) {
+export function setEnemySelectedTarget(name, str, bool) {
   return {
     type: types.SET_ENEMY_SELECTED_TARGET,
     payload: { name, str }
   };
 }
 
-export function updateCharacterStats(obj) {
+export function updateCharacterStats(obj, id) {
   return {
     type: types.UPDATE_CHARACTER_STATS,
-    payload: obj
+    payload: obj,
+    id: id
   };
 }
 
 export function updateEnemyStats(obj, id) {
-  console.log(id);
   return {
     type: types.UPDATE_ENEMY_STATS,
     id: id,
@@ -89,40 +89,61 @@ export function setHeroToEnemyTarget(boolean, target) {
 }
 
 export function setListOfTurnOrder(next) {
-  // let next = list;
-  // if (typeof next !== 'string') {
-  //   // console.log(list);
-  //   next = list.first();
-  //   // console.log(next.toArray());
-  // }
-  // // console.log(next);
   return {
     type: types.SET_LIST_OF_TURN_ORDER,
     payload: next
   };
 }
 
+export function setPauseBetweenTurns(boolean) {
+  return {
+    type: types.SET_PAUSE_BETWEEN_TURNS,
+    payload: boolean
+  };
+}
+
 export function setNextTurnFromList(list) {
+  // console.log(list);
   const next = list.first();
-  console.log(list.toJS(), next);
-  // // console.log(list);
-  // const orig = fromJS({
-  //   arrayOfValues: [
-  //     { one: { inside: 'first in array' } },
-  //     { one: { inside: 'second in array' } }
-  //   ]
-  // });
-  //
-  // const updated = orig.setIn(['arrayOfValues', 1, 'one', 'inside'], 'updated value');
-  //
-  // console.log(updated.toJS(), orig.toJS);
-  //
-  // const remains = list.toArray().slice(1);
-  // console.log(next, list.toArray(), remains);
-  // // updateTurnFromList(list)
+  // console.log(next, list.toJS());
   return {
     type: types.GET_NEXT_TURN_FROM_LIST,
     payload: next,
     list: list
+  };
+}
+
+export function setMenuAttackSelected(bool) {
+  return {
+    type: types.SET_MENU_ATTACK_SELECTED,
+    payload: bool
+  };
+}
+
+export function setMenuDefendSelected(bool) {
+  return {
+    type: types.SET_MENU_DEFEND_SELECTED,
+    payload: bool
+  };
+}
+
+export function setMenuItemsSelected(bool) {
+  return {
+    type: types.SET_MENU_ITEMS_SELECTED,
+    payload: bool
+  };
+}
+
+export function setMenuMagicSelected(bool) {
+  return {
+    type: types.SET_MENU_MAGIC_SELECTED,
+    payload: bool
+  };
+}
+
+export function setMenuRunSelected(bool) {
+  return {
+    type: types.SET_MENU_RUN_SELECTED,
+    payload: bool
   };
 }

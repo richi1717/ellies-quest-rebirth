@@ -42,7 +42,7 @@ class Enemies extends Component {
       const ranEnemy = _.sample(areaEnemies);
       this.props.updateEnemyStats(ranEnemy, key);
       e.push(
-        <Enemy enemyClass={ranEnemy.classes} position={key} key={key} {...ranEnemy}/>
+        <Enemy enemyClass={ranEnemy.classes} position={key} key={key} {...ranEnemy} />
       );
     }
     return e;
@@ -57,7 +57,7 @@ class Enemies extends Component {
     };
     return (
       <div>
-      {this.state.done ? this.chooseEnemies(this.enemies) : null}
+        {this.state.done ? this.chooseEnemies(this.enemies) : null}
       </div>
     );
   }
