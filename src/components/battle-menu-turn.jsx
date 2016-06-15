@@ -21,7 +21,7 @@ import '../../sass/_menu.scss';
 @autobind
 class BattleMenuTurn extends PureComponent {
   componentDidUpdate() {
-    this.props.getNextTurn === 'hero1' && !this.props.isPauseBetweenTurns ? this.clearOtherMenuSelections() : null;
+    this.props.getNextTurn === 'hero1' && !this.props.isPauseBetweenTurns && this.props.isMenuDefendSelected ? this.clearOtherMenuSelections() : null;
   }
 
   handleAttackClick() {
@@ -101,7 +101,8 @@ function mapStateToProps(state) {
     isHeroAttacking: state.get('getNextTurn').toJS()[0] === 'hero1' ? true : false,
     isHeroAttackingAnimation: state.get('isEnemyTarget').toJS()[0].attacking || state.get('isEnemyTarget').toJS()[1].attacking,
     getListOfTurnOrder: state.get('getListOfTurnOrder'),
-    getNextTurn: state.get('getNextTurn').toJS()[0]
+    getNextTurn: state.get('getNextTurn').toJS()[0],
+    isMenuDefendSelected: state.get('isMenuDefendSelected').toJS()[0]
     // heroMaxHp: C.get('maxHp'),
     // heroCurrentHp: C.get('currentHp'),
     // heroMaxMp: C.get('maxMp'),

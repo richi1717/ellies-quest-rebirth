@@ -86,7 +86,8 @@ class Character extends PureComponent {
 
   getDamageAmount() {
     const POWER = 1/16;
-    const DMG = damageCalcHelper(POWER, this.props.heroDef, this.props.enemyStr);
+    const STR = this.props.isMenuDefendSelected ? this.props.enemyStr * 0.618 : this.props.enemyStr;
+    const DMG = damageCalcHelper(POWER, this.props.heroDef, STR);
     return DMG;
   }
 

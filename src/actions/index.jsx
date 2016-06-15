@@ -105,7 +105,7 @@ export function setPauseBetweenTurns(boolean) {
 export function setNextTurnFromList(list) {
   // console.log(list);
   const next = list.first();
-  console.log(next, list.toJS());
+  // console.log(next, list.toJS());
   return {
     type: types.GET_NEXT_TURN_FROM_LIST,
     payload: next,

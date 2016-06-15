@@ -46,6 +46,7 @@ class Enemy extends PureComponent {
 
   componentDidUpdate() {
     if (this.props.isPauseBetweenTurns) {
+      this.dmg = null;
     } else if (!this.props.isEnemyAttacking && this.props.getNextTurn === 'enemy' + this.props.position) {
       console.log('attacking hero! from: enemy' + this.props.position);
       this.props.setEnemyAttacking(true);
