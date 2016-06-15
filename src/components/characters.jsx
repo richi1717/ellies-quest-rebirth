@@ -79,9 +79,15 @@ class Character extends PureComponent {
     if (DMG > 0) {
       const NEW_HP = this.props.heroCurrentHp - DMG;
       const NEW_STATS = this.props.heroStats.set('currentHp', NEW_HP);
-      this.props.updateCharacterStats(NEW_STATS.toJSON());
+      this.props.updateCharacterStats(NEW_STATS.toJS(), 0);
       console.log('%cdamage: ' + DMG, 'color: red');
     }
+  }
+
+  getDamageAmount() {
+    const POWER = 1/16;
+    const DMG = damageCalcHelper(POWER, this.props.heroDef, this.props.enemyStr);
+    return DMG;
   }
 
   componentDidUpdate() {
@@ -93,10 +99,11 @@ class Character extends PureComponent {
       this.handleHeroTurn();
     } else if (IS_ENEMY_ATTACKING) {
       console.log('doing it');
-      this.props.setEnemySelectedTarget(null, null, null);
       this.handleEnemyAttacking();
+      this.props.setEnemySelectedTarget(null, null, null);
     } else if (!this.props.isHeroTurn && this.props.getNextTurn === 'hero1') {
       console.log('shoot');
+      // TODO fix this area to handle defense and magic clicks
       this.props.setHeroAttacking(true);
       // console.log(this.props.getNextTurn);
       // this.props.setNextTurnFromList(this.props.getListOfTurnOrder);
@@ -106,14 +113,8 @@ class Character extends PureComponent {
     }
   }
 
-  getDamageAmount() {
-    const POWER = 1/16;
-    const DMG = damageCalcHelper(POWER, this.props.heroDef, this.props.enemyStr);
-    return DMG;
-  }
-
   handleClick() {
-    // console.log(this.props.getListOfTurnOrder.toJS()[0]);
+    console.log(this.props.getListOfTurnOrder.toJS()[0]);
     if (this.props.getListOfTurnOrder.toJS()[0] === 'hero1') {
       this.props.setNextTurnFromList(this.props.getListOfTurnOrder);
       // this.props.setPauseBetweenTurns(true);
@@ -129,6 +130,7 @@ class Character extends PureComponent {
       'battle-hero-red-boy': true,
       'battle-hero-position1-back': true,
       'battle-hero-attack': this.state.pos2,
+      'defense': this.props.isMenuDefendSelected,
       'attack-enemy0': this.props.isEnemyTarget0,
       'attack-enemy1': this.props.isEnemyTarget1,
       'attack-enemy2': this.props.isEnemyTarget2,
@@ -151,27 +153,29 @@ class Character extends PureComponent {
 
 function mapStateToProps(state) {
   const C = state.get('updateCharacterStats');
+  // console.log(C.toJS()[0]);
   // console.log(state.get('getEnemySelectedTarget').toJS().targetForAttack);
   // console.log(`%c${c.get('name')}`, 'color: green');
   return {
-    heroMaxHp: C.get('maxHp'),
-    heroCurrentHp: C.get('currentHp'),
-    heroMaxMp: C.get('maxMp'),
-    heroCurrentMp: C.get('currentMp'),
-    heroAgility: C.get('agility'),
-    accuracy: C.get('accuracy'),
-    heroStr: C.get('str'),
-    magic: C.get('magic'),
-    exp: C.get('exp'),
-    heroDef: C.get('def'),
-    evade: C.get('evade'),
-    name: C.get('name'),
-    classes: C.get('classes'),
-    refName: C.get('refName'),
+    heroMaxHp: C.toJS()[0] ? C.toJS()[0].maxHp : null,
+    heroCurrentHp: C.toJS()[0] ? C.toJS()[0].currentHp : null,
+    heroMaxMp: C.toJS()[0] ? C.toJS()[0].maxMp : null,
+    heroCurrentMp: C.toJS()[0] ? C.toJS()[0].currentMp : null,
+    heroAgility: C.toJS()[0] ? C.toJS()[0].agility : null,
+    accuracy: C.toJS()[0] ? C.toJS()[0].accuracy : null,
+    heroStr: C.toJS()[0] ? C.toJS()[0].str : null,
+    magic: C.toJS()[0] ? C.toJS()[0].magic : null,
+    exp: C.toJS()[0] ? C.toJS()[0].exp : null,
+    heroDef: C.toJS()[0] ? C.toJS()[0].def : null,
+    evade: C.toJS()[0] ? C.toJS()[0].evade : null,
+    name: C.toJS()[0] ? C.toJS()[0].name : null,
+    classes: C.toJS()[0] ? C.toJS()[0].classes : null,
+    refName: C.toJS()[0] ? C.toJS()[0].refName : null,
     getEnemySelectedTarget: state.get('getEnemySelectedTarget').toJS().targetForAttack,
     enemyStr: state.get('getEnemySelectedTarget').toJS().enemyStr,
     numberTest: 1,
-    heroStats: C,
+    heroStats: C.get('0'),
+    isMenuDefendSelected: state.get('isMenuDefendSelected').toJS()[0],
     isPauseBetweenTurns: state.get('isPauseBetweenTurns').toJS()[0],
     isHeroTurn: state.get('isHeroAttacking').isHeroAttacking,
     isHeroAttacking: state.get('getNextTurn').toJS()[0] === 'hero1' ? true : false,

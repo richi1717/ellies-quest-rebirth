@@ -25,6 +25,7 @@ class Enemies extends Component {
     this.serverRequest = axios.get(url)
       .then(response => {
         this.enemies = response.data;
+        this.ranEnemies = this.chooseEnemies(this.enemies);
         this.props.setBattleScene('forest');
         this.setState({done: true});
       });
@@ -57,7 +58,7 @@ class Enemies extends Component {
     };
     return (
       <div>
-        {this.state.done ? this.chooseEnemies(this.enemies) : null}
+      {this.state.done ? this.ranEnemies : null}
       </div>
     );
   }

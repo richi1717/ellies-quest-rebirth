@@ -10,13 +10,20 @@ import {
   setMenuDefendSelected,
   setMenuItemsSelected,
   setMenuMagicSelected,
-  setMenuRunSelected
+  setMenuRunSelected,
+  setPauseBetweenTurns,
+  setListOfTurnOrder,
+  setNextTurnFromList
 } from '../actions/index';
 
 import '../../sass/_menu.scss';
 
 @autobind
 class BattleMenuTurn extends PureComponent {
+  componentDidUpdate() {
+    this.props.getNextTurn === 'hero1' && !this.props.isPauseBetweenTurns ? this.clearOtherMenuSelections() : null;
+  }
+
   handleAttackClick() {
     this.clearOtherMenuSelections();
     this.props.setMenuAttackSelected(true);
@@ -25,6 +32,9 @@ class BattleMenuTurn extends PureComponent {
   handleDefendClick() {
     this.clearOtherMenuSelections();
     this.props.setMenuDefendSelected(true);
+    this.props.setNextTurnFromList(this.props.getListOfTurnOrder);
+    this.props.setListOfTurnOrder(this.props.getNextTurn);
+    this.props.setPauseBetweenTurns(true);
   }
 
   handleMagicClick() {
@@ -89,7 +99,8 @@ function mapStateToProps(state) {
     isPauseBetweenTurns: state.get('isPauseBetweenTurns').toJS()[0],
     isHeroTurn: state.get('isHeroAttacking').isHeroAttacking,
     isHeroAttacking: state.get('getNextTurn').toJS()[0] === 'hero1' ? true : false,
-    isHeroAttackingAnimation: state.get('isEnemyTarget').toJS()[0].attacking || state.get('isEnemyTarget').toJS()[1].attacking
+    isHeroAttackingAnimation: state.get('isEnemyTarget').toJS()[0].attacking || state.get('isEnemyTarget').toJS()[1].attacking,
+    getListOfTurnOrder: state.get('getListOfTurnOrder'),
     getNextTurn: state.get('getNextTurn').toJS()[0]
     // heroMaxHp: C.get('maxHp'),
     // heroCurrentHp: C.get('currentHp'),
@@ -118,7 +129,6 @@ function mapStateToProps(state) {
     // isEnemyTarget3: state.get('isEnemyTarget').toJS()[3].attacking,
     // isEnemyTarget4: state.get('isEnemyTarget').toJS()[4].attacking,
     // // isHeroAttackingPos2: state.get('isHeroAttacking').isHeroAttackingPos2,
-    // getListOfTurnOrder: state.get('getListOfTurnOrder'),
   };
 }
 
@@ -128,7 +138,10 @@ function mapDispatchToProps(dispatch) {
     setMenuDefendSelected,
     setMenuItemsSelected,
     setMenuMagicSelected,
-    setMenuRunSelected
+    setMenuRunSelected,
+    setPauseBetweenTurns,
+    setListOfTurnOrder,
+    setNextTurnFromList
   }, dispatch);
 }
 

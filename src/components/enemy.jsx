@@ -76,6 +76,7 @@ class Enemy extends PureComponent {
   handleHeroAttacking(enemyTarget) {
     const ENEMY_STATS = this.props['enemyStats' + this.props.position];
     const DMG = this.getDamageAmount(ENEMY_STATS);
+    this.dmg = DMG;
     const NEW_HP = ENEMY_STATS.currentHp - DMG;
     const NEW_STATS = this.props.enemyStats.find(function (stat) {
       return stat.get('id') === this.props.position;
@@ -114,8 +115,11 @@ class Enemy extends PureComponent {
     );
   }
 
+  showDamageOverHead() {
+    return (<div id={"dmg-display" + this.props.position} className="damage-display">{this.dmg}</div>);
+  }
+
   render() {
-    // console.log(this.props);
     const enemyClass = {
       'enemy-sprites': true,
       'enemy-attack-hero1': this.state.isAttacking
@@ -126,7 +130,9 @@ class Enemy extends PureComponent {
           id={"enemy" + this.props.position}
           onClick={this.handleTest}
           className={classnames(enemyClass) + " " + this.props.enemyClass + " enemy" + this.props.position}
-        />
+        >
+        {this.props.isHeroAttacking ? this.showDamageOverHead() : null}
+        </div>
         {this.state.isAttacking ? sounds.enemyAttackFX() : null}
       </div>
     );

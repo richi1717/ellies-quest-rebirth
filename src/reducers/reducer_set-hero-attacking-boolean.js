@@ -14,6 +14,9 @@ export default function(state = {isHeroAttacking: false}, action) {
     case types.SET_HERO_ATTACKING_POS2_BOOLEAN: {
       return Object.assign({}, state, {isHeroAttackingPos2: action.payload});
     }
+    case types.SET_MENU_DEFEND_SELECTED: {
+      return Object.assign({}, state, {isHeroAttacking: false});
+    }
     default: {
       return state;
     }
