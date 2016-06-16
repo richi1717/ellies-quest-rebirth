@@ -53,6 +53,28 @@ class Character extends PureComponent {
     this.getCharacters.abort();
   }
 
+  componentDidUpdate() {
+    const IS_HERO_TURN = this.props.isHeroAttackingAnimation && this.props.isHeroTurn && !this.state.pos2;
+    const IS_ENEMY_ATTACKING = this.props.isEnemyAttacking && this.props.enemyStr && this.props.getEnemySelectedTarget === 'hero1';
+    if (this.props.isPauseBetweenTurns) {
+    } else if (IS_HERO_TURN) {
+      this.handleHeroTurn();
+    } else if (IS_ENEMY_ATTACKING) {
+      console.log('doing it');
+      this.handleEnemyAttacking();
+      this.props.setEnemySelectedTarget(null, null, null);
+    } else if (!this.props.isHeroTurn && this.props.getNextTurn === 'hero1') {
+      console.log('shoot');
+      // TODO fix this area to handle defense and magic clicks
+      this.props.setHeroAttacking(true);
+      // console.log(this.props.getNextTurn);
+      // this.props.setNextTurnFromList(this.props.getListOfTurnOrder);
+      // document.getElementById('hero' + this.props.numberTest).click();
+    } else {
+      // console.log(IS_HERO_TURN, this.props.isPauseBetweenTurns);
+    }
+  }
+
   setHeroAttackingAnimation() {
     setTimeout(function () {
       this.setState({ pos2: true });
@@ -76,6 +98,8 @@ class Character extends PureComponent {
 
   handleEnemyAttacking() {
     const DMG = this.getDamageAmount();
+    const DMG_DISPLAY = document.getElementById('dmg-display-hero0');
+    this.damageDisplayFadeIn(DMG_DISPLAY);
     if (DMG > 0) {
       const NEW_HP = this.props.heroCurrentHp - DMG;
       const NEW_STATS = this.props.heroStats.set('currentHp', NEW_HP);
@@ -88,30 +112,8 @@ class Character extends PureComponent {
     const POWER = 1/16;
     const STR = this.props.isMenuDefendSelected ? this.props.enemyStr * 0.618 : this.props.enemyStr;
     const DMG = damageCalcHelper(POWER, this.props.heroDef, STR);
+    this.damage = DMG;
     return DMG;
-  }
-
-  componentDidUpdate() {
-    const IS_HERO_TURN = this.props.isHeroAttackingAnimation && this.props.isHeroTurn && !this.state.pos2;
-    const IS_ENEMY_ATTACKING = this.props.isEnemyAttacking && this.props.enemyStr && this.props.getEnemySelectedTarget === 'hero1';
-
-    if (this.props.isPauseBetweenTurns) {
-    } else if (IS_HERO_TURN) {
-      this.handleHeroTurn();
-    } else if (IS_ENEMY_ATTACKING) {
-      console.log('doing it');
-      this.handleEnemyAttacking();
-      this.props.setEnemySelectedTarget(null, null, null);
-    } else if (!this.props.isHeroTurn && this.props.getNextTurn === 'hero1') {
-      console.log('shoot');
-      // TODO fix this area to handle defense and magic clicks
-      this.props.setHeroAttacking(true);
-      // console.log(this.props.getNextTurn);
-      // this.props.setNextTurnFromList(this.props.getListOfTurnOrder);
-      // document.getElementById('hero' + this.props.numberTest).click();
-    } else {
-      // console.log(IS_HERO_TURN, this.props.isPauseBetweenTurns);
-    }
   }
 
   handleClick() {
@@ -123,6 +125,37 @@ class Character extends PureComponent {
       // this.props.setBattleScene('grass');
       console.log('getListOfTurnOrder(): ' + this.props.getListOfTurnOrder);
     }
+  }
+
+  damageDisplayFadeIn(element, display) {
+    element.style.opacity = 0;
+    element.style.display = display || "block";
+    // element.style.top = '30%';
+    let pos = 0;
+
+    (function fade() {
+      let val = parseFloat(element.style.opacity);
+      if (!((val += 0.01) > 1)) {
+        element.style.opacity = val;
+        pos--;
+        element.style.top = pos + 'px';
+        requestAnimationFrame(fade);
+      } else {
+        element.style.display = 'none';
+      }
+    })();
+  }
+
+  showDamageOverHead() {
+    const STYLE = { display: 'none' };
+    return (
+      <div
+        id={"dmg-display-hero0"}
+        className="damage-display-hero1"
+      >
+        {this.damage}
+      </div>
+    );
   }
 
   render() {
@@ -145,7 +178,9 @@ class Character extends PureComponent {
         <div>{this.props.heroCurrentHp}</div>
         <div
           className={classnames(HERO_CLASS)}
-        />
+        >
+          {this.showDamageOverHead()}
+        </div>
         {this.state.pos2 ? sounds.heroAttackFX() : null}
       </div>
     );

@@ -54,6 +54,9 @@ class Enemy extends PureComponent {
         this.handleEnemyAttacking();
         this.props.setEnemyAttacking(false);
       }.bind(this), 1000);
+    } else if (this.props.isEnemyTarget) {
+      const DMG_DISPLAY = document.getElementById('dmg-display' + this.props.position);
+      this.damageDisplayFadeIn(DMG_DISPLAY, 'block');
     }
   }
 
@@ -105,6 +108,22 @@ class Enemy extends PureComponent {
     }
   }
 
+  damageDisplayFadeIn(element, display) {
+    element.style.opacity = 0;
+    element.style.display = display || "block";
+    let pos = 0;
+
+    (function fade() {
+      var val = parseFloat(element.style.opacity);
+      if (!((val += 0.01) > 1)) {
+        element.style.opacity = val;
+        pos--;
+        element.style.top = pos + 'px';
+        requestAnimationFrame(fade);
+      }
+    })();
+  }
+
   setMusic() {
     return (
       <audio
@@ -117,22 +136,31 @@ class Enemy extends PureComponent {
   }
 
   showDamageOverHead() {
-    return (<div id={"dmg-display" + this.props.position} className="damage-display">{this.dmg}</div>);
+    const STYLE = { display: 'none' };
+    return (
+      <div
+        id={"dmg-display" + this.props.position}
+        className="damage-display"
+      >
+        {this.dmg}
+      </div>
+    );
   }
 
   render() {
-    const enemyClass = {
+    const ENEMY_CLASS = {
       'enemy-sprites': true,
       'enemy-attack-hero1': this.state.isAttacking
     };
+    const DMG_DISPLAY = document.getElementById('dmg-display' + this.props.position);
     return (
       <div>
         <div
           id={"enemy" + this.props.position}
           onClick={this.handleTest}
-          className={classnames(enemyClass) + " " + this.props.enemyClass + " enemy" + this.props.position}
+          className={classnames(ENEMY_CLASS) + " " + this.props.enemyClass + " enemy" + this.props.position}
         >
-        {this.props.isHeroAttacking ? this.showDamageOverHead() : null}
+          {this.showDamageOverHead()}
         </div>
         {this.state.isAttacking ? sounds.enemyAttackFX() : null}
       </div>
@@ -176,7 +204,10 @@ function mapStateToProps(state) {
     isEnemyTarget2: state.get('isEnemyTarget').toJS()[2],
     isEnemyTarget3: state.get('isEnemyTarget').toJS()[3],
     isEnemyTarget4: state.get('isEnemyTarget').toJS()[4],
-    isEnemyTarget: state.get('isEnemyTarget'),
+    // isEnemyTarget: state.get('isEnemyTarget'),
+    isEnemyTarget: state.get('isEnemyTarget').toJS()[0].attacking || state.get('isEnemyTarget').toJS()[1].attacking
+                           || state.get('isEnemyTarget').toJS()[2].attacking || state.get('isEnemyTarget').toJS()[3].attacking
+                           || state.get('isEnemyTarget').toJS()[4].attacking ? true : false,
     getNextTurn: state.get('getNextTurn').toJS()[0],
     getListOfTurnOrder: state.get('getListOfTurnOrder'),
     isPauseBetweenTurns: state.get('isPauseBetweenTurns').toJS()[0]

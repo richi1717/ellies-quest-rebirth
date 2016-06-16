@@ -179,3 +179,12 @@
   top: 20vh;
   left: 30vw;
 }
+
+.damage-display {
+  color: yellow;
+  position: absolute;
+  top: -20%;
+  left: 30%;
+  font-size: 13pt;
+  z-index: 1;
+}

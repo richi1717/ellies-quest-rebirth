@@ -917,13 +917,14 @@ div.new-game-screen > div > button:nth-child(44) {
   margin-top: 300px;
 }
 
-.damage-display {
-  color: yellow;
-  position: absolute;
-  top: -20%;
-  left: 30%;
-  font-size: 13pt;
-}
+// .damage-display {
+//   color: yellow;
+//   position: absolute;
+//   top: -20%;
+//   left: 30%;
+//   font-size: 13pt;
+//   z-index: 1;
+// }
 
 button:focus {
   outline: none;
