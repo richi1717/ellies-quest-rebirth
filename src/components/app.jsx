@@ -7,6 +7,7 @@ import StatusWindow from './status-window';
 import TimeOutHandler from './time-out';
 import BattleMenuTurn from './battle-menu-turn';
 import BattleMenuAttack from './battle-menu-attack';
+import BattleMenuItems from './battle-menu-items';
 
 import '../../sass/style.scss';
 
@@ -23,6 +24,7 @@ export default class App extends Component {
           <StatusWindow>
             <BattleMenuTurn>
               <BattleMenuAttack />
+              <BattleMenuItems />
             </BattleMenuTurn>
           </StatusWindow>
         </BattleScene>

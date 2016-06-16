@@ -12,92 +12,72 @@ import '../../sass/_menu.scss';
 
 @autobind
 class BattleMenuAttack extends PureComponent {
-  getRenderedListOfCharacters() {
+  getRenderedListOfItemsFirstFive() {
     const ARR = [];
-    for (const KEY in this.props.heroStats) {
-      ARR.push(
-        <li key={KEY}>
-          <button className={"menu-select attack-character"}>
-            {this.props.heroStats[KEY].name}
-          </button>
-        </li>
-      );
-    }
-    return ARR;
-  }
-
-  getRenderedListOfEnemies() {
-    const ARR = [];
-    for (const KEY in this.props.enemyStats) {
-      const CLICK = "handleEnemy" + KEY + "AttackClick";
+    for (const KEY in this.props.items) {
+      const CLICK = "handleItem" + KEY + "Click";
       /* eslint-disable */
-      ARR.push(
-        <li key={KEY}>
-        <button onClick={this[CLICK]} className={"menu-select " + this.props.target + "-position"}>
-        {this.props.enemyStats[KEY].name}
-        </button>
-        </li>
-      );
+      if (KEY < 5) {
+        ARR.push(
+          <li key={KEY}>
+            <button className="menu-select">
+              {this.props.items[KEY]}
+            </button>
+          </li>
+        );
+      }
       /* eslint-enable */
     }
     return ARR;
   }
 
-  handleEnemy0AttackClick() {
-    this.dispatchClickEvent('enemy0');
-  }
-
-  handleEnemy1AttackClick() {
-    this.dispatchClickEvent('enemy1');
-  }
-
-  handleEnemy2AttackClick() {
-    this.dispatchClickEvent('enemy2');
-  }
-
-  handleEnemy3AttackClick() {
-    this.dispatchClickEvent('enemy3');
-  }
-
-  handleEnemy4AttackClick() {
-    this.dispatchClickEvent('enemy4');
-  }
-
-  dispatchClickEvent(id) {
-    document.getElementById(id).click();
+  getRenderedListOfItemsAfterFive() {
+    const ARR = [];
+    for (const KEY in this.props.items) {
+      const CLICK = "handleItem" + KEY + "Click";
+      /* eslint-disable */
+      if (KEY > 4) {
+        ARR.push(
+          <li key={KEY}>
+            <button className="menu-select">
+              {this.props.items[KEY]}
+            </button>
+          </li>
+        );
+      }
+      /* eslint-enable */
+    }
+    return ARR;
   }
 
   render() {
     const CLASSES = {
       'battle-menu-turn': true,
-      'menu-attack': true,
+      'menu-items': true,
       'sub-menu': true,
       'more-than-five': this.props.amountOfEnemies > 4 ? true : false
     };
     const INLINE_STYLE = {
       display: 'none'
     };
-    if (this.props.isMenuAttackSelected) {
-      if (this.props.amountOfEnemies > 4) {
+    if (this.props.isMenuItemsSelected) {
+      if (this.props.items.length < 5) {
         return (
           <div className={classnames(CLASSES)}>
             <div>
-              {this.getRenderedListOfEnemies()}
+              {this.getRenderedListOfItemsFirstFive()}
             </div>
-            <div>
-              {this.getRenderedListOfCharacters()}
-            </div>
-            {this.props.children}
           </div>
         );
       } else {
         return (
           <div className={classnames(CLASSES)}>
             <div>
-              {this.getRenderedListOfEnemies()}
-              {this.getRenderedListOfCharacters()}
+              {this.getRenderedListOfItemsFirstFive()}
             </div>
-            {this.props.children}
+            <div>
+              {this.getRenderedListOfItemsAfterFive()}
+            </div>
           </div>
         );
       }
@@ -108,24 +88,25 @@ class BattleMenuAttack extends PureComponent {
 }
 
 function mapStateToProps(state) {
-  const C = state.get('updateCharacterStats');
+  const C = state.get('updateCharacterStats').toJS()[0];
   // console.log(c);
   // console.log(`%c${c.get('name')}`, 'color: green');
   return {
-    heroMaxHp: C.get('maxHp'),
-    heroCurrentHp: C.get('currentHp'),
-    heroMaxMp: C.get('maxMp'),
-    heroCurrentMp: C.get('currentMp'),
-    heroAgility: C.get('agility'),
-    accuracy: C.get('accuracy'),
-    heroStr: C.get('str'),
-    magic: C.get('magic'),
-    exp: C.get('exp'),
-    heroDef: C.get('def'),
-    evade: C.get('evade'),
-    heroName0: C.get('name'),
-    classes: C.get('classes'),
-    refName: C.get('refName'),
+    heroMaxHp: C.maxHp,
+    heroCurrentHp: C.currentHp,
+    heroMaxMp: C.maxMp,
+    heroCurrentMp: C.currentMp,
+    heroAgility: C.agility,
+    items: C.items,
+    accuracy: C.accuracy,
+    heroStr: C.str,
+    magic: C.magic,
+    exp: C.exp,
+    heroDef: C.def,
+    evade: C.evade,
+    heroName0: C.name,
+    classes: C.classes,
+    refName: C.refName,
     getEnemySelectedTarget: state.get('getEnemySelectedTarget').toJS().targetForAttack,
     enemyStr: state.get('getEnemySelectedTarget').toJS().enemyStr,
     numberTest: 1,
@@ -147,7 +128,7 @@ function mapStateToProps(state) {
     getNextTurn: state.get('getNextTurn').toJS()[0],
     enemyStats: state.get('enemyStats').toJS(),
     amountOfEnemies: state.get('enemyStats').toArray().length,
-    isMenuAttackSelected: state.get('isMenuAttackSelected').toJS()[0]
+    isMenuItemsSelected: state.get('isMenuItemsSelected').toJS()[0]
   };
 }
 

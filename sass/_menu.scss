@@ -82,27 +82,32 @@ button.menu-select {
   position: absolute;
   left: 15rem;
   bottom: 0;
+  display: flex;
+  flex-direction: row;
+  div {
+    flex: 1;
+    li {
+      font-family: 'Istok Web', sans-serif;
+      font-size: 22pt;
+      list-style-type: none;
+      margin-top: 0px;
+      margin-bottom: .4rem;
+      text-indent: 10px;
+      text-shadow: 2px 1px #8a8a7b;
+    }
+  }
 }
 
 .more-than-five {
   min-width: 60rem;
 }
 
-.battle-menu-turn > li {
-  font-family: 'Istok Web', sans-serif;
-  font-size: 22pt;
-  list-style-type: none;
-  margin-top: 0px;
-  margin-bottom: .4rem;
-  text-indent: 10px;
-  text-shadow: 2px 1px #8a8a7b;
-}
 
-.battle-menu-turn > li:nth-child(6) {
-  position: absolute;
-  top: 0;
-  right: 14rem;
-}
+// .battle-menu-turn > li:nth-child(6) {
+//   position: absolute;
+//   top: 0;
+//   right: 14rem;
+// }
 
 .battle-menu-turn > ul > li{
   font-family: 'Istok Web', sans-serif;
@@ -121,21 +126,21 @@ button.menu-select {
 
 .menu-magic {
   min-width: 600px;
-  margin-left: 200px;
-  margin-top: -230px;
   z-index: 1;
+  bottom: 4rem;
+  left: 5rem;
+}
+
+.menu-items {
+  min-width: 600px;
+  z-index: 1;
+  bottom: 4rem;
+  left: 5rem;
 }
 
 .magic-attack-menu {
   margin-left: 250px;
   margin-top: -250px;
-  z-index: 1;
-}
-
-.menu-magic {
-  min-width: 600px;
-  margin-left: 200px;
-  margin-top: -230px;
   z-index: 1;
 }
 
