@@ -55,7 +55,7 @@ class BattleMenuAttack extends PureComponent {
       'battle-menu-turn': true,
       'menu-items': true,
       'sub-menu': true,
-      'more-than-five': this.props.amountOfEnemies > 4 ? true : false
+      'more-than-five': this.props.items.length > 4 ? true : false
     };
     const INLINE_STYLE = {
       display: 'none'

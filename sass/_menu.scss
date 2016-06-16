@@ -98,11 +98,6 @@ button.menu-select {
   }
 }
 
-.more-than-five {
-  min-width: 60rem;
-}
-
-
 // .battle-menu-turn > li:nth-child(6) {
 //   position: absolute;
 //   top: 0;
@@ -125,14 +120,14 @@ button.menu-select {
 }
 
 .menu-magic {
-  min-width: 600px;
+  min-width: 30rem;
   z-index: 1;
   bottom: 4rem;
   left: 5rem;
 }
 
 .menu-items {
-  min-width: 600px;
+  min-width: 30rem;
   z-index: 1;
   bottom: 4rem;
   left: 5rem;
@@ -148,4 +143,8 @@ button.menu-select {
   margin-left: 400px;
   margin-top: -0px;
   z-index: 1
+}
+
+.more-than-five {
+  min-width: 60rem;
 }
