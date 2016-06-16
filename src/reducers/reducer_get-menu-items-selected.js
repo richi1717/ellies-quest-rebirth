@@ -5,6 +5,9 @@ const defaultState = fromJS([false]);
 
 export default function(state = defaultState, action) {
   switch (action.type) {
+    case types.SET_MENU_ITEMS_SELECTED: {
+      return state.setIn([0], action.payload);
+    }
     case types.SET_MENU_ATTACK_SELECTED: {
       return state.setIn([0], false);
     }

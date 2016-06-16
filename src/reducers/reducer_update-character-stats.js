@@ -20,7 +20,8 @@ export default function(state = fromJS([]), action) {
         def: character.def,
         evade: character.evade,
         classes: character.classes,
-        refName: character.battleName
+        refName: character.battleName,
+        items: character.items
       }));
     }
     default: {
