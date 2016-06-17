@@ -23,8 +23,8 @@ import { autobind } from 'core-decorators';
 import PureComponent from './pure-component';
 import * as sounds from '../utils/sound-fx';
 import { setTimeOutHelper } from '../utils/time-out';
-import damageCalcHelper from '../utils/damage-calc';
-import getBaseDamage from '../utils/base-damage';
+import { damageCalculation, getBaseDamage } from '../utils/damage-calc';
+import { calcLevel } from '../utils/calculate-level';
 import { fromJS } from 'immutable';
 
 import '../../sass/style.scss';
@@ -92,7 +92,8 @@ class Enemy extends PureComponent {
 
   getDamageAmount(enemy) {
     const POWER = 4;
-    let damage = damageCalcHelper(POWER, enemy.def, this.props.heroStr);
+    const BASE = getBaseDamage(this.props.heroStr, calcLevel(this.props.heroStats[0].exp));
+    let damage = damageCalculation(POWER, enemy.def, this.props.heroStr);
     damage = damage > 0 ? damage : 1;
     return damage;
   }
@@ -204,6 +205,7 @@ function mapStateToProps(state) {
     isEnemyTarget2: state.get('isEnemyTarget').toJS()[2],
     isEnemyTarget3: state.get('isEnemyTarget').toJS()[3],
     isEnemyTarget4: state.get('isEnemyTarget').toJS()[4],
+    heroStats: state.get('updateCharacterStats').toJS(),
     // isEnemyTarget: state.get('isEnemyTarget'),
     isEnemyTarget: state.get('isEnemyTarget').toJS()[0].attacking || state.get('isEnemyTarget').toJS()[1].attacking
                            || state.get('isEnemyTarget').toJS()[2].attacking || state.get('isEnemyTarget').toJS()[3].attacking

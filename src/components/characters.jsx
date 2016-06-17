@@ -21,7 +21,7 @@ import {
 } from '../actions/index';
 
 import * as sounds from '../utils/sound-fx';
-import damageCalcHelper from '../utils/damage-calc';
+import { damageCalculation, getBaseDamage } from '../utils/damage-calc';
 
 import '../../sass/style.scss';
 import '../../sass/_battle-character.scss';
@@ -111,7 +111,7 @@ class Character extends PureComponent {
   getDamageAmount() {
     const POWER = 1/16;
     const STR = this.props.isMenuDefendSelected ? this.props.enemyStr * 0.618 : this.props.enemyStr;
-    const DMG = damageCalcHelper(POWER, this.props.heroDef, STR);
+    const DMG = damageCalculation(POWER, this.props.heroDef, STR);
     this.damage = DMG;
     return DMG;
   }
