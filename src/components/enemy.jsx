@@ -15,6 +15,7 @@ import {
   updateEnemyStats,
   updateEnemyStatsFromAttack,
   setMenuAttackSelected,
+  deleteEnemyWhenKilled,
   setHeroAttacking
 } from '../actions/index';
 
@@ -47,6 +48,8 @@ class Enemy extends PureComponent {
   componentDidUpdate() {
     if (this.props.isPauseBetweenTurns) {
       this.dmg = null;
+    } else if (!this.isEnemyAlive() && this.props.getNextTurn === 'enemy' + this.props.position) {
+      this.props.setNextTurnFromList(this.props.getListOfTurnOrder);
     } else if (!this.props.isEnemyAttacking && this.props.getNextTurn === 'enemy' + this.props.position) {
       console.log('attacking hero! from: enemy' + this.props.position);
       this.props.setEnemyAttacking(true);
@@ -54,7 +57,7 @@ class Enemy extends PureComponent {
         this.handleEnemyAttacking();
         this.props.setEnemyAttacking(false);
       }.bind(this), 1000);
-    } else if (this.props.isEnemyTarget) {
+    } else if (this.props['isEnemyTarget' + this.props.position].attacking) {
       const DMG_DISPLAY = document.getElementById('dmg-display' + this.props.position);
       this.damageDisplayFadeIn(DMG_DISPLAY, 'block');
     }
@@ -78,14 +81,21 @@ class Enemy extends PureComponent {
   }
 
   handleHeroAttacking(enemyTarget) {
+    console.log(this.props.position);
     const ENEMY_STATS = this.props['enemyStats' + this.props.position];
     const DMG = this.getDamageAmount(ENEMY_STATS);
-    this.dmg = DMG;
     const NEW_HP = ENEMY_STATS.currentHp - DMG;
-    const NEW_STATS = this.props.enemyStats.find(function (stat) {
-      return stat.get('id') === this.props.position;
-    }.bind(this)).set('currentHp', NEW_HP);
-    this.props.updateEnemyStats(NEW_STATS.toJSON(), this.props.position);
+    this.dmg = DMG;
+    if (NEW_HP <= 0) {
+      const ENEMY = document.getElementById('enemy' + this.props.position);
+      this.enemyKilledFadeOut(ENEMY, 'block');
+      setTimeOutHelper(2000, this.props.deleteEnemyWhenKilled, this.props.position);
+    } else {
+      const NEW_STATS = this.props.enemyStats.find(function (stat) {
+        return stat.get('id') === this.props.position;
+      }.bind(this)).set('currentHp', NEW_HP);
+      this.props.updateEnemyStats(NEW_STATS.toJSON(), this.props.position);
+    }
     console.log('%cdamage: ' + DMG, 'color: orange');
     console.log('%cEnemy Health: ' + NEW_HP, 'color: green');
   }
@@ -110,6 +120,7 @@ class Enemy extends PureComponent {
   }
 
   damageDisplayFadeIn(element, display) {
+    console.log(element);
     element.style.opacity = 0;
     element.style.display = display || "block";
     let pos = 0;
@@ -120,6 +131,19 @@ class Enemy extends PureComponent {
         element.style.opacity = val;
         pos--;
         element.style.top = pos + 'px';
+        requestAnimationFrame(fade);
+      }
+    })();
+  }
+
+  enemyKilledFadeOut(element, display) {
+    element.style.opacity = 1;
+    element.style.display = display || "block";
+
+    (function fade() {
+      var val = parseFloat(element.style.opacity);
+      if (!((val -= 0.01) < 0)) {
+        element.style.opacity = val;
         requestAnimationFrame(fade);
       }
     })();
@@ -148,24 +172,35 @@ class Enemy extends PureComponent {
     );
   }
 
+  isEnemyAlive() {
+    return !(this.props.enemyStats[this.props.position].toJS().killed);
+  }
+
   render() {
     const ENEMY_CLASS = {
       'enemy-sprites': true,
       'enemy-attack-hero1': this.state.isAttacking
     };
+
+    // console.log(this.isEnemyAlive());
     const DMG_DISPLAY = document.getElementById('dmg-display' + this.props.position);
-    return (
-      <div>
-        <div
-          id={"enemy" + this.props.position}
-          onClick={this.handleTest}
-          className={classnames(ENEMY_CLASS) + " " + this.props.enemyClass + " enemy" + this.props.position}
-        >
-          {this.showDamageOverHead()}
+    if (this.isEnemyAlive()) {
+
+      return (
+        <div>
+          <div
+            id={"enemy" + this.props.position}
+            onClick={this.handleTest}
+            className={classnames(ENEMY_CLASS) + " " + this.props.enemyClass + " enemy" + this.props.position}
+          >
+            {this.showDamageOverHead()}
+          </div>
+          {this.state.isAttacking ? sounds.enemyAttackFX() : null}
         </div>
-        {this.state.isAttacking ? sounds.enemyAttackFX() : null}
-      </div>
-    );
+      );
+    } else {
+      return null;
+    }
   }
 }
 
@@ -230,6 +265,7 @@ function mapDispatchToProps(dispatch) {
     updateEnemyStats,
     updateEnemyStatsFromAttack,
     setMenuAttackSelected,
+    deleteEnemyWhenKilled,
     setHeroAttacking
   }, dispatch);
 }

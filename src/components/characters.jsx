@@ -101,8 +101,9 @@ class Character extends PureComponent {
     const DMG_DISPLAY = document.getElementById('dmg-display-hero0');
     this.damageDisplayFadeIn(DMG_DISPLAY);
     if (DMG > 0) {
-      const NEW_HP = this.props.heroCurrentHp - DMG;
-      const NEW_STATS = this.props.heroStats.set('currentHp', NEW_HP);
+      let newHp = this.props.heroCurrentHp - DMG;
+      newHp = newHp <= 0 ? 0 : newHp;
+      const NEW_STATS = this.props.heroStats.set('currentHp', newHp);
       this.props.updateCharacterStats(NEW_STATS.toJS(), 0);
       console.log('%cdamage: ' + DMG, 'color: red');
     }
@@ -171,7 +172,8 @@ class Character extends PureComponent {
       'attack-enemy3': this.props.isEnemyTarget3,
       'attack-enemy4': this.props.isEnemyTarget4,
       'battle-hero-position1': this.props.isHeroAttacking && !this.props.isPauseBetweenTurns,
-      'battle-hero-position1-front': this.props.isHeroAttacking && !this.props.isPauseBetweenTurns
+      'battle-hero-position1-front': this.props.isHeroAttacking && !this.props.isPauseBetweenTurns,
+      'dead': this.props.isHeroDead
     };
     return (
       <div onClick={this.handleClick}>
@@ -226,7 +228,8 @@ function mapStateToProps(state) {
     isEnemyTarget4: state.get('isEnemyTarget').toJS()[4].attacking,
     // isHeroAttackingPos2: state.get('isHeroAttacking').isHeroAttackingPos2,
     getListOfTurnOrder: state.get('getListOfTurnOrder'),
-    getNextTurn: state.get('getNextTurn').toJS()[0]
+    getNextTurn: state.get('getNextTurn').toJS()[0],
+    isHeroDead: C.toJS()[0] ? C.toJS()[0].currentHp <= 0 ? true : false : false
   };
 }
 

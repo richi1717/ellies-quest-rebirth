@@ -31,13 +31,15 @@ class BattleMenuAttack extends PureComponent {
     for (const KEY in this.props.enemyStats) {
       const CLICK = "handleEnemy" + KEY + "AttackClick";
       /* eslint-disable */
-      ARR.push(
-        <li key={KEY}>
-        <button onClick={this[CLICK]} className={"menu-select " + this.props.target + "-position"}>
-        {this.props.enemyStats[KEY].name}
-        </button>
-        </li>
-      );
+      if (!this.props.enemyStats[KEY].killed) {  
+        ARR.push(
+          <li key={KEY}>
+            <button onClick={this[CLICK]} className={"menu-select " + this.props.target + "-position"}>
+            {this.props.enemyStats[KEY].name}
+            </button>
+          </li>
+        );
+      }
       /* eslint-enable */
     }
     return ARR;

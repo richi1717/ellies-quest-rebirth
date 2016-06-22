@@ -147,3 +147,10 @@ export function setMenuRunSelected(bool) {
     payload: bool
   };
 }
+
+export function deleteEnemyWhenKilled(position) {
+  return {
+    type: types.DELETE_ENEMY_WHEN_KILLED,
+    payload: position
+  };
+}

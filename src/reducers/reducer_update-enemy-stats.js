@@ -27,7 +27,15 @@ export default function(state = fromJS([]), action) {
         expOnDefeat: enemy.expOnDefeat,
         itemHeld: enemy.itemHeld,
         rareItem: enemy.rareItem,
-        level: enemy.level
+        level: enemy.level,
+        killed: false
+      }));
+    }
+    case types.DELETE_ENEMY_WHEN_KILLED: {
+      console.log(action.payload, state.toJS());
+      return state.setIn([action.payload], Map({
+        id: action.id,
+        killed: true
       }));
     }
     default: {
