@@ -41,11 +41,23 @@ class Enemy extends PureComponent {
     };
   }
 
+  shouldComponentUpdate() {
+    // console.log(this.areAllEnemiesDead(), this.isEnemyAlive());
+    if (this.areAllEnemiesDead() || (!this.isEnemyAlive() && this.props.getNextTurn !== 'enemy' + this.props.position)) {
+      // console.log('false');
+      return false;
+    } else {
+      // console.log('true');
+      return true;
+    }
+  }
+
   componentDidMount() {
     this.props.setListOfTurnOrder('enemy' + this.props.position);
   }
 
   componentDidUpdate() {
+    // console.log('update');
     if (this.props.isPauseBetweenTurns) {
       this.dmg = null;
     } else if (!this.isEnemyAlive() && this.props.getNextTurn === 'enemy' + this.props.position) {
@@ -120,7 +132,7 @@ class Enemy extends PureComponent {
   }
 
   damageDisplayFadeIn(element, display) {
-    console.log(element);
+    // console.log(element);
     element.style.opacity = 0;
     element.style.display = display || "block";
     let pos = 0;
@@ -176,13 +188,25 @@ class Enemy extends PureComponent {
     return !(this.props.enemyStats[this.props.position].toJS().killed);
   }
 
+  areAllEnemiesDead() {
+    let dead = false;
+    for (let i = 0; i < this.props.enemyStats.length; i ++) {
+      if (this.props.enemyStats[i].get('killed')) {
+        dead = true;
+      } else {
+        dead = false;
+        return false;
+      }
+    }
+    return dead;
+  }
+
   render() {
     const ENEMY_CLASS = {
       'enemy-sprites': true,
       'enemy-attack-hero1': this.state.isAttacking
     };
 
-    // console.log(this.isEnemyAlive());
     const DMG_DISPLAY = document.getElementById('dmg-display' + this.props.position);
     if (this.isEnemyAlive()) {
 

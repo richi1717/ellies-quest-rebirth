@@ -56,7 +56,9 @@ class Character extends PureComponent {
   componentDidUpdate() {
     const IS_HERO_TURN = this.props.isHeroAttackingAnimation && this.props.isHeroTurn && !this.state.pos2;
     const IS_ENEMY_ATTACKING = this.props.isEnemyAttacking && this.props.enemyStr && this.props.getEnemySelectedTarget === 'hero1';
-    if (this.props.isPauseBetweenTurns) {
+    if (this.areAllEnemiesDead()) {
+      // this.handleVictoryState();
+    } else if (this.props.isPauseBetweenTurns) {
     } else if (IS_HERO_TURN) {
       this.handleHeroTurn();
     } else if (IS_ENEMY_ATTACKING) {
@@ -73,6 +75,11 @@ class Character extends PureComponent {
     } else {
       // console.log(IS_HERO_TURN, this.props.isPauseBetweenTurns);
     }
+  }
+
+  handleVictoryState() {
+    const STYLE = { color: 'black'};
+    return <div style={STYLE}>You Win!!!!!!!</div>;
   }
 
   setHeroAttackingAnimation() {
@@ -159,6 +166,19 @@ class Character extends PureComponent {
     );
   }
 
+  areAllEnemiesDead() {
+    let dead = false;
+    for (let i = 0; i < this.props.enemyStats.length; i ++) {
+      if (this.props.enemyStats[i].get('killed')) {
+        dead = true;
+      } else {
+        dead = false;
+        return false;
+      }
+    }
+    return dead;
+  }
+
   render() {
     const HERO_CLASS = {
       'battle-ff-sprite': true,
@@ -182,6 +202,7 @@ class Character extends PureComponent {
           className={classnames(HERO_CLASS)}
         >
           {this.showDamageOverHead()}
+          {this.areAllEnemiesDead() ? this.handleVictoryState() : null}
         </div>
         {this.state.pos2 ? sounds.heroAttackFX() : null}
       </div>
@@ -216,6 +237,7 @@ function mapStateToProps(state) {
     isMenuDefendSelected: state.get('isMenuDefendSelected').toJS()[0],
     isPauseBetweenTurns: state.get('isPauseBetweenTurns').toJS()[0],
     isHeroTurn: state.get('isHeroAttacking').isHeroAttacking,
+    enemyStats: state.get('enemyStats').toArray(),
     isHeroAttacking: state.get('getNextTurn').toJS()[0] === 'hero1' ? true : false,
     isHeroAttackingAnimation: state.get('isEnemyTarget').toJS()[0].attacking || state.get('isEnemyTarget').toJS()[1].attacking
                            || state.get('isEnemyTarget').toJS()[2].attacking || state.get('isEnemyTarget').toJS()[3].attacking
