@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import axios from 'axios';
-import classnames from 'classnames';
-import PureComponent from './pure-component';
 import { autobind } from 'core-decorators';
 import { fromJS } from 'immutable';
-import { setTimeOutHelper } from '../utils/time-out';
+import axios from 'axios';
+import classnames from 'classnames';
+
+import PureComponent from './pure-component';
 
 import {
   setBattleScene,
@@ -20,6 +18,7 @@ import {
   ROOT_URL
 } from '../actions/index';
 
+import { setTimeOutHelper } from '../utils/time-out';
 import * as sounds from '../utils/sound-fx';
 import { damageCalculation, getBaseDamage } from '../utils/damage-calc';
 
@@ -28,7 +27,7 @@ import '../../sass/_battle-character.scss';
 import '../../sass/_battle-backgrounds.scss';
 
 @autobind
-class Character extends PureComponent {
+export default class Character extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -205,67 +204,8 @@ class Character extends PureComponent {
           {this.areAllEnemiesDead() ? this.handleVictoryState() : null}
         </div>
         {this.state.pos2 ? sounds.heroAttackFX() : null}
+        {this.areAllEnemiesDead() ? sounds.battleVictoryMusic() : null}
       </div>
     );
   }
 }
-
-function mapStateToProps(state) {
-  const C = state.get('updateCharacterStats');
-  // console.log(C.toJS()[0]);
-  // console.log(state.get('getEnemySelectedTarget').toJS().targetForAttack);
-  // console.log(`%c${c.get('name')}`, 'color: green');
-  return {
-    heroMaxHp: C.toJS()[0] ? C.toJS()[0].maxHp : null,
-    heroCurrentHp: C.toJS()[0] ? C.toJS()[0].currentHp : null,
-    heroMaxMp: C.toJS()[0] ? C.toJS()[0].maxMp : null,
-    heroCurrentMp: C.toJS()[0] ? C.toJS()[0].currentMp : null,
-    heroAgility: C.toJS()[0] ? C.toJS()[0].agility : null,
-    accuracy: C.toJS()[0] ? C.toJS()[0].accuracy : null,
-    heroStr: C.toJS()[0] ? C.toJS()[0].str : null,
-    magic: C.toJS()[0] ? C.toJS()[0].magic : null,
-    exp: C.toJS()[0] ? C.toJS()[0].exp : null,
-    heroDef: C.toJS()[0] ? C.toJS()[0].def : null,
-    evade: C.toJS()[0] ? C.toJS()[0].evade : null,
-    name: C.toJS()[0] ? C.toJS()[0].name : null,
-    classes: C.toJS()[0] ? C.toJS()[0].classes : null,
-    refName: C.toJS()[0] ? C.toJS()[0].refName : null,
-    getEnemySelectedTarget: state.get('getEnemySelectedTarget').toJS().targetForAttack,
-    enemyStr: state.get('getEnemySelectedTarget').toJS().enemyStr,
-    numberTest: 1,
-    heroStats: C.get('0'),
-    isMenuDefendSelected: state.get('isMenuDefendSelected').toJS()[0],
-    isPauseBetweenTurns: state.get('isPauseBetweenTurns').toJS()[0],
-    isHeroTurn: state.get('isHeroAttacking').isHeroAttacking,
-    enemyStats: state.get('enemyStats').toArray(),
-    isHeroAttacking: state.get('getNextTurn').toJS()[0] === 'hero1' ? true : false,
-    isHeroAttackingAnimation: state.get('isEnemyTarget').toJS()[0].attacking || state.get('isEnemyTarget').toJS()[1].attacking
-                           || state.get('isEnemyTarget').toJS()[2].attacking || state.get('isEnemyTarget').toJS()[3].attacking
-                           || state.get('isEnemyTarget').toJS()[4].attacking ? true : false,
-    isEnemyAttacking: state.get('isEnemyAttacking').toJS()[0],
-    isEnemyTarget0: state.get('isEnemyTarget').toJS()[0].attacking,
-    isEnemyTarget1: state.get('isEnemyTarget').toJS()[1].attacking,
-    isEnemyTarget2: state.get('isEnemyTarget').toJS()[2].attacking,
-    isEnemyTarget3: state.get('isEnemyTarget').toJS()[3].attacking,
-    isEnemyTarget4: state.get('isEnemyTarget').toJS()[4].attacking,
-    // isHeroAttackingPos2: state.get('isHeroAttacking').isHeroAttackingPos2,
-    getListOfTurnOrder: state.get('getListOfTurnOrder'),
-    getNextTurn: state.get('getNextTurn').toJS()[0],
-    isHeroDead: C.toJS()[0] ? C.toJS()[0].currentHp <= 0 ? true : false : false
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({
-    setBattleScene,
-    setEnemySelectedTarget,
-    setPauseBetweenTurns,
-    setNextTurnFromList,
-    setListOfTurnOrder,
-    setEnemyAttacking,
-    updateCharacterStats,
-    setHeroAttacking
-  }, dispatch);
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Character);
