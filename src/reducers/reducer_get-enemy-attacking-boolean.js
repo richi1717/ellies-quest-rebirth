@@ -1,9 +1,9 @@
 import * as types from '../constants/action_types';
-import { List, Map } from 'immutable';
+import { fromJS } from 'immutable';
 
-const defaultState = List([false]);
+const DEF = fromJS([false]);
 
-export default function(state = defaultState, action) {
+export default function(state = DEF, action) {
   switch (action.type) {
     case types.SET_ENEMY_ATTACKING_BOOLEAN: {
       return state.setIn([0], action.payload);

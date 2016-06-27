@@ -9,7 +9,7 @@
     "webpack-server": "webpack-dev-server --hot --progress --colors",
     "web-server": "json-server -w gameDb.json",
     "start": "npm run webpack-server & npm run web-server",
-    "test": "NODE_ENV=test nyc --config nyc-config.js --reporter=lcov --reporter=text-lcov mocha --compilers js:babel-register --recursive",
+    "test": "NODE_ENV=test nyc --config nyc-config.js --reporter=lcov --reporter=text-lcov mocha --compilers js:babel-register --require ./test/test_helper.js --recursive",
     "test:watch": "npm test -- --watch",
     "cf": "webpack -p --config webpack.cf.config.js && cd dist && cf push ellies-quest-rebirth"
   },
@@ -18,6 +18,7 @@
     "axios": "^0.11.1",
     "babel-core": "^6.5.2",
     "babel-eslint": "^5.0.4",
+    "babel-jest": "^13.0.0",
     "babel-loader": "^6.2.4",
     "babel-plugin-__coverage__": "^11.0.0",
     "babel-plugin-react-transform": "^2.0.2",
@@ -27,6 +28,7 @@
     "babel-preset-react": "^6.5.0",
     "babel-preset-stage-0": "^6.5.0",
     "chai": "^3.5.0",
+    "chai-immutable": "^1.6.0",
     "classnames": "^2.2.5",
     "core-decorators": "^0.12.3",
     "core-js": "^2.4.0",
@@ -41,6 +43,7 @@
     "http-server": "^0.9.0",
     "img-loader": "^1.2.2",
     "immutable": "^3.8.1",
+    "jest": "^13.0.0",
     "jquery": "^2.2.4",
     "jsdom": "^9.2.1",
     "jsx-chai": "^4.0.0",
@@ -93,5 +96,12 @@
     ],
     "sourceMap": false,
     "instrument": false
+  },
+  "jest": {
+    "unmockedModulePathPatterns": [
+      "<rootDir>/node_modules/react/",
+      "<rootDir>/node_modules/react-dom/",
+      "<rootDir>/node_modules/react-addons-test-utils/"
+    ]
   }
 }

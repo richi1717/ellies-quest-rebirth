@@ -22,7 +22,7 @@ BattleScene.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    battleScene: state.get('battleScene').get('battleScene')
+    battleScene: state.get('battleScene').toJS()[0].battleScene
   };
 }
 
