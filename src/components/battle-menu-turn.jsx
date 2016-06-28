@@ -119,8 +119,8 @@ function mapStateToProps(state) {
     // name: C.get('name'),
     // classes: C.get('classes'),
     // refName: C.get('refName'),
-    // getEnemySelectedTarget: state.get('getEnemySelectedTarget').toJS().targetForAttack,
-    // enemyStr: state.get('getEnemySelectedTarget').toJS().enemyStr,
+    // getEnemySelectedTarget: state.get('getEnemySelectedTarget').toJS()[0].targetForAttack,
+    // enemyStr: state.get('getEnemySelectedTarget').toJS()[0].enemyStr,
     // numberTest: 1,
     // heroStats: C,
     //                        || state.get('isEnemyTarget').toJS()[2].attacking || state.get('isEnemyTarget').toJS()[3].attacking

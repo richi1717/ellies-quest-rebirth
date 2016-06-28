@@ -31,7 +31,7 @@ class BattleMenuAttack extends PureComponent {
     for (const KEY in this.props.enemyStats) {
       const CLICK = "handleEnemy" + KEY + "AttackClick";
       /* eslint-disable */
-      if (!this.props.enemyStats[KEY].killed) {  
+      if (!this.props.enemyStats[KEY].killed) {
         ARR.push(
           <li key={KEY}>
             <button onClick={this[CLICK]} className={"menu-select " + this.props.target + "-position"}>
@@ -128,8 +128,8 @@ function mapStateToProps(state) {
     heroName0: C.get('name'),
     classes: C.get('classes'),
     refName: C.get('refName'),
-    getEnemySelectedTarget: state.get('getEnemySelectedTarget').toJS().targetForAttack,
-    enemyStr: state.get('getEnemySelectedTarget').toJS().enemyStr,
+    getEnemySelectedTarget: state.get('getEnemySelectedTarget').toJS()[0].targetForAttack,
+    enemyStr: state.get('getEnemySelectedTarget').toJS()[0].enemyStr,
     numberTest: 1,
     heroStats: state.get('updateCharacterStats').toJS(),
     isPauseBetweenTurns: state.get('isPauseBetweenTurns').toJS()[0],
