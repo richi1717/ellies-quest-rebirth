@@ -6,7 +6,7 @@ export default function(state = fromJS([]), action) {
     case types.UPDATE_ENEMY_STATS: {
       const enemy = action.payload;
 
-      return state.setIn([action.id], Map({
+      return state.setIn([action.id], fromJS({
         id: action.id,
         maxHp: enemy.maxHp,
         currentHp: enemy.currentHp,
@@ -32,11 +32,7 @@ export default function(state = fromJS([]), action) {
       }));
     }
     case types.DELETE_ENEMY_WHEN_KILLED: {
-      console.log(action.payload, state.toJS());
-      return state.setIn([action.payload], Map({
-        id: action.id,
-        killed: true
-      }));
+      return state.setIn([action.payload], fromJS({ killed: true }));
     }
     default: {
       return state;
