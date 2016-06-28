@@ -1,15 +1,15 @@
 import * as types from '../constants/action_types';
-import { List, Map, fromJS } from 'immutable';
+import { fromJS } from 'immutable';
 
-const DEFAULT = fromJS({
+const DEF = fromJS([{
   targetForAttack: null,
   enemyStr: null
-});
+}]);
 
-export default function(state = DEFAULT, action) {
+export default function(state = DEF, action) {
   switch (action.type) {
     case types.SET_ENEMY_SELECTED_TARGET: {
-      return state.merge(fromJS({
+      return state.setIn([0], fromJS({
         targetForAttack: action.payload.name,
         enemyStr: action.payload.str
       }));
