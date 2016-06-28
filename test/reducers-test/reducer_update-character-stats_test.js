@@ -3,7 +3,7 @@ import * as types from '../../src/constants/action_types';
 import reducer from '../../src/reducers/reducer_update-character-stats';
 import { fromJS } from 'immutable';
 
-describe('enemy selected target reducer', () => {
+describe('update character stats reducer', () => {
   it('should return the initial state', () => {
     expect(reducer(undefined, {})).to.equal(fromJS([{
       maxHp: 0,
