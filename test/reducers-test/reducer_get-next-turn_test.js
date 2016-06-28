@@ -1,6 +1,6 @@
 import { expect } from 'chai';
-import * as types from '../src/constants/action_types';
-import reducer from '../src/reducers/reducer_get-next-turn';
+import * as types from '../../src/constants/action_types';
+import reducer from '../../src/reducers/reducer_get-next-turn';
 import { fromJS } from 'immutable';
 
 describe('enemy selected target reducer', () => {

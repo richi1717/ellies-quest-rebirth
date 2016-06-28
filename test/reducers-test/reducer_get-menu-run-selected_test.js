@@ -1,15 +1,15 @@
 import { expect } from 'chai';
-import * as types from '../src/constants/action_types';
-import reducer from '../src/reducers/reducer_get-menu-attack-selected';
+import * as types from '../../src/constants/action_types';
+import reducer from '../../src/reducers/reducer_get-menu-run-selected';
 import { fromJS } from 'immutable';
 
-describe('menu attack selected reducer', () => {
+describe('menu run selected reducer', () => {
   it('should return the initial state', () => {
     expect(reducer(undefined, {})).to.equal(fromJS([false]));
   });
-  it('handles SET_MENU_ATTACK_SELECTED', () => {
+  it('handles SET_MENU_RUN_SELECTED', () => {
     const DEF = fromJS([false]);
-    const action = { type: types.SET_MENU_ATTACK_SELECTED, payload: true };
+    const action = { type: types.SET_MENU_RUN_SELECTED, payload: true };
     const nextState = reducer(DEF, action);
 
     expect(nextState).to.equal(fromJS([true]));
@@ -19,7 +19,7 @@ describe('menu attack selected reducer', () => {
   });
   it('handles SET_MENU_ATTACK_SELECTED', () => {
     const DEF = fromJS([false]);
-    const action = { type: types.SET_MENU_ATTACK_SELECTED, payload: false };
+    const action = { type: types.SET_MENU_ATTACK_SELECTED, payload: true };
     const nextState = reducer(DEF, action);
 
     expect(nextState).to.equal(fromJS([false]));

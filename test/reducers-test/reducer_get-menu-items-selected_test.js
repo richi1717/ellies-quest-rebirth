@@ -1,6 +1,6 @@
 import { expect } from 'chai';
-import * as types from '../src/constants/action_types';
-import reducer from '../src/reducers/reducer_get-menu-items-selected';
+import * as types from '../../src/constants/action_types';
+import reducer from '../../src/reducers/reducer_get-menu-items-selected';
 import { fromJS } from 'immutable';
 
 describe('menu items selected reducer', () => {

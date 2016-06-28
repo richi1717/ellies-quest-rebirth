@@ -1,6 +1,6 @@
 import { expect } from 'chai';
-import * as types from '../src/constants/action_types';
-import reducer from '../src/reducers/reducer_get-pause-between-turns';
+import * as types from '../../src/constants/action_types';
+import reducer from '../../src/reducers/reducer_get-pause-between-turns';
 import { fromJS } from 'immutable';
 
 describe('pause between turns reducer', () => {

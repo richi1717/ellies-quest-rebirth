@@ -1,6 +1,6 @@
 import { expect } from 'chai';
-import * as types from '../src/constants/action_types';
-import reducer from '../src/reducers/reducer_battle-scene';
+import * as types from '../../src/constants/action_types';
+import reducer from '../../src/reducers/reducer_battle-scene';
 import { fromJS } from 'immutable';
 
 describe('battle scene reducer', () => {
