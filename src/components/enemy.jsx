@@ -22,7 +22,7 @@ import {
 import classnames from 'classnames';
 import { autobind } from 'core-decorators';
 import PureComponent from './pure-component';
-import * as sounds from '../utils/sound-fx';
+import { EnemyAttackFX } from '../utils/sound-fx';
 import { setTimeOutHelper } from '../utils/time-out';
 import { damageCalculation, getBaseDamage } from '../utils/damage-calc';
 import { calcLevel } from '../utils/calculate-level';
@@ -219,7 +219,7 @@ class Enemy extends PureComponent {
           >
             {this.showDamageOverHead()}
           </div>
-          {this.state.isAttacking ? sounds.enemyAttackFX() : null}
+          {this.state.isAttacking ? <EnemyAttackFX /> : null}
         </div>
       );
     } else {

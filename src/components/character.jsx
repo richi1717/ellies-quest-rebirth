@@ -19,7 +19,7 @@ import {
 } from '../actions/index';
 
 import { setTimeOutHelper } from '../utils/time-out';
-import * as sounds from '../utils/sound-fx';
+import { HeroAttackFX, BattleVictoryMusic } from '../utils/sound-fx';
 import { damageCalculation, getBaseDamage } from '../utils/damage-calc';
 
 import '../../sass/style.scss';
@@ -203,8 +203,8 @@ export default class Character extends PureComponent {
           {this.showDamageOverHead()}
           {this.areAllEnemiesDead() ? this.handleVictoryState() : null}
         </div>
-        {this.state.pos2 ? sounds.heroAttackFX() : null}
-        {this.areAllEnemiesDead() ? sounds.battleVictoryMusic() : null}
+        {this.state.pos2 ? <HeroAttackFX /> : null}
+        {this.areAllEnemiesDead() ? <BattleVictoryMusic /> : null}
       </div>
     );
   }
