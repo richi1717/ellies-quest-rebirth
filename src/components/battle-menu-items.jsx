@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Map } from 'immutable';
 import { autobind } from 'core-decorators';
-// import axios from 'axios';
-import { setMenuAttackSelected } from '../actions/index';
+import axios from 'axios';
+import { setMenuAttackSelected, ROOT_URL, setListOfItems } from '../actions/index';
 import classnames from 'classnames';
 import PureComponent from './pure-component';
 
@@ -12,16 +12,49 @@ import '../../sass/_menu.scss';
 
 @autobind
 class BattleMenuAttack extends PureComponent {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      done: false
+    };
+  }
+
+  componentWillMount() {
+    const url = `${ROOT_URL}/items`;
+    this.serverRequest = axios.get(url)
+      .then(response => {
+        console.log(response.data);
+        this.getItems = this.setItems(response.data);
+        this.setState({done: true});
+      });
+  }
+
+  componentWillUnmount() {
+    this.serverRequest.abort();
+  }
+
+  setItems(items) {
+    const ARR = [];
+    for (const KEY in items) {
+      if (items[KEY].inStock > 0) {
+        this.props.setListOfItems(items[KEY], KEY);
+        ARR.push(items[KEY]);
+      }
+    }
+    return ARR;
+  }
+
   getRenderedListOfItemsFirstFive() {
     const ARR = [];
-    for (const KEY in this.props.items) {
+    for (const KEY in this.props.getListOfItems) {
       const CLICK = "handleItem" + KEY + "Click";
       /* eslint-disable */
       if (KEY < 5) {
         ARR.push(
           <li key={KEY}>
             <button className="menu-select">
-              {this.props.items[KEY]}
+              {this.props.getListOfItems[KEY].name + "  x" + this.props.getListOfItems[KEY].inStock}
             </button>
           </li>
         );
@@ -33,14 +66,14 @@ class BattleMenuAttack extends PureComponent {
 
   getRenderedListOfItemsAfterFive() {
     const ARR = [];
-    for (const KEY in this.props.items) {
+    for (const KEY in this.props.getListOfItems) {
       const CLICK = "handleItem" + KEY + "Click";
       /* eslint-disable */
       if (KEY > 4) {
         ARR.push(
           <li key={KEY}>
             <button className="menu-select">
-              {this.props.items[KEY]}
+              {this.props.getListOfItems[KEY].name + "  x" + this.props.getListOfItems[KEY].inStock}
             </button>
           </li>
         );
@@ -51,17 +84,17 @@ class BattleMenuAttack extends PureComponent {
   }
 
   render() {
-    const CLASSES = {
-      'battle-menu-turn': true,
-      'menu-items': true,
-      'sub-menu': true,
-      'more-than-five': this.props.items.length > 4 ? true : false
-    };
     const INLINE_STYLE = {
       display: 'none'
     };
-    if (this.props.isMenuItemsSelected) {
-      if (this.props.items.length < 5) {
+    if (this.props.isMenuItemsSelected && this.state.done) {
+      const CLASSES = {
+        'battle-menu-turn': true,
+        'menu-items': true,
+        'sub-menu': true,
+        'more-than-five': this.props.getListOfItems.length > 4 ? true : false
+      };
+      if (this.props.getListOfItems.length < 5) {
         return (
           <div className={classnames(CLASSES)}>
             <div>
@@ -128,12 +161,13 @@ function mapStateToProps(state) {
     getNextTurn: state.get('getNextTurn').toJS()[0],
     enemyStats: state.get('enemyStats').toJS(),
     amountOfEnemies: state.get('enemyStats').toArray().length,
-    isMenuItemsSelected: state.get('isMenuItemsSelected').toJS()[0]
+    isMenuItemsSelected: state.get('isMenuItemsSelected').toJS()[0],
+    getListOfItems: state.get('getListOfItems').toJS()
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ setMenuAttackSelected }, dispatch);
+  return bindActionCreators({ setMenuAttackSelected, setListOfItems }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(BattleMenuAttack);

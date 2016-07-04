@@ -149,9 +149,10 @@ describe('actions', () => {
     const BOOL = true;
     const expectedAction = {
       type: types.SET_MENU_DEFEND_SELECTED,
-      payload: BOOL
+      payload: BOOL,
+      id: 0
     };
-    expect(actions.setMenuDefendSelected(BOOL)).toEqual(expectedAction);
+    expect(actions.setMenuDefendSelected(BOOL, 0)).toEqual(expectedAction);
   });
   it('should create an action to update the menu selection for items', () => {
     const BOOL = true;

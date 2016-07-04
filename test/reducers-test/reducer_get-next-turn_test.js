@@ -5,10 +5,10 @@ import { fromJS } from 'immutable';
 
 describe('next turn reducer', () => {
   it('should return the initial state', () => {
-    expect(reducer(undefined, {})).to.equal(fromJS([]));
+    expect(reducer(undefined, {})).to.equal(fromJS(['fake0']));
   });
   it('handles GET_NEXT_TURN_FROM_LIST', () => {
-    const DEF = fromJS([]);
+    const DEF = fromJS(['fake0']);
     const action = { type: types.GET_NEXT_TURN_FROM_LIST, payload: 'enemy1' };
     const nextState = reducer(DEF, action);
 

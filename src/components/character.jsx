@@ -202,7 +202,7 @@ export default class Character extends PureComponent {
       'position1': true,
       'front-row': true,
       'attack-swing': this.state.pos2,
-      'defense': this.props.isMenuDefendSelected,
+      'defense': this.props.isHero0Defending,
       'attacking': this.props.isHero0Attacking && !this.props.isPauseBetweenTurns,
       'hero-turn': this.props.isHero0Attacking && !this.props.isPauseBetweenTurns,
       'dead': this.props.isHeroDead
@@ -214,7 +214,7 @@ export default class Character extends PureComponent {
       'position2': true,
       'front-row': true,
       'attack-swing': this.state.pos2,
-      'defense': this.props.isMenuDefendSelected,
+      'defense': this.props.isHero1Defending,
       'attacking': this.props.isHero1Attacking && !this.props.isPauseBetweenTurns,
       'hero-turn': this.props.isHero1Attacking && !this.props.isPauseBetweenTurns,
       'dead': this.props.isHeroDead
@@ -226,7 +226,7 @@ export default class Character extends PureComponent {
       'position3': true,
       'back-row': true,
       'attack-swing': this.state.pos2,
-      'defense': this.props.isMenuDefendSelected,
+      'defense': this.props.isHero2Defending,
       'attacking': this.props.isHero2Attacking && !this.props.isPauseBetweenTurns,
       'hero-turn': this.props.isHero2Attacking && !this.props.isPauseBetweenTurns,
       'dead': this.props.isHeroDead

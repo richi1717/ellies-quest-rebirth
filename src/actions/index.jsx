@@ -121,10 +121,11 @@ export function setMenuAttackSelected(bool) {
   };
 }
 
-export function setMenuDefendSelected(bool) {
+export function setMenuDefendSelected(bool, id) {
   return {
     type: types.SET_MENU_DEFEND_SELECTED,
-    payload: bool
+    payload: bool,
+    id
   };
 }
 
@@ -153,5 +154,13 @@ export function deleteEnemyWhenKilled(position) {
   return {
     type: types.DELETE_ENEMY_WHEN_KILLED,
     payload: position
+  };
+}
+
+export function setListOfItems(items, id) {
+  return {
+    type: types.SET_LIST_OF_ITEMS,
+    payload: items,
+    id
   };
 }

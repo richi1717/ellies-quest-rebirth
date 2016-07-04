@@ -21,7 +21,9 @@ import '../../sass/_menu.scss';
 @autobind
 class BattleMenuTurn extends PureComponent {
   componentDidUpdate() {
-    this.props.getNextTurn === 'hero1' && !this.props.isPauseBetweenTurns && this.props.isMenuDefendSelected ? this.clearOtherMenuSelections() : null;
+    this.props.getNextTurn === 'hero0' && !this.props.isPauseBetweenTurns && this.props.isHero0Defending ? this.clearOtherMenuSelections() : null;
+    this.props.getNextTurn === 'hero1' && !this.props.isPauseBetweenTurns && this.props.isHero1Defending ? this.clearOtherMenuSelections() : null;
+    this.props.getNextTurn === 'hero2' && !this.props.isPauseBetweenTurns && this.props.isHero2Defending ? this.clearOtherMenuSelections() : null;
   }
 
   handleAttackClick() {
@@ -30,8 +32,9 @@ class BattleMenuTurn extends PureComponent {
   }
 
   handleDefendClick() {
+    console.log(this.props.getAttackingPosition);
     this.clearOtherMenuSelections();
-    this.props.setMenuDefendSelected(true);
+    this.props.setMenuDefendSelected(true, this.props.getAttackingPosition);
     this.props.setNextTurnFromList(this.props.getListOfTurnOrder);
     this.props.setListOfTurnOrder(this.props.getNextTurn);
     this.props.setPauseBetweenTurns(true);
@@ -54,7 +57,7 @@ class BattleMenuTurn extends PureComponent {
 
   clearOtherMenuSelections() {
     this.props.setMenuAttackSelected(false);
-    this.props.setMenuDefendSelected(false);
+    this.props.setMenuDefendSelected(false, this.props.getAttackingPosition);
     this.props.setMenuMagicSelected(false);
     this.props.setMenuItemsSelected(false);
     this.props.setMenuRunSelected(false);
@@ -67,21 +70,11 @@ class BattleMenuTurn extends PureComponent {
     const INNER = (
       <div className="battle-menu-turn">
         <div>
-          <li>
-            <button onClick={this.handleAttackClick} className="menu-select" id="attack">Attack</button>
-          </li>
-          <li>
-            <button onClick={this.handleDefendClick} className="menu-select" id="defend">Defend</button>
-          </li>
-          <li>
-            <button onClick={this.handleMagicClick} className="menu-select" id="magic">Magic</button>
-          </li>
-          <li>
-            <button onClick={this.handleItemsClick} className="menu-select" id="items">Items</button>
-          </li>
-          <li>
-            <button onClick={this.handleRunClick} className="menu-select" id="run">RUN!</button>
-          </li>
+          <li><button onClick={this.handleAttackClick} className="menu-select" id="attack">Attack</button></li>
+          <li><button onClick={this.handleDefendClick} className="menu-select" id="defend">Defend</button></li>
+          <li><button onClick={this.handleMagicClick} className="menu-select" id="magic">Magic</button></li>
+          <li><button onClick={this.handleItemsClick} className="menu-select" id="items">Items</button></li>
+          <li><button onClick={this.handleRunClick} className="menu-select" id="run">RUN!</button></li>
         </div>
         {this.props.children}
       </div>
@@ -100,6 +93,7 @@ class BattleMenuTurn extends PureComponent {
 
 function mapStateToProps(state) {
   const C = state.get('updateCharacterStats');
+  // console.log(state.get('getNextTurn').toJS()[0]);
   // console.log(c);
   // console.log(`%c${c.get('name')}`, 'color: green');
   return {
@@ -108,10 +102,13 @@ function mapStateToProps(state) {
     isHero0Attacking: state.get('getNextTurn').toJS()[0] === 'hero0' ? true : false,
     isHero1Attacking: state.get('getNextTurn').toJS()[0] === 'hero1' ? true : false,
     isHero2Attacking: state.get('getNextTurn').toJS()[0] === 'hero2' ? true : false,
+    getAttackingPosition: state.get('getNextTurn').toJS()[0].slice(4),
     isHeroAttackingAnimation: state.get('isEnemyTarget').toJS()[0].attacking || state.get('isEnemyTarget').toJS()[1].attacking,
     getListOfTurnOrder: state.get('getListOfTurnOrder'),
     getNextTurn: state.get('getNextTurn').toJS()[0],
-    isMenuDefendSelected: state.get('isMenuDefendSelected').toJS()[0]
+    isHero0Defending: state.get('isMenuDefendSelected').toJS()[0],
+    isHero1Defending: state.get('isMenuDefendSelected').toJS()[1],
+    isHero2Defending: state.get('isMenuDefendSelected').toJS()[2]
     // heroMaxHp: C.get('maxHp'),
     // heroCurrentHp: C.get('currentHp'),
     // heroMaxMp: C.get('maxMp'),
