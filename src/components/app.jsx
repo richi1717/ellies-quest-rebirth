@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Character from '../containers/character-container';
+import Character from '../containers/character-selection-container';
 import BattleScene from './battle-scene';
 import Enemies from './enemy-selection';
 import { List, Map } from 'immutable';

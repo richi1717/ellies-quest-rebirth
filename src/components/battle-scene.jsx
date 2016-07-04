@@ -1,6 +1,6 @@
 import React, { Component , PropTypes} from 'react';
 import { connect } from 'react-redux';
-import { normalBattleMusic } from '../utils/sound-fx';
+import { NormalBattleMusic } from '../utils/sound-fx';
 
 import '../../sass/_battle-backgrounds.scss';
 

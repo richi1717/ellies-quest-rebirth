@@ -21,6 +21,18 @@
       text-indent: 40px;
       text-shadow: 2px 1px #8a8a7b;
     }
+
+    th {
+      text-align: left;
+      height: 1px;
+      font-size: 20pt;
+    }
+
+    tbody + tbody {
+      font-family: 'Istok Web', sans-serif;
+      font-size: 22pt;
+      height: 1px;
+    }
   }
 
   .battle-menu-main-stats {
@@ -57,7 +69,49 @@
   }
 }
 
-button.menu-select {
+.low-health {
+  color: rgba(130,14,16,0.5);
+}
+
+.low-magic {
+  color: rgba(130,14,16,0.5);
+}
+
+.health-bar {
+  position: relative;
+  div {
+    height: .5rem;
+    width: 75%;
+    position: absolute;
+    left: 4rem;
+    background-color: rgba(130,14,16,0.5);
+    span {
+      background-color: rgba(45, 179, 77, 0.71);
+      position: absolute;
+      height: .5rem;
+      left: 0;
+    }
+  }
+}
+
+.magic-bar {
+  position: relative;
+  div {
+    height: .5rem;
+    width: 73%;
+    position: absolute;
+    left: 4rem;
+    background-color: rgba(130,14,16,0.5);
+    span {
+      background-color: rgba(35, 194, 246, 0.71);
+      position: absolute;
+      height: .5rem;
+      left: 0;
+    }
+  }
+}
+
+.menu-select {
   padding: 0 0px;
   text-align: left;
   text-shadow: 2px 1px #8a8a7b;

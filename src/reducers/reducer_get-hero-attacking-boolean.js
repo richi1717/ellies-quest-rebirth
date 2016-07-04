@@ -1,21 +1,19 @@
 import * as types from '../constants/action_types';
-import { List, Map } from 'immutable';
+import { fromJS } from 'immutable';
 
-const defaultState = List([{isHeroAttacking: false}]);
+const DEF = fromJS([
+  { isHeroAttacking: false },
+  { isHeroAttacking: false },
+  { isHeroAttacking: false }
+]);
 
-export default function(state = {isHeroAttacking: false}, action) {
+export default function(state = DEF, action) {
   switch (action.type) {
     case types.SET_HERO_ATTACKING_BOOLEAN: {
-      // console.log(action.payload);
-      return Object.assign({}, state, {isHeroAttacking: action.payload});
-      // return [action.payload, ...state];
-      // return state.merge(Map({isHeroAttacking: action.payload}));
-    }
-    case types.SET_HERO_ATTACKING_POS2_BOOLEAN: {
-      return Object.assign({}, state, {isHeroAttackingPos2: action.payload});
+      return state.setIn([action.id], { isHeroAttacking: action.payload });
     }
     case types.SET_MENU_DEFEND_SELECTED: {
-      return Object.assign({}, state, {isHeroAttacking: false});
+      return state.setIn([action.id], { isHeroAttacking: false });
     }
     default: {
       return state;

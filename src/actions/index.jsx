@@ -66,10 +66,11 @@ export function setEnemyAttacking(boolean) {
   };
 }
 
-export function setHeroAttacking(boolean) {
+export function setHeroAttacking(boolean, id) {
   return {
     type: types.SET_HERO_ATTACKING_BOOLEAN,
-    payload: boolean
+    payload: boolean,
+    id
   };
 }
 

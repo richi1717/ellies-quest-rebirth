@@ -13,24 +13,58 @@ import '../../sass/_menu.scss';
 @autobind
 class StatusWindow extends PureComponent {
   showStatusPerCharacter() {
-    // this.props.heroStats.Map((h) => {
-    //
-    // });
-    return (
-      <tr>
-        <td>{this.props.heroCurrentHp}/{this.props.heroMaxHp}</td>
-        <td>{this.props.heroCurrentMp}/{this.props.heroMaxMp}</td>
-      </tr>
-    );
+    const STATUS = [];
+    this.props.heroStats.map((h, idx) => {
+      const HP_PERCENTAGE = Math.ceil((h.currentHp / h.maxHp) * 100);
+      const MP_PERCENTAGE = Math.ceil((h.currentMp / h.maxMp) * 100);
+      const LOW_HEALTH = {
+        'low-health': HP_PERCENTAGE <= 10
+      };
+      const LOW_MAGIC = {
+        'low-magic': MP_PERCENTAGE <= 10
+      };
+      const STYLE_HP = {
+        width: HP_PERCENTAGE + '%'
+      };
+      const STYLE_MP = {
+        width: MP_PERCENTAGE + '%'
+      };
+      STATUS.push(
+        <tr key={idx}>
+          <td className={"health-bar " + classnames(LOW_HEALTH)}>{h.currentHp}/{h.maxHp}<div><span style={STYLE_HP}></span></div></td>
+          <td className={"magic-bar " + classnames(LOW_MAGIC)}>{h.currentMp}/{h.maxMp}<div><span style={STYLE_MP}></span></div></td>
+        </tr>
+      );
+    });
+    return STATUS;
+  }
+
+  renderNames() {
+    const STATUS = [];
+    this.props.heroStats.map((h, idx) => {
+      STATUS.push(
+        <tr key={idx}>
+          <td className="menu-select character">{h.name}</td>
+        </tr>
+      );
+    });
+    return STATUS;
   }
 
   render() {
     return (
       <div className="battle-menu-container">
-        <div className="battle-menu-main">NAME
-          <li>
-            <button className="menu-select character">{this.props.heroName}</button>
-          </li>
+        <div className="battle-menu-main">
+        <table>
+          <tbody>
+            <tr>
+              <th>NAME</th>
+            </tr>
+          </tbody>
+          <tbody>
+            {this.renderNames()}
+          </tbody>
+        </table>
         </div>
         <div className="battle-menu-main-stats">
           <table>
@@ -41,7 +75,7 @@ class StatusWindow extends PureComponent {
               </tr>
             </tbody>
             <tbody>
-            {this.showStatusPerCharacter()}
+              {this.showStatusPerCharacter()}
             </tbody>
           </table>
         </div>
@@ -52,21 +86,10 @@ class StatusWindow extends PureComponent {
 }
 
 function mapStateToProps(state) {
-  const c = state.get('updateCharacterStats').toJS()[0] ? state.get('updateCharacterStats').toJS()[0] : state.get('updateCharacterStats').toJS();
-  // console.log(c);
-  // console.log(`%c${c.get('name')}`, 'color: green');
+  const c = state.get('updateCharacterStats').toJS();
   return {
-    heroMaxHp: c.maxHp,
-    heroCurrentHp: c.currentHp,
-    heroMaxMp: c.maxMp,
-    heroCurrentMp: c.currentMp,
-    heroName: c.name,
     heroStats: c
   };
 }
-
-// function mapDispatchToProps(dispatch) {
-//   return bindActionCreators({ fetchCharacters, setBattleScene, setEnemyAttacking, updateCharacterStats }, dispatch);
-// }
 
 export default connect(mapStateToProps, null)(StatusWindow);

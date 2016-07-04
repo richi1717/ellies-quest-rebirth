@@ -26,7 +26,7 @@ class Enemies extends Component {
       .then(response => {
         this.enemies = response.data;
         this.ranEnemies = this.chooseEnemies(this.enemies);
-        this.props.setBattleScene('forest');
+        // this.props.setBattleScene('forest');
         this.setState({done: true});
       });
   }
@@ -37,7 +37,6 @@ class Enemies extends Component {
 
   chooseEnemies(x) {
     const e = [];
-    const names = [];
     const areaEnemies = _.filter(x, { sections: ['forest'] });
     for (let key = 0; key < _.random(1, 5); key++) {
       const ranEnemy = _.sample(areaEnemies);
@@ -69,14 +68,8 @@ Enemies.propTypes = {
   updateEnemyStats: PropTypes.func
 };
 
-function mapStateToProps(state) {
-  return {
-    en: 'en'
-  };
-}
-
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({ setBattleScene, updateEnemyStats }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Enemies);
+export default connect(null, mapDispatchToProps)(Enemies);

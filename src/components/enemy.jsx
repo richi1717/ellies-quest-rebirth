@@ -37,7 +37,9 @@ class Enemy extends PureComponent {
     super(props);
     this.state = {
       test: false,
-      isAttacking: false
+      isAttackingHero0: false,
+      isAttackingHero1: false,
+      isAttackingHero2: false
     };
   }
 
@@ -61,8 +63,10 @@ class Enemy extends PureComponent {
     if (this.props.isPauseBetweenTurns) {
       this.dmg = null;
     } else if (!this.isEnemyAlive() && this.props.getNextTurn === 'enemy' + this.props.position) {
+      console.log('in first else if');
       this.props.setNextTurnFromList(this.props.getListOfTurnOrder);
     } else if (!this.props.isEnemyAttacking && this.props.getNextTurn === 'enemy' + this.props.position) {
+      console.log('second else if');
       console.log('attacking hero! from: enemy' + this.props.position);
       this.props.setEnemyAttacking(true);
       setTimeout(function () {
@@ -76,17 +80,23 @@ class Enemy extends PureComponent {
   }
 
   handleEnemyAttacking() {
-    if (!this.state.isAttacking) {
-      this.props.setEnemySelectedTarget('hero1', getBaseDamage(this.props.str, this.props.level));
+    if (!this.state.isAttackingHero0 || !this.state.isAttackingHero1 || !this.state.isAttackHero2) {
+      const ATK_TARGET = _.random(1, this.props.heroLength) - 1;
+      console.log("attacking hero" + ATK_TARGET);
+      this.props.setEnemySelectedTarget('hero' + ATK_TARGET, getBaseDamage(this.props.str, this.props.level));
       this.props.setPauseBetweenTurns(true);
       this.props.setListOfTurnOrder(this.props.getNextTurn);
       this.props.setNextTurnFromList(this.props.getListOfTurnOrder);
       this.setState({
-        isAttacking: true
+        isAttackingHero0: ATK_TARGET === 0 ? true : false,
+        isAttackingHero1: ATK_TARGET === 1 ? true : false,
+        isAttackingHero2: ATK_TARGET === 2 ? true : false
       });
       setTimeout(function () {
         this.setState({
-          isAttacking: false
+          isAttackingHero0: false,
+          isAttackingHero1: false,
+          isAttackingHero2: false
         });
       }.bind(this), 850);
     }
@@ -121,7 +131,21 @@ class Enemy extends PureComponent {
   }
 
   handleTest() {
-    if (this.props.isHeroAttacking) {
+    if (this.props.isHero0Attacking) {
+      const ENEMY_TARGET = this.props['isEnemyTarget' + this.props.position];
+      this.handleHeroAttacking(ENEMY_TARGET);
+      this.props.setHeroToEnemyTarget(true, this.props.position);
+      this.props.setMenuAttackSelected(false);
+      setTimeOutHelper(1300, this.props.setHeroToEnemyTarget, false, this.props.position);
+      console.log('finished');
+    } else if (this.props.isHero1Attacking) {
+      const ENEMY_TARGET = this.props['isEnemyTarget' + this.props.position];
+      this.handleHeroAttacking(ENEMY_TARGET);
+      this.props.setHeroToEnemyTarget(true, this.props.position);
+      this.props.setMenuAttackSelected(false);
+      setTimeOutHelper(1300, this.props.setHeroToEnemyTarget, false, this.props.position);
+      console.log('finished');
+    } else if (this.props.isHero2Attacking) {
       const ENEMY_TARGET = this.props['isEnemyTarget' + this.props.position];
       this.handleHeroAttacking(ENEMY_TARGET);
       this.props.setHeroToEnemyTarget(true, this.props.position);
@@ -204,7 +228,9 @@ class Enemy extends PureComponent {
   render() {
     const ENEMY_CLASS = {
       'enemy-sprites': true,
-      'enemy-attack-hero1': this.state.isAttacking
+      'enemy-attack-hero0': this.state.isAttackingHero0,
+      'enemy-attack-hero1': this.state.isAttackingHero1,
+      'enemy-attack-hero2': this.state.isAttackingHero2
     };
 
     const DMG_DISPLAY = document.getElementById('dmg-display' + this.props.position);
@@ -219,7 +245,9 @@ class Enemy extends PureComponent {
           >
             {this.showDamageOverHead()}
           </div>
-          {this.state.isAttacking ? <EnemyAttackFX /> : null}
+          {this.state.isAttackingHero0 ? <EnemyAttackFX /> : null}
+          {this.state.isAttackingHero1 ? <EnemyAttackFX /> : null}
+          {this.state.isAttackingHero2 ? <EnemyAttackFX /> : null}
         </div>
       );
     } else {
@@ -251,7 +279,9 @@ function mapStateToProps(state) {
   return {
     isEnemyAttacking: state.get('isEnemyAttacking').toJS()[0],
     // isHeroAttacking: state.get('getNextTurn').toJS()[0] === 'hero1' ? true : false,
-    isHeroAttacking: state.get('isHeroAttacking').isHeroAttacking,
+    isHero0Attacking: state.get('isHeroAttacking').toJS()[0].isHeroAttacking,
+    isHero1Attacking: state.get('isHeroAttacking').toJS()[1].isHeroAttacking,
+    isHero2Attacking: state.get('isHeroAttacking').toJS()[2].isHeroAttacking,
     heroStr: state.get('updateCharacterStats').toJS()[0].str,
     enemyStats: state.get('enemyStats').toArray(),
     enemyStats0: state.get('enemyStats').toJS()[0] ? state.get('enemyStats').toJS()[0] : null,
@@ -271,7 +301,8 @@ function mapStateToProps(state) {
                            || state.get('isEnemyTarget').toJS()[4].attacking ? true : false,
     getNextTurn: state.get('getNextTurn').toJS()[0],
     getListOfTurnOrder: state.get('getListOfTurnOrder'),
-    isPauseBetweenTurns: state.get('isPauseBetweenTurns').toJS()[0]
+    isPauseBetweenTurns: state.get('isPauseBetweenTurns').toJS()[0],
+    heroLength: state.get('updateCharacterStats').toJS().length
   };
 }
 

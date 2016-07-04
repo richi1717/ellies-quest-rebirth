@@ -3,8 +3,8 @@
     {
       "userId": 1,
       "name": "Link",
-      "battleName": "hero1",
-      "classes": "ff-sprite red-boy-down1",
+      "battleName": "hero0",
+      "classes": "red-boy",
       "str": 20,
       "def": 16,
       "exp": 0,
@@ -26,13 +26,14 @@
         "Super Health Tonic",
         "Super Magic Tonic"
       ],
-      "id": 1
+      "id": 1,
+      "inPlay": true
     },
     {
       "userId": 1,
       "name": "Ellie",
-      "battleName": "hero2",
-      "classes": "white-girl-down1 ff-sprite",
+      "battleName": "hero1",
+      "classes": "white-girl",
       "magicAbilities": [
         "Cure1",
         "Fire1",
@@ -57,7 +58,40 @@
         "Super Health Tonic",
         "Super Magic Tonic"
       ],
-      "id": 2
+      "id": 2,
+      "inPlay": true
+    },
+    {
+      "userId": 1,
+      "name": "Luke",
+      "battleName": "hero2",
+      "classes": "green-boy",
+      "magicAbilities": [
+        "Cure1",
+        "Fire1",
+        "Lightning1"
+      ],
+      "magic": 19,
+      "str": 11,
+      "def": 10,
+      "exp": 0,
+      "maxMp": 50,
+      "currentMp": 50,
+      "maxHp": 219,
+      "currentHp": 219,
+      "accuracy": 8,
+      "evade": 6,
+      "agility": 9,
+      "items": [
+        "Health Tonic",
+        "Magic Tonic",
+        "Elixir",
+        "Revive",
+        "Super Health Tonic",
+        "Super Magic Tonic"
+      ],
+      "id": 3,
+      "inPlay": true
     }
   ],
   "currentUser": {
