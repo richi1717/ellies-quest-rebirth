@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Map } from 'immutable';
+import { Map, fromJS } from 'immutable';
 import { autobind } from 'core-decorators';
 import axios from 'axios';
 import { setMenuAttackSelected, ROOT_URL, setListOfItems } from '../actions/index';
@@ -38,7 +38,7 @@ class BattleMenuAttack extends PureComponent {
     const ARR = [];
     for (const KEY in items) {
       if (items[KEY].inStock > 0) {
-        this.props.setListOfItems(items[KEY], KEY);
+        this.props.setListOfItems(fromJS(items[KEY]), KEY);
         ARR.push(items[KEY]);
       }
     }
@@ -122,8 +122,6 @@ class BattleMenuAttack extends PureComponent {
 
 function mapStateToProps(state) {
   const C = state.get('updateCharacterStats').toJS()[0];
-  // console.log(c);
-  // console.log(`%c${c.get('name')}`, 'color: green');
   return {
     heroMaxHp: C.maxHp,
     heroCurrentHp: C.currentHp,

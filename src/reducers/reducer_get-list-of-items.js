@@ -1,7 +1,10 @@
 import * as types from '../constants/action_types';
 import { List, Map, fromJS } from 'immutable';
 
-const DEF = fromJS([{ name: 'Health Tonic', inStock: 0 }]);
+const DEF = fromJS([
+  { name: 'Health Tonic', inStock: 0 },
+  { name: 'Super Health Tonic', inStock: 0 }
+]);
 
 export default function(state = DEF, action) {
   switch (action.type) {
