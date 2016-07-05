@@ -164,3 +164,10 @@ export function setListOfItems(items, id) {
     id
   };
 }
+
+export function setItemSelectedBoolean(bool) {
+  return {
+    type: types.SET_ITEM_SELECTED_BOOLEAN,
+    payload: bool
+  };
+}

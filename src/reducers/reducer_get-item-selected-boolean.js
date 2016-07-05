@@ -5,7 +5,7 @@ const DEF = fromJS([false]);
 
 export default function(state = DEF, action) {
   switch (action.type) {
-    case types.SET_MENU_ITEMS_SELECTED: {
+    case types.SET_ITEM_SELECTED_BOOLEAN: {
       return state.setIn([0], action.payload);
     }
     default: {

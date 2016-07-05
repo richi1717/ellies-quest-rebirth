@@ -14,10 +14,14 @@ import '../../sass/_menu.scss';
 class BattleMenuAttack extends PureComponent {
   getRenderedListOfCharacters() {
     const ARR = [];
+    const CLASSES = {
+      'menu-select': true,
+      'attack-character': !this.props.isItemSelected
+    };
     for (const KEY in this.props.heroStats) {
       ARR.push(
         <li key={KEY}>
-          <button className={"menu-select attack-character"}>
+          <button className={classnames(CLASSES)}>
             {this.props.heroStats[KEY].name}
           </button>
         </li>
@@ -69,18 +73,25 @@ class BattleMenuAttack extends PureComponent {
     document.getElementById(id).click();
   }
 
+  isMoreThanFive() {
+    return (this.props.amountOfEnemies > 4 && this.props.amountOfCharacters === 1)
+        || (this.props.amountOfEnemies > 3 && this.props.amountOfCharacters === 2)
+        || (this.props.amountOfEnemies > 2 && this.props.amountOfCharacters === 3);
+  }
+
   render() {
     const CLASSES = {
       'battle-menu-turn': true,
       'menu-attack': true,
       'sub-menu': true,
-      'more-than-five': this.props.amountOfEnemies > 4 ? true : false
+      'more-than-five': this.isMoreThanFive() ? true : false,
+      'menu-items-select': this.props.isItemSelected
     };
     const INLINE_STYLE = {
       display: 'none'
     };
-    if (this.props.isMenuAttackSelected) {
-      if (this.props.amountOfEnemies > 4) {
+    if (this.props.isMenuAttackSelected || this.props.isItemSelected) {
+      if (this.isMoreThanFive()) {
         return (
           <div className={classnames(CLASSES)}>
             <div>
@@ -149,7 +160,9 @@ function mapStateToProps(state) {
     getNextTurn: state.get('getNextTurn').toJS()[0],
     enemyStats: state.get('enemyStats').toJS(),
     amountOfEnemies: state.get('enemyStats').toArray().length,
-    isMenuAttackSelected: state.get('isMenuAttackSelected').toJS()[0]
+    isMenuAttackSelected: state.get('isMenuAttackSelected').toJS()[0],
+    isItemSelected: state.get('isItemSelected').toJS()[0],
+    amountOfCharacters: state.get('updateCharacterStats').toJS().length
   };
 }
 

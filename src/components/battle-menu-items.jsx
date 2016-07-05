@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { Map, fromJS } from 'immutable';
 import { autobind } from 'core-decorators';
 import axios from 'axios';
-import { setMenuAttackSelected, ROOT_URL, setListOfItems } from '../actions/index';
+import { setMenuAttackSelected, ROOT_URL, setListOfItems, setItemSelectedBoolean } from '../actions/index';
 import classnames from 'classnames';
 import PureComponent from './pure-component';
 
@@ -30,10 +30,6 @@ class BattleMenuAttack extends PureComponent {
       });
   }
 
-  componentWillUnmount() {
-    this.serverRequest.abort();
-  }
-
   setItems(items) {
     const ARR = [];
     for (const KEY in items) {
@@ -49,12 +45,18 @@ class BattleMenuAttack extends PureComponent {
     const ARR = [];
     for (const KEY in this.props.getListOfItems) {
       const CLICK = "handleItem" + KEY + "Click";
+      const ITEM = this.props.getListOfItems[KEY];
+      const PROPS = this.props;
       /* eslint-disable */
       if (KEY < 5) {
+        function CLICK() {
+          PROPS.setItemSelectedBoolean(true);
+          console.log(ITEM);
+        }
         ARR.push(
           <li key={KEY}>
-            <button className="menu-select">
-              {this.props.getListOfItems[KEY].name + "  x" + this.props.getListOfItems[KEY].inStock}
+            <button className="menu-select" onClick={CLICK}>
+              {ITEM.name + "  x" + ITEM.inStock}
             </button>
           </li>
         );
@@ -68,12 +70,16 @@ class BattleMenuAttack extends PureComponent {
     const ARR = [];
     for (const KEY in this.props.getListOfItems) {
       const CLICK = "handleItem" + KEY + "Click";
+      const ITEM = this.props.getListOfItems[KEY];
       /* eslint-disable */
       if (KEY > 4) {
+        function CLICK() {
+          console.log(ITEM);
+        }
         ARR.push(
           <li key={KEY}>
-            <button className="menu-select">
-              {this.props.getListOfItems[KEY].name + "  x" + this.props.getListOfItems[KEY].inStock}
+            <button className="menu-select" onClick={CLICK}>
+              {ITEM.name + "  x" + ITEM.inStock}
             </button>
           </li>
         );
@@ -165,7 +171,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ setMenuAttackSelected, setListOfItems }, dispatch);
+  return bindActionCreators({ setMenuAttackSelected, setListOfItems, setItemSelectedBoolean }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(BattleMenuAttack);
