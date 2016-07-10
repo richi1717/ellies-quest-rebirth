@@ -4,7 +4,14 @@ import { bindActionCreators } from 'redux';
 import { Map, fromJS } from 'immutable';
 import { autobind } from 'core-decorators';
 import axios from 'axios';
-import { setMenuAttackSelected, ROOT_URL, setListOfItems, setItemSelectedBoolean } from '../actions/index';
+import {
+  setMenuAttackSelected,
+  ROOT_URL,
+  setListOfItems,
+  setItemSelectedBoolean,
+  setItemObjectFromSelection
+} from '../actions/index';
+
 import classnames from 'classnames';
 import PureComponent from './pure-component';
 
@@ -51,7 +58,8 @@ class BattleMenuAttack extends PureComponent {
       if (KEY < 5) {
         function CLICK() {
           PROPS.setItemSelectedBoolean(true);
-          console.log(ITEM);
+          PROPS.setItemObjectFromSelection(ITEM);
+          // console.log(ITEM);
         }
         ARR.push(
           <li key={KEY}>
@@ -71,10 +79,13 @@ class BattleMenuAttack extends PureComponent {
     for (const KEY in this.props.getListOfItems) {
       const CLICK = "handleItem" + KEY + "Click";
       const ITEM = this.props.getListOfItems[KEY];
+      const PROPS = this.props;
       /* eslint-disable */
       if (KEY > 4) {
         function CLICK() {
-          console.log(ITEM);
+          PROPS.setItemSelectedBoolean(true);
+          PROPS.setItemObjectFromSelection(ITEM);
+          // console.log(ITEM);
         }
         ARR.push(
           <li key={KEY}>
@@ -171,7 +182,12 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ setMenuAttackSelected, setListOfItems, setItemSelectedBoolean }, dispatch);
+  return bindActionCreators({
+    setMenuAttackSelected,
+    setListOfItems,
+    setItemSelectedBoolean,
+    setItemObjectFromSelection
+  }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(BattleMenuAttack);

@@ -19,13 +19,20 @@ class BattleMenuAttack extends PureComponent {
       'attack-character': !this.props.isItemSelected
     };
     for (const KEY in this.props.heroStats) {
-      ARR.push(
-        <li key={KEY}>
-          <button className={classnames(CLASSES)}>
-            {this.props.heroStats[KEY].name}
-          </button>
-        </li>
-      );
+      const HERO = this.props.heroStats[KEY];
+      const CLICK = 'handleCharacter' + KEY + 'AttackClick';
+      // if (!HERO.killed) {
+        // function CLICK() {
+        //
+        // }
+        ARR.push(
+          <li key={KEY}>
+            <button className={classnames(CLASSES)}>
+              {HERO.name}
+            </button>
+          </li>
+        );
+      // }
     }
     return ARR;
   }
@@ -36,9 +43,12 @@ class BattleMenuAttack extends PureComponent {
       const CLICK = "handleEnemy" + KEY + "AttackClick";
       /* eslint-disable */
       if (!this.props.enemyStats[KEY].killed) {
+        function CLICK() {
+          this.dispatchClickEvent('enemy' + KEY);
+        }
         ARR.push(
           <li key={KEY}>
-            <button onClick={this[CLICK]} className={"menu-select " + this.props.target + "-position"}>
+            <button onClick={CLICK.bind(this)} className={"menu-select " + this.props.target + "-position"}>
             {this.props.enemyStats[KEY].name}
             </button>
           </li>
@@ -47,26 +57,6 @@ class BattleMenuAttack extends PureComponent {
       /* eslint-enable */
     }
     return ARR;
-  }
-
-  handleEnemy0AttackClick() {
-    this.dispatchClickEvent('enemy0');
-  }
-
-  handleEnemy1AttackClick() {
-    this.dispatchClickEvent('enemy1');
-  }
-
-  handleEnemy2AttackClick() {
-    this.dispatchClickEvent('enemy2');
-  }
-
-  handleEnemy3AttackClick() {
-    this.dispatchClickEvent('enemy3');
-  }
-
-  handleEnemy4AttackClick() {
-    this.dispatchClickEvent('enemy4');
   }
 
   dispatchClickEvent(id) {
@@ -95,10 +85,10 @@ class BattleMenuAttack extends PureComponent {
         return (
           <div className={classnames(CLASSES)}>
             <div>
-              {this.getRenderedListOfEnemies()}
+              {this.props.isItemSelected ? this.getRenderedListOfCharacters() : this.getRenderedListOfEnemies()}
             </div>
             <div>
-              {this.getRenderedListOfCharacters()}
+              {this.props.isItemSelected ? this.getRenderedListOfEnemies() : this.getRenderedListOfCharacters()}
             </div>
             {this.props.children}
           </div>
@@ -107,8 +97,8 @@ class BattleMenuAttack extends PureComponent {
         return (
           <div className={classnames(CLASSES)}>
             <div>
-              {this.getRenderedListOfEnemies()}
-              {this.getRenderedListOfCharacters()}
+              {this.props.isItemSelected ? this.getRenderedListOfCharacters() : this.getRenderedListOfEnemies()}
+              {this.props.isItemSelected ? this.getRenderedListOfEnemies() : this.getRenderedListOfCharacters()}
             </div>
             {this.props.children}
           </div>
