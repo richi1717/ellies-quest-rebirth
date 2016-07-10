@@ -37,6 +37,12 @@ export default class Character extends PureComponent {
     };
   }
 
+  // shouldComponentUpdate() {
+  //   const HERO = 'isHero' + this.props.position + 'Dead';
+  //   const IS_HERO_DEAD_AND_NOT_REVIVE = this.props[HERO] && this.props.getItemObject.type !== 'Revive';
+  //   return !IS_HERO_DEAD_AND_NOT_REVIVE;
+  // }
+
   componentWillMount() {
     this.props.setListOfTurnOrder(this.props.battleName);
     // const URL = `${ROOT_URL}/characters`;
@@ -53,22 +59,25 @@ export default class Character extends PureComponent {
   }
 
   componentDidUpdate() {
-    // console.log(this.props.isHero0Turn, this.props.isHero1Turn);
     const IS_HERO0_TURN = this.props.isHeroAttackingAnimation && this.props.isHero0Turn && !this.state.pos2 && this.props.position === 0;
     const IS_HERO1_TURN = this.props.isHeroAttackingAnimation && this.props.isHero1Turn && !this.state.pos2 && this.props.position === 1;
     const IS_HERO2_TURN = this.props.isHeroAttackingAnimation && this.props.isHero2Turn && !this.state.pos2 && this.props.position === 2;
     const IS_ENEMY_ATTACKING_HERO0 = this.props.isEnemyAttacking && this.props.enemyStr && this.props.getEnemySelectedTarget === 'hero0' && this.props.position === 0;
     const IS_ENEMY_ATTACKING_HERO1 = this.props.isEnemyAttacking && this.props.enemyStr && this.props.getEnemySelectedTarget === 'hero1' && this.props.position === 1;
     const IS_ENEMY_ATTACKING_HERO2 = this.props.isEnemyAttacking && this.props.enemyStr && this.props.getEnemySelectedTarget === 'hero2' && this.props.position === 2;
-    // console.log(IS_HERO0_TURN, IS_HERO1_TURN, IS_HERO2_TURN);
-    if (this.areAllEnemiesDead()) {
+    if (this.props.getNextTurn === 'fake0') {
+      this.handleClick();
+    } else if (this.areAllEnemiesDead()) {
       // this.handleVictoryState();
     } else if (this.props.isPauseBetweenTurns) {
     } else if (IS_HERO0_TURN) {
+      console.log('0000');
       this.handleHeroTurn();
     } else if (IS_HERO1_TURN) {
+      console.log('00001111');
       this.handleHeroTurn();
     } else if (IS_HERO2_TURN) {
+      console.log('00001111222');
       this.handleHeroTurn();
     } else if (IS_ENEMY_ATTACKING_HERO0) {
       console.log('attacking hero 0', this.props.position);
@@ -119,26 +128,34 @@ export default class Character extends PureComponent {
   }
 
   handleEnemyAttacking(heroStats) {
-    const DMG = this.getDamageAmount();
+    const DMG = this.getDamageAmount(heroStats.toJS());
     const DMG_DISPLAY = document.getElementById('dmg-display-hero' + this.props.position);
     this.damageDisplayFadeIn(DMG_DISPLAY);
     if (DMG > 0) {
       console.log(heroStats.toJS());
       let newHp = heroStats.toJS().currentHp - DMG;
       newHp = newHp <= 0 ? 0 : newHp;
-      const NEW_STATS = heroStats.set('currentHp', newHp);
+      const NEW_STATS = newHp === 0 ? heroStats.set('killed', true).set('currentHp', 0) : heroStats.set('currentHp', newHp);
+      if (newHp === 0) {
+        let indexOfDead;
+        for (const KEY in this.props.getListOfTurnOrder.toJS()) {
+          this.props.getListOfTurnOrder.toJS()[KEY] === 'hero' + this.props.position ? indexOfDead = KEY : null;
+        }
+        this.props.removeHeroFromList(indexOfDead);
+      }
       console.log(NEW_STATS.toJS(), this.props.position);
       this.props.updateCharacterStats(NEW_STATS.toJS(), this.props.position);
       console.log('%cdamage: ' + DMG, 'color: red');
     }
   }
 
-  getDamageAmount() {
+  getDamageAmount(heroStats) {
     const POWER = 1/16;
     const STR = this.props.isMenuDefendSelected ? this.props.enemyStr * 0.618 : this.props.enemyStr;
-    const DMG = damageCalculation(POWER, this.props.heroDef, STR);
-    this.damage = DMG;
-    return DMG;
+    let damage = damageCalculation(POWER, heroStats.def, STR);
+    damage = damage >= heroStats.currentHp ? heroStats.currentHp : damage;
+    this.damage = damage;
+    return damage;
   }
 
   handleClick() {
@@ -190,7 +207,7 @@ export default class Character extends PureComponent {
       if (this.props.enemyStats[i].get('killed')) {
         dead = true;
       } else {
-        dead = false;
+        // dead = false;
         return false;
       }
     }
@@ -202,10 +219,10 @@ export default class Character extends PureComponent {
       'position1': true,
       'front-row': true,
       'attack-swing': this.state.pos2,
-      'defense': this.props.isHero0Defending,
+      'defense': !this.props.isHero0Dead && this.props.isHero0Defending,
       'attacking': this.props.isHero0Attacking && !this.props.isPauseBetweenTurns,
       'hero-turn': this.props.isHero0Attacking && !this.props.isPauseBetweenTurns,
-      'dead': this.props.isHeroDead
+      'dead': this.props.isHero0Dead
     };
   }
 
@@ -214,10 +231,10 @@ export default class Character extends PureComponent {
       'position2': true,
       'front-row': true,
       'attack-swing': this.state.pos2,
-      'defense': this.props.isHero1Defending,
+      'defense': !this.props.isHero1Dead && this.props.isHero1Defending,
       'attacking': this.props.isHero1Attacking && !this.props.isPauseBetweenTurns,
       'hero-turn': this.props.isHero1Attacking && !this.props.isPauseBetweenTurns,
-      'dead': this.props.isHeroDead
+      'dead': this.props.isHero1Dead
     };
   }
 
@@ -226,10 +243,10 @@ export default class Character extends PureComponent {
       'position3': true,
       'back-row': true,
       'attack-swing': this.state.pos2,
-      'defense': this.props.isHero2Defending,
+      'defense': !this.props.isHero2Dead && this.props.isHero2Defending,
       'attacking': this.props.isHero2Attacking && !this.props.isPauseBetweenTurns,
       'hero-turn': this.props.isHero2Attacking && !this.props.isPauseBetweenTurns,
-      'dead': this.props.isHeroDead
+      'dead': this.props.isHero2Dead
     };
   }
 

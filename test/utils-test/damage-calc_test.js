@@ -6,7 +6,8 @@ describe('damage calculation helper function', () => {
     expect(dmg.damageCalculation(0, 0, 0)).to.equal(0);
   });
   it('should calculate the damage based on power, defense, and base damage passed to damageCalculation()', () => {
-    expect(dmg.damageCalculation(20, 20, 500)).to.equal(6006);
+    // expect(dmg.damageCalculation(20, 20, 500)).to.equal(6006);
+    expect(dmg.damageCalculation(20, 20, 500)).to.equal(9668);
   });
 });
 describe('base damage calculation helper function', () => {

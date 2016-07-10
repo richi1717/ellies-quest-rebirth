@@ -20,7 +20,7 @@ describe('update character stats reducer', () => {
       def: 0,
       evade: 0,
       classes: 0,
-      items: 0
+      killed: false
     }]));
   });
   it('handles UPDATE_CHARACTER_STATS', () => {
@@ -39,7 +39,7 @@ describe('update character stats reducer', () => {
       def: 0,
       evade: 0,
       classes: 0,
-      items: 0
+      killed: false
     }]);
     const OBJ = {
       maxHp: 0,
@@ -56,7 +56,7 @@ describe('update character stats reducer', () => {
       def: 0,
       evade: 0,
       classes: 0,
-      items: 0
+      killed: false
     };
     const action = { type: types.UPDATE_CHARACTER_STATS, payload: OBJ, id: 0 };
     const nextState = reducer(DEF, action);
@@ -76,7 +76,7 @@ describe('update character stats reducer', () => {
       def: 0,
       evade: 0,
       classes: 0,
-      items: 0
+      killed: false
     }]));
     expect(nextState).to.not.equal(DEF);
     expect(nextState).to.not.equal([{
@@ -94,7 +94,7 @@ describe('update character stats reducer', () => {
       def: 0,
       evade: 0,
       classes: 0,
-      items: 0
+      killed: false
     }]);
     expect(nextState).to.not.equal({
       maxHp: 0,
@@ -111,7 +111,7 @@ describe('update character stats reducer', () => {
       def: 0,
       evade: 0,
       classes: 0,
-      items: 0
+      killed: false
     });
   });
 });

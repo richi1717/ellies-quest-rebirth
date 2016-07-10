@@ -18,10 +18,10 @@ class StatusWindow extends PureComponent {
       const HP_PERCENTAGE = Math.ceil((h.currentHp / h.maxHp) * 100);
       const MP_PERCENTAGE = Math.ceil((h.currentMp / h.maxMp) * 100);
       const LOW_HEALTH = {
-        'low-health': HP_PERCENTAGE <= 10
+        'low-health': HP_PERCENTAGE <= 25
       };
       const LOW_MAGIC = {
-        'low-magic': MP_PERCENTAGE <= 10
+        'low-magic': MP_PERCENTAGE <= 25
       };
       const STYLE_HP = {
         width: HP_PERCENTAGE + '%'

@@ -19,7 +19,8 @@
       "currentPositionX": 13,
       "currentPositionY": 3,
       "id": 1,
-      "inPlay": true
+      "inPlay": true,
+      "killed": false
     },
     {
       "userId": 1,
@@ -43,7 +44,8 @@
       "evade": 6,
       "agility": 9,
       "id": 2,
-      "inPlay": true
+      "inPlay": true,
+      "killed": false
     },
     {
       "userId": 1,
@@ -67,7 +69,8 @@
       "evade": 6,
       "agility": 9,
       "id": 3,
-      "inPlay": true
+      "inPlay": true,
+      "killed": false
     }
   ],
   "currentUser": {

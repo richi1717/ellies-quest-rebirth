@@ -171,3 +171,24 @@ export function setItemSelectedBoolean(bool) {
     payload: bool
   };
 }
+
+export function setItemObjectFromSelection(obj) {
+  return {
+    type: types.SET_ITEM_OBJECT_FROM_SELECTED,
+    payload: obj
+  };
+}
+
+export function removeEnemyFromList(index) {
+  return {
+    type: types.DELETE_FROM_LIST,
+    index
+  };
+}
+
+export function removeHeroFromList(index) {
+  return {
+    type: types.DELETE_FROM_LIST,
+    index
+  };
+}

@@ -15,6 +15,7 @@ import {
   updateEnemyStats,
   updateEnemyStatsFromAttack,
   setMenuAttackSelected,
+  removeEnemyFromList,
   deleteEnemyWhenKilled,
   setHeroAttacking
 } from '../actions/index';
@@ -59,12 +60,12 @@ class Enemy extends PureComponent {
   }
 
   componentDidUpdate() {
-    // console.log('update');
+    console.log(this.isEnemyAlive(), this.props.getNextTurn);
     if (this.props.isPauseBetweenTurns) {
       this.dmg = null;
-    } else if (!this.isEnemyAlive() && this.props.getNextTurn === 'enemy' + this.props.position) {
-      console.log('in first else if');
-      this.props.setNextTurnFromList(this.props.getListOfTurnOrder);
+    // } else if (!this.isEnemyAlive() && this.props.getNextTurn === 'enemy' + this.props.position) {
+    //   console.log('in first else if');
+    //   // this.props.setNextTurnFromList(this.props.getListOfTurnOrder);
     } else if (!this.props.isEnemyAttacking && this.props.getNextTurn === 'enemy' + this.props.position) {
       console.log('second else if');
       console.log('attacking hero! from: enemy' + this.props.position);
@@ -79,18 +80,62 @@ class Enemy extends PureComponent {
     }
   }
 
+  getRandomTargetForAttack() {
+    console.log('inside random');
+    const TARGET = _.random(1, this.props.heroLength) - 1;
+    return this.isHeroDead(TARGET);
+  }
+
+  isHeroDead(target) {
+    if (this.props.isHero0Dead && this.props.isHero1Dead && this.props.isHero2Dead) {
+      console.log('they\'re all dead!!!');
+    } else {
+      let targetNum;
+      switch (target) {
+        case 0: {
+          if (this.props.isHero0Dead) {
+            targetNum = this.props.isHero1Dead ? 2 : 1;
+          } else {
+            targetNum = target;
+          }
+          return targetNum;
+        }
+        case 1: {
+          if (this.props.isHero1Dead) {
+            targetNum = this.props.isHero2Dead ? 0 : 2;
+          } else {
+            targetNum = target;
+          }
+          return targetNum;
+        }
+        case 2: {
+          if (this.props.isHero2Dead) {
+            targetNum = this.props.isHero0Dead ? 1 : 0;
+          } else {
+            targetNum = target;
+          }
+          return targetNum;
+        }
+        default: {
+          return 0;
+        }
+      }
+      return targetNum;
+    }
+  }
+
   handleEnemyAttacking() {
     if (!this.state.isAttackingHero0 || !this.state.isAttackingHero1 || !this.state.isAttackHero2) {
-      const ATK_TARGET = _.random(1, this.props.heroLength) - 1;
-      console.log("attacking hero" + ATK_TARGET);
-      this.props.setEnemySelectedTarget('hero' + ATK_TARGET, getBaseDamage(this.props.str, this.props.level));
+      const TARGET = this.getRandomTargetForAttack();
+      console.log("attacking hero" + TARGET);
+      this.props.setEnemySelectedTarget('hero' + TARGET, getBaseDamage(this.props.str, this.props.level));
       this.props.setPauseBetweenTurns(true);
       this.props.setListOfTurnOrder(this.props.getNextTurn);
       this.props.setNextTurnFromList(this.props.getListOfTurnOrder);
       this.setState({
-        isAttackingHero0: ATK_TARGET === 0 ? true : false,
-        isAttackingHero1: ATK_TARGET === 1 ? true : false,
-        isAttackingHero2: ATK_TARGET === 2 ? true : false
+        isAttackingHero0: TARGET === 0 ? true : false,
+        isAttackingHero1: TARGET === 1 ? true : false,
+        isAttackingHero2: TARGET === 2 ? true : false
       });
       setTimeout(function () {
         this.setState({
@@ -110,6 +155,11 @@ class Enemy extends PureComponent {
     this.dmg = DMG;
     if (NEW_HP <= 0) {
       const ENEMY = document.getElementById('enemy' + this.props.position);
+      let indexOfDead;
+      for (const KEY in this.props.getListOfTurnOrder.toJS()) {
+        this.props.getListOfTurnOrder.toJS()[KEY] === 'enemy' + this.props.position ? indexOfDead = KEY : null;
+      }
+      this.props.removeEnemyFromList(indexOfDead);
       this.enemyKilledFadeOut(ENEMY, 'block');
       setTimeOutHelper(2000, this.props.deleteEnemyWhenKilled, this.props.position);
     } else {
@@ -302,7 +352,10 @@ function mapStateToProps(state) {
     getNextTurn: state.get('getNextTurn').toJS()[0],
     getListOfTurnOrder: state.get('getListOfTurnOrder'),
     isPauseBetweenTurns: state.get('isPauseBetweenTurns').toJS()[0],
-    heroLength: state.get('updateCharacterStats').toJS().length
+    heroLength: state.get('updateCharacterStats').toJS().length,
+    isHero0Dead: state.get('updateCharacterStats').toJS()[0].killed,
+    isHero1Dead: state.get('updateCharacterStats').toJS()[1].killed,
+    isHero2Dead: state.get('updateCharacterStats').toJS()[2].killed
   };
 }
 
@@ -320,6 +373,7 @@ function mapDispatchToProps(dispatch) {
     updateEnemyStats,
     updateEnemyStatsFromAttack,
     setMenuAttackSelected,
+    removeEnemyFromList,
     deleteEnemyWhenKilled,
     setHeroAttacking
   }, dispatch);
