@@ -10,7 +10,7 @@ class TimeOutHandler extends Component {
 
   componentDidUpdate() {
     if (this.props.isPauseBetweenTurns) {
-      setTimeOutHelper(4000, this.props.setPauseBetweenTurns, false);
+      setTimeOutHelper(2000, this.props.setPauseBetweenTurns, false);
     }
   }
 
