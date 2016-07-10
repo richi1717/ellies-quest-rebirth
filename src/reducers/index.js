@@ -18,6 +18,7 @@ import isMenuMagicSelected from './reducer_get-menu-magic-selected';
 import isMenuRunSelected from './reducer_get-menu-run-selected';
 import getListOfItems from './reducer_get-list-of-items';
 import isItemSelected from './reducer_get-item-selected-boolean';
+import getItemObject from './reducer_get-item-object-from-selected';
 
 const rootReducer = combineReducers({
   characterInfo,
@@ -37,7 +38,8 @@ const rootReducer = combineReducers({
   isMenuMagicSelected,
   isMenuRunSelected,
   getListOfItems,
-  isItemSelected
+  isItemSelected,
+  getItemObject
 });
 
 export default rootReducer;

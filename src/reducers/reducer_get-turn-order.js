@@ -11,6 +11,9 @@ export default function(state = DEF, action) {
     case types.GET_NEXT_TURN_FROM_LIST: {
         return state.shift();
     }
+    case types.DELETE_FROM_LIST: {
+        return state.deleteIn(action.index);
+    }
     default: {
       return state;
     }

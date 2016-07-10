@@ -16,7 +16,7 @@ const DEF = fromJS([{
   def: 0,
   evade: 0,
   classes: 0,
-  items: 0
+  killed: false
 }]);
 
 export default function(state = DEF, action) {
@@ -38,7 +38,7 @@ export default function(state = DEF, action) {
         def: character.def,
         evade: character.evade,
         classes: character.classes,
-        items: character.items
+        killed: character.killed
       }));
     }
     default: {
