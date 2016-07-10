@@ -12,6 +12,7 @@ import {
   setListOfTurnOrder,
   setEnemyAttacking,
   updateCharacterStats,
+  removeHeroFromList,
   setHeroAttacking,
   ROOT_URL
 } from '../actions/index';
@@ -60,7 +61,10 @@ function mapStateToProps(state) {
     // isHeroAttackingPos2: state.get('isHeroAttacking').isHeroAttackingPos2,
     getListOfTurnOrder: state.get('getListOfTurnOrder'),
     getNextTurn: state.get('getNextTurn').toJS()[0],
-    isHeroDead: state.get('updateCharacterStats').toJS()[0].currentHp <= 0 ? true : false
+    isHero0Dead: state.get('updateCharacterStats').toJS()[0].killed,
+    isHero1Dead: state.get('updateCharacterStats').toJS()[1].killed,
+    isHero2Dead: state.get('updateCharacterStats').toJS()[2].killed,
+    getItemObject: state.get('getItemObject').toJS()[0]
   };
 }
 
@@ -73,6 +77,7 @@ function mapDispatchToProps(dispatch) {
     setListOfTurnOrder,
     setEnemyAttacking,
     updateCharacterStats,
+    removeHeroFromList,
     setHeroAttacking
   }, dispatch);
 }
