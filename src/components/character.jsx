@@ -6,18 +6,6 @@ import classnames from 'classnames';
 
 import PureComponent from './pure-component';
 
-import {
-  setBattleScene,
-  setEnemySelectedTarget,
-  setPauseBetweenTurns,
-  setNextTurnFromList,
-  setListOfTurnOrder,
-  setEnemyAttacking,
-  updateCharacterStats,
-  setHeroAttacking,
-  ROOT_URL
-} from '../actions/index';
-
 import { setTimeOutHelper } from '../utils/time-out';
 import { HeroAttackFX, BattleVictoryMusic } from '../utils/sound-fx';
 import { damageCalculation, getBaseDamage } from '../utils/damage-calc';
@@ -35,6 +23,8 @@ export default class Character extends PureComponent {
       done: false,
       pos2: false
     };
+    // TODO figure out why tests hate es7
+    this.areAllEnemiesDead = this.areAllEnemiesDead.bind(this);
   }
 
   // shouldComponentUpdate() {
@@ -44,18 +34,7 @@ export default class Character extends PureComponent {
   // }
 
   componentWillMount() {
-    this.props.setListOfTurnOrder(this.props.battleName);
-    // const URL = `${ROOT_URL}/characters`;
-    // this.getCharacters = axios.get(URL)
-    //   .then(response => {
-    //     this.getInitialCharacterStats = response.data[0];
-    //     this.props.updateCharacterStats(this.getInitialCharacterStats, 0);
-    //     this.setState({done: true});
-    //   });
-  }
-
-  componentWillUnmount() {
-    // this.getCharacters.abort();
+    setTimeOutHelper(2000 - this.props.turnSpeed, this.props.setListOfTurnOrder, this.props.battleName);
   }
 
   componentDidUpdate() {
@@ -66,7 +45,7 @@ export default class Character extends PureComponent {
     const IS_ENEMY_ATTACKING_HERO1 = this.props.isEnemyAttacking && this.props.enemyStr && this.props.getEnemySelectedTarget === 'hero1' && this.props.position === 1;
     const IS_ENEMY_ATTACKING_HERO2 = this.props.isEnemyAttacking && this.props.enemyStr && this.props.getEnemySelectedTarget === 'hero2' && this.props.position === 2;
     if (this.props.getNextTurn === 'fake0') {
-      this.handleClick();
+      this.setInitialTurn();
     } else if (this.areAllEnemiesDead()) {
       // this.handleVictoryState();
     } else if (this.props.isPauseBetweenTurns) {
@@ -81,15 +60,15 @@ export default class Character extends PureComponent {
       this.handleHeroTurn();
     } else if (IS_ENEMY_ATTACKING_HERO0) {
       console.log('attacking hero 0', this.props.position);
-      this.handleEnemyAttacking(this.props.hero0Stats);
+      this.handleEnemyAttacking(this.props.hero0Stats, this.props.position);
       this.props.setEnemySelectedTarget(null, null, null);
     } else if (IS_ENEMY_ATTACKING_HERO1) {
       console.log('attacking hero 1', this.props.position);
-      this.handleEnemyAttacking(this.props.hero1Stats);
+      this.handleEnemyAttacking(this.props.hero1Stats, this.props.position);
       this.props.setEnemySelectedTarget(null, null, null);
     } else if (IS_ENEMY_ATTACKING_HERO2) {
       console.log('attacking hero 2', this.props.position);
-      this.handleEnemyAttacking(this.props.hero2Stats);
+      this.handleEnemyAttacking(this.props.hero2Stats, this.props.position);
       this.props.setEnemySelectedTarget(null, null, null);
     } else if ((!this.props.isHero0Turn && !this.props.isHero1Turn && !this.props.isHero2Turn) && this.props.getNextTurn === ('hero' + this.props.position)) {
       console.log('shoot');
@@ -127,10 +106,10 @@ export default class Character extends PureComponent {
     this.setNextTurnAfterHeroIsDone();
   }
 
-  handleEnemyAttacking(heroStats) {
+  handleEnemyAttacking(heroStats, position) {
     const DMG = this.getDamageAmount(heroStats.toJS());
-    const DMG_DISPLAY = document.getElementById('dmg-display-hero' + this.props.position);
-    this.damageDisplayFadeIn(DMG_DISPLAY);
+    const DMG_DISPLAY = document.getElementById('dmg-display-hero' + position);
+    this.damageDisplayFadeIn(DMG_DISPLAY, 'damage');
     if (DMG > 0) {
       console.log(heroStats.toJS());
       let newHp = heroStats.toJS().currentHp - DMG;
@@ -139,14 +118,44 @@ export default class Character extends PureComponent {
       if (newHp === 0) {
         let indexOfDead;
         for (const KEY in this.props.getListOfTurnOrder.toJS()) {
-          this.props.getListOfTurnOrder.toJS()[KEY] === 'hero' + this.props.position ? indexOfDead = KEY : null;
+          this.props.getListOfTurnOrder.toJS()[KEY] === 'hero' + position ? indexOfDead = KEY : null;
         }
         this.props.removeHeroFromList(indexOfDead);
       }
-      console.log(NEW_STATS.toJS(), this.props.position);
-      this.props.updateCharacterStats(NEW_STATS.toJS(), this.props.position);
+      console.log(NEW_STATS.toJS(), position);
+      this.props.updateCharacterStats(NEW_STATS.toJS(), position);
       console.log('%cdamage: ' + DMG, 'color: red');
     }
+  }
+
+  handleItemUseOnHero(restoration, heroStats, position, type) {
+    if (type === 'hp') {
+      restoration = restoration + heroStats.toJS().currentHp >= heroStats.toJS().maxHp ?
+        heroStats.toJS().maxHp - heroStats.toJS().currentHp : restoration;
+        if (restoration > 0) {
+          console.log(heroStats.toJS());
+          const newHp = heroStats.toJS().currentHp + restoration;
+          const NEW_STATS = newHp !== 0 ? heroStats.set('currentHp', newHp) : heroStats;
+          console.log(NEW_STATS.toJS(), position);
+          this.props.updateCharacterStats(NEW_STATS.toJS(), position);
+          console.log('%ccure: ' + restoration, 'color: green');
+        }
+    } else if (type === 'mp') {
+      restoration = restoration + heroStats.toJS().currentMp >= heroStats.toJS().maxMp ?
+        heroStats.toJS().maxMp - heroStats.toJS().currentMp : restoration;
+        if (restoration > 0) {
+          console.log(heroStats.toJS());
+          const newMp = heroStats.toJS().currentMp + restoration;
+          const NEW_STATS = newMp !== 0 ? heroStats.set('currentMp', newMp) : heroStats;
+          console.log(NEW_STATS.toJS(), position);
+          this.props.updateCharacterStats(NEW_STATS.toJS(), position);
+          console.log('%cMP cure: ' + restoration, 'color: green');
+        }
+    }
+    // console.log('%cMP cure: ' + restoration, 'color: red');
+    this.damage = restoration;
+    const DMG_DISPLAY = document.getElementById('dmg-display-hero' + position);
+    this.damageDisplayFadeIn(DMG_DISPLAY, 'restore');
   }
 
   getDamageAmount(heroStats) {
@@ -158,21 +167,18 @@ export default class Character extends PureComponent {
     return damage;
   }
 
-  handleClick() {
-    console.log(this.props.getListOfTurnOrder.toJS()[0]);
+  setInitialTurn() {
     if (this.props.getListOfTurnOrder.toJS()[0] === ('hero' + this.props.position)) {
-      console.log('ok');
+      console.log('once');
       this.props.setNextTurnFromList(this.props.getListOfTurnOrder);
-      // this.props.setPauseBetweenTurns(true);
       this.props.setHeroAttacking(true, this.props.position);
-      // this.props.setBattleScene('grass');
-      console.log('getListOfTurnOrder(): ' + this.props.getListOfTurnOrder);
     }
   }
 
-  damageDisplayFadeIn(element, display) {
+  damageDisplayFadeIn(element, type, display) {
     element.style.opacity = 0;
     element.style.display = display || "block";
+    type === 'restore' ? element.style.color = "00FF3C" : element;
     // element.style.top = '30%';
     let pos = 0;
 
@@ -257,6 +263,38 @@ export default class Character extends PureComponent {
     nameOfClass['attack-enemy3'] = this.props.isEnemyTarget3;
     nameOfClass['attack-enemy4'] = this.props.isEnemyTarget4;
   }
+
+  handleClick() {
+    if (this.props.isItemSelected && this.props.getItemObject.length !== 0) {
+      switch (this.props.getItemObject.type) {
+        case 'HP restore': {
+          // TODO rewrite this to not use the same action but to close turn window
+          this.props.setHeroToEnemyTarget(true, this.props.position);
+          this.props.setItemSelectedBoolean(false);
+          this.props.setItemObjectFromSelection(null);
+          this.props.setMenuItemsSelected(false);
+          this.handleItemUseOnHero(this.props.getItemObject.str, this.props['hero' + this.props.position + 'Stats'], this.props.position, 'hp');
+          this.setNextTurnAfterHeroIsDone();
+          break;
+        }
+        case 'MP restore': {
+
+        }
+        case 'HP MP restore': {
+
+        }
+        case 'Revive': {
+          if (this.props['isHero' + this.props.position + 'Dead']) {
+            console.log('risen like Jesus!!');
+          }
+        }
+        // default: {
+        //   return false;
+        // }
+      }
+      console.log(this.props.getItemObject);
+    }
+  }
   render() {
     let heroClass;
     const constantClass = {
@@ -281,9 +319,10 @@ export default class Character extends PureComponent {
       }
     }
     return (
-      <div onClick={this.handleClick}>
-        <div>{this.props.heroCurrentHp}</div>
+      <div onClick={() => {this.handleClick();}} >
+        <div id={"hero" + this.props.position}>{this.props.heroCurrentHp}</div>
         <div
+          ref={"hero" + this.props.position}
           className={classnames(constantClass, heroClass) + " " + this.props.classes}
         >
           {this.showDamageOverHead()}

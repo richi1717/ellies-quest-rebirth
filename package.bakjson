@@ -6,8 +6,12 @@
   "license": "MIT",
   "repository": "git@github.com:richi1717/ellies-quest-rebirth.git",
   "scripts": {
-    "start": "node app.js",
-    "postinstall": "webpack -p --config webpack.cf.config.js"
+    "webpack-server": "webpack-dev-server --hot --progress --colors",
+    "web-server": "json-server -w gameDb.json",
+    "start": "npm run webpack-server & npm run web-server",
+    "test": "NODE_ENV=test nyc --config nyc-config.js --reporter=lcov --reporter=text-lcov mocha --compilers js:babel-register --require ./test/test_helper.js --require ignore-styles --recursive",
+    "test:watch": "npm test -- --watch",
+    "cf": "webpack -p --config webpack.cf.config.js && cd dist && cf push ellies-quest-rebirth"
   },
   "devDependencies": {
     "autoprefixer-loader": "^3.2.0",
@@ -35,7 +39,6 @@
     "eslint-plugin-react": "^5.1.1",
     "events": "^1.1.1",
     "expect": "^1.20.1",
-    "expect-jsx": "^2.6.0",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.8.5",
     "html-webpack-plugin": "^2.17.0",
@@ -75,9 +78,7 @@
     "timestamp-webpack-plugin": "^0.2.3",
     "url-loader": "^0.5.7",
     "webpack": "^1.13.1",
-    "webpack-dev-middleware": "^1.8.4",
-    "webpack-dev-server": "^1.14.1",
-    "webpack-hot-middleware": "^2.13.0"
+    "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
     "babel-polyfill": "^6.9.1",

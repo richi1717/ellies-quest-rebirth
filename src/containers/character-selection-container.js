@@ -17,7 +17,7 @@ class CharacterSelection extends Component {
   }
 
   componentWillMount() {
-    const url = `${ROOT_URL}/characters`;
+    const url = `${ROOT_URL}/characters.json`;
     this.serverRequest = axios.get(url)
       .then(response => {
         this.character = response.data;
@@ -36,9 +36,8 @@ class CharacterSelection extends Component {
     const PLAYABLE_CHARACTERS = _.filter(x, { inPlay: true });
     for (let key = 0; key < PLAYABLE_CHARACTERS.length; key++) {
       this.props.updateCharacterStats(PLAYABLE_CHARACTERS[key], key);
-      // console.log(PLAYABLE_CHARACTERS[key], PLAYABLE_CHARACTERS[key].classes);
       CHARACTER.push(
-        <Character classes={PLAYABLE_CHARACTERS[key].classes} position={key} key={key} {...PLAYABLE_CHARACTERS[key]} />
+        <Character classes={PLAYABLE_CHARACTERS[key].classes} turnSpeed={PLAYABLE_CHARACTERS[key].agility} position={key} key={key} {...PLAYABLE_CHARACTERS[key]} />
       );
     }
     return CHARACTER;

@@ -21,12 +21,10 @@ export default class App extends Component {
             <Enemies />
             <TimeOutHandler />
           </div>
-          <StatusWindow>
-            <BattleMenuTurn>
-              <BattleMenuAttack />
-              <BattleMenuItems />
-            </BattleMenuTurn>
-          </StatusWindow>
+          <StatusWindow />
+          <BattleMenuTurn />
+          <BattleMenuAttack />
+          <BattleMenuItems />
         </BattleScene>
       </div>
     );

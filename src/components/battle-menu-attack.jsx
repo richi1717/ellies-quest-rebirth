@@ -21,18 +21,20 @@ class BattleMenuAttack extends PureComponent {
     for (const KEY in this.props.heroStats) {
       const HERO = this.props.heroStats[KEY];
       const CLICK = 'handleCharacter' + KEY + 'AttackClick';
-      // if (!HERO.killed) {
-        // function CLICK() {
-        //
-        // }
+      /* eslint-disable */
+      if (!HERO.killed) {
+        function CLICK() {
+          this.dispatchClickEvent('hero' + KEY);
+        }
         ARR.push(
           <li key={KEY}>
-            <button className={classnames(CLASSES)}>
+            <button onClick={CLICK.bind(this)} className={classnames(CLASSES)}>
               {HERO.name}
             </button>
           </li>
         );
-      // }
+      }
+      /* eslint-enable */
     }
     return ARR;
   }

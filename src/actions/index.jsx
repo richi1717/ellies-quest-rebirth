@@ -3,10 +3,11 @@ import _ from 'lodash';
 import * as types from '../constants/action_types';
 import { fromJS } from 'immutable';
 
-export const ROOT_URL = 'http://localhost:3000';
+export const ROOT_URL = 'https://ellies-quest.firebaseio.com/';
+export const FIREBASE_API = '.json';
 
 export function fetchCharacters() {
-  const url = `${ROOT_URL}/characters`;
+  const url = `${ROOT_URL}/characters${FIREBASE_API}`;
   const request = axios.get(url)
     .then(response => {
       return response.data[0];
@@ -18,7 +19,7 @@ export function fetchCharacters() {
 }
 
 export function fetchEnemies() {
-  const url = `${ROOT_URL}/monsters`;
+  const url = `${ROOT_URL}/monsters${FIREBASE_API}`;
   const request = axios.get(url)
     .then(response => {
       return response.data;

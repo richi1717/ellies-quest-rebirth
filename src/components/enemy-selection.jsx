@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { setBattleScene, updateEnemyStats, ROOT_URL } from '../actions/index';
-import Enemy from './enemy';
+import Enemy from '../containers/enemy-container';
 import classnames from 'classnames';
 import axios from 'axios';
 import _ from 'lodash';
@@ -21,7 +21,7 @@ class Enemies extends Component {
   }
 
   componentWillMount() {
-    const url = `${ROOT_URL}/monsters`;
+    const url = `${ROOT_URL}/monsters.json`;
     this.serverRequest = axios.get(url)
       .then(response => {
         this.enemies = response.data;
@@ -42,7 +42,7 @@ class Enemies extends Component {
       const ranEnemy = _.sample(areaEnemies);
       this.props.updateEnemyStats(ranEnemy, key);
       e.push(
-        <Enemy enemyClass={ranEnemy.classes} position={key} key={key} {...ranEnemy} />
+        <Enemy enemyClass={ranEnemy.classes} turnSpeed={ranEnemy.agility} position={key} key={key} {...ranEnemy} />
       );
     }
     return e;

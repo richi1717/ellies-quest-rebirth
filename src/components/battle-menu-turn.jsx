@@ -13,7 +13,8 @@ import {
   setMenuRunSelected,
   setPauseBetweenTurns,
   setListOfTurnOrder,
-  setNextTurnFromList
+  setNextTurnFromList,
+  setItemSelectedBoolean
 } from '../actions/index';
 
 import '../../sass/_menu.scss';
@@ -61,6 +62,7 @@ class BattleMenuTurn extends PureComponent {
     this.props.setMenuMagicSelected(false);
     this.props.setMenuItemsSelected(false);
     this.props.setMenuRunSelected(false);
+    this.props.setItemSelectedBoolean(false);
   }
 
   render() {
@@ -103,7 +105,9 @@ function mapStateToProps(state) {
     isHero1Attacking: state.get('getNextTurn').toJS()[0] === 'hero1' ? true : false,
     isHero2Attacking: state.get('getNextTurn').toJS()[0] === 'hero2' ? true : false,
     getAttackingPosition: state.get('getNextTurn').toJS()[0].slice(4),
-    isHeroAttackingAnimation: state.get('isEnemyTarget').toJS()[0].attacking || state.get('isEnemyTarget').toJS()[1].attacking,
+    isHeroAttackingAnimation: state.get('isEnemyTarget').toJS()[0].attacking || state.get('isEnemyTarget').toJS()[1].attacking
+                           || state.get('isEnemyTarget').toJS()[2].attacking || state.get('isEnemyTarget').toJS()[3].attacking
+                           || state.get('isEnemyTarget').toJS()[4].attacking,
     getListOfTurnOrder: state.get('getListOfTurnOrder'),
     getNextTurn: state.get('getNextTurn').toJS()[0],
     isHero0Defending: state.get('isMenuDefendSelected').toJS()[0],
@@ -148,7 +152,8 @@ function mapDispatchToProps(dispatch) {
     setMenuRunSelected,
     setPauseBetweenTurns,
     setListOfTurnOrder,
-    setNextTurnFromList
+    setNextTurnFromList,
+    setItemSelectedBoolean
   }, dispatch);
 }
 

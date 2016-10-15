@@ -13,26 +13,16 @@ import {
   setEnemyAttacking,
   updateCharacterStats,
   removeHeroFromList,
+  setItemSelectedBoolean,
+  setItemObjectFromSelection,
+  setMenuItemsSelected,
   setHeroAttacking,
+  setHeroToEnemyTarget,
   ROOT_URL
 } from '../actions/index';
 
 function mapStateToProps(state) {
   return {
-    heroMaxHp: state.get('updateCharacterStats').toJS()[0].maxHp,
-    heroCurrentHp: state.get('updateCharacterStats').toJS()[0].currentHp,
-    heroMaxMp: state.get('updateCharacterStats').toJS()[0].maxMp,
-    heroCurrentMp: state.get('updateCharacterStats').toJS()[0].currentMp,
-    heroAgility: state.get('updateCharacterStats').toJS()[0].agility,
-    accuracy: state.get('updateCharacterStats').toJS()[0].accuracy,
-    heroStr: state.get('updateCharacterStats').toJS()[0].str,
-    magic: state.get('updateCharacterStats').toJS()[0].magic,
-    exp: state.get('updateCharacterStats').toJS()[0].exp,
-    heroDef: state.get('updateCharacterStats').toJS()[0].def,
-    evade: state.get('updateCharacterStats').toJS()[0].evade,
-    name: state.get('updateCharacterStats').toJS()[0].name,
-    // classes: state.get('updateCharacterStats').toJS()[0].classes,
-    refName: state.get('updateCharacterStats').toJS()[0].refName,
     getEnemySelectedTarget: state.get('getEnemySelectedTarget').toJS()[0].targetForAttack,
     enemyStr: state.get('getEnemySelectedTarget').toJS()[0].enemyStr,
     hero0Stats: state.get('updateCharacterStats').get('0'),
@@ -64,7 +54,8 @@ function mapStateToProps(state) {
     isHero0Dead: state.get('updateCharacterStats').toJS()[0].killed,
     isHero1Dead: state.get('updateCharacterStats').toJS()[1].killed,
     isHero2Dead: state.get('updateCharacterStats').toJS()[2].killed,
-    getItemObject: state.get('getItemObject').toJS()[0]
+    getItemObject: state.get('getItemObject').toJS()[0],
+    isItemSelected: state.get('isItemSelected').toJS()[0]
   };
 }
 
@@ -78,7 +69,11 @@ function mapDispatchToProps(dispatch) {
     setEnemyAttacking,
     updateCharacterStats,
     removeHeroFromList,
-    setHeroAttacking
+    setHeroAttacking,
+    setItemSelectedBoolean,
+    setItemObjectFromSelection,
+    setMenuItemsSelected,
+    setHeroToEnemyTarget
   }, dispatch);
 }
 

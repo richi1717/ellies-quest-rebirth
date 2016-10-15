@@ -1,24 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-
-import {
-  fetchEnemies,
-  setBattleScene,
-  setPauseBetweenTurns,
-  setListOfTurnOrder,
-  setNextTurnFromList,
-  setHeroAttackingPos2,
-  setEnemySelectedTarget,
-  setHeroToEnemyTarget,
-  setEnemyAttacking,
-  updateEnemyStats,
-  updateEnemyStatsFromAttack,
-  setMenuAttackSelected,
-  removeEnemyFromList,
-  deleteEnemyWhenKilled,
-  setHeroAttacking
-} from '../actions/index';
 
 import classnames from 'classnames';
 import { autobind } from 'core-decorators';
@@ -33,7 +13,7 @@ import '../../sass/style.scss';
 import '../../sass/_enemies.scss';
 
 @autobind
-class Enemy extends PureComponent {
+export default class Enemy extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -42,6 +22,8 @@ class Enemy extends PureComponent {
       isAttackingHero1: false,
       isAttackingHero2: false
     };
+
+    this.isEnemyAlive = this.isEnemyAlive.bind(this);
   }
 
   shouldComponentUpdate() {
@@ -56,12 +38,13 @@ class Enemy extends PureComponent {
   }
 
   componentDidMount() {
-    this.props.setListOfTurnOrder('enemy' + this.props.position);
+    setTimeOutHelper(2000 - this.props.turnSpeed, this.props.setListOfTurnOrder, 'enemy' + this.props.position);
   }
 
   componentDidUpdate() {
-    console.log(this.isEnemyAlive(), this.props.getNextTurn);
-    if (this.props.isPauseBetweenTurns) {
+    if (this.props.getNextTurn === 'fake0') {
+      this.setInitialTurn();
+    } else if (this.props.isPauseBetweenTurns) {
       this.dmg = null;
     // } else if (!this.isEnemyAlive() && this.props.getNextTurn === 'enemy' + this.props.position) {
     //   console.log('in first else if');
@@ -77,6 +60,12 @@ class Enemy extends PureComponent {
     } else if (this.props['isEnemyTarget' + this.props.position].attacking) {
       const DMG_DISPLAY = document.getElementById('dmg-display' + this.props.position);
       this.damageDisplayFadeIn(DMG_DISPLAY, 'block');
+    }
+  }
+
+  setInitialTurn() {
+    if (this.props.getListOfTurnOrder.toJS()[0] === 'enemy' + this.props.position) {
+      this.props.setNextTurnFromList(this.props.getListOfTurnOrder);
     }
   }
 
@@ -180,7 +169,7 @@ class Enemy extends PureComponent {
     return damage;
   }
 
-  handleTest() {
+  handleClick() {
     if (this.props.isHero0Attacking) {
       const ENEMY_TARGET = this.props['isEnemyTarget' + this.props.position];
       this.handleHeroAttacking(ENEMY_TARGET);
@@ -284,13 +273,13 @@ class Enemy extends PureComponent {
     };
 
     const DMG_DISPLAY = document.getElementById('dmg-display' + this.props.position);
-    if (this.isEnemyAlive()) {
+    if (() => {this.isEnemyAlive();}) {
 
       return (
-        <div>
+        <div onClick={() => this.handleClick()}>
           <div
             id={"enemy" + this.props.position}
-            onClick={this.handleTest}
+            ref={"enemy" + this.props.position}
             className={classnames(ENEMY_CLASS) + " " + this.props.enemyClass + " enemy" + this.props.position}
           >
             {this.showDamageOverHead()}
@@ -323,60 +312,3 @@ Enemy.propTypes = {
   updateEnemyStats: PropTypes.func,
   setHeroToEnemyTarget: PropTypes.func
 };
-
-function mapStateToProps(state) {
-  // console.log(state.get('enemyStats'));
-  return {
-    isEnemyAttacking: state.get('isEnemyAttacking').toJS()[0],
-    // isHeroAttacking: state.get('getNextTurn').toJS()[0] === 'hero1' ? true : false,
-    isHero0Attacking: state.get('isHeroAttacking').toJS()[0].isHeroAttacking,
-    isHero1Attacking: state.get('isHeroAttacking').toJS()[1].isHeroAttacking,
-    isHero2Attacking: state.get('isHeroAttacking').toJS()[2].isHeroAttacking,
-    heroStr: state.get('updateCharacterStats').toJS()[0].str,
-    enemyStats: state.get('enemyStats').toArray(),
-    enemyStats0: state.get('enemyStats').toJS()[0] ? state.get('enemyStats').toJS()[0] : null,
-    enemyStats1: state.get('enemyStats').toJS()[1] ? state.get('enemyStats').toJS()[1] : null,
-    enemyStats2: state.get('enemyStats').toJS()[2] ? state.get('enemyStats').toJS()[2] : null,
-    enemyStats3: state.get('enemyStats').toJS()[3] ? state.get('enemyStats').toJS()[3] : null,
-    enemyStats4: state.get('enemyStats').toJS()[4] ? state.get('enemyStats').toJS()[4] : null,
-    isEnemyTarget0: state.get('isEnemyTarget').toJS()[0],
-    isEnemyTarget1: state.get('isEnemyTarget').toJS()[1],
-    isEnemyTarget2: state.get('isEnemyTarget').toJS()[2],
-    isEnemyTarget3: state.get('isEnemyTarget').toJS()[3],
-    isEnemyTarget4: state.get('isEnemyTarget').toJS()[4],
-    heroStats: state.get('updateCharacterStats').toJS(),
-    // isEnemyTarget: state.get('isEnemyTarget'),
-    isEnemyTarget: state.get('isEnemyTarget').toJS()[0].attacking || state.get('isEnemyTarget').toJS()[1].attacking
-                           || state.get('isEnemyTarget').toJS()[2].attacking || state.get('isEnemyTarget').toJS()[3].attacking
-                           || state.get('isEnemyTarget').toJS()[4].attacking ? true : false,
-    getNextTurn: state.get('getNextTurn').toJS()[0],
-    getListOfTurnOrder: state.get('getListOfTurnOrder'),
-    isPauseBetweenTurns: state.get('isPauseBetweenTurns').toJS()[0],
-    heroLength: state.get('updateCharacterStats').toJS().length,
-    isHero0Dead: state.get('updateCharacterStats').toJS()[0].killed,
-    isHero1Dead: state.get('updateCharacterStats').toJS()[1].killed,
-    isHero2Dead: state.get('updateCharacterStats').toJS()[2].killed
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({
-    fetchEnemies,
-    setBattleScene,
-    setPauseBetweenTurns,
-    setListOfTurnOrder,
-    setNextTurnFromList,
-    setHeroAttackingPos2,
-    setEnemySelectedTarget,
-    setHeroToEnemyTarget,
-    setEnemyAttacking,
-    updateEnemyStats,
-    updateEnemyStatsFromAttack,
-    setMenuAttackSelected,
-    removeEnemyFromList,
-    deleteEnemyWhenKilled,
-    setHeroAttacking
-  }, dispatch);
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Enemy);

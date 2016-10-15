@@ -1,60 +1,14 @@
-var path = require('path');
-var HtmlwebpackPlugin = require('html-webpack-plugin');
-var stylelint = require('stylelint');
 var webpack = require('webpack');
-
-const PATHS = {
-  config: path.join(__dirname, './config'),
-  spec: path.join(__dirname, 'test'),
-  app: path.join(__dirname, 'src'),
-  components: path.join(__dirname, './components'),
-  css: path.join(__dirname, 'scss')
-};
+var path = require('path');
 
 module.exports = {
   entry: [
-    'babel-polyfill',
-    'webpack/hot/dev-server',
-    'webpack-dev-server/client?http://localhost:8080',
-    path.resolve(__dirname, 'src/index.jsx')
-  ],
-  output: {
-    path: PATHS.build,
-    filename: 'bundle.js',
-    publicPath: '/'
-  },
-  devtool: "inline-source-map",
-  plugins: [
-    new HtmlwebpackPlugin({
-      title: 'Rebirth',
-      template: 'build/index.html',
-      inject: true
-    }),
-    new webpack.ProvidePlugin({
-      $: 'jquery',
-      jQuery: 'jquery',
-      "window.jQuery": 'jquery'
-    })
+    './src/index'
   ],
   module: {
-    preLoaders: [
-
-      {test: /\.jsx?$/, loader: "eslint-loader", exclude: /node_modules/},
-      {test: /\.scss$/, loaders: ['postcss'], include: PATHS.css}
-
-    ],
     loaders: [
-      {
-        loader: "babel-loader",
-        include: [
-          path.resolve(__dirname, "src"),
-        ],
-        test: /\.jsx?$/,
-        query: {
-          plugins: ['transform-runtime', 'transform-decorators-legacy'],
-          presets: ['es2015', 'es2016', 'stage-0', 'react'],
-        }
-      },
+      { test: /\.jsx?$/, loader: 'babel', exclude: /node_modules/ },
+      // { test: /\.s?css$/, loader: 'style!css!sass' },
       {
         test: /\.scss$/,
          loaders: ["style", "css?sourceMap?root=.", "sass?sourceMap"],
@@ -72,25 +26,21 @@ module.exports = {
       }
     ]
   },
-  sassLoader: {
-    includePaths: [path.resolve(__dirname, "./sass")]
-  },
   resolve: {
-    extensions: ['', '.jsx', '.js', '.json']
+    extensions: ['', '.jsx', '.js']
   },
-  postcss: function () {
-    return [stylelint({
-      extends: [PATHS.config + "/.stylelintrc"],
-      rules: {
-        'color-hex-case': 'lower'
-      }
-    })];
+  output: {
+    path: path.join(__dirname, '/dist'),
+    publicPath: '/',
+    filename: 'bundle.js'
   },
-  eslint: {
-    configFile: PATHS.config + '/.eslintrc',
-    rules: {
-      "no-var": 0,
-      "no-unused-vars": 0
-    }
-  }
-}
+  devServer: {
+    contentBase: './dist',
+    hot: true
+  },
+  plugins: [
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin()
+  ]
+};

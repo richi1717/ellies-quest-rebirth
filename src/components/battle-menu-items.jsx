@@ -28,7 +28,7 @@ class BattleMenuAttack extends PureComponent {
   }
 
   componentWillMount() {
-    const url = `${ROOT_URL}/items`;
+    const url = `${ROOT_URL}/items.json`;
     this.serverRequest = axios.get(url)
       .then(response => {
         console.log(response.data);

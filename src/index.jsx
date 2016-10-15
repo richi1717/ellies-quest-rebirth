@@ -11,7 +11,7 @@ import reducers from './reducers';
 
 const initialState = Map();
 
-const store = createStore(
+export const store = createStore(
   reducers,
   compose(
     applyMiddleware(ReduxPromise),

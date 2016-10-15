@@ -11,7 +11,7 @@
       "maxMp": 30,
       "currentMp": 30,
       "maxHp": 350,
-      "currentHp": 350,
+      "currentHp": 150,
       "accuracy": 10,
       "magic": 10,
       "evade": 6,
@@ -67,7 +67,7 @@
       "currentHp": 219,
       "accuracy": 8,
       "evade": 6,
-      "agility": 9,
+      "agility": 13,
       "id": 3,
       "inPlay": true,
       "killed": false
