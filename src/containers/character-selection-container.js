@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { setBattleScene, updateCharacterStats, ROOT_URL } from '../actions/index';
+import { setBattleScene, updateCharacterStats, ROOT_URL, FIREBASE_API } from '../actions/index';
 import Character from './character-container';
 import classnames from 'classnames';
 import axios from 'axios';
@@ -17,7 +17,7 @@ class CharacterSelection extends Component {
   }
 
   componentWillMount() {
-    const url = `${ROOT_URL}/characters.json`;
+    const url = `${ROOT_URL}/characters${FIREBASE_API}`;
     this.serverRequest = axios.get(url)
       .then(response => {
         this.character = response.data;

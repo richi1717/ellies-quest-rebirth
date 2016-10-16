@@ -33,7 +33,7 @@ h4 {
 }
 
 .mountains {
-  background-image: url('/resources/images/mountains.png');
+  background-image: url('/images/mountains.png');
   background-size: cover;
   height: 200px;
   width: 790px;
@@ -239,7 +239,7 @@ ul.opening-right {
 }
 
 .home-bgi {
-  // background-image: url('/resources/images/bombfallout.png');
+  // background-image: url('/images/bombfallout.png');
   -webkit-background-size: cover;
   background-size: cover;
   height: 100px;
@@ -396,31 +396,31 @@ h1 {
 }
 
 .grass {
-  background-image: url('/resources/images/grass.png');
+  background-image: url('/images/grass.png');
   background-size: cover;
 }
 
 .forest {
-  background-image: url('/resources/images/forest.png');
+  background-image: url('/images/forest.png');
   background-size: 50px;
 }
 
 .trees {
-  // background-image: url('/resources/images/trees.png');
+  // background-image: url('/images/trees.png');
 }
 
 .desert {
-  background-image: url('/resources/images/sand1.png');
+  background-image: url('/images/sand1.png');
   background-size: cover;
 }
 
 .water {
-  background-image: url('/resources/images/water5.png');
+  background-image: url('/images/water5.png');
   background-size: cover;
 }
 
 .rain {
-  background-image: url('/resources/images/rain.png');
+  background-image: url('/images/rain.png');
   height: 100vh;
   width: 100vw;
   position: absolute;
@@ -449,7 +449,7 @@ h1 {
 }
 
 .ff-sprite {
-  background-image: url('/resources/images/ff1-sprites.png');
+  background-image: url('/images/ff1-sprites.png');
   background-position: 0 0;
   background-size: 1200px;
 }
@@ -515,7 +515,7 @@ h1 {
 
 
  .boss {
-   background-image: url('/resources/images/grass.png');
+   background-image: url('/images/grass.png');
    background-size: cover;
  }
 
@@ -941,7 +941,7 @@ button:focus {
   width: 670px;
   height: 353px;
   margin: 2% auto;
-  background: url('/resources/images/ssscroll.png') left center;
+  background: url('/images/ssscroll.png') left center;
   animation: play 10s steps(3) infinite;
 }
 

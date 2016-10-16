@@ -50,9 +50,9 @@ function mapStateToProps(state) {
     getListOfTurnOrder: state.get('getListOfTurnOrder'),
     isPauseBetweenTurns: state.get('isPauseBetweenTurns').toJS()[0],
     heroLength: state.get('updateCharacterStats').toJS().length,
-    isHero0Dead: state.get('updateCharacterStats').toJS()[0].killed,
-    isHero1Dead: state.get('updateCharacterStats').toJS()[1].killed,
-    isHero2Dead: state.get('updateCharacterStats').toJS()[2].killed
+    isHero0Dead: state.get('updateCharacterStats').toJS()[0] && state.get('updateCharacterStats').toJS()[0].killed,
+    isHero1Dead: state.get('updateCharacterStats').toJS()[1] && state.get('updateCharacterStats').toJS()[1].killed,
+    isHero2Dead: state.get('updateCharacterStats').toJS()[2] && state.get('updateCharacterStats').toJS()[2].killed
   };
 }
 

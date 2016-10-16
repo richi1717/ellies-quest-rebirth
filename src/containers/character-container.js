@@ -51,9 +51,9 @@ function mapStateToProps(state) {
     // isHeroAttackingPos2: state.get('isHeroAttacking').isHeroAttackingPos2,
     getListOfTurnOrder: state.get('getListOfTurnOrder'),
     getNextTurn: state.get('getNextTurn').toJS()[0],
-    isHero0Dead: state.get('updateCharacterStats').toJS()[0].killed,
-    isHero1Dead: state.get('updateCharacterStats').toJS()[1].killed,
-    isHero2Dead: state.get('updateCharacterStats').toJS()[2].killed,
+    isHero0Dead: state.get('updateCharacterStats').toJS()[0] && state.get('updateCharacterStats').toJS()[0].killed,
+    isHero1Dead: state.get('updateCharacterStats').toJS()[1] && state.get('updateCharacterStats').toJS()[1].killed,
+    isHero2Dead: state.get('updateCharacterStats').toJS()[2] && state.get('updateCharacterStats').toJS()[2].killed,
     getItemObject: state.get('getItemObject').toJS()[0],
     isItemSelected: state.get('isItemSelected').toJS()[0]
   };

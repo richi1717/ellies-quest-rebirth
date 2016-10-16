@@ -72,11 +72,11 @@ class BattleMenuTurn extends PureComponent {
     const INNER = (
       <div className="battle-menu-turn">
         <div>
-          <li><button onClick={this.handleAttackClick} className="menu-select" id="attack">Attack</button></li>
-          <li><button onClick={this.handleDefendClick} className="menu-select" id="defend">Defend</button></li>
-          <li><button onClick={this.handleMagicClick} className="menu-select" id="magic">Magic</button></li>
-          <li><button onClick={this.handleItemsClick} className="menu-select" id="items">Items</button></li>
-          <li><button onClick={this.handleRunClick} className="menu-select" id="run">RUN!</button></li>
+          <li><button onClick={() => { this.handleAttackClick(); }} className="menu-select" id="attack">Attack</button></li>
+          <li><button onClick={() => { this.handleDefendClick(); }} className="menu-select" id="defend">Defend</button></li>
+          <li><button onClick={() => { this.handleMagicClick(); }} className="menu-select" id="magic">Magic</button></li>
+          <li><button onClick={() => { this.handleItemsClick(); }} className="menu-select" id="items">Items</button></li>
+          <li><button onClick={() => { this.handleRunClick(); }} className="menu-select" id="run">RUN!</button></li>
         </div>
         {this.props.children}
       </div>
