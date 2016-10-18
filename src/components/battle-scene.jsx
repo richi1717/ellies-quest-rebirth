@@ -8,7 +8,7 @@ class BattleScene extends Component {
   render() {
     return (
       <div className={this.props.battleScene + "-battle battle"}>
-        <NormalBattleMusic />
+        {/* <NormalBattleMusic /> */}
         {this.props.children}
       </div>
     );
