@@ -62,9 +62,8 @@ function StatusWindow(props) {
 }
 
 function mapStateToProps(state) {
-  const c = state.get('updateCharacterStats').toJS();
   return {
-    heroStats: c
+    heroStats: state.characterStats
   };
 }
 
