@@ -15,7 +15,7 @@ import {
 import classnames from 'classnames';
 import PureComponent from './pure-component';
 
-import '../../sass/_menu.scss';
+import '../../../sass/_menu.scss';
 
 @autobind
 class BattleMenuAttack extends PureComponent {

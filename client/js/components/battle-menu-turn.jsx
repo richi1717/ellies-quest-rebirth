@@ -3,7 +3,6 @@ import classnames from 'classnames';
 import PureComponent from './pure-component';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { autobind } from 'core-decorators';
 
 import {
   setMenuAttackSelected,
@@ -17,9 +16,8 @@ import {
   setItemSelectedBoolean
 } from '../actions/index';
 
-import '../../sass/_menu.scss';
+import '../../../sass/_menu.scss';
 
-@autobind
 class BattleMenuTurn extends PureComponent {
   componentDidUpdate() {
     this.props.getNextTurn === 'hero0' && !this.props.isPauseBetweenTurns && this.props.isHero0Defending ? this.clearOtherMenuSelections() : null;
@@ -33,7 +31,6 @@ class BattleMenuTurn extends PureComponent {
   }
 
   handleDefendClick() {
-    console.log(this.props.getAttackingPosition);
     this.clearOtherMenuSelections();
     this.props.setMenuDefendSelected(true, this.props.getAttackingPosition);
     this.props.setNextTurnFromList(this.props.getListOfTurnOrder);
@@ -95,9 +92,7 @@ class BattleMenuTurn extends PureComponent {
 
 function mapStateToProps(state) {
   const C = state.get('updateCharacterStats');
-  // console.log(state.get('getNextTurn').toJS()[0]);
-  // console.log(c);
-  // console.log(`%c${c.get('name')}`, 'color: green');
+
   return {
     isPauseBetweenTurns: state.get('isPauseBetweenTurns').toJS()[0],
     isHeroTurn: state.get('isHeroAttacking').isHeroAttacking,
@@ -105,41 +100,16 @@ function mapStateToProps(state) {
     isHero1Attacking: state.get('getNextTurn').toJS()[0] === 'hero1' ? true : false,
     isHero2Attacking: state.get('getNextTurn').toJS()[0] === 'hero2' ? true : false,
     getAttackingPosition: state.get('getNextTurn').toJS()[0].slice(4),
-    isHeroAttackingAnimation: state.get('isEnemyTarget').toJS()[0].attacking || state.get('isEnemyTarget').toJS()[1].attacking
-                           || state.get('isEnemyTarget').toJS()[2].attacking || state.get('isEnemyTarget').toJS()[3].attacking
-                           || state.get('isEnemyTarget').toJS()[4].attacking,
+    isHeroAttackingAnimation: state.get('isEnemyTarget').toJS()[0].attacking
+      || state.get('isEnemyTarget').toJS()[1].attacking
+      || state.get('isEnemyTarget').toJS()[2].attacking
+      || state.get('isEnemyTarget').toJS()[3].attacking
+      || state.get('isEnemyTarget').toJS()[4].attacking,
     getListOfTurnOrder: state.get('getListOfTurnOrder'),
     getNextTurn: state.get('getNextTurn').toJS()[0],
     isHero0Defending: state.get('isMenuDefendSelected').toJS()[0],
     isHero1Defending: state.get('isMenuDefendSelected').toJS()[1],
     isHero2Defending: state.get('isMenuDefendSelected').toJS()[2]
-    // heroMaxHp: C.get('maxHp'),
-    // heroCurrentHp: C.get('currentHp'),
-    // heroMaxMp: C.get('maxMp'),
-    // heroCurrentMp: C.get('currentMp'),
-    // heroAgility: C.get('agility'),
-    // accuracy: C.get('accuracy'),
-    // heroStr: C.get('str'),
-    // magic: C.get('magic'),
-    // exp: C.get('exp'),
-    // heroDef: C.get('def'),
-    // evade: C.get('evade'),
-    // name: C.get('name'),
-    // classes: C.get('classes'),
-    // refName: C.get('refName'),
-    // getEnemySelectedTarget: state.get('getEnemySelectedTarget').toJS()[0].targetForAttack,
-    // enemyStr: state.get('getEnemySelectedTarget').toJS()[0].enemyStr,
-    // numberTest: 1,
-    // heroStats: C,
-    //                        || state.get('isEnemyTarget').toJS()[2].attacking || state.get('isEnemyTarget').toJS()[3].attacking
-    //                        || state.get('isEnemyTarget').toJS()[4].attacking ? true : false,
-    // isEnemyAttacking: state.get('isEnemyAttacking').toJS()[0],
-    // isEnemyTarget0: state.get('isEnemyTarget').toJS()[0].attacking,
-    // isEnemyTarget1: state.get('isEnemyTarget').toJS()[1].attacking,
-    // isEnemyTarget2: state.get('isEnemyTarget').toJS()[2].attacking,
-    // isEnemyTarget3: state.get('isEnemyTarget').toJS()[3].attacking,
-    // isEnemyTarget4: state.get('isEnemyTarget').toJS()[4].attacking,
-    // // isHeroAttackingPos2: state.get('isHeroAttacking').isHeroAttackingPos2,
   };
 }
 

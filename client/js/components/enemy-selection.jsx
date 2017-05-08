@@ -7,7 +7,7 @@ import classnames from 'classnames';
 import axios from 'axios';
 import _ from 'lodash';
 
-import '../../sass/style.scss';
+import '../../../sass/style.scss';
 import '../../sass/_enemies.scss';
 // let enemies;
 

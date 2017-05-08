@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { autobind } from 'core-decorators';
 import { fromJS } from 'immutable';
 import axios from 'axios';
 import classnames from 'classnames';
@@ -10,11 +9,10 @@ import { setTimeOutHelper } from '../utils/time-out';
 import { HeroAttackFX, BattleVictoryMusic } from '../utils/sound-fx';
 import { damageCalculation, getBaseDamage } from '../utils/damage-calc';
 
-import '../../sass/style.scss';
+import '../../../sass/style.scss';
 import '../../sass/_battle-character.scss';
 import '../../sass/_battle-backgrounds.scss';
 
-@autobind
 export default class Character extends PureComponent {
   constructor(props) {
     super(props);
@@ -44,6 +42,7 @@ export default class Character extends PureComponent {
     const IS_ENEMY_ATTACKING_HERO0 = this.props.isEnemyAttacking && this.props.enemyStr && this.props.getEnemySelectedTarget === 'hero0' && this.props.position === 0;
     const IS_ENEMY_ATTACKING_HERO1 = this.props.isEnemyAttacking && this.props.enemyStr && this.props.getEnemySelectedTarget === 'hero1' && this.props.position === 1;
     const IS_ENEMY_ATTACKING_HERO2 = this.props.isEnemyAttacking && this.props.enemyStr && this.props.getEnemySelectedTarget === 'hero2' && this.props.position === 2;
+
     if (this.props.getNextTurn === 'fake0') {
       this.setInitialTurn();
     } else if (this.areAllEnemiesDead()) {
@@ -304,22 +303,25 @@ export default class Character extends PureComponent {
 
     if (this.props.position === 0) {
       heroClass = this.position0Classes();
+
       if (this.props.getNextTurn === 'hero0') {
         this.enemySelectionPositionClasses(heroClass);
       }
     } else if (this.props.position === 1) {
       heroClass = this.position1Classes();
+
       if (this.props.getNextTurn === 'hero1') {
         this.enemySelectionPositionClasses(heroClass);
       }
     } else if (this.props.position === 2) {
       heroClass = this.position2Classes();
+
       if (this.props.getNextTurn === 'hero2') {
         this.enemySelectionPositionClasses(heroClass);
       }
     }
     return (
-      <div onClick={() => {this.handleClick();}} >
+      <div onClick={() => { this.handleClick(); }} >
         <div id={"hero" + this.props.position}>{this.props.heroCurrentHp}</div>
         <div
           ref={"hero" + this.props.position}

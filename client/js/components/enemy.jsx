@@ -9,7 +9,7 @@ import { damageCalculation, getBaseDamage } from '../utils/damage-calc';
 import { calcLevel } from '../utils/calculate-level';
 import { fromJS } from 'immutable';
 
-import '../../sass/style.scss';
+import '../../../sass/style.scss';
 import '../../sass/_enemies.scss';
 
 @autobind

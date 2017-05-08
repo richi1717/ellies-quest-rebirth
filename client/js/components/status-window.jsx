@@ -8,7 +8,7 @@ import { autobind } from 'core-decorators';
 import classnames from 'classnames';
 import PureComponent from './pure-component';
 
-import '../../sass/_menu.scss';
+import '../../../sass/_menu.scss';
 
 @autobind
 class StatusWindow extends PureComponent {
