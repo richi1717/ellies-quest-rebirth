@@ -1,4 +1,4 @@
-import * as types from '../constants/action_types';
+import types from '../constants/actionTypes';
 import { List, Map, fromJS } from 'immutable';
 
 export default function(state = fromJS([]), action) {

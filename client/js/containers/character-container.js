@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fromJS } from 'immutable';
-import Character from '../components/character';
+import Character from '../components/Character';
 
 import {
   setBattleScene,

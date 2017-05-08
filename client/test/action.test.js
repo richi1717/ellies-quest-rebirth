@@ -1,6 +1,6 @@
 import expect from 'expect';
 import * as actions from '../src/actions/index';
-import * as types from '../src/constants/action_types';
+import types from '../src/constants/actionTypes';
 import { fromJS } from 'immutable';
 
 describe('actions', () => {

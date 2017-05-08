@@ -3,13 +3,13 @@ import React, { Component, PropTypes } from 'react';
 import classnames from 'classnames';
 import { autobind } from 'core-decorators';
 import PureComponent from './pure-component';
-import { EnemyAttackFX } from '../utils/sound-fx';
-import { setTimeOutHelper } from '../utils/time-out';
-import { damageCalculation, getBaseDamage } from '../utils/damage-calc';
-import { calcLevel } from '../utils/calculate-level';
+import { EnemyAttackFX } from '../helpers/sound-fx';
+import { setTimeOutHelper } from '../helpers/time-out';
+import { damageCalculation, getBaseDamage } from '../helpers/damage-calc';
+import { calcLevel } from '../helpers/calculate-level';
 import { fromJS } from 'immutable';
 
-import '../../../sass/style.scss';
+import '../../sass/style.scss';
 import '../../sass/_enemies.scss';
 
 @autobind

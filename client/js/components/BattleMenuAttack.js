@@ -1,17 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { Map } from 'immutable';
 import { autobind } from 'core-decorators';
-// import axios from 'axios';
-import { setMenuAttackSelected } from '../actions/index';
+import dispatch from '../dispatch';
+import { setMenuAttackSelected } from '../actions/actionCreators';
 import classnames from 'classnames';
-import PureComponent from './pure-component';
 
-import '../../../sass/_menu.scss';
-
-@autobind
-class BattleMenuAttack extends PureComponent {
+class BattleMenuAttack extends Component {
   getRenderedListOfCharacters() {
     const ARR = [];
     const CLASSES = {
@@ -113,53 +108,8 @@ class BattleMenuAttack extends PureComponent {
 }
 
 function mapStateToProps(state) {
-  const C = state.get('updateCharacterStats');
-  // console.log(c);
-  // console.log(`%c${c.get('name')}`, 'color: green');
   return {
-    heroMaxHp: C.get('maxHp'),
-    heroCurrentHp: C.get('currentHp'),
-    heroMaxMp: C.get('maxMp'),
-    heroCurrentMp: C.get('currentMp'),
-    heroAgility: C.get('agility'),
-    accuracy: C.get('accuracy'),
-    heroStr: C.get('str'),
-    magic: C.get('magic'),
-    exp: C.get('exp'),
-    heroDef: C.get('def'),
-    evade: C.get('evade'),
-    heroName0: C.get('name'),
-    classes: C.get('classes'),
-    refName: C.get('refName'),
-    getEnemySelectedTarget: state.get('getEnemySelectedTarget').toJS()[0].targetForAttack,
-    enemyStr: state.get('getEnemySelectedTarget').toJS()[0].enemyStr,
-    numberTest: 1,
-    heroStats: state.get('updateCharacterStats').toJS(),
-    isPauseBetweenTurns: state.get('isPauseBetweenTurns').toJS()[0],
-    isHeroTurn: state.get('isHeroAttacking').isHeroAttacking,
-    isHeroAttacking: state.get('getNextTurn').toJS()[0] === 'hero1' ? true : false,
-    isHeroAttackingAnimation: state.get('isEnemyTarget').toJS()[0].attacking || state.get('isEnemyTarget').toJS()[1].attacking
-                           || state.get('isEnemyTarget').toJS()[2].attacking || state.get('isEnemyTarget').toJS()[3].attacking
-                           || state.get('isEnemyTarget').toJS()[4].attacking ? true : false,
-    isEnemyAttacking: state.get('isEnemyAttacking').toJS()[0],
-    isEnemyTarget0: state.get('isEnemyTarget').toJS()[0].attacking,
-    isEnemyTarget1: state.get('isEnemyTarget').toJS()[1].attacking,
-    isEnemyTarget2: state.get('isEnemyTarget').toJS()[2].attacking,
-    isEnemyTarget3: state.get('isEnemyTarget').toJS()[3].attacking,
-    isEnemyTarget4: state.get('isEnemyTarget').toJS()[4].attacking,
-    // isHeroAttackingPos2: state.get('isHeroAttacking').isHeroAttackingPos2,
-    getListOfTurnOrder: state.get('getListOfTurnOrder'),
-    getNextTurn: state.get('getNextTurn').toJS()[0],
-    enemyStats: state.get('enemyStats').toJS(),
-    amountOfEnemies: state.get('enemyStats').toArray().length,
-    isMenuAttackSelected: state.get('isMenuAttackSelected').toJS()[0],
-    isItemSelected: state.get('isItemSelected').toJS()[0],
-    amountOfCharacters: state.get('updateCharacterStats').toJS().length
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ setMenuAttackSelected }, dispatch);
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(BattleMenuAttack);
+export default connect(mapStateToProps)(BattleMenuAttack);

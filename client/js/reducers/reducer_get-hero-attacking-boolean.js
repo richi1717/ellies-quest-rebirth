@@ -1,4 +1,4 @@
-import * as types from '../constants/action_types';
+import types from '../constants/actionTypes';
 import { fromJS } from 'immutable';
 
 const DEF = fromJS([

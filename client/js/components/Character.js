@@ -1,19 +1,10 @@
 import React, { Component } from 'react';
-import { fromJS } from 'immutable';
-import axios from 'axios';
 import classnames from 'classnames';
+import { setTimeOutHelper } from '../helpers/time-out';
+import { HeroAttackFX, BattleVictoryMusic } from '../helpers/sound-fx';
+import { damageCalculation, getBaseDamage } from '../helpers/damage-calc';
 
-import PureComponent from './pure-component';
-
-import { setTimeOutHelper } from '../utils/time-out';
-import { HeroAttackFX, BattleVictoryMusic } from '../utils/sound-fx';
-import { damageCalculation, getBaseDamage } from '../utils/damage-calc';
-
-import '../../../sass/style.scss';
-import '../../sass/_battle-character.scss';
-import '../../sass/_battle-backgrounds.scss';
-
-export default class Character extends PureComponent {
+export default class Character extends Component {
   constructor(props) {
     super(props);
     this.state = {

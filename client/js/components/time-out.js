@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { setPauseBetweenTurns } from '../actions/index';
 import { autobind } from 'core-decorators';
-import { setTimeOutHelper } from '../utils/time-out';
+import { setTimeOutHelper } from '../helpers/time-out';
 
 @autobind
 class TimeOutHandler extends Component {

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import _ from 'lodash';
-import * as types from '../constants/action_types';
+import types from '../constants/actionTypes';
 import { fromJS } from 'immutable';
 
 export const ROOT_URL = 'https://ellies-quest.firebaseio.com/';
@@ -33,7 +33,7 @@ export function fetchEnemies() {
 export function setBattleScene(area) {
   return {
     type: types.SET_BATTLE_SCENE,
-    payload: area
+    battleScene: area
   };
 }
 
@@ -47,7 +47,7 @@ export function setEnemySelectedTarget(name, str, bool) {
 export function updateCharacterStats(obj, id) {
   return {
     type: types.UPDATE_CHARACTER_STATS,
-    payload: obj,
+    character: obj,
     id: id
   };
 }

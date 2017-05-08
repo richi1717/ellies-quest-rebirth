@@ -4,15 +4,11 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import ReduxPromise from 'redux-promise';
-import { Map } from 'immutable';
-
-import App from './components/app';
-import reducers from './reducers';
-
-const initialState = Map();
+import App from './components/App';
+import rootReducer from './reducers/rootReducer';
 
 export const store = createStore(
-  reducers,
+  rootReducer,
   compose(
     applyMiddleware(ReduxPromise),
     window.devToolsExtension ? window.devToolsExtension() : f => f

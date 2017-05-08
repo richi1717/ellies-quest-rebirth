@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import * as types from '../../src/constants/action_types';
+import types from '../../src/constants/actionTypes';
 import reducer from '../../src/reducers/reducer_update-enemy-stats';
 import { fromJS } from 'immutable';
 

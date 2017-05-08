@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import Enemy from '../components/enemy';
+import Enemy from '../components/Enemy';
 
 import {
   fetchEnemies,
