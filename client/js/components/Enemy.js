@@ -1,19 +1,13 @@
-import React, { Component, PropTypes } from 'react';
-
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { autobind } from 'core-decorators';
-import PureComponent from './pure-component';
 import { EnemyAttackFX } from '../helpers/sound-fx';
 import { setTimeOutHelper } from '../helpers/time-out';
 import { damageCalculation, getBaseDamage } from '../helpers/damage-calc';
 import { calcLevel } from '../helpers/calculate-level';
-import { fromJS } from 'immutable';
 
-import '../../sass/style.scss';
-import '../../sass/_enemies.scss';
-
-@autobind
-export default class Enemy extends PureComponent {
+export default class Enemy extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -216,7 +210,7 @@ export default class Enemy extends PureComponent {
     element.style.display = display || "block";
 
     (function fade() {
-      var val = parseFloat(element.style.opacity);
+      let val = parseFloat(element.style.opacity);
       if (!((val -= 0.01) < 0)) {
         element.style.opacity = val;
         requestAnimationFrame(fade);
@@ -309,6 +303,5 @@ Enemy.propTypes = {
   currentHp: PropTypes.number,
   enemyStats: PropTypes.array,
   def: PropTypes.number,
-  updateEnemyStats: PropTypes.func,
   setHeroToEnemyTarget: PropTypes.func
 };

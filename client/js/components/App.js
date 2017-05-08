@@ -1,5 +1,5 @@
 import React from 'react';
-import Character from '../containers/character-selection-container';
+import Character from '../components/Character';
 import BattleScene from './BattleScene';
 import Enemies from './EnemySelection';
 import StatusWindow from './StatusWindow';
