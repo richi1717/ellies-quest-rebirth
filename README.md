@@ -9,15 +9,23 @@ Now it's still in development and needs a lot of work but if you want to check o
 
 ### Installation
 
-First clone this project 
+I use `yarn` and if you'd like to use it too
+
+```javascript
+$ brew install yarn    // obviously using brew
+or
+$ curl -o- -L https://yarnpkg.com/install.sh | bash   // if you don't have brew
+```
+
+Want to do everything on one line?
+
+```javascript
+$ git clone git@github.com:richi1717/ellies-quest-rebirth.git && cd ellies-quest-rebirth && yarn
+```
+Or Step by Step?
 
 ```javascript
 $ git clone git@github.com:richi1717/ellies-quest-rebirth.git
-```
-
-Then
-
-```javascript
 $ cd ellies-quest-rebirth
 $ yarn
 ```
