@@ -1,0 +1,11 @@
+{
+  "collectCoverageFrom": [
+    "server/**/*.js"
+  ],
+  "coveragePathIgnorePatterns": [
+    "/node_modules/"
+  ],
+  "testEnvironment": "node",
+  "testMatch": ["**/server/tests/**/*.test.js"],
+  "coverageDirectory": "coverage/server"
+}

@@ -16,7 +16,7 @@ import {
   setItemSelectedBoolean
 } from '../actions/index';
 
-import '../../sass/_menu.scss';
+import '../../../sass/_menu.scss';
 
 class BattleMenuTurn extends PureComponent {
   componentDidUpdate() {

@@ -1,0 +1,18 @@
+{
+  "transform": {
+    ".*": "<rootDir>/node_modules/babel-jest"
+  },
+  "collectCoverageFrom": [
+    "client/js/**/*.js"
+  ],
+  "coveragePathIgnorePatterns": [
+    "/node_modules/",
+    "/client/js/constants"
+  ],
+  "setupTestFrameworkScriptFile": "./node_modules/jest-enzyme/lib/index.js",
+  "moduleNameMapper": {
+    "^.*\\.scss$": "<rootDir>/_test_/utils/SCSSStub.js"
+  },
+  "testMatch": ["**client/tests/**/*.test.js"],
+  "coverageDirectory": "coverage/client"
+}

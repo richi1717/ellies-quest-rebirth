@@ -9,7 +9,7 @@ import { setTimeOutHelper } from '../utils/time-out';
 import { HeroAttackFX, BattleVictoryMusic } from '../utils/sound-fx';
 import { damageCalculation, getBaseDamage } from '../utils/damage-calc';
 
-import '../../sass/style.scss';
+import '../../../sass/style.scss';
 import '../../sass/_battle-character.scss';
 import '../../sass/_battle-backgrounds.scss';
 

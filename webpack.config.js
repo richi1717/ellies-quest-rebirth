@@ -1,46 +1,33 @@
-var webpack = require('webpack');
-var path = require('path');
+const webpack = require('webpack');
+const path = require('path');
 
 module.exports = {
-  entry: [
-    './src/index'
-  ],
+  entry: ['whatwg-fetch', './client/js/index.js'],
+  devtool: 'inline-source-map',
+  output: {
+    path: path.join(__dirname, 'public'),
+    filename: 'bundle.js',
+    publicPath: '/'
+  },
   module: {
-    loaders: [
-      { test: /\.jsx?$/, loader: 'babel', exclude: /node_modules/ },
-      // { test: /\.s?css$/, loader: 'style!css!sass' },
+    rules: [
+      {
+        test: /\.js$/,
+        loader: 'babel-loader',
+        include: [path.join(__dirname, 'client/js/')],
+        exclude: /node_modules/,
+        options: { cacheDirectory: true }
+      },
       {
         test: /\.scss$/,
-         loaders: ["style", "css?sourceMap?root=.", "sass?sourceMap"],
-      },
-      {
-        test: /\.(jpe?g|png|gif|svg)$/i,
-        loaders: [
-          'url?limit=8192?',
-          'img'
-        ]
-      },
-      {
-        test: /\.mp3$/,
-        loaders: ["file-loader"]
+        loaders: ['style-loader', 'css-loader?sourceMap?root=.', 'sass-loader']
       }
     ]
   },
-  resolve: {
-    extensions: ['', '.jsx', '.js']
-  },
-  output: {
-    path: path.join(__dirname, '/dist'),
-    publicPath: '/',
-    filename: 'bundle.js'
-  },
-  devServer: {
-    contentBase: './dist',
-    hot: true
-  },
   plugins: [
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
-  ]
+    new webpack.EnvironmentPlugin({
+      NODE_ENV: 'development'
+    })
+  ],
+  watch: true
 };

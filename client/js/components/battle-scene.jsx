@@ -2,7 +2,7 @@ import React, { Component , PropTypes} from 'react';
 import { connect } from 'react-redux';
 import { NormalBattleMusic } from '../utils/sound-fx';
 
-import '../../sass/_battle-backgrounds.scss';
+import '../../../sass/_battle-backgrounds.scss';
 
 class BattleScene extends Component {
   render() {
