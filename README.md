@@ -13,7 +13,9 @@ I use `yarn` and if you'd like to use it too
 
 ```javascript
 $ brew install yarn    // obviously using brew
+```
 or
+```javascript
 $ curl -o- -L https://yarnpkg.com/install.sh | bash   // if you don't have brew
 ```
 
