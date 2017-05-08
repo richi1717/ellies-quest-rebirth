@@ -60,7 +60,6 @@
     "babel-polyfill": "^6.23.0",
     "body-parser": "^1.15.0",
     "classnames": "^2.2.5",
-    "ds-front-end-one-ui": "git+https://e8990cb5e3b6fa44f8dc483dadd732fd62276733:x-oauth-basic@github.com/aaa-ncnu-ie/aaaie-One-UI.git#2.0.0-beta.1",
     "express": "^4.13.4",
     "fetch": "^1.1.0",
     "prop-types": "^15.5.8",
