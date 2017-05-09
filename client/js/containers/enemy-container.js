@@ -19,7 +19,7 @@ import {
   removeEnemyFromList,
   deleteEnemyWhenKilled,
   setHeroAttacking
-} from '../actions/index';
+} from '../actions/actionCreators';
 
 function mapStateToProps(state) {
   // console.log(state.get('enemyStats'));

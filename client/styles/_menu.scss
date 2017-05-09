@@ -1,6 +1,7 @@
 .battle-menu-container {
   display: flex;
   min-height: 26vh;
+
   .battle-menu-main {
     flex: 1;
     color: #C2C3C7;
@@ -80,16 +81,16 @@
 .health-bar {
   position: relative;
   div {
-    height: .5rem;
+    height: 5px;
     width: 75%;
     position: absolute;
-    left: 4rem;
+    left: 40px;
     background-color: rgba(130,14,16,0.5);
     span {
       background-color: rgba(45, 179, 77, 0.71);
-      border-radius: 10rem;
+      border-radius: 100px;
       position: absolute;
-      height: .5rem;
+      height: 5px;
       left: 0;
     }
   }
@@ -98,16 +99,16 @@
 .magic-bar {
   position: relative;
   div {
-    height: .5rem;
+    height: 5px;
     width: 73%;
     position: absolute;
-    left: 4rem;
+    left: 40px;
     background-color: rgba(130,14,16,0.5);
     span {
       background-color: rgba(35, 194, 246, 0.71);
-      border-radius: 10rem;
+      border-radius: 100px;
       position: absolute;
-      height: .5rem;
+      height: 5px;
       left: 0;
     }
   }
@@ -131,15 +132,15 @@
 .battle-menu-turn {
   color: #C2C3C7;
   text-shadow: 2px 1px #8a8a7b;
-  height: 20rem;
-  min-width: 30rem;
+  height: 200px;
+  min-width: 300px;
   border: 2px solid rgba(255, 255, 255, 0.2);
   box-shadow: 3px 3px #0a0a0a, -3px -3px #0a0a0a, -3px 3px #0a0a0a, 3px -3px #0a0a0a;
   background-color: rgba(15, 14, 45, 0.85);
   border-radius: 5px;
   z-index: 1;
   position: absolute;
-  left: 15rem;
+  left: 150px;
   bottom: 0;
   display: flex;
   flex-direction: row;
@@ -150,7 +151,7 @@
       font-size: 22pt;
       list-style-type: none;
       margin-top: 0px;
-      margin-bottom: .4rem;
+      margin-bottom: 4px;
       text-indent: 10px;
       text-shadow: 2px 1px #8a8a7b;
     }
@@ -160,7 +161,7 @@
 // .battle-menu-turn > li:nth-child(6) {
 //   position: absolute;
 //   top: 0;
-//   right: 14rem;
+//   right: 140px;
 // }
 
 .battle-menu-turn > ul > li{
@@ -174,28 +175,28 @@
 .menu-attack {
   // min-width: 600px;
   z-index: 1;
-  bottom: 4rem;
-  left: 20rem;
+  bottom: 40px;
+  left: 200px;
 }
 
 .menu-items-select {
   z-index: 2;
-  bottom: 8rem;
-  left: 25rem;
+  bottom: 80px;
+  left: 250px;
 }
 
 .menu-magic {
-  min-width: 30rem;
+  min-width: 300px;
   z-index: 1;
-  bottom: 4rem;
-  left: 20rem;
+  bottom: 40px;
+  left: 200px;
 }
 
 .menu-items {
-  min-width: 30rem;
+  min-width: 300px;
   z-index: 1;
-  bottom: 4rem;
-  left: 20rem;
+  bottom: 40px;
+  left: 200px;
 }
 
 .magic-attack-menu {
@@ -211,5 +212,5 @@
 }
 
 .more-than-five {
-  min-width: 60rem;
+  min-width: 600px;
 }

@@ -1,14 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { setBattleScene, updateEnemyStats, ROOT_URL } from '../actions/index';
+import { setBattleScene, updateEnemyStats, ROOT_URL } from '../actions/actionCreators';
 import Enemy from '../containers/enemy-container';
 import classnames from 'classnames';
-import axios from 'axios';
 import _ from 'lodash';
 
-import '../../sass/style.scss';
-import '../../sass/_enemies.scss';
 // let enemies;
 
 class Enemies extends Component {
@@ -19,17 +16,17 @@ class Enemies extends Component {
       done: false
     };
   }
-
-  componentWillMount() {
-    const url = `${ROOT_URL}/monsters.json`;
-    this.serverRequest = axios.get(url)
-      .then(response => {
-        this.enemies = response.data;
-        this.ranEnemies = this.chooseEnemies(this.enemies);
-        // this.props.setBattleScene('forest');
-        this.setState({done: true});
-      });
-  }
+  //
+  // componentWillMount() {
+  //   const url = `${ROOT_URL}/monsters.json`;
+  //   this.serverRequest = axios.get(url)
+  //     .then(response => {
+  //       this.enemies = response.data;
+  //       this.ranEnemies = this.chooseEnemies(this.enemies);
+  //       // this.props.setBattleScene('forest');
+  //       this.setState({done: true});
+  //     });
+  // }
 
   componentWillUnmount() {
     this.serverRequest.abort();

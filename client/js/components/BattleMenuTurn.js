@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
-import PureComponent from './pure-component';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -14,11 +13,9 @@ import {
   setListOfTurnOrder,
   setNextTurnFromList,
   setItemSelectedBoolean
-} from '../actions/index';
+} from '../actions/actionCreators';
 
-import '../../sass/_menu.scss';
-
-class BattleMenuTurn extends PureComponent {
+class BattleMenuTurn extends Component {
   componentDidUpdate() {
     this.props.getNextTurn === 'hero0' && !this.props.isPauseBetweenTurns && this.props.isHero0Defending ? this.clearOtherMenuSelections() : null;
     this.props.getNextTurn === 'hero1' && !this.props.isPauseBetweenTurns && this.props.isHero1Defending ? this.clearOtherMenuSelections() : null;

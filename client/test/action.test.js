@@ -1,5 +1,5 @@
 import expect from 'expect';
-import * as actions from '../src/actions/index';
+import * as actions from '../src/actions/actionCreators';
 import types from '../src/constants/actionTypes';
 import { fromJS } from 'immutable';
 

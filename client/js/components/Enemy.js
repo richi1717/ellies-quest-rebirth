@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import { autobind } from 'core-decorators';
-import { EnemyAttackFX } from '../helpers/sound-fx';
+import { EnemyAttackFX } from '../helpers/soundEffects';
 import { setTimeOutHelper } from '../helpers/time-out';
 import { damageCalculation, getBaseDamage } from '../helpers/damage-calc';
 import { calcLevel } from '../helpers/calculate-level';

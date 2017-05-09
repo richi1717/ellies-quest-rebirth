@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { autobind } from 'core-decorators';
-import axios from 'axios';
 import {
   setMenuAttackSelected,
   ROOT_URL,
   setListOfItems,
   setItemSelectedBoolean,
   setItemObjectFromSelection
-} from '../actions/index';
+} from '../actions/actionCreators';
 
 import classnames from 'classnames';
 
@@ -20,16 +18,16 @@ class BattleMenuAttack extends Component {
       done: false
     };
   }
-
-  componentWillMount() {
-    const url = `${ROOT_URL}/items.json`;
-    this.serverRequest = axios.get(url)
-      .then(response => {
-        console.log(response.data);
-        this.getItems = this.setItems(response.data);
-        this.setState({done: true});
-      });
-  }
+  //
+  // componentWillMount() {
+  //   const url = `${ROOT_URL}/items.json`;
+  //   this.serverRequest = axios.get(url)
+  //     .then(response => {
+  //       console.log(response.data);
+  //       this.getItems = this.setItems(response.data);
+  //       this.setState({done: true});
+  //     });
+  // }
 
   setItems(items) {
     const ARR = [];

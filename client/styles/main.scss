@@ -1,3 +1,11 @@
+@import '_battle-backgrounds.scss';
+@import '_battle-character.scss';
+@import '_enemies.scss';
+@import '_items.scss';
+@import '_magic.scss';
+@import '_menu.scss';
+
+
 html {
   font-family: 'Orbitron', sans-serif;
   box-sizing: border-box;
@@ -19,7 +27,7 @@ body {
 
 .battle-scene-container {
   flex: 1;
-  height: 50rem;
+  height: 500px;
 }
 
 img {

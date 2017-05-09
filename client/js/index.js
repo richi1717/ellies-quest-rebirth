@@ -1,4 +1,4 @@
-import '../sass/style.scss';
+import 'whatwg-fetch';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
@@ -6,6 +6,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import ReduxPromise from 'redux-promise';
 import App from './components/App';
 import rootReducer from './reducers/rootReducer';
+import { initializeDispatch } from './dispatch';
 
 export const store = createStore(
   rootReducer,
@@ -15,8 +16,10 @@ export const store = createStore(
   )
 );
 
+initializeDispatch(store);
+
 ReactDOM.render(
   <Provider store={store}>
     <App />
   </Provider>
-  , document.getElementById('container'));
+  , document.getElementById('appRender'));

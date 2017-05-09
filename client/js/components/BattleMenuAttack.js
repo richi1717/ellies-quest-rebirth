@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Map } from 'immutable';
-import { autobind } from 'core-decorators';
 import dispatch from '../dispatch';
 import { setMenuAttackSelected } from '../actions/actionCreators';
 import classnames from 'classnames';
@@ -15,8 +13,6 @@ class BattleMenuAttack extends Component {
     };
     for (const KEY in this.props.heroStats) {
       const HERO = this.props.heroStats[KEY];
-      const CLICK = 'handleCharacter' + KEY + 'AttackClick';
-      /* eslint-disable */
       if (!HERO.killed) {
         function CLICK() {
           this.dispatchClickEvent('hero' + KEY);
@@ -29,7 +25,6 @@ class BattleMenuAttack extends Component {
           </li>
         );
       }
-      /* eslint-enable */
     }
     return ARR;
   }
@@ -37,8 +32,6 @@ class BattleMenuAttack extends Component {
   getRenderedListOfEnemies() {
     const ARR = [];
     for (const KEY in this.props.enemyStats) {
-      const CLICK = "handleEnemy" + KEY + "AttackClick";
-      /* eslint-disable */
       if (!this.props.enemyStats[KEY].killed) {
         function CLICK() {
           this.dispatchClickEvent('enemy' + KEY);
@@ -51,7 +44,6 @@ class BattleMenuAttack extends Component {
           </li>
         );
       }
-      /* eslint-enable */
     }
     return ARR;
   }
@@ -80,7 +72,7 @@ class BattleMenuAttack extends Component {
     if (this.props.isMenuAttackSelected || this.props.isItemSelected) {
       if (this.isMoreThanFive()) {
         return (
-          <div className={classnames(CLASSES)}>
+          <div label="yeah" className={classnames(CLASSES)}>
             <div>
               {this.props.isItemSelected ? this.getRenderedListOfCharacters() : this.getRenderedListOfEnemies()}
             </div>

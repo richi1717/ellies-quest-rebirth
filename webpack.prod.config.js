@@ -2,7 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 
 module.exports = {
-  entry: ['whatwg-fetch', './client/js/index.js'],
+  entry: ['./client/js/index.js'],
   devtool: 'inline-source-map',
   output: {
     path: path.join(__dirname, 'public'),
@@ -17,17 +17,25 @@ module.exports = {
         include: [path.join(__dirname, 'client/js/')],
         exclude: /node_modules/,
         options: { cacheDirectory: true }
-      },
-      {
-        test: /\.scss$/,
-        loaders: ['style-loader', 'css-loader?sourceMap?root=.', 'sass-loader']
       }
     ]
   },
   plugins: [
-    new webpack.EnvironmentPlugin({
-      NODE_ENV: 'development'
-    })
-  ],
-  watch: true
+    new webpack.LoaderOptionsPlugin({
+      minimize: true,
+      debug: false
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      beautify: false,
+      mangle: {
+        screw_ie8: true,
+        keep_fnames: true
+      },
+      compress: {
+        screw_ie8: true
+      },
+      comments: false
+    }),
+    new webpack.DefinePlugin({ 'process.env': { NODE_ENV: JSON.stringify('production') } }),
+  ]
 };

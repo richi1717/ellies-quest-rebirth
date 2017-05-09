@@ -31,7 +31,7 @@ gulp.task('webpack', () => {
 });
 
 gulp.task('dev', [
-  // 'stylesheetsWatch',
+  'stylesheetsWatch',
   'webpack',
   'server'
 ]);
@@ -50,4 +50,4 @@ gulp.task('stylesheetsNoThrow', () => stylesheets(() => sass().on('error', sass.
 
 gulp.task('stylesheets', () => stylesheets(() => sass()));
 
-gulp.task('stylesheetsWatch', ['stylesheetsNoThrow'], () => gulp.watch('client/styles/*.scss', ['stylesheetsNoThrow']));
+gulp.task('stylesheetsWatch', ['stylesheetsNoThrow'], () => gulp.watch('client/scss/*.scss', ['stylesheetsNoThrow']));

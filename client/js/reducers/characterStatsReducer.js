@@ -4,6 +4,7 @@ export default function(characterStats, action) {
   switch (action.type) {
     case types.UPDATE_CHARACTER_STATS: {
       const character = action.character;
+
       return characterStats.map(stats => {
         if (stats === characterStats[action.id]) {
           return Object.assign({}, stats, {

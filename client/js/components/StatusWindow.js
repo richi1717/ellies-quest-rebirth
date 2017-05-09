@@ -47,13 +47,13 @@ function StatusWindow(props) {
       <div className="battle-menu-main">
         <table>
           <tbody><tr><th>NAME</th></tr></tbody>
-          <tbody>{this.renderNames()}</tbody>
+          <tbody>{renderNames()}</tbody>
         </table>
       </div>
       <div className="battle-menu-main-stats">
         <table>
           <tbody><tr><th>HP</th><th>MP</th></tr></tbody>
-          <tbody>{this.showStatusPerCharacter()}</tbody>
+          <tbody>{showStatusPerCharacter()}</tbody>
         </table>
       </div>
       {props.children}

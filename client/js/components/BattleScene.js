@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { NormalBattleMusic } from '../helpers/sound-fx';
-
-import '../../sass/_battle-backgrounds.scss';
+import { NormalBattleMusic } from '../helpers/soundEffects';
 
 function BattleScene(props) {
   return (

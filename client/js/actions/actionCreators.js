@@ -1,34 +1,31 @@
-import axios from 'axios';
-import _ from 'lodash';
 import types from '../constants/actionTypes';
-import { fromJS } from 'immutable';
 
 export const ROOT_URL = 'https://ellies-quest.firebaseio.com/';
 export const FIREBASE_API = '.json';
 
-export function fetchCharacters() {
-  const url = `${ROOT_URL}/characters${FIREBASE_API}`;
-  const request = axios.get(url)
-    .then(response => {
-      return response.data[0];
-    });
-  return {
-    type: types.GET_CHARACTER_INFO,
-    payload: request
-  };
-}
-
-export function fetchEnemies() {
-  const url = `${ROOT_URL}/monsters${FIREBASE_API}`;
-  const request = axios.get(url)
-    .then(response => {
-      return response.data;
-    });
-  return {
-    type: types.GET_ENEMY_INFO,
-    payload: request
-  };
-}
+// export function fetchCharacters() {
+//   const url = `${ROOT_URL}/characters${FIREBASE_API}`;
+//   const request = axios.get(url)
+//     .then(response => {
+//       return response.data[0];
+//     });
+//   return {
+//     type: types.GET_CHARACTER_INFO,
+//     payload: request
+//   };
+// }
+//
+// export function fetchEnemies() {
+//   const url = `${ROOT_URL}/monsters${FIREBASE_API}`;
+//   const request = axios.get(url)
+//     .then(response => {
+//       return response.data;
+//     });
+//   return {
+//     type: types.GET_ENEMY_INFO,
+//     payload: request
+//   };
+// }
 
 export function setBattleScene(area) {
   return {
@@ -48,7 +45,7 @@ export function updateCharacterStats(obj, id) {
   return {
     type: types.UPDATE_CHARACTER_STATS,
     character: obj,
-    id: id
+    id
   };
 }
 

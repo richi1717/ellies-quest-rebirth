@@ -4,23 +4,7 @@ import characterStatsReducer from './characterStatsReducer';
 const defaults = {
   battleScene: { data: 'forest' },
   enemyInfo: { data: '' },
-  characterStats: {
-    maxHp: 0,
-    currentHp: 1,
-    id: 0,
-    maxMp: 0,
-    currentMp: 0,
-    name: 0,
-    agility: 0,
-    accuracy: 0,
-    str: 0,
-    magic: 0,
-    exp: 0,
-    def: 0,
-    evade: 0,
-    classes: 0,
-    killed: false
-  }
+  characterStats: [{}, {}, {}]
 };
 
 export default function rootReducer(state = defaults, action) {

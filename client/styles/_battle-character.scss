@@ -55,31 +55,31 @@
   }
 
   &.red-boy {
-    background-position: .6rem .3rem;
+    background-position: 6px 3px;
   }
 
   &.white-girl {
-    background-position: .6rem -9.5rem;
+    background-position: 6px -95px;
   }
 
   &.green-boy {
-    background-position: .3rem -19rem;
+    background-position: 3px -190px;
   }
 
   &.attacking {
-    background-position-x: -9.5rem;
+    background-position-x: -95px;
   }
 
   &.attack-swing {
-    background-position-x: -21rem;
+    background-position-x: -210px;
   }
 
   &.defense {
-    background-position-x: -31rem;
+    background-position-x: -310px;
   }
 
   &.dead {
-    background-position-x: -60rem;
+    background-position-x: -600px;
   }
 
   &.battle-hero-red-boy-movement {
@@ -91,21 +91,21 @@
   }
 
   &.run1 {
-    background-position-x: -40rem;
+    background-position-x: -400px;
     right: 10%;
   }
 
   &.run2 {
-    background-position-x: -50rem;
+    background-position-x: -500px;
     right: 9.5%;
   }
 }
 
 .battle-ff-sprite {
   background-image: url('/resources/images/battle-sprites2.png');
-  background-size: 70rem;
-  height: 10rem;
-  width: 10rem;
+  background-size: 700px;
+  height: 100px;
+  width: 100px;
 }
 
 .damage-display-hero {

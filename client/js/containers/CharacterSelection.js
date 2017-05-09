@@ -1,13 +1,10 @@
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { setBattleScene, updateCharacterStats, ROOT_URL, FIREBASE_API } from '../actions/index';
-import Character from './character-container';
-import classnames from 'classnames';
-import axios from 'axios';
-import _ from 'lodash';
+import { setBattleScene, updateCharacterStats, ROOT_URL, FIREBASE_API } from '../actions/actionCreators';
+import Character from '../components/Character';
+import dispatch from '../dispatch';
+import filter from 'lodash/filter';
 
-class CharacterSelection extends Component {
+export default class CharacterSelection extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -18,12 +15,15 @@ class CharacterSelection extends Component {
 
   componentWillMount() {
     const url = `${ROOT_URL}/characters${FIREBASE_API}`;
-    this.serverRequest = axios.get(url)
+    this.serverRequest = fetch(url)
       .then(response => {
-        this.character = response.data;
+        return response.json();
+      })
+      .then(data => {
+        this.character = data;
         this.getCharacters = this.setCharacters(this.character);
-        this.props.setBattleScene('forest');
-        this.setState({done: true});
+        dispatch(setBattleScene(this.props.battleScene));
+        this.setState({ done: true });
       });
   }
 
@@ -33,9 +33,9 @@ class CharacterSelection extends Component {
 
   setCharacters(x) {
     const CHARACTER = [];
-    const PLAYABLE_CHARACTERS = _.filter(x, { inPlay: true });
+    const PLAYABLE_CHARACTERS = filter(x, { inPlay: true });
     for (let key = 0; key < PLAYABLE_CHARACTERS.length; key++) {
-      this.props.updateCharacterStats(PLAYABLE_CHARACTERS[key], key);
+      dispatch(updateCharacterStats(PLAYABLE_CHARACTERS[key], key));
       CHARACTER.push(
         <Character classes={PLAYABLE_CHARACTERS[key].classes} turnSpeed={PLAYABLE_CHARACTERS[key].agility} position={key} key={key} {...PLAYABLE_CHARACTERS[key]} />
       );
@@ -53,12 +53,6 @@ class CharacterSelection extends Component {
 }
 
 CharacterSelection.propTypes = {
-  setBattleScene: PropTypes.func.isRequired,
+  battleScene: PropTypes.string,
   updateCharacterStats: PropTypes.func
 };
-
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ setBattleScene, updateCharacterStats }, dispatch);
-}
-
-export default connect(null, mapDispatchToProps)(CharacterSelection);
