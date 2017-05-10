@@ -4,13 +4,6 @@
 
 I use [yarn](https://yarnpkg.com/lang/en/docs/install/) for this project.
 
-Want to do everything on one line?
-
-```javascript
-$ git clone git@github.com:richi1717/ellies-quest-rebirth.git && cd ellies-quest-rebirth && yarn && yarn dev
-```
-Or Step by Step?
-
 ```javascript
 $ git clone git@github.com:richi1717/ellies-quest-rebirth.git
 $ cd ellies-quest-rebirth
