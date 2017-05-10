@@ -1,4 +1,5 @@
 .battle {
+  max-width: 1352px;
   height: 100vh;
   width: 100vw;
   background-size: cover;
@@ -18,6 +19,9 @@
 .boss-battle {
   background-image: url("/resources/images/boss-battle.png"); }
 
+.beach-battle {
+  background-image: url("/resources/images/beach-battle.png"); }
+
 .battle-hero {
   z-index: 1; }
   .battle-hero.position1 {
@@ -30,30 +34,30 @@
     position: absolute;
     top: 40%; }
   .battle-hero.front-row {
-    right: 15%; }
+    left: 15%; }
   .battle-hero.back-row {
-    right: 5%; }
+    left: 35%; }
   .battle-hero.hero-turn {
-    right: 24vw; }
+    left: 24vw; }
   .battle-hero.attack-enemy0 {
     top: 31%;
-    right: 65vw; }
+    left: 65vw; }
   .battle-hero.attack-enemy1 {
     top: 47%;
-    right: 65vw; }
+    left: 65vw; }
   .battle-hero.attack-enemy2 {
     top: 43%;
-    right: 80vw; }
+    left: 80vw; }
   .battle-hero.attack-enemy3 {
     top: 30%;
-    right: 78vw; }
+    left: 78vw; }
   .battle-hero.attack-enemy4 {
     top: 57%;
-    right: 78vw; }
+    left: 78vw; }
   .battle-hero.red-boy {
     background-position: 6px 3px; }
   .battle-hero.white-girl {
-    background-position: 6px -95px; }
+    background-position: 7px -95px; }
   .battle-hero.green-boy {
     background-position: 3px -190px; }
   .battle-hero.attacking {
@@ -70,10 +74,10 @@
     top: 50.5%; }
   .battle-hero.run1 {
     background-position-x: -400px;
-    right: 10%; }
+    left: 10%; }
   .battle-hero.run2 {
     background-position-x: -500px;
-    right: 9.5%; }
+    left: 9.5%; }
 
 .battle-ff-sprite {
   background-image: url("/resources/images/battle-sprites2.png");
@@ -92,6 +96,7 @@
 .enemy-sprites {
   background-image: url("/resources/images/monsters2.png");
   background-size: 2220px;
+  position: absolute;
   height: 100px;
   width: 90px; }
 
@@ -162,12 +167,10 @@
   background-position: -1945px 0; }
 
 .enemy-position-single {
-  position: absolute;
   top: 40%;
   left: 15%; }
 
 .enemy0 {
-  position: absolute;
   top: 32%;
   left: 22%; }
 
@@ -175,7 +178,6 @@
   top: 32.5%; }
 
 .enemy1 {
-  position: absolute;
   top: 48%;
   left: 22%; }
 
@@ -183,7 +185,6 @@
   top: 48.5%; }
 
 .enemy2 {
-  position: absolute;
   top: 40%;
   left: 10%; }
 
@@ -191,7 +192,6 @@
   top: 40.5%; }
 
 .enemy3 {
-  position: absolute;
   top: 25%;
   left: 10%; }
 
@@ -199,7 +199,6 @@
   top: 25.5%; }
 
 .enemy4 {
-  position: absolute;
   top: 55%;
   left: 10%; }
 
@@ -503,9 +502,19 @@ body {
   margin: 0;
   background-color: #212527; }
 
-.battle-scene-container {
-  flex: 1;
-  height: 500px; }
+.ellies-quest-rebirth-container {
+  display: flex;
+  justify-content: center; }
+  .ellies-quest-rebirth-container .battle-scene-container {
+    flex: 1;
+    height: 500px;
+    display: flex; }
+    .ellies-quest-rebirth-container .battle-scene-container .enemies-container {
+      flex: 1;
+      position: relative; }
+    .ellies-quest-rebirth-container .battle-scene-container .characters-container {
+      flex: .5;
+      position: relative; }
 
 img {
   height: 50px;

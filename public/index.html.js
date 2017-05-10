@@ -10,7 +10,6 @@ module.exports = () => `
   </head>
   <body>
     <div id="appRender"></div>
-    <div id="resume-path-tkn" style="display: none" data-tkn="notoken" data-test="cheese-board/public/index.html"></div>
     <script type="text/javascript" src="/bundle.js" charset="utf-8"></script>
   </body>
 </html>`;

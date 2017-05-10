@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import ReduxPromise from 'redux-promise';
-import App from './components/App';
+import Router from './routes';
 import rootReducer from './reducers/rootReducer';
 import { initializeDispatch } from './dispatch';
 
@@ -20,6 +20,6 @@ initializeDispatch(store);
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <Router />
   </Provider>
   , document.getElementById('appRender'));

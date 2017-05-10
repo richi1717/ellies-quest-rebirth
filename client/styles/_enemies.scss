@@ -1,6 +1,7 @@
 .enemy-sprites {
   background-image: url('/resources/images/monsters2.png');
   background-size: 2220px;
+  position: absolute;
   height: 100px;
   width: 90px;
 }
@@ -94,13 +95,11 @@
 }
 
 .enemy-position-single {
-  position: absolute;
   top: 40%;
   left: 15%;
 }
 
 .enemy0 {
-  position: absolute;
   top: 32%;
   left: 22%;
 }
@@ -111,7 +110,6 @@
 }
 
 .enemy1 {
-  position: absolute;
   top: 48%;
   left: 22%;
 }
@@ -121,7 +119,6 @@
 }
 
 .enemy2 {
-  position: absolute;
   top: 40%;
   left: 10%;
 }
@@ -131,7 +128,6 @@
 }
 
 .enemy3 {
-  position: absolute;
   top: 25%;
   left: 10%;
 }
@@ -141,7 +137,6 @@
 }
 
 .enemy4 {
-  position: absolute;
   top: 55%;
   left: 10%;
 }
