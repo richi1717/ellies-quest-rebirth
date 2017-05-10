@@ -5,8 +5,6 @@
 
 ### Installation
 
-I use [yarn](https://yarnpkg.com/lang/en/docs/install/) for this project.
-
 ```javascript
 $ git clone git@github.com:richi1717/ellies-quest-rebirth.git
 $ cd ellies-quest-rebirth
@@ -20,7 +18,7 @@ If you do not have webpack and webpack-dev-server installed globally do it now
 $ yarn global add webpack webpack-dev-server
 ```
 
-Then go to http://localhost:8888/ in chrome (because honestly that's the only one I've tested in right now) and enjoy.
+Then go to [http://localhost:3000](http:/localhost:3000) in chrome (because honestly that's the only one I've tested in right now) and enjoy.
 
 ### Router
 
@@ -29,14 +27,13 @@ and the enemies that appear.  There will always be between 1-5 enemies but they 
 would exist if for some reason this world was real 😉.  Here's a list of all of the locations you can go to. Still working
 on the beach one because I'm not super happy with it.
 
-```javascript
-/         -> defaults to forest
-/forest   -> forest
-/grass    -> grass
-/beach    -> beach
-/boss     -> hellish volcano looking scene
-/desert   -> desert wasteland looking area
-```
+  * [/](http:/localhost:3000/)                 -> defaults to forest
+  * [/forest](http:/localhost:3000/forest)     -> forest
+  * [/grass](http:/localhost:3000/grass)       -> grass
+  * [/beach](http:/localhost:3000/beach)       -> beach
+  * [/boss](http:/localhost:3000/boss)         -> hellish volcano looking scene
+  * [/desert](http:/localhost:3000/desert)     -> desert wasteland looking area
+
 I hope to add more in the future but want to get the mechanics sorted out.
 
 ### Insight
