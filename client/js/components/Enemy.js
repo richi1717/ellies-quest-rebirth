@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { EnemyAttackFX } from './SoundEffects';
-import { setTimeOutHelper } from '../helpers/time-out';
-import { damageCalculation, getBaseDamage } from '../helpers/damage-calc';
-import { calcLevel } from '../helpers/calculate-level';
+// import setTimeoutHelper from '../helpers/time-out';
+// import { damageCalculation, getBaseDamage } from '../helpers/damage-calc';
+// import { calcLevel } from '../helpers/calculate-level';
 
 export default class Enemy extends Component {
   constructor(props) {
@@ -240,9 +240,10 @@ export default class Enemy extends Component {
   //   );
   // }
   //
-  // isEnemyAlive() {
-  //   return !(this.props.enemyStats[this.props.position].toJS().killed);
-  // }
+  isEnemyAlive() {
+    return false;
+    // return !(this.props.enemyStats[this.props.position].toJS().killed);
+  }
   //
   // areAllEnemiesDead() {
   //   let dead = false;
@@ -265,15 +266,13 @@ export default class Enemy extends Component {
       'enemy-attack-hero2': this.state.isAttackingHero2
     };
 
-    const DMG_DISPLAY = document.getElementById('dmg-display' + this.props.position);
-    if (() => {this.isEnemyAlive();}) {
-
+    // const DMG_DISPLAY = document.getElementById(`dmg-display${this.props.position}`);
+    if (this.isEnemyAlive()) {
       return (
-        <div onClick={() => this.handleClick()}>
+        <div>
           <div
-            id={"enemy" + this.props.position}
-            ref={"enemy" + this.props.position}
-            className={classnames(ENEMY_CLASS) + " " + this.props.enemyClass + " enemy" + this.props.position}
+            id={`enemy${this.props.position}`}
+            className={`${classnames(ENEMY_CLASS)} ${this.props.enemyClass} enemy${this.props.position}`}
           >
             {/*{this.showDamageOverHead()}*/}
           </div>
@@ -282,25 +281,25 @@ export default class Enemy extends Component {
           {this.state.isAttackingHero2 ? <EnemyAttackFX /> : null}
         </div>
       );
-    } else {
-      return null;
     }
+
+    return null;
   }
 }
 
 Enemy.propTypes = {
-  str: PropTypes.number,
-  heroStr: PropTypes.number,
-  level: PropTypes.number,
-  setEnemySelectedTarget: PropTypes.func,
-  setEnemyAttacking: PropTypes.func,
+  // str: PropTypes.number,
+  // heroStr: PropTypes.number,
+  // level: PropTypes.number,
+  // setEnemySelectedTarget: PropTypes.func,
+  // setEnemyAttacking: PropTypes.func,
   enemyClass: PropTypes.string,
-  position: PropTypes.number,
-  setHeroAttacking: PropTypes.func,
-  updateEnemyStats: PropTypes.func,
-  isHeroAttacking: PropTypes.bool,
-  currentHp: PropTypes.number,
-  enemyStats: PropTypes.array,
-  def: PropTypes.number,
-  setHeroToEnemyTarget: PropTypes.func
+  position: PropTypes.number
+  // setHeroAttacking: PropTypes.func,
+  // updateEnemyStats: PropTypes.func,
+  // isHeroAttacking: PropTypes.bool,
+  // currentHp: PropTypes.number,
+  // enemyStats: PropTypes.array,
+  // def: PropTypes.number,
+  // setHeroToEnemyTarget: PropTypes.func
 };

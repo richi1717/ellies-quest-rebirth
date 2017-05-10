@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
+import filter from 'lodash.filter';
 import { updateCharacterStats, ROOT_URL, FIREBASE_API } from '../actions/actionCreators';
 import Character from '../components/Character';
 import dispatch from '../dispatch';
-import filter from 'lodash/filter';
 
 export default class CharacterSelection extends Component {
   constructor(props) {
@@ -16,9 +16,7 @@ export default class CharacterSelection extends Component {
   componentWillMount() {
     const url = `${ROOT_URL}/characters${FIREBASE_API}`;
     this.serverRequest = fetch(url)
-      .then(response => {
-        return response.json();
-      })
+      .then(response => response.json())
       .then(data => {
         this.character = data;
         this.getCharacters = this.setCharacters(this.character);

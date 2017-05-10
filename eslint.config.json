@@ -38,6 +38,8 @@
   },
   "extends": "airbnb",
   "rules": {
+    "array-callback-return": "off",
+    "arrow-parens": "off",
     "class-methods-use-this": "off",
     "comma-dangle": "off",
     "consistent-return": "warn",
@@ -46,12 +48,15 @@
     "jsx-a11y/href-no-hash": "off",
     "max-len": "off",
     "no-console": ["error", { "allow": ["warn", "error"] }],
-    "no-plusplus": "warn",
+    "no-plusplus": "off",
     "no-prototype-builtins": "warn",
     "no-restricted-syntax": "warn",
     "no-unused-expressions": "off",
     "prefer-arrow-callback": "warn",
+    "quote-props": ["error", "consistent"],
     "react/jsx-filename-extension": "off",
-    "react/jsx-no-target-blank": "off"
+    "react/jsx-no-target-blank": "off",
+    "react/require-default-props": "off",
+    "spaced-comment": "off"
   }
 }

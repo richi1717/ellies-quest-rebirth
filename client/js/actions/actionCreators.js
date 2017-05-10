@@ -27,7 +27,7 @@ export const FIREBASE_API = '.json';
 //   };
 // }
 
-export function setEnemySelectedTarget(name, str, bool) {
+export function setEnemySelectedTarget(name, str) {
   return {
     type: types.SET_ENEMY_SELECTED_TARGET,
     payload: { name, str }
@@ -45,8 +45,8 @@ export function updateCharacterStats(obj, id) {
 export function updateEnemyStats(obj, id) {
   return {
     type: types.UPDATE_ENEMY_STATS,
-    id: id,
-    payload: obj
+    payload: obj,
+    id
   };
 }
 
@@ -93,17 +93,17 @@ export function setPauseBetweenTurns(boolean) {
     payload: boolean
   };
 }
-
-export function setNextTurnFromList(list) {
-  // console.log(list);
-  const next = list.first();
-  // console.log(next, list.toJS());
-  return {
-    type: types.GET_NEXT_TURN_FROM_LIST,
-    payload: next,
-    list: list
-  };
-}
+//
+// export function setNextTurnFromList(list) {
+//   // console.log(list);
+//   const next = list.first();
+//   // console.log(next, list.toJS());
+//   return {
+//     type: types.GET_NEXT_TURN_FROM_LIST,
+//     payload: next,
+//     list: list
+//   };
+// }
 
 export function setMenuAttackSelected(bool) {
   return {

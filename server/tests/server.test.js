@@ -2,7 +2,7 @@ const server = require('../server');
 const request = require('supertest');
 const indexHTML = require('../../public/index.html');
 
-describe('server', function () {
+describe('server', () => {
   let app;
 
   beforeEach(() => {

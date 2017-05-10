@@ -1,11 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
 
 function StatusWindow(props) {
   function showStatusPerCharacter() {
     const STATUS = [];
-    props.heroStats.map((h, idx) => {
+    let incr;
+
+    props.heroStats.map((h) => {
+      incr++;
       const HP_PERCENTAGE = Math.ceil((h.currentHp / h.maxHp) * 100);
       const MP_PERCENTAGE = Math.ceil((h.currentMp / h.maxMp) * 100);
       const LOW_HEALTH = {
@@ -15,15 +19,15 @@ function StatusWindow(props) {
         'low-magic': MP_PERCENTAGE <= 25
       };
       const STYLE_HP = {
-        width: HP_PERCENTAGE + '%'
+        width: `${HP_PERCENTAGE}%`
       };
       const STYLE_MP = {
-        width: MP_PERCENTAGE + '%'
+        width: `${MP_PERCENTAGE}%`
       };
       STATUS.push(
-        <tr key={idx}>
-          <td className={"health-bar " + classnames(LOW_HEALTH)}>{h.currentHp}/{h.maxHp}<div><span style={STYLE_HP} /></div></td>
-          <td className={"magic-bar " + classnames(LOW_MAGIC)}>{h.currentMp}/{h.maxMp}<div><span style={STYLE_MP} /></div></td>
+        <tr key={incr}>
+          <td className={`health-bar ${classnames(LOW_HEALTH)}`}>{h.currentHp}/{h.maxHp}<div><span style={STYLE_HP} /></div></td>
+          <td className={`magic-bar ${classnames(LOW_MAGIC)}`}>{h.currentMp}/{h.maxMp}<div><span style={STYLE_MP} /></div></td>
         </tr>
       );
     });
@@ -32,9 +36,12 @@ function StatusWindow(props) {
 
   function renderNames() {
     const STATUS = [];
-    props.heroStats.map((h, idx) => {
+    let incr;
+
+    props.heroStats.map((h) => {
+      incr++;
       STATUS.push(
-        <tr key={idx}>
+        <tr key={incr}>
           <td className="menu-select character">{h.name}</td>
         </tr>
       );
@@ -60,6 +67,11 @@ function StatusWindow(props) {
     </div>
   );
 }
+
+StatusWindow.propTypes = {
+  heroStats: PropTypes.obj,
+  children: PropTypes.node
+};
 
 function mapStateToProps(state) {
   return {

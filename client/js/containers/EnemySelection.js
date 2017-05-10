@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
+import filter from 'lodash.filter';
+import sample from 'lodash.sample';
+import random from 'lodash.random';
 import { updateEnemyStats, ROOT_URL } from '../actions/actionCreators';
 import Enemy from '../components/Enemy';
-import filter from 'lodash/filter';
-import sample from 'lodash/sample';
-import random from 'lodash/random';
 import dispatch from '../dispatch';
 
 export default class Enemies extends Component {
@@ -18,13 +18,11 @@ export default class Enemies extends Component {
   componentWillMount() {
     const url = `${ROOT_URL}/monsters.json`;
     this.serverRequest = fetch(url)
-      .then(response => {
-        return response.json();
-      })
+      .then(response => response.json())
       .then(data => {
         this.enemies = data;
         this.ranEnemies = this.chooseEnemies(this.enemies);
-        this.setState({done: true});
+        this.setState({ done: true });
       });
   }
 
@@ -46,12 +44,12 @@ export default class Enemies extends Component {
   }
 
   render() {
-    const enemyClass = {
-      'enemy-sprites': true,
-      'enemy-attack-hero1': this.state.test,
-      'enemy-green-eagle': true,
-      'enemy1': true
-    };
+    // const enemyClass = {
+    //   'enemy-sprites': true,
+    //   'enemy-attack-hero1': this.state.test,
+    //   'enemy-green-eagle': true,
+    //   enemy1: true
+    // };
     return (
       <div className="enemies-container">
         {this.state.done ? this.ranEnemies : null}
@@ -61,6 +59,6 @@ export default class Enemies extends Component {
 }
 
 Enemies.propTypes = {
-  battleScene: PropTypes.string.isRequired,
-  updateEnemyStats: PropTypes.func
+  battleScene: PropTypes.string.isRequired
+  // updateEnemyStats: PropTypes.func
 };

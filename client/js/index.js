@@ -8,7 +8,7 @@ import Router from './routes';
 import rootReducer from './reducers/rootReducer';
 import { initializeDispatch } from './dispatch';
 
-export const store = createStore(
+const store = createStore(
   rootReducer,
   compose(
     applyMiddleware(ReduxPromise),

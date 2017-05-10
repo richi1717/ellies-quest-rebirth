@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import dispatch from '../dispatch';
-import { setMenuAttackSelected } from '../actions/actionCreators';
+// import dispatch from '../dispatch';
+// import { setMenuAttackSelected } from '../actions/actionCreators';
 import classnames from 'classnames';
 
 class BattleMenuAttack extends Component {
@@ -14,12 +14,9 @@ class BattleMenuAttack extends Component {
     for (const KEY in this.props.heroStats) {
       const HERO = this.props.heroStats[KEY];
       if (!HERO.killed) {
-        function CLICK() {
-          this.dispatchClickEvent('hero' + KEY);
-        }
         ARR.push(
           <li key={KEY}>
-            <button onClick={CLICK.bind(this)} className={classnames(CLASSES)}>
+            <button onClick={() => this.dispatchClickEvent(`hero${KEY}`)} className={classnames(CLASSES)}>
               {HERO.name}
             </button>
           </li>
@@ -33,13 +30,10 @@ class BattleMenuAttack extends Component {
     const ARR = [];
     for (const KEY in this.props.enemyStats) {
       if (!this.props.enemyStats[KEY].killed) {
-        function CLICK() {
-          this.dispatchClickEvent('enemy' + KEY);
-        }
         ARR.push(
           <li key={KEY}>
-            <button onClick={CLICK.bind(this)} className={"menu-select " + this.props.target + "-position"}>
-            {this.props.enemyStats[KEY].name}
+            <button onClick={() => this.dispatchClickEvent(`enemy${KEY}`)} className={`menu-select ${this.props.target}-position`}>
+              {this.props.enemyStats[KEY].name}
             </button>
           </li>
         );
@@ -63,7 +57,7 @@ class BattleMenuAttack extends Component {
       'battle-menu-turn': true,
       'menu-attack': true,
       'sub-menu': true,
-      'more-than-five': this.isMoreThanFive() ? true : false,
+      'more-than-five': !!this.isMoreThanFive(),
       'menu-items-select': this.props.isItemSelected
     };
     const INLINE_STYLE = {
@@ -82,20 +76,20 @@ class BattleMenuAttack extends Component {
             {this.props.children}
           </div>
         );
-      } else {
-        return (
-          <div className={classnames(CLASSES)}>
-            <div>
-              {this.props.isItemSelected ? this.getRenderedListOfCharacters() : this.getRenderedListOfEnemies()}
-              {this.props.isItemSelected ? this.getRenderedListOfEnemies() : this.getRenderedListOfCharacters()}
-            </div>
-            {this.props.children}
-          </div>
-        );
       }
-    } else {
-      return <span style={INLINE_STYLE} />;
+
+      return (
+        <div className={classnames(CLASSES)}>
+          <div>
+            {this.props.isItemSelected ? this.getRenderedListOfCharacters() : this.getRenderedListOfEnemies()}
+            {this.props.isItemSelected ? this.getRenderedListOfEnemies() : this.getRenderedListOfCharacters()}
+          </div>
+          {this.props.children}
+        </div>
+      );
     }
+
+    return <span style={INLINE_STYLE} />;
   }
 }
 

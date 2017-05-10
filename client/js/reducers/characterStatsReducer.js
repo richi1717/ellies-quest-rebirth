@@ -1,11 +1,11 @@
 import types from '../constants/actionTypes';
 
-export default function(characterStats, action) {
+export default function (characterStats, action) {
   switch (action.type) {
     case types.UPDATE_CHARACTER_STATS: {
       const character = action.character;
 
-      return characterStats.map(stats => {
+      return characterStats.map((stats) => {
         if (stats === characterStats[action.id]) {
           return Object.assign({}, stats, {
             maxHp: character.maxHp,
@@ -22,11 +22,13 @@ export default function(characterStats, action) {
             def: character.def,
             evade: character.evade,
             classes: character.classes,
-            killed: character.killed
+            killed: character.killed,
+            currentPositionX: character.currentPositionX,
+            currentPositionY: character.currentPositionY
           });
-        } else {
-          return stats;
         }
+
+        return stats;
       });
     }
     default: {

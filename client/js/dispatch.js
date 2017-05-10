@@ -1,8 +1,8 @@
-let dispatch = function () {
-  throw 'dispatch not initialized';
+let dispatch = () => {
+  throw new Error('dispatch not initialized');
 };
 
-export function initializeDispatch (store) {
+export function initializeDispatch(store) {
   dispatch = store.dispatch;
 }
 
