@@ -27,12 +27,12 @@ and the enemies that appear.  There will always be between 1-5 enemies but they 
 would exist if for some reason this world was real 😉.  Here's a list of all of the locations you can go to. Still working
 on the beach one because I'm not super happy with it.
 
-  * [/](http:/localhost:3000/)                 -> defaults to forest
-  * [/forest](http:/localhost:3000/forest)     -> forest
-  * [/grass](http:/localhost:3000/grass)       -> grass
-  * [/beach](http:/localhost:3000/beach)       -> beach
-  * [/boss](http:/localhost:3000/boss)         -> hellish volcano looking scene
-  * [/desert](http:/localhost:3000/desert)     -> desert wasteland looking area
+  * [http:/localhost:3000/](http:/localhost:3000/)                 -> defaults to forest
+  * [http:/localhost:3000/forest](http:/localhost:3000/forest)     -> forest
+  * [http:/localhost:3000/grass](http:/localhost:3000/grass)       -> grass
+  * [http:/localhost:3000/beach](http:/localhost:3000/beach)       -> beach
+  * [http:/localhost:3000/boss](http:/localhost:3000/boss)         -> hellish volcano looking scene
+  * [http:/localhost:3000/desert](http:/localhost:3000/desert)     -> desert wasteland looking area
 
 I hope to add more in the future but want to get the mechanics sorted out.
 
