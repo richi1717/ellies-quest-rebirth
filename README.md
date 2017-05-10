@@ -1,4 +1,5 @@
 <h1>Ellie's Quest Rebirth</h1>
+[![Build Status](https://travis-ci.org/richi1717/ellies-quest-rebirth.svg?branch=master)](https://travis-ci.org/richi1717/ellies-quest-rebirth)
 
 ### Installation
 
