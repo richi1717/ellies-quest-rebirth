@@ -1,5 +1,7 @@
 # Ellie's Quest Rebirth
 [![Build Status](https://travis-ci.org/richi1717/ellies-quest-rebirth.svg?branch=master)](https://travis-ci.org/richi1717/ellies-quest-rebirth)
+[![Dependency Status](https://david-dm.org/richi1717/ellies-quest-rebirth.svg?branch=master)](https://david-dm.org/richi1717/ellies-quest-rebirth)
+[![devDependency Status](https://david-dm.org/richi1717/ellies-quest-rebirth/dev-status.svg?branch=master)](https://david-dm.org/richi1717/ellies-quest-rebirth#info=devDependencies)
 
 ### Installation
 
