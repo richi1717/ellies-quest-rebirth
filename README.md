@@ -2,20 +2,12 @@
 
 ### Installation
 
-I use `yarn` and if you'd like to use it too
-
-```javascript
-$ brew install yarn    // obviously using brew
-```
-or
-```javascript
-$ curl -o- -L https://yarnpkg.com/install.sh | bash   // if you don't have brew
-```
+I use [yarn]('https://yarnpkg.com/lang/en/docs/install/') for this project.
 
 Want to do everything on one line?
 
 ```javascript
-$ git clone git@github.com:richi1717/ellies-quest-rebirth.git && cd ellies-quest-rebirth && yarn
+$ git clone git@github.com:richi1717/ellies-quest-rebirth.git && cd ellies-quest-rebirth && yarn && yarn dev
 ```
 Or Step by Step?
 
@@ -23,18 +15,13 @@ Or Step by Step?
 $ git clone git@github.com:richi1717/ellies-quest-rebirth.git
 $ cd ellies-quest-rebirth
 $ yarn
+$ yarn dev
 ```
 
 If you do not have webpack and webpack-dev-server installed globally do it now
 
 ```javascript
 $ yarn global add webpack webpack-dev-server
-```
-
-Then finally 
-
-```javascript
-$ yarn dev
 ```
 
 Then go to http://localhost:8888/ in chrome (because honestly that's the only one I've tested in right now) and enjoy.
