@@ -1,4 +1,4 @@
-<h2>Ellie's Quest Rebirth</h2>
+<h1>Ellie's Quest Rebirth</h1>
 
 ### Installation
 
@@ -19,7 +19,7 @@ $ yarn global add webpack webpack-dev-server
 
 Then go to http://localhost:8888/ in chrome (because honestly that's the only one I've tested in right now) and enjoy.
 
-#### Router
+### Router
 
 I use [react-router](https://github.com/ReactTraining/react-router) for this project.  The urls change the battle scene
 and the enemies that appear.  There will always be between 1-5 enemies but they are filtered based on where I think they
