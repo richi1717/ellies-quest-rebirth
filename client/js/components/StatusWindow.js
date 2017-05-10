@@ -6,7 +6,7 @@ import classnames from 'classnames';
 function StatusWindow(props) {
   function showStatusPerCharacter() {
     const STATUS = [];
-    let incr;
+    let incr = 0;
 
     props.heroStats.map((h) => {
       incr++;
@@ -36,7 +36,7 @@ function StatusWindow(props) {
 
   function renderNames() {
     const STATUS = [];
-    let incr;
+    let incr = 0;
 
     props.heroStats.map((h) => {
       incr++;
@@ -69,7 +69,7 @@ function StatusWindow(props) {
 }
 
 StatusWindow.propTypes = {
-  heroStats: PropTypes.obj,
+  heroStats: PropTypes.array,
   children: PropTypes.node
 };
 

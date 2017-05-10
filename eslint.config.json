@@ -54,6 +54,7 @@
     "no-unused-expressions": "off",
     "prefer-arrow-callback": "warn",
     "quote-props": ["error", "consistent"],
+    "react/forbid-prop-types": "off",
     "react/jsx-filename-extension": "off",
     "react/jsx-no-target-blank": "off",
     "react/require-default-props": "off",

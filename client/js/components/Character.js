@@ -281,7 +281,7 @@ export default class Character extends Component {
 }
 
 Character.propTypes = {
-  position: PropTypes.number.isRequired,
-  heroCurrentHp: PropTypes.string.isRequired,
-  classes: PropTypes.string.isRequired
+  position: PropTypes.number,
+  heroCurrentHp: PropTypes.string,
+  classes: PropTypes.string
 };

@@ -241,7 +241,7 @@ export default class Enemy extends Component {
   // }
   //
   isEnemyAlive() {
-    return false;
+    return true;
     // return !(this.props.enemyStats[this.props.position].toJS().killed);
   }
   //
