@@ -1,4 +1,5 @@
 .battle {
+  max-width: 1352px;
   height: 100vh;
   width: 100vw;
   background-size: cover;
@@ -21,4 +22,8 @@
 
 .boss-battle {
   background-image: url('/resources/images/boss-battle.png');
+}
+
+.beach-battle {
+  background-image: url('/resources/images/beach-battle.png');
 }

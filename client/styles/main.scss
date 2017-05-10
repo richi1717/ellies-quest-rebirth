@@ -1,5 +1,5 @@
-@import '_battle-backgrounds.scss';
-@import '_battle-character.scss';
+@import 'battleBackgrounds';
+@import 'battleHeroes';
 @import '_enemies.scss';
 @import '_items.scss';
 @import '_magic.scss';
@@ -25,9 +25,24 @@ body {
   // position: relative;
 }
 
-.battle-scene-container {
-  flex: 1;
-  height: 500px;
+.ellies-quest-rebirth-container {
+  display: flex;
+  justify-content: center;
+  .battle-scene-container {
+    flex: 1;
+    height: 500px;
+    display: flex;
+
+    .enemies-container {
+      flex: 1;
+      position: relative;
+    }
+
+    .characters-container {
+      flex: .5;
+      position: relative;
+    }
+  }
 }
 
 img {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
 import { setTimeOutHelper } from '../helpers/time-out';
-import { HeroAttackFX, BattleVictoryMusic } from '../helpers/soundEffects';
+import { HeroAttackFX, BattleVictoryMusic } from './SoundEffects';
 import { damageCalculation, getBaseDamage } from '../helpers/damage-calc';
 
 export default class Character extends Component {
@@ -162,41 +162,41 @@ export default class Character extends Component {
     return dead;
   }
   //
-  // position0Classes() {
-  //   return {
-  //     'position1': true,
-  //     'front-row': true,
-  //     'attack-swing': this.state.pos2,
-  //     'defense': !this.props.isHero0Dead && this.props.isHero0Defending,
-  //     'attacking': this.props.isHero0Attacking && !this.props.isPauseBetweenTurns,
-  //     'hero-turn': this.props.isHero0Attacking && !this.props.isPauseBetweenTurns,
-  //     'dead': this.props.isHero0Dead
-  //   };
-  // }
-  //
-  // position1Classes() {
-  //   return {
-  //     'position2': true,
-  //     'front-row': true,
-  //     'attack-swing': this.state.pos2,
-  //     'defense': !this.props.isHero1Dead && this.props.isHero1Defending,
-  //     'attacking': this.props.isHero1Attacking && !this.props.isPauseBetweenTurns,
-  //     'hero-turn': this.props.isHero1Attacking && !this.props.isPauseBetweenTurns,
-  //     'dead': this.props.isHero1Dead
-  //   };
-  // }
-  //
-  // position2Classes() {
-  //   return {
-  //     'position3': true,
-  //     'back-row': true,
-  //     'attack-swing': this.state.pos2,
-  //     'defense': !this.props.isHero2Dead && this.props.isHero2Defending,
-  //     'attacking': this.props.isHero2Attacking && !this.props.isPauseBetweenTurns,
-  //     'hero-turn': this.props.isHero2Attacking && !this.props.isPauseBetweenTurns,
-  //     'dead': this.props.isHero2Dead
-  //   };
-  // }
+  position0Classes() {
+    return {
+      'position1': true,
+      'front-row': true,
+      'attack-swing': this.state.pos2,
+      'defense': !this.props.isHero0Dead && this.props.isHero0Defending,
+      'attacking': this.props.isHero0Attacking && !this.props.isPauseBetweenTurns,
+      'hero-turn': this.props.isHero0Attacking && !this.props.isPauseBetweenTurns,
+      'dead': this.props.isHero0Dead
+    };
+  }
+
+  position1Classes() {
+    return {
+      'position2': true,
+      'front-row': true,
+      'attack-swing': this.state.pos2,
+      'defense': !this.props.isHero1Dead && this.props.isHero1Defending,
+      'attacking': this.props.isHero1Attacking && !this.props.isPauseBetweenTurns,
+      'hero-turn': this.props.isHero1Attacking && !this.props.isPauseBetweenTurns,
+      'dead': this.props.isHero1Dead
+    };
+  }
+
+  position2Classes() {
+    return {
+      'position3': true,
+      'back-row': true,
+      'attack-swing': this.state.pos2,
+      'defense': !this.props.isHero2Dead && this.props.isHero2Defending,
+      'attacking': this.props.isHero2Attacking && !this.props.isPauseBetweenTurns,
+      'hero-turn': this.props.isHero2Attacking && !this.props.isPauseBetweenTurns,
+      'dead': this.props.isHero2Dead
+    };
+  }
   //
   // enemySelectionPositionClasses(nameOfClass) {
   //   nameOfClass['attack-enemy0'] = this.props.isEnemyTarget0;
@@ -244,26 +244,26 @@ export default class Character extends Component {
       'battle-hero': true,
       'battle-ff-sprite': true
     };
-    //
-    // if (this.props.position === 0) {
-    //   heroClass = this.position0Classes();
-    //
-    //   if (this.props.getNextTurn === 'hero0') {
-    //     this.enemySelectionPositionClasses(heroClass);
-    //   }
-    // } else if (this.props.position === 1) {
-    //   heroClass = this.position1Classes();
-    //
-    //   if (this.props.getNextTurn === 'hero1') {
-    //     this.enemySelectionPositionClasses(heroClass);
-    //   }
-    // } else if (this.props.position === 2) {
-    //   heroClass = this.position2Classes();
-    //
-    //   if (this.props.getNextTurn === 'hero2') {
-    //     this.enemySelectionPositionClasses(heroClass);
-    //   }
-    // }
+
+    if (this.props.position === 0) {
+      heroClass = this.position0Classes();
+
+      if (this.props.getNextTurn === 'hero0') {
+        this.enemySelectionPositionClasses(heroClass);
+      }
+    } else if (this.props.position === 1) {
+      heroClass = this.position1Classes();
+
+      if (this.props.getNextTurn === 'hero1') {
+        this.enemySelectionPositionClasses(heroClass);
+      }
+    } else if (this.props.position === 2) {
+      heroClass = this.position2Classes();
+
+      if (this.props.getNextTurn === 'hero2') {
+        this.enemySelectionPositionClasses(heroClass);
+      }
+    }
     return (
       <div onClick={() => console.log('sweet')} >
         <div id={`hero${this.props.position}`}>{this.props.heroCurrentHp}</div>

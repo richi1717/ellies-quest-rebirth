@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { setBattleScene, updateCharacterStats, ROOT_URL, FIREBASE_API } from '../actions/actionCreators';
+import { updateCharacterStats, ROOT_URL, FIREBASE_API } from '../actions/actionCreators';
 import Character from '../components/Character';
 import dispatch from '../dispatch';
 import filter from 'lodash/filter';
@@ -22,7 +22,6 @@ export default class CharacterSelection extends Component {
       .then(data => {
         this.character = data;
         this.getCharacters = this.setCharacters(this.character);
-        dispatch(setBattleScene(this.props.battleScene));
         this.setState({ done: true });
       });
   }
@@ -45,7 +44,7 @@ export default class CharacterSelection extends Component {
 
   render() {
     return (
-      <div>
+      <div className="characters-container">
         {this.state.done ? this.getCharacters : null}
       </div>
     );

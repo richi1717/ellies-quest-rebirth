@@ -1,15 +1,16 @@
 .battle-hero {
   z-index: 1;
+
   &.position1 {
     position: absolute;
     top: 30%;
-    // right: 15%;
+    // left: 15%;
   }
 
   &.position2 {
     position: absolute;
     top: 50%;
-    // right: 15%;
+    // left: 15%;
   }
 
   &.position3 {
@@ -18,40 +19,40 @@
   }
 
   &.front-row {
-    right: 15%;
+    left: 15%;
   }
 
   &.back-row {
-    right: 5%;
+    left: 35%;
   }
 
   &.hero-turn {
-    right: 24vw;
+    left: 24vw;
   }
 
   &.attack-enemy0 {
     top: 31%;
-    right: 65vw;
+    left: 65vw;
   }
 
   &.attack-enemy1 {
     top: 47%;
-    right: 65vw;
+    left: 65vw;
   }
 
   &.attack-enemy2 {
     top: 43%;
-    right: 80vw;
+    left: 80vw;
   }
 
   &.attack-enemy3 {
     top: 30%;
-    right: 78vw;
+    left: 78vw;
   }
 
   &.attack-enemy4 {
     top: 57%;
-    right: 78vw;
+    left: 78vw;
   }
 
   &.red-boy {
@@ -59,7 +60,7 @@
   }
 
   &.white-girl {
-    background-position: 6px -95px;
+    background-position: 7px -95px;
   }
 
   &.green-boy {
@@ -92,12 +93,12 @@
 
   &.run1 {
     background-position-x: -400px;
-    right: 10%;
+    left: 10%;
   }
 
   &.run2 {
     background-position-x: -500px;
-    right: 9.5%;
+    left: 9.5%;
   }
 }
 

@@ -27,13 +27,6 @@ export const FIREBASE_API = '.json';
 //   };
 // }
 
-export function setBattleScene(area) {
-  return {
-    type: types.SET_BATTLE_SCENE,
-    battleScene: area
-  };
-}
-
 export function setEnemySelectedTarget(name, str, bool) {
   return {
     type: types.SET_ENEMY_SELECTED_TARGET,
