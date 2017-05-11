@@ -29,15 +29,19 @@ export default class CharacterSelection extends Component {
   }
 
   setCharacters(x) {
-    const CHARACTER = [];
-    const PLAYABLE_CHARACTERS = filter(x, { inPlay: true });
-    for (let key = 0; key < PLAYABLE_CHARACTERS.length; key++) {
-      dispatch(updateCharacterStats(PLAYABLE_CHARACTERS[key], key));
-      CHARACTER.push(
-        <Character classes={PLAYABLE_CHARACTERS[key].classes} turnSpeed={PLAYABLE_CHARACTERS[key].agility} position={key} key={key} {...PLAYABLE_CHARACTERS[key]} />
+    const characters = [];
+    const playableCharacters = filter(x, { inPlay: true });
+    let incr = 0;
+
+    playableCharacters.map((character, key) => {
+      incr++;
+      dispatch(updateCharacterStats(character, key));
+      characters.push(
+        <Character position={incr} key={incr} {...character} />
       );
-    }
-    return CHARACTER;
+    });
+
+    return characters;
   }
 
   render() {

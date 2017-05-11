@@ -10,11 +10,9 @@ export default class Character extends Component {
     super(props);
 
     this.state = {
-      test: false,
-      done: false,
-      pos2: false
+      pos2: false,
+      attacking: false
     };
-    // TODO figure out why tests hate es7
   }
 
   // shouldComponentUpdate() {
@@ -166,7 +164,7 @@ export default class Character extends Component {
   //
   position0Classes() {
     return {
-      'position1': true,
+      // 'position1': true,
       'front-row': true,
       'attack-swing': this.state.pos2
       // 'defense': !this.props.isHero0Dead && this.props.isHero0Defending,
@@ -178,7 +176,7 @@ export default class Character extends Component {
 
   position1Classes() {
     return {
-      'position2': true,
+      // 'position2': true,
       'front-row': true,
       'attack-swing': this.state.pos2
       // 'defense': !this.props.isHero1Dead && this.props.isHero1Defending,
@@ -190,7 +188,7 @@ export default class Character extends Component {
 
   position2Classes() {
     return {
-      'position3': true,
+      // 'position3': true,
       'back-row': true,
       'attack-swing': this.state.pos2
       // 'defense': !this.props.isHero2Dead && this.props.isHero2Defending,
@@ -239,40 +237,39 @@ export default class Character extends Component {
   //     console.log(this.props.getItemObject);
   //   }
   // }
+  hero1Click() {
+    this.setState({ attacking: true });
+  }
+
+  hero2Click() {
+    this.setState({ attacking: true });
+  }
+
+  hero3Click() {
+    this.setState({ attacking: true });
+  }
 
   render() {
-    let heroClass;
-    const constantClass = {
+    const heroClass = {
       'battle-hero': true,
-      'battle-ff-sprite': true
+      'battle-ff-sprite': true,
+      'front-row': this.props.position < 3,
+      'back-row': this.props.position >= 3,
+      'dead': this.props.killed,
+      [`position${this.props.position}`]: true,
+      'attacking hero-turn': this.state.attacking
     };
 
-    if (this.props.position === 0) {
-      heroClass = this.position0Classes();
-
-      // if (this.props.getNextTurn === 'hero0') {
-      //   this.enemySelectionPositionClasses(heroClass);
-      // }
-    } else if (this.props.position === 1) {
-      heroClass = this.position1Classes();
-
-      // if (this.props.getNextTurn === 'hero1') {
-      //   this.enemySelectionPositionClasses(heroClass);
-      // }
-    } else if (this.props.position === 2) {
-      heroClass = this.position2Classes();
-
-      // if (this.props.getNextTurn === 'hero2') {
-      //   this.enemySelectionPositionClasses(heroClass);
-      // }
-    }
     return (
       <div>
-        <div id={`hero${this.props.position}`}>{this.props.heroCurrentHp}</div>
-        <div className={`${classnames(constantClass, heroClass)} ${this.props.classes}`}>
+        <button
+          id={`hero${this.props.position}`}
+          onClick={event => this[`${event.target.id}Click`]()}
+          className={`${classnames(heroClass)} ${this.props.classes}`}
+        >
           {this.showDamageOverHead()}
           {this.areAllEnemiesDead() ? this.handleVictoryState() : null}
-        </div>
+        </button>
         {this.state.pos2 ? <HeroAttackFX /> : null}
         {this.areAllEnemiesDead() ? <BattleVictoryMusic /> : null}
       </div>
@@ -282,6 +279,7 @@ export default class Character extends Component {
 
 Character.propTypes = {
   position: PropTypes.number,
-  heroCurrentHp: PropTypes.string,
-  classes: PropTypes.string
+  // currentHp: PropTypes.number,
+  classes: PropTypes.string,
+  killed: PropTypes.bool
 };

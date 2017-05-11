@@ -60,9 +60,7 @@ class BattleMenuAttack extends Component {
       'more-than-five': !!this.isMoreThanFive(),
       'menu-items-select': this.props.isItemSelected
     };
-    const INLINE_STYLE = {
-      display: 'none'
-    };
+
     if (this.props.isMenuAttackSelected || this.props.isItemSelected) {
       if (this.isMoreThanFive()) {
         return (
@@ -89,7 +87,7 @@ class BattleMenuAttack extends Component {
       );
     }
 
-    return <span style={INLINE_STYLE} />;
+    return <span style={{ display: 'none' }} />;
   }
 }
 

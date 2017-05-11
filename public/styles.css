@@ -38,7 +38,7 @@
   .battle-hero.back-row {
     left: 35%; }
   .battle-hero.hero-turn {
-    left: 24vw; }
+    left: 0; }
   .battle-hero.attack-enemy0 {
     top: 31%;
     left: 65vw; }
@@ -732,12 +732,8 @@ a:hover {
   margin: 0; }
 
 button {
-  border-radius: 3px;
   background-color: transparent;
-  border: hidden;
-  min-width: 120px;
-  display: inline-block;
-  padding: 10px 16px; }
+  border: hidden; }
 
 a > button {
   font-size: 14pt;

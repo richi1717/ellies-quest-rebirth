@@ -17,10 +17,10 @@ import {
 } from '../../js/components/SoundEffects';
 
 describe('sounds/music helper function', () => {
-  describe('EnemyAttackFX', () => {
-    it('renders EnemyAttackFX component', () => {
+  describe('<EnemyAttackFX />', () => {
+    test('renders EnemyAttackFX component', () => {
       const wrapper = shallow(<EnemyAttackFX />);
-      expect(wrapper.length).toEqual(1);
+      expect(wrapper).toHaveLength(1);
       expect(wrapper.contains(
         <audio
           src="/resources/music/swipe.mp3"
@@ -32,25 +32,27 @@ describe('sounds/music helper function', () => {
       )).toEqual(true);
     });
   });
-  describe('HeroAttackFX', () => {
-    it('renders HeroAttackFX component', () => {
+
+  describe('<HeroAttackFX />', () => {
+    test('renders HeroAttackFX component', () => {
       const wrapper = shallow(<HeroAttackFX />);
-      expect(wrapper.length).toEqual(1);
+      // expect(wrapper).toHaveLength(1);
       expect(wrapper.contains(
         <audio
           src="/resources/music/sword-slash.mp3"
           name="media"
-          type="audio/mp3"
+          type="audio/mpeg"
           controls
           autoPlay
         />
       )).toEqual(true);
     });
   });
-  describe('NormalBattleMusic', () => {
-    it('renders NormalBattleMusic component', () => {
+
+  describe('<NormalBattleMusic />', () => {
+    test('renders NormalBattleMusic component', () => {
       const wrapper = shallow(<NormalBattleMusic />);
-      expect(wrapper.length).toEqual(1);
+      expect(wrapper).toHaveLength(1);
       expect(wrapper.contains(
         <audio
           src="/resources/music/better-battle.m4a"
@@ -62,10 +64,11 @@ describe('sounds/music helper function', () => {
       )).toEqual(true);
     });
   });
-  describe('BattleVictoryMusic', () => {
-    it('renders BattleVictoryMusic component', () => {
+
+  describe('<BattleVictoryMusic />', () => {
+    test('renders BattleVictoryMusic component', () => {
       const wrapper = shallow(<BattleVictoryMusic />);
-      expect(wrapper.length).toEqual(1);
+      expect(wrapper).toHaveLength(1);
       expect(wrapper.contains(
         <audio
           src="/resources/music/1-06 Victory Fanfare.mp3"
@@ -77,10 +80,11 @@ describe('sounds/music helper function', () => {
       )).toEqual(true);
     });
   });
-  describe('FireMagicFX', () => {
-    it('renders FireMagicFX component', () => {
+
+  describe('<FireMagicFX />', () => {
+    test('renders FireMagicFX component', () => {
       const wrapper = shallow(<FireMagicFX />);
-      expect(wrapper.length).toEqual(1);
+      expect(wrapper).toHaveLength(1);
       expect(wrapper.contains(
         <audio
           src="/resources/music/fire1.mp3"
@@ -92,10 +96,11 @@ describe('sounds/music helper function', () => {
       )).toEqual(true);
     });
   });
-  describe('CureMagicFX', () => {
-    it('renders CureMagicFX component', () => {
+
+  describe('<CureMagicFX />', () => {
+    test('renders CureMagicFX component', () => {
       const wrapper = shallow(<CureMagicFX />);
-      expect(wrapper.length).toEqual(1);
+      expect(wrapper).toHaveLength(1);
       expect(wrapper.contains(
         <audio
           src="/resources/music/healingSpell.mp3"
@@ -107,10 +112,11 @@ describe('sounds/music helper function', () => {
       )).toEqual(true);
     });
   });
-  describe('CursorMovementFX', () => {
-    it('renders CursorMovementFX component', () => {
+
+  describe('<CursorMovementFX />', () => {
+    test('renders CursorMovementFX component', () => {
       const wrapper = shallow(<CursorMovementFX />);
-      expect(wrapper.length).toEqual(1);
+      expect(wrapper).toHaveLength(1);
       expect(wrapper.contains(
         <audio
           src="/resources/music/cursor.mp3"
@@ -122,10 +128,11 @@ describe('sounds/music helper function', () => {
       )).toEqual(true);
     });
   });
-  describe('LightningMagicFX', () => {
-    it('renders LightningMagicFX component', () => {
+
+  describe('<LightningMagicFX />', () => {
+    test('renders LightningMagicFX component', () => {
       const wrapper = shallow(<LightningMagicFX />);
-      expect(wrapper.length).toEqual(1);
+      expect(wrapper).toHaveLength(1);
       expect(wrapper.contains(
         <audio
           src="/resources/music/lightning1.m4a"
@@ -137,10 +144,11 @@ describe('sounds/music helper function', () => {
       )).toEqual(true);
     });
   });
-  describe('BossBattleMusicPart1', () => {
-    it('renders BossBattleMusicPart1 component', () => {
+
+  describe('<BossBattleMusicPart1 />', () => {
+    test('renders BossBattleMusicPart1 component', () => {
       const wrapper = shallow(<BossBattleMusicPart1 />);
-      expect(wrapper.length).toEqual(1);
+      expect(wrapper).toHaveLength(1);
       expect(wrapper.contains(
         <audio
           src="/resources/music/boss-battle1.m4a"
@@ -152,10 +160,11 @@ describe('sounds/music helper function', () => {
       )).toEqual(true);
     });
   });
-  describe('BossBattleMusicPart2', () => {
-    it('renders BossBattleMusicPart2 component', () => {
+
+  describe('<BossBattleMusicPart2 />', () => {
+    test('renders BossBattleMusicPart2 component', () => {
       const wrapper = shallow(<BossBattleMusicPart2 />);
-      expect(wrapper.length).toEqual(1);
+      expect(wrapper).toHaveLength(1);
       expect(wrapper.contains(
         <audio
           src="/resources/music/boss-battle2.m4a"
@@ -167,10 +176,11 @@ describe('sounds/music helper function', () => {
       )).toEqual(true);
     });
   });
-  describe('GameOverMusic', () => {
-    it('renders GameOverMusic component', () => {
+
+  describe('<GameOverMusic />', () => {
+    test('renders GameOverMusic component', () => {
       const wrapper = shallow(<GameOverMusic />);
-      expect(wrapper.length).toEqual(1);
+      expect(wrapper).toHaveLength(1);
       expect(wrapper.contains(
         <audio
           src="/resources/music/19 Game Over.mp3"
@@ -182,10 +192,11 @@ describe('sounds/music helper function', () => {
       )).toEqual(true);
     });
   });
-  describe('IntroMusic', () => {
-    it('renders IntroMusic component', () => {
+
+  describe('<IntroMusic />', () => {
+    test('renders IntroMusic component', () => {
       const wrapper = shallow(<IntroMusic />);
-      expect(wrapper.length).toEqual(1);
+      expect(wrapper).toHaveLength(1);
       expect(wrapper.contains(
         <audio
           src="/resources/music/3-16 The Prelude.mp3"
@@ -197,10 +208,11 @@ describe('sounds/music helper function', () => {
       )).toEqual(true);
     });
   });
-  describe('OverworldMusic', () => {
-    it('renders OverworldMusic component', () => {
+
+  describe('<OverworldMusic />', () => {
+    test('renders OverworldMusic component', () => {
       const wrapper = shallow(<OverworldMusic />);
-      expect(wrapper.length).toEqual(1);
+      expect(wrapper).toHaveLength(1);
       expect(wrapper.contains(
         <audio
           src="/resources/music/2-01 Terra's Theme.mp3"
