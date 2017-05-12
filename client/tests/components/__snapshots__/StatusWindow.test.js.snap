@@ -1,0 +1,164 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<StatusWindow /> should match snapshot 1`] = `
+<div
+  className="battle-menu-container"
+>
+  <div
+    className="battle-menu-main"
+  >
+    <table>
+      <tbody>
+        <tr>
+          <th>
+            NAME
+          </th>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr>
+          <td
+            className="menu-select character"
+          >
+            Link
+          </td>
+        </tr>
+        <tr>
+          <td
+            className="menu-select character"
+          >
+            Ellie
+          </td>
+        </tr>
+        <tr>
+          <td
+            className="menu-select character"
+          >
+            Luke
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div
+    className="battle-menu-main-stats"
+  >
+    <table>
+      <tbody>
+        <tr>
+          <th>
+            HP
+          </th>
+          <th>
+            MP
+          </th>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr>
+          <td
+            className="health-bar "
+          >
+            150
+            /
+            350
+            <div>
+              <span
+                style={
+                  Object {
+                    "width": "43%",
+                  }
+                }
+              />
+            </div>
+          </td>
+          <td
+            className="magic-bar "
+          >
+            30
+            /
+            30
+            <div>
+              <span
+                style={
+                  Object {
+                    "width": "100%",
+                  }
+                }
+              />
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td
+            className="health-bar "
+          >
+            219
+            /
+            219
+            <div>
+              <span
+                style={
+                  Object {
+                    "width": "100%",
+                  }
+                }
+              />
+            </div>
+          </td>
+          <td
+            className="magic-bar "
+          >
+            50
+            /
+            50
+            <div>
+              <span
+                style={
+                  Object {
+                    "width": "100%",
+                  }
+                }
+              />
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td
+            className="health-bar "
+          >
+            219
+            /
+            219
+            <div>
+              <span
+                style={
+                  Object {
+                    "width": "100%",
+                  }
+                }
+              />
+            </div>
+          </td>
+          <td
+            className="magic-bar "
+          >
+            50
+            /
+            50
+            <div>
+              <span
+                style={
+                  Object {
+                    "width": "100%",
+                  }
+                }
+              />
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+`;
