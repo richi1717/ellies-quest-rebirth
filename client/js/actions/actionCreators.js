@@ -183,3 +183,10 @@ export function removeHeroFromList(index) {
     index
   };
 }
+
+export function shouldPlayBackgroundMusic(bool) {
+  return {
+    type: types.BACKGROUND_MUSIC_SWITCH,
+    isBackgroundMusicOn: bool
+  };
+}

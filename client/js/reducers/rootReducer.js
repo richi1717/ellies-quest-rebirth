@@ -4,7 +4,8 @@ import characterStatsReducer from './characterStatsReducer';
 
 const defaults = {
   enemyInfo: { data: '' },
-  characterStats: [{}, {}, {}]
+  characterStats: [{}, {}, {}],
+  isBackgroundMusicOn: { data: false }
 };
 
 export default function rootReducer(state = defaults, action) {
@@ -15,6 +16,8 @@ export default function rootReducer(state = defaults, action) {
       return _merge({}, state, { enemyInfo: { data: action.enemyInfo } });
     case types.UPDATE_CHARACTER_STATS:
       return _merge({}, state, { characterStats: characterStatsReducer(state.characterStats, action) });
+    case types.BACKGROUND_MUSIC_SWITCH:
+      return _merge({}, state, { isBackgroundMusicOn: { data: action.isBackgroundMusicOn } });
     default:
       return state;
   }

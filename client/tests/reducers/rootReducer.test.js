@@ -81,7 +81,8 @@ describe('rootReducer', () => {
           inPlay: true,
           killed: false
         }
-      ]
+      ],
+      isBackgroundMusicOn: { data: false }
     };
     newState = {
       enemyInfo: { data: '' },
@@ -158,25 +159,39 @@ describe('rootReducer', () => {
           inPlay: true,
           killed: true
         }
-      ]
+      ],
+      isBackgroundMusicOn: { data: true }
     };
   });
 
   test('defaults > should return defaults by default', () => {
     expect(rootReducer(undefined, {})).toEqual({
       enemyInfo: { data: '' },
-      characterStats: [{}, {}, {}]
+      characterStats: [{}, {}, {}],
+      isBackgroundMusicOn: { data: false }
     });
   });
-  //
-  // test('no action > should return current state', () => {
-  //   expect(rootReducer(oldState, {})).toEqual(oldState);
-  // });
+
+  test('no action > should return current state', () => {
+    expect(rootReducer(oldState, { type: '' })).toEqual(oldState);
+  });
 
   test('USER_LOGOUT > should return defaults', () => {
     expect(rootReducer(oldState, { type: types.USER_LOGOUT })).toEqual({
       enemyInfo: { data: '' },
-      characterStats: [{}, {}, {}]
+      characterStats: [{}, {}, {}],
+      isBackgroundMusicOn: { data: false }
+    });
+  });
+
+  test('BACKGROUND_MUSIC_SWITCH > should update isBackgroundMusicOn', () => {
+    expect(rootReducer(oldState, {
+      type: types.BACKGROUND_MUSIC_SWITCH,
+      isBackgroundMusicOn: true
+    })).toEqual({
+      enemyInfo: oldState.enemyInfo,
+      characterStats: oldState.characterStats,
+      isBackgroundMusicOn: { data: true }
     });
   });
 
@@ -184,7 +199,8 @@ describe('rootReducer', () => {
     expect(rootReducer(oldState, { type: types.UPDATE_CHARACTER_STATS, character: newState.characterStats[0], id: 0 }))
       .toEqual({
         enemyInfo: { data: '' },
-        characterStats: [newState.characterStats[0], oldState.characterStats[1], oldState.characterStats[2]]
+        characterStats: [newState.characterStats[0], oldState.characterStats[1], oldState.characterStats[2]],
+        isBackgroundMusicOn: { data: false }
       });
   });
 });

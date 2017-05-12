@@ -186,4 +186,12 @@ describe('actions', () => {
     };
     expect(actions.deleteEnemyWhenKilled(POSITION)).toEqual(expectedAction);
   });
+
+  test('shouldPlayBackgroundMusic should turn on/off background music', () => {
+    const expectedAction = {
+      type: types.BACKGROUND_MUSIC_SWITCH,
+      isBackgroundMusicOn: true
+    };
+    expect(actions.shouldPlayBackgroundMusic(true)).toEqual(expectedAction);
+  });
 });

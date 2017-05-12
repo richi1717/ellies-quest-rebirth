@@ -5,11 +5,9 @@ import charactersData from '../testHelpers/charactersData';
 
 describe('<StatusWindow />', () => {
   let statusWindow;
-  let characters;
 
   beforeEach(() => {
-    characters = charactersData;
-    statusWindow = shallow(<StatusWindow characterStats={characters} />);
+    statusWindow = shallow(<StatusWindow characterStats={charactersData} />);
   });
 
   test('should match snapshot', () => {

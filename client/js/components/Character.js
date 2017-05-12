@@ -249,22 +249,23 @@ export default class Character extends Component {
   }
 
   render() {
+    const { position, killed, classes } = this.props;
     const heroClass = {
       'battle-hero': true,
       'battle-ff-sprite': true,
-      'front-row': this.props.position < 3,
-      'back-row': this.props.position >= 3,
-      'dead': this.props.killed,
-      [`position${this.props.position}`]: true,
+      'front-row': position < 3,
+      'back-row': position >= 3,
+      'dead': killed,
+      [`position${position}`]: true,
       'attacking hero-turn': this.state.attacking
     };
 
     return (
       <div>
         <button
-          id={`hero${this.props.position}`}
+          id={`hero${position}`}
           onClick={event => this[`${event.target.id}Click`]()}
-          className={`${classnames(heroClass)} ${this.props.classes}`}
+          className={`${classnames(heroClass)} ${classes}`}
         >
           {this.showDamageOverHead()}
           {this.areAllEnemiesDead() ? <Victory /> : null}
