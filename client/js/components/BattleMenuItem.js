@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import {
   setMenuAttackSelected,
   ROOT_URL,
@@ -10,7 +9,7 @@ import {
 
 import classnames from 'classnames';
 
-class BattleMenuAttack extends Component {
+export default class BattleMenuAttack extends Component {
   constructor(props) {
     super(props);
 
@@ -128,10 +127,3 @@ class BattleMenuAttack extends Component {
     }
   }
 }
-
-function mapStateToProps(state) {
-  return {
-  };
-}
-
-export default connect(mapStateToProps)(BattleMenuAttack);

@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 // import dispatch from '../dispatch';
 // import { setMenuAttackSelected } from '../actions/actionCreators';
 import classnames from 'classnames';
 
-class BattleMenuAttack extends Component {
+export default class BattleMenuAttack extends Component {
   getRenderedListOfCharacters() {
     const ARR = [];
     const CLASSES = {
@@ -90,10 +89,3 @@ class BattleMenuAttack extends Component {
     return <span style={{ display: 'none' }} />;
   }
 }
-
-function mapStateToProps(state) {
-  return {
-  };
-}
-
-export default connect(mapStateToProps)(BattleMenuAttack);

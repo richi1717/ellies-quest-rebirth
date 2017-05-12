@@ -1,14 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import classnames from 'classnames';
 
-function StatusWindow(props) {
+export default function StatusWindow(props) {
   function showStatusPerCharacter() {
     const STATUS = [];
     let incr = 0;
 
-    props.heroStats.map((h) => {
+    props.characterStats.map((h) => {
       incr++;
       const HP_PERCENTAGE = Math.ceil((h.currentHp / h.maxHp) * 100);
       const MP_PERCENTAGE = Math.ceil((h.currentMp / h.maxMp) * 100);
@@ -37,8 +36,7 @@ function StatusWindow(props) {
   function renderNames() {
     const STATUS = [];
     let incr = 0;
-
-    props.heroStats.map((h) => {
+    props.characterStats.map((h) => {
       incr++;
       STATUS.push(
         <tr key={incr}>
@@ -69,14 +67,6 @@ function StatusWindow(props) {
 }
 
 StatusWindow.propTypes = {
-  heroStats: PropTypes.array,
+  characterStats: PropTypes.array,
   children: PropTypes.node
 };
-
-function mapStateToProps(state) {
-  return {
-    heroStats: state.characterStats
-  };
-}
-
-export default connect(mapStateToProps)(StatusWindow);

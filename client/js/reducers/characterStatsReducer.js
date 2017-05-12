@@ -1,3 +1,4 @@
+import _merge from 'lodash.merge';
 import types from '../constants/actionTypes';
 
 export default function (characterStats, action) {
@@ -7,7 +8,7 @@ export default function (characterStats, action) {
 
       return characterStats.map((stats) => {
         if (stats === characterStats[action.id]) {
-          return Object.assign({}, stats, {
+          return _merge({}, stats, {
             maxHp: character.maxHp,
             currentHp: character.currentHp,
             id: action.id,

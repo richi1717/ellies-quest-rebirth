@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import dispatch from '../dispatch';
 
 import {
@@ -13,7 +12,7 @@ import {
   setItemSelectedBoolean
 } from '../actions/actionCreators';
 
-class BattleMenuTurn extends Component {
+export default class BattleMenuTurn extends Component {
   handleAttackClick() {
     this.clearOtherMenuSelections();
     dispatch(setMenuAttackSelected(true));
@@ -68,11 +67,3 @@ class BattleMenuTurn extends Component {
     // return <span style={{ display: 'none' }} />;
   }
 }
-
-function mapStateToProps(state) {
-  return {
-
-  };
-}
-
-export default connect(mapStateToProps)(BattleMenuTurn);

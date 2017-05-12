@@ -15,11 +15,11 @@ export default function App(props) {
       <BattleScene {...props}>
         <div className="battle-scene-container">
           <Enemies {...props} />
-          <Character />
+          <Character {...props} />
           {/*<TimeOutHandler />*/}
         </div>
-        <StatusWindow />
-        <BattleMenuTurn />
+        <StatusWindow {...props} />
+        <BattleMenuTurn {...props} />
         {/*<BattleMenuAttack />*/}
         {/*<BattleMenuItems />*/}
       </BattleScene>

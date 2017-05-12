@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+// import dispatch from '../dispatch';
+
 // import setTimeoutHelper from '../helpers/time-out';
 import { HeroAttackFX } from './SoundEffects';
 import Victory from './Victory';
