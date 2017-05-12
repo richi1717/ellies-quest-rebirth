@@ -4,47 +4,52 @@ import classnames from 'classnames';
 
 export default function StatusWindow(props) {
   function showStatusPerCharacter() {
-    const STATUS = [];
+    const status = [];
     let incr = 0;
 
     props.characterStats.map((h) => {
       incr++;
-      const HP_PERCENTAGE = Math.ceil((h.currentHp / h.maxHp) * 100);
-      const MP_PERCENTAGE = Math.ceil((h.currentMp / h.maxMp) * 100);
-      const LOW_HEALTH = {
-        'low-health': HP_PERCENTAGE <= 25
+      const hpPercentage = Math.ceil((h.currentHp / h.maxHp) * 100);
+      const mpPercentage = Math.ceil((h.currentMp / h.maxMp) * 100);
+      const lowHealth = {
+        'low-health': hpPercentage <= 25
       };
-      const LOW_MAGIC = {
-        'low-magic': MP_PERCENTAGE <= 25
+      const lowMagic = {
+        'low-magic': mpPercentage <= 25
       };
-      const STYLE_HP = {
-        width: `${HP_PERCENTAGE}%`
-      };
-      const STYLE_MP = {
-        width: `${MP_PERCENTAGE}%`
-      };
-      STATUS.push(
+      status.push(
         <tr key={incr}>
-          <td className={`health-bar ${classnames(LOW_HEALTH)}`}>{h.currentHp}/{h.maxHp}<div><span style={STYLE_HP} /></div></td>
-          <td className={`magic-bar ${classnames(LOW_MAGIC)}`}>{h.currentMp}/{h.maxMp}<div><span style={STYLE_MP} /></div></td>
+          <td className={`health-bar ${classnames(lowHealth)}`}>
+            {h.currentHp}/{h.maxHp}
+            <div>
+              <span style={{ width: `${hpPercentage}%` }} />
+            </div>
+          </td>
+          <td className={`magic-bar ${classnames(lowMagic)}`}>
+            {h.currentMp}/{h.maxMp}
+            <div>
+              <span style={{ width: `${mpPercentage}%` }} />
+            </div>
+          </td>
         </tr>
       );
     });
-    return STATUS;
+    return status;
   }
 
   function renderNames() {
-    const STATUS = [];
+    const names = [];
     let incr = 0;
+
     props.characterStats.map((h) => {
       incr++;
-      STATUS.push(
+      names.push(
         <tr key={incr}>
           <td className="menu-select character">{h.name}</td>
         </tr>
       );
     });
-    return STATUS;
+    return names;
   }
 
   return (
@@ -67,6 +72,6 @@ export default function StatusWindow(props) {
 }
 
 StatusWindow.propTypes = {
-  characterStats: PropTypes.array,
+  characterStats: PropTypes.array.isRequired,
   children: PropTypes.node
 };
