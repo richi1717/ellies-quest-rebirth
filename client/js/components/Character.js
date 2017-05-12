@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 // import setTimeoutHelper from '../helpers/time-out';
-import { HeroAttackFX, BattleVictoryMusic } from './SoundEffects';
+import { HeroAttackFX } from './SoundEffects';
+import Victory from './Victory';
 // import { damageCalculation, getBaseDamage } from '../helpers/damage-calc';
 
 export default class Character extends Component {
@@ -20,11 +21,7 @@ export default class Character extends Component {
   //   const IS_HERO_DEAD_AND_NOT_REVIVE = this.props[HERO] && this.props.getItemObject.type !== 'Revive';
   //   return !IS_HERO_DEAD_AND_NOT_REVIVE;
   // }
-  //
-  // handleVictoryState() {
-  //   const STYLE = { color: 'black'};
-  //   return <div style={STYLE}>You Win!!!!!!!</div>;
-  // }
+
   //
   // setHeroAttackingAnimation() {
   //   setTimeout(function () {
@@ -268,10 +265,9 @@ export default class Character extends Component {
           className={`${classnames(heroClass)} ${this.props.classes}`}
         >
           {this.showDamageOverHead()}
-          {this.areAllEnemiesDead() ? this.handleVictoryState() : null}
+          {this.areAllEnemiesDead() ? <Victory /> : null}
         </button>
         {this.state.pos2 ? <HeroAttackFX /> : null}
-        {this.areAllEnemiesDead() ? <BattleVictoryMusic /> : null}
       </div>
     );
   }
