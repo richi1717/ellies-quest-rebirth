@@ -8,7 +8,13 @@
   "coverageDirectory": "../coverage/client",
   "coveragePathIgnorePatterns": [
     "/node_modules/",
-    "/client/js/index.js"
+    "/client/js/index.js",
+    "/client/js/containers",
+    "/client/js/components/BattleMenuAttack",
+    "/client/js/components/BattleMenuItem",
+    "/client/js/components/BattleMenuTurn",
+    "/client/js/components/Victory",
+    "/client/js/constants"
   ],
   "setupTestFrameworkScriptFile": "../node_modules/jest-enzyme/lib/index.js",
   "testMatch": ["**client/tests/**/*.test.js"]

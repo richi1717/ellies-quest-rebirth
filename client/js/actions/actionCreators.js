@@ -1,7 +1,7 @@
 import types from '../constants/actionTypes';
 
-export const ROOT_URL = 'https://ellies-quest.firebaseio.com/';
-export const FIREBASE_API = '.json';
+// export const ROOT_URL = 'https://ellies-quest.firebaseio.com/';
+// export const FIREBASE_API = '.json';
 
 // export function fetchCharacters() {
 //   const url = `${ROOT_URL}/characters${FIREBASE_API}`;
@@ -31,14 +31,6 @@ export function setEnemySelectedTarget(name, str) {
   return {
     type: types.SET_ENEMY_SELECTED_TARGET,
     payload: { name, str }
-  };
-}
-
-export function updateCharacterStats(obj, id) {
-  return {
-    type: types.UPDATE_CHARACTER_STATS,
-    character: obj,
-    id
   };
 }
 
@@ -145,42 +137,6 @@ export function deleteEnemyWhenKilled(position) {
   return {
     type: types.DELETE_ENEMY_WHEN_KILLED,
     payload: position
-  };
-}
-
-export function setListOfItems(items, id) {
-  return {
-    type: types.SET_LIST_OF_ITEMS,
-    payload: items,
-    id
-  };
-}
-
-export function setItemSelectedBoolean(bool) {
-  return {
-    type: types.SET_ITEM_SELECTED_BOOLEAN,
-    payload: bool
-  };
-}
-
-export function setItemObjectFromSelection(obj) {
-  return {
-    type: types.SET_ITEM_OBJECT_FROM_SELECTED,
-    payload: obj
-  };
-}
-
-export function removeEnemyFromList(index) {
-  return {
-    type: types.DELETE_FROM_LIST,
-    index
-  };
-}
-
-export function removeHeroFromList(index) {
-  return {
-    type: types.DELETE_FROM_LIST,
-    index
   };
 }
 

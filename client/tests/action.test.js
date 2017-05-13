@@ -18,26 +18,6 @@ describe('actions', () => {
     expect(actions.setEnemySelectedTarget(NAME, STR)).toEqual(expectedAction);
   });
 
-  test('should create an action to update character stats', () => {
-    const ID = 1234;
-    const expectedAction = {
-      type: types.UPDATE_CHARACTER_STATS,
-      character: heroLink,
-      id: ID
-    };
-    expect(actions.updateCharacterStats(heroLink, ID)).toEqual(expectedAction);
-  });
-
-  test('should create an action to update character stats', () => {
-    const ID = 1234;
-    const unExpectedAction = {
-      type: '',
-      payload: '',
-      id: ''
-    };
-    expect(actions.updateCharacterStats(heroLink, ID)).not.toEqual(unExpectedAction);
-  });
-
   test('should create an action to update enemy stats', () => {
     const ID = 1234;
     const expectedAction = {

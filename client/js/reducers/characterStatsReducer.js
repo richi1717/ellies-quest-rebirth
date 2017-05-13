@@ -1,39 +1,25 @@
-import _merge from 'lodash.merge';
-import types from '../constants/actionTypes';
+import _set from 'lodash.set';
 
 export default function (characterStats, action) {
-  switch (action.type) {
-    case types.UPDATE_CHARACTER_STATS: {
-      const character = action.character;
+  const character = action.character;
 
-      return characterStats.map((stats) => {
-        if (stats === characterStats[action.id]) {
-          return _merge({}, stats, {
-            maxHp: character.maxHp,
-            currentHp: character.currentHp,
-            id: action.id,
-            maxMp: character.maxMp,
-            currentMp: character.currentMp,
-            name: character.name,
-            agility: character.agility,
-            accuracy: character.accuracy,
-            str: character.str,
-            magic: character.magic,
-            exp: character.exp,
-            def: character.def,
-            evade: character.evade,
-            classes: character.classes,
-            killed: character.killed,
-            currentPositionX: character.currentPositionX,
-            currentPositionY: character.currentPositionY
-          });
-        }
-
-        return stats;
-      });
-    }
-    default: {
-      return characterStats;
-    }
-  }
+  return _set(characterStats, action.id, {
+    accuracy: character.accuracy,
+    agility: character.agility,
+    classes: character.classes,
+    currentHp: character.currentHp,
+    currentMp: character.currentMp,
+    currentPositionX: character.currentPositionX,
+    currentPositionY: character.currentPositionY,
+    def: character.def,
+    evade: character.evade,
+    exp: character.exp,
+    id: action.id,
+    killed: character.killed,
+    magic: character.magic,
+    maxHp: character.maxHp,
+    maxMp: character.maxMp,
+    name: character.name,
+    str: character.str
+  });
 }

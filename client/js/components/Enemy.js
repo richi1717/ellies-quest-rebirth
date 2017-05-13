@@ -272,7 +272,7 @@ export default class Enemy extends Component {
         <div>
           <div
             id={`enemy${this.props.position}`}
-            className={`${classnames(ENEMY_CLASS)} ${this.props.enemyClass} enemy${this.props.position}`}
+            className={`${classnames(ENEMY_CLASS)} ${this.props.classes} enemy${this.props.position}`}
           >
             {/*{this.showDamageOverHead()}*/}
           </div>
@@ -293,7 +293,7 @@ Enemy.propTypes = {
   // level: PropTypes.number,
   // setEnemySelectedTarget: PropTypes.func,
   // setEnemyAttacking: PropTypes.func,
-  enemyClass: PropTypes.string,
+  classes: PropTypes.string,
   position: PropTypes.number
   // setHeroAttacking: PropTypes.func,
   // updateEnemyStats: PropTypes.func,

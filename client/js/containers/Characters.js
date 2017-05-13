@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import filter from 'lodash.filter';
-import { updateCharacterStats, ROOT_URL, FIREBASE_API } from '../actions/actionCreators';
+import { DATA_BASE_URL } from '../constants/databaseUrls';
 import Character from '../components/Character';
+import types from '../constants/actionTypes';
 import dispatch from '../dispatch';
 
 export default class CharacterSelection extends Component {
@@ -14,7 +15,7 @@ export default class CharacterSelection extends Component {
   }
 
   componentWillMount() {
-    const url = `${ROOT_URL}/characters${FIREBASE_API}`;
+    const url = `${DATA_BASE_URL}/characters.json`;
     this.serverRequest = fetch(url)
       .then(response => response.json())
       .then(data => {
@@ -33,9 +34,13 @@ export default class CharacterSelection extends Component {
     const playableCharacters = filter(x, { inPlay: true });
     let incr = 0;
 
-    playableCharacters.map((character, key) => {
+    playableCharacters.map((character, id) => {
       incr++;
-      dispatch(updateCharacterStats(character, key));
+      dispatch({
+        type: types.UPDATE_CHARACTER_STATS,
+        character,
+        id
+      });
       characters.push(
         <Character position={incr} key={incr} {...character} />
       );

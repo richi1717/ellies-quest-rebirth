@@ -1,8 +1,10 @@
 import React, { Component, PropTypes } from 'react';
-import filter from 'lodash.filter';
-import sample from 'lodash.sample';
-import random from 'lodash.random';
-import { updateEnemyStats, ROOT_URL } from '../actions/actionCreators';
+import _filter from 'lodash.filter';
+import _sampleSize from 'lodash.samplesize';
+import _random from 'lodash.random';
+import _forEach from 'lodash.foreach';
+import types from '../constants/actionTypes';
+import { DATA_BASE_URL } from '../constants/databaseUrls';
 import Enemy from '../components/Enemy';
 import dispatch from '../dispatch';
 
@@ -16,7 +18,7 @@ export default class Enemies extends Component {
   }
 
   componentWillMount() {
-    const url = `${ROOT_URL}/monsters.json`;
+    const url = `${DATA_BASE_URL}/monsters.json`;
     this.serverRequest = fetch(url)
       .then(response => response.json())
       .then(data => {
@@ -31,16 +33,24 @@ export default class Enemies extends Component {
   }
 
   chooseEnemies(x) {
-    const e = [];
-    const areaEnemies = filter(x, { sections: [this.props.battleScene] });
-    for (let key = 0; key < random(1, 5); key++) {
-      const ranEnemy = sample(areaEnemies);
-      dispatch(updateEnemyStats(ranEnemy, key));
-      e.push(
-        <Enemy enemyClass={ranEnemy.classes} turnSpeed={ranEnemy.agility} position={key} key={key} {...ranEnemy} />
+    const enemies = [];
+    const areaEnemies = _filter(x, { sections: [this.props.battleScene] });
+    const ranEnemy = _sampleSize(areaEnemies, _random(1, 5));
+    let incr = 0;
+
+    _forEach(ranEnemy, (enemy, id) => {
+      incr++;
+      dispatch({
+        type: types.UPDATE_ENEMY_STATS,
+        enemy,
+        id
+      });
+      enemies.push(
+        <Enemy position={incr} key={incr} {...enemy} />
       );
-    }
-    return e;
+    });
+
+    return enemies;
   }
 
   render() {
@@ -60,5 +70,4 @@ export default class Enemies extends Component {
 
 Enemies.propTypes = {
   battleScene: PropTypes.string.isRequired
-  // updateEnemyStats: PropTypes.func
 };
