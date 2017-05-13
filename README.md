@@ -5,9 +5,6 @@
       <img src="https://img.shields.io/travis/rust-lang/rust.svg?style=plastic" alt="Gitter">
     </a>
     <a href="https://github.com/richi1717/ellies-quest-rebirth">
-      <img src="https://img.shields.io/github/tag/expressjs/express.svg?style=plastic" alt="Gitter">
-    </a>
-    <a href="https://github.com/richi1717/ellies-quest-rebirth">
       <img src="https://img.shields.io/david/expressjs/express.svg?style=plastic" alt="Gitter">
     </a>
     <a href="https://github.com/richi1717/ellies-quest-rebirth">
