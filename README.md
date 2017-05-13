@@ -1,5 +1,6 @@
-<h1 align="center">
-  Ellie's Quest Rebirth
+<h1 align="center">Ellie's Quest Rebirth</h1>
+===
+<p align="center">
   <br>
     <a href="https://travis-ci.org/richi1717/ellies-quest-rebirth">
       <img src="https://img.shields.io/travis/rust-lang/rust.svg?style=plastic" alt="Gitter">
@@ -10,7 +11,7 @@
     <a href="https://github.com/richi1717/ellies-quest-rebirth">
       <img src="https://img.shields.io/david/dev/expressjs/express.svg?style=plastic" alt="Gitter">
     </a>
-</h1>
+</p>
 
 ### Installation
 
