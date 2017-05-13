@@ -1,7 +1,19 @@
-# Ellie's Quest Rebirth
-[![Build Status](https://travis-ci.org/richi1717/ellies-quest-rebirth.svg?branch=master)](https://travis-ci.org/richi1717/ellies-quest-rebirth)
-[![Dependency Status](https://david-dm.org/richi1717/ellies-quest-rebirth.svg?branch=master)](https://david-dm.org/richi1717/ellies-quest-rebirth)
-[![devDependency Status](https://david-dm.org/richi1717/ellies-quest-rebirth/dev-status.svg?branch=master)](https://david-dm.org/richi1717/ellies-quest-rebirth#info=devDependencies)
+<h1 align="center">
+  Ellie's Quest Rebirth
+  <br>
+    <a href="https://travis-ci.org/richi1717/ellies-quest-rebirth">
+      <img src="https://img.shields.io/travis/rust-lang/rust.svg?style=plastic" alt="Gitter">
+    </a>
+    <a href="https://github.com/richi1717/ellies-quest-rebirth">
+      <img src="https://img.shields.io/github/tag/expressjs/express.svg?style=plastic" alt="Gitter">
+    </a>
+    <a href="https://github.com/richi1717/ellies-quest-rebirth">
+      <img src="https://img.shields.io/david/expressjs/express.svg?style=plastic" alt="Gitter">
+    </a>
+    <a href="https://github.com/richi1717/ellies-quest-rebirth">
+      <img src="https://img.shields.io/david/dev/expressjs/express.svg?style=plastic" alt="Gitter">
+    </a>
+</h1>
 
 ### Installation
 
