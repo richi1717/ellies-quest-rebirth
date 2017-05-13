@@ -4,7 +4,7 @@ import _sampleSize from 'lodash.samplesize';
 import _random from 'lodash.random';
 import _forEach from 'lodash.foreach';
 import types from '../constants/actionTypes';
-import { DATA_BASE_URL } from '../constants/databaseUrls';
+import { DATA_BASE_URL_MONSTERS } from '../constants/databaseUrls';
 import Enemy from '../components/Enemy';
 import dispatch from '../dispatch';
 
@@ -18,7 +18,7 @@ export default class Enemies extends Component {
   }
 
   componentWillMount() {
-    const url = `${DATA_BASE_URL}/monsters.json`;
+    const url = `${DATA_BASE_URL_MONSTERS}`;
     this.serverRequest = fetch(url)
       .then(response => response.json())
       .then(data => {

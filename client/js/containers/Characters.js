@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import filter from 'lodash.filter';
-import { DATA_BASE_URL } from '../constants/databaseUrls';
+import { DATA_BASE_URL_CHARACTERS } from '../constants/databaseUrls';
 import Character from '../components/Character';
 import types from '../constants/actionTypes';
 import dispatch from '../dispatch';
@@ -15,7 +15,7 @@ export default class CharacterSelection extends Component {
   }
 
   componentWillMount() {
-    const url = `${DATA_BASE_URL}/characters.json`;
+    const url = `${DATA_BASE_URL_CHARACTERS}`;
     this.serverRequest = fetch(url)
       .then(response => response.json())
       .then(data => {
