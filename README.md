@@ -1,5 +1,5 @@
 <h1 align="center">Ellie's Quest Rebirth</h1>
-===
+
 <p align="center">
   <br>
     <a href="https://travis-ci.org/richi1717/ellies-quest-rebirth">
