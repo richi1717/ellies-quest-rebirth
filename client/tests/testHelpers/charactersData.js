@@ -19,7 +19,8 @@ export default [
     currentPositionY: 3,
     id: 1,
     inPlay: true,
-    killed: false
+    killed: false,
+    attackerId: 'hero1'
   },
   {
     userId: 1,
@@ -44,7 +45,8 @@ export default [
     agility: 9,
     id: 2,
     inPlay: true,
-    killed: false
+    killed: false,
+    attackerId: 'hero2'
   },
   {
     userId: 1,
@@ -69,6 +71,7 @@ export default [
     agility: 13,
     id: 3,
     inPlay: true,
-    killed: false
+    killed: false,
+    attackerId: 'hero3'
   }
 ];

@@ -7,7 +7,16 @@ describe('<StatusWindow />', () => {
   let statusWindow;
 
   beforeEach(() => {
-    statusWindow = shallow(<StatusWindow characterStats={charactersData} />);
+    statusWindow = shallow(
+      <StatusWindow
+        state={{
+          characterStats: charactersData,
+          whoIsAttacking: {
+            attacker: 'hero1'
+          }
+        }}
+      />
+    );
   });
 
   test('should match snapshot', () => {

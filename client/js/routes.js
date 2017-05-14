@@ -13,37 +13,37 @@ export default function Router(props) {
         <Route
           exact path="/"
           render={() => (
-            <App battleScene="forest" playMusic={isMusicOn} {...store} />
+            <App battleScene="forest" playMusic={isMusicOn} state={store} />
           )}
         />
         <Route
           path="/forest"
           render={() => (
-            <App battleScene="forest" playMusic={isMusicOn} {...store} />
+            <App battleScene="forest" playMusic={isMusicOn} state={store} />
           )}
         />
         <Route
           path="/desert"
           render={() => (
-            <App battleScene="desert" playMusic={isMusicOn} {...store} />
+            <App battleScene="desert" playMusic={isMusicOn} state={store} />
           )}
         />
         <Route
           path="/grass"
           render={() => (
-            <App battleScene="grass" playMusic={isMusicOn} {...store} />
+            <App battleScene="grass" playMusic={isMusicOn} state={store} />
           )}
         />
         <Route
           path="/boss"
           render={() => (
-            <App battleScene="boss" playMusic={isMusicOn} {...store} />
+            <App battleScene="boss" playMusic={isMusicOn} state={store} />
           )}
         />
         <Route
           path="/beach"
           render={() => (
-            <App battleScene="beach" playMusic={isMusicOn} {...store} />
+            <App battleScene="beach" playMusic={isMusicOn} state={store} />
           )}
         />
       </div>

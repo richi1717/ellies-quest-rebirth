@@ -18,21 +18,21 @@ exports[`<StatusWindow /> should match snapshot 1`] = `
       <tbody>
         <tr>
           <td
-            className="menu-select character"
+            className="menu-select character character-turn"
           >
             Link
           </td>
         </tr>
         <tr>
           <td
-            className="menu-select character"
+            className="menu-select character "
           >
             Ellie
           </td>
         </tr>
         <tr>
           <td
-            className="menu-select character"
+            className="menu-select character "
           >
             Luke
           </td>

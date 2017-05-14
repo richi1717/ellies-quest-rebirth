@@ -19,8 +19,7 @@ export default class CharacterSelection extends Component {
     this.serverRequest = fetch(url)
       .then(response => response.json())
       .then(data => {
-        this.character = data;
-        this.getCharacters = this.setCharacters(this.character);
+        this.setCharacters(data);
         this.setState({ done: true });
       });
   }
@@ -32,17 +31,27 @@ export default class CharacterSelection extends Component {
   setCharacters(x) {
     const characters = [];
     const playableCharacters = filter(x, { inPlay: true });
-    let incr = 0;
 
     playableCharacters.map((character, id) => {
-      incr++;
       dispatch({
         type: types.UPDATE_CHARACTER_STATS,
         character,
         id
       });
+    });
+
+    return characters;
+  }
+
+  renderCharacters(x) {
+    const characters = [];
+    let incr = 0;
+
+    x.map(character => {
+      incr++;
+
       characters.push(
-        <Character position={incr} key={incr} {...character} />
+        <Character position={incr} key={incr} state={this.props.state} {...character} />
       );
     });
 
@@ -52,13 +61,12 @@ export default class CharacterSelection extends Component {
   render() {
     return (
       <div className="characters-container">
-        {this.state.done ? this.getCharacters : null}
+        {this.state.done ? this.renderCharacters(this.props.state.characterStats) : null}
       </div>
     );
   }
 }
 
 CharacterSelection.propTypes = {
-  battleScene: PropTypes.string,
-  updateCharacterStats: PropTypes.func
+  state: PropTypes.object.isRequired
 };

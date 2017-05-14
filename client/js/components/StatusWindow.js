@@ -7,7 +7,7 @@ export default function StatusWindow(props) {
     const status = [];
     let incr = 0;
 
-    props.characterStats.map((h) => {
+    props.state.characterStats.map((h) => {
       incr++;
       const hpPercentage = Math.ceil((h.currentHp / h.maxHp) * 100);
       const mpPercentage = Math.ceil((h.currentMp / h.maxMp) * 100);
@@ -41,11 +41,12 @@ export default function StatusWindow(props) {
     const names = [];
     let incr = 0;
 
-    props.characterStats.map((h) => {
+    props.state.characterStats.map((h) => {
       incr++;
+      const selected = h.attackerId === props.state.whoIsAttacking.attacker ? 'character-turn' : '';
       names.push(
         <tr key={incr}>
-          <td className="menu-select character">{h.name}</td>
+          <td className={`menu-select character ${selected}`}>{h.name}</td>
         </tr>
       );
     });
@@ -72,6 +73,6 @@ export default function StatusWindow(props) {
 }
 
 StatusWindow.propTypes = {
-  characterStats: PropTypes.array.isRequired,
+  state: PropTypes.object.isRequired,
   children: PropTypes.node
 };

@@ -14,13 +14,15 @@ describe('rootReducer', () => {
     oldState = {
       characterStats: [{ killed: false }],
       enemyStats: [{ yolo: true }],
-      isBackgroundMusicOn: { data: false }
+      isBackgroundMusicOn: { data: false },
+      whoIsAttacking: { attacker: 'hero1', target: 'monster2', typeOfAttack: 'attack' }
     };
     newState = {
       enemyInfo: { data: '' },
       characterStats: [],
       enemyStats: [],
-      isBackgroundMusicOn: { data: true }
+      isBackgroundMusicOn: { data: true },
+      whoIsAttacking: { attacker: 'hero2', target: '', typeOfAttack: 'magic' }
     };
   });
 
@@ -28,7 +30,8 @@ describe('rootReducer', () => {
     expect(rootReducer(undefined, {})).toEqual({
       characterStats: [],
       enemyStats: [],
-      isBackgroundMusicOn: { data: false }
+      isBackgroundMusicOn: { data: false },
+      whoIsAttacking: { attacker: '', target: '', typeOfAttack: '' }
     });
   });
 
@@ -40,7 +43,8 @@ describe('rootReducer', () => {
     expect(rootReducer(oldState, { type: types.USER_LOGOUT })).toEqual({
       characterStats: [],
       enemyStats: [],
-      isBackgroundMusicOn: { data: false }
+      isBackgroundMusicOn: { data: false },
+      whoIsAttacking: { attacker: '', target: '', typeOfAttack: '' }
     });
   });
 
@@ -51,7 +55,8 @@ describe('rootReducer', () => {
     })).toEqual({
       characterStats: oldState.characterStats,
       enemyStats: oldState.enemyStats,
-      isBackgroundMusicOn: { data: true }
+      isBackgroundMusicOn: { data: true },
+      whoIsAttacking: oldState.whoIsAttacking
     });
   });
 

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-// import dispatch from '../dispatch';
+import dispatch from '../dispatch';
+import types from '../constants/actionTypes';
 
 // import setTimeoutHelper from '../helpers/time-out';
 import { HeroAttackFX } from './SoundEffects';
@@ -236,20 +237,19 @@ export default class Character extends Component {
   //     console.log(this.props.getItemObject);
   //   }
   // }
-  hero1Click() {
-    this.setState({ attacking: true });
-  }
-
-  hero2Click() {
-    this.setState({ attacking: true });
-  }
-
-  hero3Click() {
-    this.setState({ attacking: true });
+  heroClick(event) {
+    if (this.props.state.whoIsAttacking.attacker !== event.target.id) {
+      dispatch({
+        type: types.SET_ATTACKER_AND_TARGET,
+        attacker: event.target.id,
+        target: '',
+        typeOfAttack: ''
+      });
+    }
   }
 
   render() {
-    const { position, killed, classes } = this.props;
+    const { position, killed, classes, state, attackerId } = this.props;
     const heroClass = {
       'battle-hero': true,
       'battle-ff-sprite': true,
@@ -257,14 +257,14 @@ export default class Character extends Component {
       'back-row': position >= 3,
       'dead': killed,
       [`position${position}`]: true,
-      'attacking hero-turn': this.state.attacking
+      'attacking hero-turn': state.whoIsAttacking.attacker === attackerId
     };
 
     return (
       <div>
         <button
-          id={`hero${position}`}
-          onClick={event => this[`${event.target.id}Click`]()}
+          id={attackerId}
+          onClick={event => this.heroClick(event)}
           className={`${classnames(heroClass)} ${classes}`}
         >
           {this.showDamageOverHead()}
@@ -280,5 +280,7 @@ Character.propTypes = {
   position: PropTypes.number,
   // currentHp: PropTypes.number,
   classes: PropTypes.string,
-  killed: PropTypes.bool
+  killed: PropTypes.bool,
+  state: PropTypes.object,
+  attackerId: PropTypes.string
 };

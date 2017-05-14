@@ -14,6 +14,7 @@ export default function (characterStats, action) {
     def: character.def,
     evade: character.evade,
     exp: character.exp,
+    attackerId: `hero${character.id}`,
     id: action.id,
     killed: character.killed,
     magic: character.magic,
