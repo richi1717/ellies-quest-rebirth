@@ -162,41 +162,6 @@ export default class Character extends Component {
     return false;
   }
   //
-  position0Classes() {
-    return {
-      // 'position1': true,
-      'front-row': true,
-      'attack-swing': this.state.pos2
-      // 'defense': !this.props.isHero0Dead && this.props.isHero0Defending,
-      // 'attacking': this.props.isHero0Attacking && !this.props.isPauseBetweenTurns,
-      // 'hero-turn': this.props.isHero0Attacking && !this.props.isPauseBetweenTurns,
-      // 'dead': this.props.isHero0Dead
-    };
-  }
-
-  position1Classes() {
-    return {
-      // 'position2': true,
-      'front-row': true,
-      'attack-swing': this.state.pos2
-      // 'defense': !this.props.isHero1Dead && this.props.isHero1Defending,
-      // 'attacking': this.props.isHero1Attacking && !this.props.isPauseBetweenTurns,
-      // 'hero-turn': this.props.isHero1Attacking && !this.props.isPauseBetweenTurns,
-      // 'dead': this.props.isHero1Dead
-    };
-  }
-
-  position2Classes() {
-    return {
-      // 'position3': true,
-      'back-row': true,
-      'attack-swing': this.state.pos2
-      // 'defense': !this.props.isHero2Dead && this.props.isHero2Defending,
-      // 'attacking': this.props.isHero2Attacking && !this.props.isPauseBetweenTurns,
-      // 'hero-turn': this.props.isHero2Attacking && !this.props.isPauseBetweenTurns,
-      // 'dead': this.props.isHero2Dead
-    };
-  }
   //
   // enemySelectionPositionClasses(nameOfClass) {
   //   nameOfClass['attack-enemy0'] = this.props.isEnemyTarget0;
@@ -278,7 +243,6 @@ export default class Character extends Component {
 
 Character.propTypes = {
   position: PropTypes.number,
-  // currentHp: PropTypes.number,
   classes: PropTypes.string,
   killed: PropTypes.bool,
   state: PropTypes.object,
