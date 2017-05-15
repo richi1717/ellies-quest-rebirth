@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import _filter from 'lodash.filter';
 import dispatch from '../dispatch';
 import types from '../constants/actionTypes';
-import _filter from 'lodash.filter';
-
-// import setTimeoutHelper from '../helpers/time-out';
 import { HeroAttackFX } from './SoundEffects';
 import Victory from './Victory';
+// import setTimeoutHelper from '../helpers/time-out';
 // import { damageCalculation, getBaseDamage } from '../helpers/damage-calc';
 
 export default class Character extends Component {
@@ -15,8 +14,7 @@ export default class Character extends Component {
     super(props);
 
     this.state = {
-      pos2: false,
-      attacking: false
+      pos2: false
     };
   }
 
