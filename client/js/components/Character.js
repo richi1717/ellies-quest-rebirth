@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import dispatch from '../dispatch';
 import types from '../constants/actionTypes';
+import _filter from 'lodash.filter';
 
 // import setTimeoutHelper from '../helpers/time-out';
 import { HeroAttackFX } from './SoundEffects';
@@ -148,19 +149,6 @@ export default class Character extends Component {
     );
   }
 
-  areAllEnemiesDead() {
-    // let dead = false;
-    // for (let i = 0; i < this.props.enemyStats.length; i ++) {
-    //   if (this.props.enemyStats[i].get('killed')) {
-    //     dead = true;
-    //   } else {
-    //     // dead = false;
-    //     return false;
-    //   }
-    // }
-    // return dead;
-    return false;
-  }
   //
   //
   // enemySelectionPositionClasses(nameOfClass) {
@@ -203,7 +191,8 @@ export default class Character extends Component {
   //   }
   // }
   heroClick(event) {
-    if (this.props.state.whoIsAttacking.attacker !== event.target.id) {
+    const { attacker } = this.props.state.whoIsAttacking;
+    if (attacker !== event.target.id) {
       dispatch({
         type: types.SET_ATTACKER_AND_TARGET,
         attacker: event.target.id,
@@ -215,6 +204,7 @@ export default class Character extends Component {
 
   render() {
     const { position, killed, classes, state, attackerId } = this.props;
+    const areAllEnemiesDead = _filter(state.enemyStats, { killed: false }).length === 0;
     const heroClass = {
       'battle-hero': true,
       'battle-ff-sprite': true,
@@ -233,7 +223,7 @@ export default class Character extends Component {
           className={`${classnames(heroClass)} ${classes}`}
         >
           {this.showDamageOverHead()}
-          {this.areAllEnemiesDead() ? <Victory /> : null}
+          {areAllEnemiesDead ? <Victory /> : null}
         </button>
         {this.state.pos2 ? <HeroAttackFX /> : null}
       </div>

@@ -15,7 +15,7 @@ export default function (enemyStats, action) {
     expOnDefeat: enemy.expOnDefeat,
     id: action.id,
     itemHeld: enemy.itemHeld,
-    killed: enemy.killed,
+    killed: !!enemy.killed,
     level: enemy.level,
     magic: enemy.magic,
     magicDef: enemy.magicDef,

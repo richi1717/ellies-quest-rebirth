@@ -16,6 +16,10 @@ describe('<Character />', () => {
     props = {
       position: 1,
       state: {
+        enemyStats: [
+          { killed: false },
+          { killed: false }
+        ],
         whoIsAttacking: {
           attacker: 'hero2'
         }
@@ -72,6 +76,13 @@ describe('<Character />', () => {
 
     test('should not have Victory component when any enemy is alive', () => {
       expect(character.find(Victory)).toHaveLength(0);
+    });
+
+    test('should have Victory component when all enemies are dead', () => {
+      props.state.enemyStats[0].killed = true;
+      props.state.enemyStats[1].killed = true;
+      character = shallow(<Character {...props} />);
+      expect(character.find(Victory)).toHaveLength(1);
     });
 
     test('should have HeroAttackFX component when state.pos2 is true', () => {

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { EnemyAttackFX } from './SoundEffects';
+import dispatch from '../dispatch';
+import types from '../constants/actionTypes';
 // import setTimeoutHelper from '../helpers/time-out';
 // import { damageCalculation, getBaseDamage } from '../helpers/damage-calc';
 // import { calcLevel } from '../helpers/calculate-level';
@@ -240,10 +242,10 @@ export default class Enemy extends Component {
   //   );
   // }
   //
-  isEnemyAlive() {
-    return true;
-    // return !(this.props.enemyStats[this.props.position].toJS().killed);
-  }
+  // isEnemyAlive() {
+  //   return true;
+  //   // return !(this.props.enemyStats[this.props.position].toJS().killed);
+  // }
   //
   // areAllEnemiesDead() {
   //   let dead = false;
@@ -257,25 +259,57 @@ export default class Enemy extends Component {
   //   }
   //   return dead;
   // }
+  enemyClick(event) {
+    // just for testing
+    const index = event.target.id.split('enemy')[1] - 1;
+    const enemy = this.props.state.enemyStats[index];
+    enemy.killed = true;
+    dispatch({
+      type: types.UPDATE_ENEMY_STATS,
+      enemy,
+      id: index
+    });
+    // const { attacker, target } = this.props.state.whoIsAttacking;
+    // if (attacker.includes('hero') && !target) {
+    //   dispatch({
+    //     type: types.SET_ATTACKER_AND_TARGET,
+    //     attacker,
+    //     target: event.target.id,
+    //     typeOfAttack: ''
+    //   });
+    // }
+    //
+    // if (!attacker.includes('hero') && attacker !== event.target.id) {
+    //   dispatch({
+    //     type: types.SET_ATTACKER_AND_TARGET,
+    //     attacker: event.target.id,
+    //     target: '',
+    //     typeOfAttack: ''
+    //   });
+    // }
+  }
 
   render() {
-    const ENEMY_CLASS = {
-      'enemy-sprites': true,
-      'enemy-attack-hero0': this.state.isAttackingHero0,
-      'enemy-attack-hero1': this.state.isAttackingHero1,
-      'enemy-attack-hero2': this.state.isAttackingHero2
-    };
+    const { state, position } = this.props;
+    // const ENEMY_CLASS = {
+    //   'enemy-sprites': true,
+    //   'enemy-attack-hero0': this.state.isAttackingHero0,
+    //   'enemy-attack-hero1': this.state.isAttackingHero1,
+    //   'enemy-attack-hero2': this.state.isAttackingHero2
+    // };
 
     // const DMG_DISPLAY = document.getElementById(`dmg-display${this.props.position}`);
-    if (this.isEnemyAlive()) {
+    const enemyId = `enemy${position}`;
+    if (!state.enemyStats[position - 1].killed) {
       return (
         <div>
-          <div
-            id={`enemy${this.props.position}`}
-            className={`${classnames(ENEMY_CLASS)} ${this.props.classes} enemy${this.props.position}`}
+          <button
+            onClick={event => this.enemyClick(event)}
+            id={enemyId}
+            className={`enemy-sprites ${this.props.classes} ${enemyId}`}
           >
             {/*{this.showDamageOverHead()}*/}
-          </div>
+          </button>
           {this.state.isAttackingHero0 ? <EnemyAttackFX /> : null}
           {this.state.isAttackingHero1 ? <EnemyAttackFX /> : null}
           {this.state.isAttackingHero2 ? <EnemyAttackFX /> : null}
@@ -288,18 +322,7 @@ export default class Enemy extends Component {
 }
 
 Enemy.propTypes = {
-  // str: PropTypes.number,
-  // heroStr: PropTypes.number,
-  // level: PropTypes.number,
-  // setEnemySelectedTarget: PropTypes.func,
-  // setEnemyAttacking: PropTypes.func,
   classes: PropTypes.string,
-  position: PropTypes.number
-  // setHeroAttacking: PropTypes.func,
-  // updateEnemyStats: PropTypes.func,
-  // isHeroAttacking: PropTypes.bool,
-  // currentHp: PropTypes.number,
-  // enemyStats: PropTypes.array,
-  // def: PropTypes.number,
-  // setHeroToEnemyTarget: PropTypes.func
+  position: PropTypes.number.isRequired,
+  state: PropTypes.object.isRequired
 };

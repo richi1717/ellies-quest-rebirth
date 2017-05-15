@@ -28,7 +28,6 @@ export default class CharacterSelection extends Component {
   }
 
   setCharacters(x) {
-    const characters = [];
     const playableCharacters = filter(x, { inPlay: true });
 
     playableCharacters.map((character, id) => {

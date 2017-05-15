@@ -50,7 +50,7 @@ export default class Enemies extends Component {
     _forEach(enemies, (enemy) => {
       incr++;
       enemiesArray.push(
-        <Enemy position={incr} key={incr} {...enemy} />
+        <Enemy position={incr} key={incr} state={this.props.state} {...enemy} />
       );
     });
 
