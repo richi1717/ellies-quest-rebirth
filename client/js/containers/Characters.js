@@ -9,7 +9,6 @@ export default class CharacterSelection extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      test: false,
       done: false
     };
   }
@@ -39,8 +38,6 @@ export default class CharacterSelection extends Component {
         id
       });
     });
-
-    return characters;
   }
 
   renderCharacters(x) {

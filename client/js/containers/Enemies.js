@@ -12,7 +12,6 @@ export default class Enemies extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      test: false,
       done: false
     };
   }
@@ -22,8 +21,7 @@ export default class Enemies extends Component {
     this.serverRequest = fetch(url)
       .then(response => response.json())
       .then(data => {
-        this.enemies = data;
-        this.ranEnemies = this.chooseEnemies(this.enemies);
+        this.chooseEnemies(data);
         this.setState({ done: true });
       });
   }
@@ -32,42 +30,43 @@ export default class Enemies extends Component {
     this.serverRequest.abort();
   }
 
-  chooseEnemies(x) {
-    const enemies = [];
-    const areaEnemies = _filter(x, { sections: [this.props.battleScene] });
+  chooseEnemies(enemies) {
+    const areaEnemies = _filter(enemies, { sections: [this.props.battleScene] });
     const ranEnemy = _sampleSize(areaEnemies, _random(1, 5));
-    let incr = 0;
 
     _forEach(ranEnemy, (enemy, id) => {
-      incr++;
       dispatch({
         type: types.UPDATE_ENEMY_STATS,
         enemy,
         id
       });
-      enemies.push(
+    });
+  }
+
+  renderEnemies(enemies) {
+    const enemiesArray = [];
+    let incr = 0;
+
+    _forEach(enemies, (enemy) => {
+      incr++;
+      enemiesArray.push(
         <Enemy position={incr} key={incr} {...enemy} />
       );
     });
 
-    return enemies;
+    return enemiesArray;
   }
 
   render() {
-    // const enemyClass = {
-    //   'enemy-sprites': true,
-    //   'enemy-attack-hero1': this.state.test,
-    //   'enemy-green-eagle': true,
-    //   enemy1: true
-    // };
     return (
       <div className="enemies-container">
-        {this.state.done ? this.ranEnemies : null}
+        {this.state.done ? this.renderEnemies(this.props.state.enemyStats) : null}
       </div>
     );
   }
 }
 
 Enemies.propTypes = {
-  battleScene: PropTypes.string.isRequired
+  battleScene: PropTypes.string.isRequired,
+  state: PropTypes.object.isRequired
 };
