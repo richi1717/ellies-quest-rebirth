@@ -10,6 +10,16 @@ describe('<Enemy />', () => {
   let enemy;
   let props;
 
+  beforeAll(() => {
+    const element = { style: { opacity: 1, display: 'block' } };
+    Object.defineProperty(document, 'getElementById', {
+      value: jest.fn(() => element)
+    });
+    Object.defineProperty(window, 'requestAnimationFrame', {
+      value: jest.fn(fn => fn())
+    });
+  });
+
   beforeEach(() => {
     props = {
       state: {

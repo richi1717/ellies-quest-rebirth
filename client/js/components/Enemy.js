@@ -206,29 +206,26 @@ export default class Enemy extends Component {
   //   })();
   // }
   //
-  // enemyKilledFadeOut(element, display) {
-  //   element.style.opacity = 1;
-  //   element.style.display = display || "block";
-  //
-  //   (function fade() {
-  //     let val = parseFloat(element.style.opacity);
-  //     if (!((val -= 0.01) < 0)) {
-  //       element.style.opacity = val;
-  //       requestAnimationFrame(fade);
-  //     }
-  //   })();
-  // }
-  //
-  // setMusic() {
-  //   return (
-  //     <audio
-  //       controls name="media"
-  //       src="/resources/music/swipe.mp3"
-  //       autoPlay
-  //       type="audio/mpeg"
-  //     />
-  //   );
-  // }
+  enemyKilledFadeOut(e, enemy, id) {
+    const element = e;
+    element.style.opacity = 1;
+    element.style.display = 'block';
+
+    (function fade() {
+      let val = parseFloat(element.style.opacity);
+      if (!((val - 0.01) < 0)) {
+        val -= 0.01;
+        element.style.opacity = val;
+        requestAnimationFrame(fade);
+      } else {
+        dispatch({
+          type: types.UPDATE_ENEMY_STATS,
+          enemy,
+          id
+        });
+      }
+    }());
+  }
   //
   // showDamageOverHead() {
   //   const STYLE = { display: 'none' };
@@ -241,34 +238,15 @@ export default class Enemy extends Component {
   //     </div>
   //   );
   // }
-  //
-  // isEnemyAlive() {
-  //   return true;
-  //   // return !(this.props.enemyStats[this.props.position].toJS().killed);
-  // }
-  //
-  // areAllEnemiesDead() {
-  //   let dead = false;
-  //   for (let i = 0; i < this.props.enemyStats.length; i ++) {
-  //     if (this.props.enemyStats[i].get('killed')) {
-  //       dead = true;
-  //     } else {
-  //       dead = false;
-  //       return false;
-  //     }
-  //   }
-  //   return dead;
-  // }
+
   enemyClick(event) {
     // just for testing
     const index = event.target.id.split('enemy')[1] - 1;
     const enemy = this.props.state.enemyStats[index];
     enemy.killed = true;
-    dispatch({
-      type: types.UPDATE_ENEMY_STATS,
-      enemy,
-      id: index
-    });
+    const element = document.getElementById(enemy.attackerId);
+    this.enemyKilledFadeOut(element, enemy, index);
+
     // const { attacker, target } = this.props.state.whoIsAttacking;
     // if (attacker.includes('hero') && !target) {
     //   dispatch({
