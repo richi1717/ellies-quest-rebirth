@@ -3,6 +3,23 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 export default function StatusWindow(props) {
+  function renderNames() {
+    const { characterStats, whoIsAttacking } = props.state;
+    const names = [];
+    let incr = 0;
+
+    characterStats.map((h) => {
+      incr++;
+      const selected = h.attackerId === whoIsAttacking.attacker ? 'character-turn' : '';
+      names.push(
+        <tr key={incr}>
+          <td className={`menu-select character ${selected}`}>{h.name}</td>
+        </tr>
+      );
+    });
+    return names;
+  }
+
   function showStatusPerCharacter() {
     const status = [];
     let incr = 0;
@@ -12,20 +29,22 @@ export default function StatusWindow(props) {
       const hpPercentage = Math.ceil((h.currentHp / h.maxHp) * 100);
       const mpPercentage = Math.ceil((h.currentMp / h.maxMp) * 100);
       const lowHealth = {
-        'low-health': hpPercentage <= 25
+        'low-health': hpPercentage <= 25,
+        'health-bar': true
       };
       const lowMagic = {
-        'low-magic': mpPercentage <= 25
+        'low-magic': mpPercentage <= 25,
+        'magic-bar': true
       };
       status.push(
         <tr key={incr}>
-          <td className={`health-bar ${classnames(lowHealth)}`}>
+          <td className={classnames(lowHealth)}>
             {h.currentHp}/{h.maxHp}
             <div>
               <span style={{ width: `${hpPercentage}%` }} />
             </div>
           </td>
-          <td className={`magic-bar ${classnames(lowMagic)}`}>
+          <td className={classnames(lowMagic)}>
             {h.currentMp}/{h.maxMp}
             <div>
               <span style={{ width: `${mpPercentage}%` }} />
@@ -35,22 +54,6 @@ export default function StatusWindow(props) {
       );
     });
     return status;
-  }
-
-  function renderNames() {
-    const names = [];
-    let incr = 0;
-
-    props.state.characterStats.map((h) => {
-      incr++;
-      const selected = h.attackerId === props.state.whoIsAttacking.attacker ? 'character-turn' : '';
-      names.push(
-        <tr key={incr}>
-          <td className={`menu-select character ${selected}`}>{h.name}</td>
-        </tr>
-      );
-    });
-    return names;
   }
 
   return (

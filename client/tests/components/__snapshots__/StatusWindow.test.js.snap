@@ -57,7 +57,7 @@ exports[`<StatusWindow /> should match snapshot 1`] = `
       <tbody>
         <tr>
           <td
-            className="health-bar "
+            className="health-bar"
           >
             150
             /
@@ -73,7 +73,7 @@ exports[`<StatusWindow /> should match snapshot 1`] = `
             </div>
           </td>
           <td
-            className="magic-bar "
+            className="magic-bar"
           >
             30
             /
@@ -91,7 +91,7 @@ exports[`<StatusWindow /> should match snapshot 1`] = `
         </tr>
         <tr>
           <td
-            className="health-bar "
+            className="health-bar"
           >
             219
             /
@@ -107,7 +107,7 @@ exports[`<StatusWindow /> should match snapshot 1`] = `
             </div>
           </td>
           <td
-            className="magic-bar "
+            className="magic-bar"
           >
             50
             /
@@ -125,7 +125,7 @@ exports[`<StatusWindow /> should match snapshot 1`] = `
         </tr>
         <tr>
           <td
-            className="health-bar "
+            className="health-bar"
           >
             219
             /
@@ -141,7 +141,7 @@ exports[`<StatusWindow /> should match snapshot 1`] = `
             </div>
           </td>
           <td
-            className="magic-bar "
+            className="magic-bar"
           >
             50
             /

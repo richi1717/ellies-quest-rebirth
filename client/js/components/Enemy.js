@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classnames from 'classnames';
+// import classnames from 'classnames';
 import { EnemyAttackFX } from './SoundEffects';
 import dispatch from '../dispatch';
 import types from '../constants/actionTypes';
@@ -291,12 +291,7 @@ export default class Enemy extends Component {
 
   render() {
     const { state, position } = this.props;
-    // const ENEMY_CLASS = {
-    //   'enemy-sprites': true,
-    //   'enemy-attack-hero0': this.state.isAttackingHero0,
-    //   'enemy-attack-hero1': this.state.isAttackingHero1,
-    //   'enemy-attack-hero2': this.state.isAttackingHero2
-    // };
+    const { attacker } = state.whoIsAttacking;
 
     // const DMG_DISPLAY = document.getElementById(`dmg-display${this.props.position}`);
     const enemyId = `enemy${position}`;
@@ -310,9 +305,7 @@ export default class Enemy extends Component {
           >
             {/*{this.showDamageOverHead()}*/}
           </button>
-          {this.state.isAttackingHero0 ? <EnemyAttackFX /> : null}
-          {this.state.isAttackingHero1 ? <EnemyAttackFX /> : null}
-          {this.state.isAttackingHero2 ? <EnemyAttackFX /> : null}
+          {attacker === enemyId && <EnemyAttackFX />}
         </div>
       );
     }

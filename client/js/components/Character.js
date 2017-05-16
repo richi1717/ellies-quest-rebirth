@@ -18,11 +18,12 @@ export default class Character extends Component {
     };
   }
 
-  // shouldComponentUpdate() {
-  //   const HERO = 'isHero' + this.props.position + 'Dead';
-  //   const IS_HERO_DEAD_AND_NOT_REVIVE = this.props[HERO] && this.props.getItemObject.type !== 'Revive';
-  //   return !IS_HERO_DEAD_AND_NOT_REVIVE;
-  // }
+  shouldComponentUpdate() {
+    const { state, position } = this.props;
+    const isHeroDeadAndNotBeingRevived = state.characterStats[position - 1].killed;
+      // && this.props.getItemObject.type !== 'Revive';
+    return !isHeroDeadAndNotBeingRevived;
+  }
 
   //
   // setHeroAttackingAnimation() {

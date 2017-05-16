@@ -22,7 +22,10 @@ describe('<Character />', () => {
         ],
         whoIsAttacking: {
           attacker: 'hero2'
-        }
+        },
+        characterStats: [
+          { killed: false }
+        ]
       },
       killed: false,
       classes: 'red-boy',

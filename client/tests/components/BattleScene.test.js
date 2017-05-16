@@ -18,6 +18,17 @@ describe('<BattleScene />', () => {
     expect(battleScene.getNode()).toMatchSnapshot();
   });
 
+  test('should have default propTypes', () => {
+    battleScene = shallow(
+      <BattleScene>
+        <div className="test" />
+      </BattleScene>
+    );
+
+    expect(battleScene).toHaveClassName('forest-battle');
+    expect(battleScene.find(NormalBattleMusic)).toHaveLength(0);
+  });
+
   test('should have a className of grass-battle battle', () => {
     expect(battleScene).toHaveClassName('grass-battle battle');
   });

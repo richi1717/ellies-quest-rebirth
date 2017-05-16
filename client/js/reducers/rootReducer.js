@@ -8,7 +8,8 @@ const defaults = {
   characterStats: [],
   enemyStats: [],
   isBackgroundMusicOn: { data: false },
-  whoIsAttacking: { attacker: '', target: '', typeOfAttack: '' }
+  whoIsAttacking: { attacker: '', target: '', typeOfAttack: '' },
+  battleMenuAction: { selection: '', hero: '' }
 };
 
 export default function rootReducer(state = defaults, action) {
@@ -21,6 +22,8 @@ export default function rootReducer(state = defaults, action) {
       return _merge({}, state, { enemyStats: enemyStatsReducer(state.enemyStats, action) });
     case types.BACKGROUND_MUSIC_SWITCH:
       return _assign({}, state, { isBackgroundMusicOn: { data: action.isBackgroundMusicOn } });
+    case types.SET_BATTLE_MENU_ACTION:
+      return _assign({}, state, { battleMenuAction: { selection: action.selection, hero: action.hero } });
     case types.SET_ATTACKER_AND_TARGET:
       return _assign({}, state, { whoIsAttacking: {
         attacker: action.attacker,

@@ -15,14 +15,16 @@ describe('rootReducer', () => {
       characterStats: [{ killed: false }],
       enemyStats: [{ yolo: true }],
       isBackgroundMusicOn: { data: false },
-      whoIsAttacking: { attacker: 'hero1', target: 'monster2', typeOfAttack: 'attack' }
+      whoIsAttacking: { attacker: 'hero1', target: 'monster2', typeOfAttack: 'attack' },
+      battleMenuAction: { selection: 'run', hero: '1' }
     };
     newState = {
       enemyInfo: { data: '' },
       characterStats: [],
       enemyStats: [],
       isBackgroundMusicOn: { data: true },
-      whoIsAttacking: { attacker: 'hero2', target: '', typeOfAttack: 'magic' }
+      whoIsAttacking: { attacker: 'hero2', target: '', typeOfAttack: 'magic' },
+      battleMenuAction: { selection: 'defend', hero: '2' }
     };
   });
 
@@ -31,7 +33,8 @@ describe('rootReducer', () => {
       characterStats: [],
       enemyStats: [],
       isBackgroundMusicOn: { data: false },
-      whoIsAttacking: { attacker: '', target: '', typeOfAttack: '' }
+      whoIsAttacking: { attacker: '', target: '', typeOfAttack: '' },
+      battleMenuAction: { selection: '', hero: '' }
     });
   });
 
@@ -44,7 +47,8 @@ describe('rootReducer', () => {
       characterStats: [],
       enemyStats: [],
       isBackgroundMusicOn: { data: false },
-      whoIsAttacking: { attacker: '', target: '', typeOfAttack: '' }
+      whoIsAttacking: { attacker: '', target: '', typeOfAttack: '' },
+      battleMenuAction: { selection: '', hero: '' }
     });
   });
 
@@ -56,7 +60,22 @@ describe('rootReducer', () => {
       characterStats: oldState.characterStats,
       enemyStats: oldState.enemyStats,
       isBackgroundMusicOn: { data: true },
-      whoIsAttacking: oldState.whoIsAttacking
+      whoIsAttacking: oldState.whoIsAttacking,
+      battleMenuAction: oldState.battleMenuAction
+    });
+  });
+
+  test('SET_BATTLE_MENU_ACTION > should update battleMenuAction', () => {
+    expect(rootReducer(oldState, {
+      type: types.SET_BATTLE_MENU_ACTION,
+      selection: 'defend',
+      hero: '2'
+    })).toEqual({
+      characterStats: oldState.characterStats,
+      enemyStats: oldState.enemyStats,
+      isBackgroundMusicOn: { data: false },
+      whoIsAttacking: oldState.whoIsAttacking,
+      battleMenuAction: newState.battleMenuAction
     });
   });
 

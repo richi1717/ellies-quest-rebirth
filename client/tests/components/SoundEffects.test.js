@@ -36,7 +36,7 @@ describe('sounds/music helper function', () => {
   describe('<HeroAttackFX />', () => {
     test('renders HeroAttackFX component', () => {
       const wrapper = shallow(<HeroAttackFX />);
-      // expect(wrapper).toHaveLength(1);
+      expect(wrapper).toHaveLength(1);
       expect(wrapper.contains(
         <audio
           src="/resources/music/sword-slash.mp3"

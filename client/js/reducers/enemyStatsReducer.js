@@ -7,6 +7,7 @@ export default function (enemyStats, action) {
     accuracy: enemy.accuracy,
     agility: enemy.agility,
     attack: enemy.attack,
+    attackerId: `enemy${action.id + 1}`,
     classes: enemy.classes,
     currentHp: enemy.currentHp,
     currentMp: enemy.currentMp,
