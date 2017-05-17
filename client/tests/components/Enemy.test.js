@@ -3,8 +3,10 @@ import { shallow } from 'enzyme';
 import Enemy from '../../js/components/Enemy';
 import { EnemyAttackFX } from '../../js/components/SoundEffects';
 import dispatch from '../../js/dispatch';
+import damageCalculation from '../../js/helpers/damageCalc';
 
 jest.mock('../../js/dispatch');
+jest.mock('../../js/helpers/damageCalc');
 
 describe('<Enemy />', () => {
   let enemy;
@@ -24,10 +26,20 @@ describe('<Enemy />', () => {
     props = {
       state: {
         enemyStats: [
-          { killed: false }
+          {
+            killed: false,
+            def: 10,
+            currentHp: 1
+          }
+        ],
+        characterStats: [
+          {
+            str: 10,
+            exp: 10
+          }
         ],
         whoIsAttacking: {
-          attacker: ''
+          attacker: 'hero1'
         }
       },
       position: 1,
@@ -51,9 +63,35 @@ describe('<Enemy />', () => {
     enemy = shallow(<Enemy {...props} />);
     expect(enemy.find(EnemyAttackFX)).toHaveLength(1);
   });
+  //
+  // test('should have EnemyAttackFX if attacker is the same as the enemyId', () => {
+  //   props.state.whoIsAttacking.attacker = 'enemy1';
+  //   enemy = shallow(<Enemy {...props} />);
+  //   enemy.find('button').simulate('click', { target: { id: 'enemy1' } });
+  //   expect(enemy).toHaveLength(1);
+  // });
 
   test('should call dispatch when enemy is clicked', () => {
+    damageCalculation.mockImplementation(() => 1);
     enemy.find('button').simulate('click', { target: { id: 'enemy1' } });
-    expect(dispatch).toHaveBeenCalled();
+    expect(dispatch).toHaveBeenCalledTimes(2);
+    expect(dispatch).lastCalledWith({
+      type: 'SET_ATTACKER_AND_TARGET',
+      attacker: '',
+      target: '',
+      typeOfAttack: ''
+    });
+  });
+
+  test('should call dispatch when enemy is clicked', () => {
+    damageCalculation.mockImplementation(() => 1);
+    props.state.enemyStats[0].currentHp = 100;
+    enemy.find('button').simulate('click', { target: { id: 'enemy1' } });
+    expect(dispatch).lastCalledWith({
+      type: 'SET_ATTACKER_AND_TARGET',
+      attacker: '',
+      target: '',
+      typeOfAttack: ''
+    });
   });
 });
