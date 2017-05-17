@@ -18,7 +18,7 @@ export default class Enemy extends Component {
       isAttackingHero2: false
     };
 
-    const endTurn = (enemy, id) => {
+    this.completePhase = (enemy, id) => {
       dispatch({
         type: types.UPDATE_ENEMY_STATS,
         enemy,
@@ -31,53 +31,7 @@ export default class Enemy extends Component {
         typeOfAttack: ''
       });
     };
-    this.completePhase = endTurn;
-    // this.isEnemyAlive = this.isEnemyAlive.bind(this);
   }
-  //
-  // shouldComponentUpdate() {
-  //   // console.log(this.areAllEnemiesDead(), this.isEnemyAlive());
-  //   if (this.areAllEnemiesDead() || (!this.isEnemyAlive() && this.props.getNextTurn !== 'enemy' + this.props.position)) {
-  //     // console.log('false');
-  //     return false;
-  //   } else {
-  //     // console.log('true');
-  //     return true;
-  //   }
-  // }
-  //
-  // componentDidMount() {
-  //   setTimeOutHelper(2000 - this.props.turnSpeed, this.props.setListOfTurnOrder, 'enemy' + this.props.position);
-  // }
-  //
-  // componentDidUpdate() {
-  //   if (this.props.getNextTurn === 'fake0') {
-  //     this.setInitialTurn();
-  //   } else if (this.props.isPauseBetweenTurns) {
-  //     this.dmg = null;
-  //   // } else if (!this.isEnemyAlive() && this.props.getNextTurn === 'enemy' + this.props.position) {
-  //   //   console.log('in first else if');
-  //   //   // this.props.setNextTurnFromList(this.props.getListOfTurnOrder);
-  //   } else if (!this.props.isEnemyAttacking && this.props.getNextTurn === 'enemy' + this.props.position) {
-  //     console.log('second else if');
-  //     console.log('attacking hero! from: enemy' + this.props.position);
-  //     this.props.setEnemyAttacking(true);
-  //     setTimeout(function () {
-  //       this.handleEnemyAttacking();
-  //       this.props.setEnemyAttacking(false);
-  //     }.bind(this), 1000);
-  //   } else if (this.props['isEnemyTarget' + this.props.position].attacking) {
-  //     const DMG_DISPLAY = document.getElementById('dmg-display' + this.props.position);
-  //     this.damageDisplayFadeIn(DMG_DISPLAY, 'block');
-  //   }
-  // }
-  //
-  // setInitialTurn() {
-  //   if (this.props.getListOfTurnOrder.toJS()[0] === 'enemy' + this.props.position) {
-  //     this.props.setNextTurnFromList(this.props.getListOfTurnOrder);
-  //   }
-  // }
-  //
   // getRandomTargetForAttack() {
   //   console.log('inside random');
   //   const TARGET = _.random(1, this.props.heroLength) - 1;
@@ -122,29 +76,6 @@ export default class Enemy extends Component {
   //   }
   // }
   //
-  // handleEnemyAttacking() {
-  //   if (!this.state.isAttackingHero0 || !this.state.isAttackingHero1 || !this.state.isAttackHero2) {
-  //     const TARGET = this.getRandomTargetForAttack();
-  //     console.log("attacking hero" + TARGET);
-  //     this.props.setEnemySelectedTarget('hero' + TARGET, getBaseDamage(this.props.str, this.props.level));
-  //     this.props.setPauseBetweenTurns(true);
-  //     this.props.setListOfTurnOrder(this.props.getNextTurn);
-  //     this.props.setNextTurnFromList(this.props.getListOfTurnOrder);
-  //     this.setState({
-  //       isAttackingHero0: TARGET === 0 ? true : false,
-  //       isAttackingHero1: TARGET === 1 ? true : false,
-  //       isAttackingHero2: TARGET === 2 ? true : false
-  //     });
-  //     setTimeout(function () {
-  //       this.setState({
-  //         isAttackingHero0: false,
-  //         isAttackingHero1: false,
-  //         isAttackingHero2: false
-  //       });
-  //     }.bind(this), 850);
-  //   }
-  // }
-  //
   // handleHeroAttacking(enemyTarget) {
   //   console.log(this.props.position);
   //   const ENEMY_STATS = this.props['enemyStats' + this.props.position];
@@ -176,31 +107,6 @@ export default class Enemy extends Component {
   //   let damage = damageCalculation(POWER, enemy.def, this.props.heroStr);
   //   damage = damage > 0 ? damage : 1;
   //   return damage;
-  // }
-  //
-  // handleClick() {
-  //   if (this.props.isHero0Attacking) {
-  //     const ENEMY_TARGET = this.props['isEnemyTarget' + this.props.position];
-  //     this.handleHeroAttacking(ENEMY_TARGET);
-  //     this.props.setHeroToEnemyTarget(true, this.props.position);
-  //     this.props.setMenuAttackSelected(false);
-  //     setTimeOutHelper(1300, this.props.setHeroToEnemyTarget, false, this.props.position);
-  //     console.log('finished');
-  //   } else if (this.props.isHero1Attacking) {
-  //     const ENEMY_TARGET = this.props['isEnemyTarget' + this.props.position];
-  //     this.handleHeroAttacking(ENEMY_TARGET);
-  //     this.props.setHeroToEnemyTarget(true, this.props.position);
-  //     this.props.setMenuAttackSelected(false);
-  //     setTimeOutHelper(1300, this.props.setHeroToEnemyTarget, false, this.props.position);
-  //     console.log('finished');
-  //   } else if (this.props.isHero2Attacking) {
-  //     const ENEMY_TARGET = this.props['isEnemyTarget' + this.props.position];
-  //     this.handleHeroAttacking(ENEMY_TARGET);
-  //     this.props.setHeroToEnemyTarget(true, this.props.position);
-  //     this.props.setMenuAttackSelected(false);
-  //     setTimeOutHelper(1300, this.props.setHeroToEnemyTarget, false, this.props.position);
-  //     console.log('finished');
-  //   }
   // }
   //
   // damageDisplayFadeIn(element, display) {
@@ -253,31 +159,12 @@ export default class Enemy extends Component {
   // }
 
   enemyClick(event) {
-    // just for testing
-    const index = event.target.id.split('enemy')[1] - 1;
     const { enemyStats, characterStats, whoIsAttacking } = this.props.state;
+    const index = event.target.id.split('enemy')[1] - 1;
     const enemy = enemyStats[index];
     const { attacker } = whoIsAttacking;
-    // enemy.killed = true;
 
     if (attacker.includes('hero')) this.attackEnemy(enemy, attacker, characterStats, index);
-    // if (attacker.includes('hero') && !target) {
-    //   dispatch({
-    //     type: types.SET_ATTACKER_AND_TARGET,
-    //     attacker,
-    //     target: event.target.id,
-    //     typeOfAttack: ''
-    //   });
-    // }
-    //
-    // if (!attacker.includes('hero') && attacker !== event.target.id) {
-    //   dispatch({
-    //     type: types.SET_ATTACKER_AND_TARGET,
-    //     attacker: event.target.id,
-    //     target: '',
-    //     typeOfAttack: ''
-    //   });
-    // }
   }
 
   attackEnemy(enemy, attacker, characterStats, index) {
@@ -290,8 +177,8 @@ export default class Enemy extends Component {
     if (killed) {
       enemyCopy.currentHp = 0;
       enemyCopy.killed = killed;
-
       const element = document.getElementById(enemyCopy.attackerId);
+
       this.enemyKilledFadeOut(element, enemyCopy, index);
     } else {
       this.completePhase(enemyCopy, index);
