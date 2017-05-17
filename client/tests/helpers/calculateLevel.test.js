@@ -1,4 +1,4 @@
-import * as calc from '../../js/helpers/calculate-level';
+import * as calc from '../../js/helpers/levelCalc';
 
 describe('calculate level helper function', () => {
   it('should calculate the level based on no experience passed to calcLevel()', () => {

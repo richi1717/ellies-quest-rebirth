@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import _assign from 'lodash.assign';
 // import classnames from 'classnames';
 import { EnemyAttackFX } from './SoundEffects';
 import dispatch from '../dispatch';
 import types from '../constants/actionTypes';
 // import setTimeoutHelper from '../helpers/time-out';
-// import { damageCalculation, getBaseDamage } from '../helpers/damage-calc';
-// import { calcLevel } from '../helpers/calculate-level';
+import damageCalculation from '../helpers/damageCalc';
 
 export default class Enemy extends Component {
   constructor(props) {
@@ -18,6 +18,20 @@ export default class Enemy extends Component {
       isAttackingHero2: false
     };
 
+    const endTurn = (enemy, id) => {
+      dispatch({
+        type: types.UPDATE_ENEMY_STATS,
+        enemy,
+        id
+      });
+      dispatch({
+        type: types.SET_ATTACKER_AND_TARGET,
+        attacker: '',
+        target: '',
+        typeOfAttack: ''
+      });
+    };
+    this.completePhase = endTurn;
     // this.isEnemyAlive = this.isEnemyAlive.bind(this);
   }
   //
@@ -211,20 +225,19 @@ export default class Enemy extends Component {
     element.style.opacity = 1;
     element.style.display = 'block';
 
-    (function fade() {
+    const fade = () => {
       let val = parseFloat(element.style.opacity);
+
       if (!((val - 0.01) < 0)) {
         val -= 0.01;
         element.style.opacity = val;
         requestAnimationFrame(fade);
       } else {
-        dispatch({
-          type: types.UPDATE_ENEMY_STATS,
-          enemy,
-          id
-        });
+        this.completePhase(enemy, id);
       }
-    }());
+    };
+
+    fade();
   }
   //
   // showDamageOverHead() {
@@ -242,12 +255,12 @@ export default class Enemy extends Component {
   enemyClick(event) {
     // just for testing
     const index = event.target.id.split('enemy')[1] - 1;
-    const enemy = this.props.state.enemyStats[index];
-    enemy.killed = true;
-    const element = document.getElementById(enemy.attackerId);
-    this.enemyKilledFadeOut(element, enemy, index);
+    const { enemyStats, characterStats, whoIsAttacking } = this.props.state;
+    const enemy = enemyStats[index];
+    const { attacker } = whoIsAttacking;
+    // enemy.killed = true;
 
-    // const { attacker, target } = this.props.state.whoIsAttacking;
+    if (attacker.includes('hero')) this.attackEnemy(enemy, attacker, characterStats, index);
     // if (attacker.includes('hero') && !target) {
     //   dispatch({
     //     type: types.SET_ATTACKER_AND_TARGET,
@@ -265,6 +278,24 @@ export default class Enemy extends Component {
     //     typeOfAttack: ''
     //   });
     // }
+  }
+
+  attackEnemy(enemy, attacker, characterStats, index) {
+    const enemyCopy = _assign({}, enemy);
+    const hero = characterStats[attacker.split('hero')[1] - 1];
+    const dmg = damageCalculation(hero, enemyCopy);
+    const killed = dmg >= enemyCopy.currentHp;
+    enemyCopy.currentHp -= dmg;
+
+    if (killed) {
+      enemyCopy.currentHp = 0;
+      enemyCopy.killed = killed;
+
+      const element = document.getElementById(enemyCopy.attackerId);
+      this.enemyKilledFadeOut(element, enemyCopy, index);
+    } else {
+      this.completePhase(enemyCopy, index);
+    }
   }
 
   render() {
