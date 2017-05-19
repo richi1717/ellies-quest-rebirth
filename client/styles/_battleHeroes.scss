@@ -1,5 +1,6 @@
 .battle-hero {
   z-index: 1;
+  transition: top 1s ease, left 1s ease;
 
   &.position1 {
     position: absolute;
@@ -30,29 +31,29 @@
     left: 0;
   }
 
-  &.attack-enemy0 {
-    top: 31%;
-    left: 65vw;
-  }
-
   &.attack-enemy1 {
-    top: 47%;
-    left: 65vw;
+    top: 31%;
+    left: -140%;
   }
 
   &.attack-enemy2 {
-    top: 43%;
-    left: 80vw;
+    top: 47%;
+    left: -140%;
   }
 
   &.attack-enemy3 {
-    top: 30%;
-    left: 78vw;
+    top: 43%;
+    left: -170%;
   }
 
   &.attack-enemy4 {
+    top: 30%;
+    left: -170%;
+  }
+
+  &.attack-enemy5 {
     top: 57%;
-    left: 78vw;
+    left: -170%;
   }
 
   &.red-boy {
@@ -72,6 +73,7 @@
   }
 
   &.attack-swing {
+    transition: top 1s ease, left 1s ease, background-position-x 0s ease 1s;
     background-position-x: -210px;
   }
 
@@ -80,6 +82,7 @@
   }
 
   &.dead {
+    //transition: background-position-x 0s ease 1s;
     background-position-x: -600px;
   }
 

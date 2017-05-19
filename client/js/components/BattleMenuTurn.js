@@ -9,8 +9,7 @@ export default class BattleMenuTurn extends Component {
     const setMenuAction = (selection) => () => {
       dispatch({
         type: types.SET_BATTLE_MENU_ACTION,
-        selection,
-        hero: this.props.state.whoIsAttacking.attacker
+        selection
       });
     };
 
@@ -33,7 +32,6 @@ export default class BattleMenuTurn extends Component {
             <li><button onClick={this.itemsClick} className="menu-select" id="items">Items</button></li>
             <li><button onClick={this.runClick} className="menu-select" id="run">RUN!</button></li>
           </div>
-          {this.props.children}
         </div>
       );
     }

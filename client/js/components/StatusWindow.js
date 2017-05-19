@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import dispatch from '../dispatch';
+import types from '../constants/actionTypes';
 
 export default function StatusWindow(props) {
   function renderNames() {
@@ -13,7 +15,17 @@ export default function StatusWindow(props) {
       const selected = h.attackerId === whoIsAttacking.attacker ? 'character-turn' : '';
       names.push(
         <tr key={incr}>
-          <td className={`menu-select character ${selected}`}>{h.name}</td>
+          <td>
+            <button
+              onClick={() => dispatch({
+                type: types.SET_ATTACKER_AND_TARGET,
+                attacker: h.attackerId,
+                target: '',
+                typeOfAttack: ''
+              })}
+              className={`menu-select character ${selected}`}
+            >{h.name}</button>
+          </td>
         </tr>
       );
     });

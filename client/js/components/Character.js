@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import _filter from 'lodash.filter';
 import dispatch from '../dispatch';
 import types from '../constants/actionTypes';
-import { HeroAttackFX } from './SoundEffects';
+import { heroAttackFX } from './SoundEffects';
 import Victory from './Victory';
 // import setTimeoutHelper from '../helpers/time-out';
 // import { damageCalculation, getBaseDamage } from '../helpers/damage-calc';
@@ -26,14 +26,20 @@ export default class Character extends Component {
   }
 
   //
-  // setHeroAttackingAnimation() {
-  //   setTimeout(function () {
-  //     this.setState({ pos2: true });
-  //   }.bind(this), 550);
-  //   setTimeout(function () {
-  //     this.setState({ pos2: false });
-  //   }.bind(this), 1300);
-  // }
+  setHeroAttackingAnimation() {
+    setTimeout(() => {
+      heroAttackFX();
+    }, 800);
+    // setTimeout(() => {
+    //   // dispatch({
+    //   //   type: types.SET_ATTACKER_AND_TARGET,
+    //   //   attacker: '',
+    //   //   target: '',
+    //   //   typeOfAttack: ''
+    //   // });
+    //   this.setState({ pos2: false });
+    // }, 1300);
+  }
   //
   // setNextTurnAfterHeroIsDone() {
   //   setTimeOutHelper(1000, this.props.setPauseBetweenTurns, true);
@@ -148,83 +154,27 @@ export default class Character extends Component {
     );
   }
 
-  //
-  //
-  // enemySelectionPositionClasses(nameOfClass) {
-  //   nameOfClass['attack-enemy0'] = this.props.isEnemyTarget0;
-  //   nameOfClass['attack-enemy1'] = this.props.isEnemyTarget1;
-  //   nameOfClass['attack-enemy2'] = this.props.isEnemyTarget2;
-  //   nameOfClass['attack-enemy3'] = this.props.isEnemyTarget3;
-  //   nameOfClass['attack-enemy4'] = this.props.isEnemyTarget4;
-  // }
-  //
-  // handleClick() {
-  //   if (this.props.isItemSelected && this.props.getItemObject.length !== 0) {
-  //     switch (this.props.getItemObject.type) {
-  //       case 'HP restore': {
-  //         // TODO rewrite this to not use the same action but to close turn window
-  //         this.props.setHeroToEnemyTarget(true, this.props.position);
-  //         this.props.setItemSelectedBoolean(false);
-  //         this.props.setItemObjectFromSelection(null);
-  //         this.props.setMenuItemsSelected(false);
-  //         this.handleItemUseOnHero(this.props.getItemObject.str, this.props['hero' + this.props.position + 'Stats'], this.props.position, 'hp');
-  //         this.setNextTurnAfterHeroIsDone();
-  //         break;
-  //       }
-  //       case 'MP restore': {
-  //
-  //       }
-  //       case 'HP MP restore': {
-  //
-  //       }
-  //       case 'Revive': {
-  //         if (this.props[`isHero${this.props.position}Dead`]) {
-  //           console.log('risen like Jesus!!');
-  //         }
-  //       }
-  //       // default: {
-  //       //   return false;
-  //       // }
-  //     }
-  //     console.log(this.props.getItemObject);
-  //   }
-  // }
-  heroClick(event) {
-    const { attacker } = this.props.state.whoIsAttacking;
-    if (attacker !== event.target.id) {
-      dispatch({
-        type: types.SET_ATTACKER_AND_TARGET,
-        attacker: event.target.id,
-        target: '',
-        typeOfAttack: ''
-      });
-    }
-  }
-
   render() {
     const { position, killed, classes, state, attackerId } = this.props;
-    const areAllEnemiesDead = _filter(state.enemyStats, { killed: false }).length === 0;
+    const { whoIsAttacking } = state;
+    const isHeroAttacking = whoIsAttacking.target && whoIsAttacking.attacker === attackerId;
+    isHeroAttacking && this.setHeroAttackingAnimation();
+
     const heroClass = {
-      'battle-hero': true,
-      'battle-ff-sprite': true,
+      [`battle-hero battle-ff-sprite position${position} ${classes}`]: true,
       'front-row': position < 3,
       'back-row': position >= 3,
       'dead': killed,
-      [`position${position}`]: true,
-      'attacking hero-turn': state.whoIsAttacking.attacker === attackerId
+      'attacking hero-turn': whoIsAttacking.attacker === attackerId,
+      [`attack-${whoIsAttacking.target}`]: isHeroAttacking,
+      'attack-swing': isHeroAttacking
     };
 
     return (
       <div>
-        <button
-          id={attackerId}
-          onClick={event => this.heroClick(event)}
-          className={`${classnames(heroClass)} ${classes}`}
-        >
+        <div className={`${classnames(heroClass)}`}>
           {this.showDamageOverHead()}
-          {areAllEnemiesDead ? <Victory /> : null}
-        </button>
-        {this.state.pos2 ? <HeroAttackFX /> : null}
+        </div>
       </div>
     );
   }

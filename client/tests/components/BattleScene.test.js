@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import BattleScene from '../../js/components/BattleScene';
-import { NormalBattleMusic } from '../../js/components/SoundEffects';
+import { normalBattleMusic } from '../../js/components/SoundEffects';
 
 describe('<BattleScene />', () => {
   let battleScene;
@@ -26,15 +26,15 @@ describe('<BattleScene />', () => {
     );
 
     expect(battleScene).toHaveClassName('forest-battle');
-    expect(battleScene.find(NormalBattleMusic)).toHaveLength(0);
+    expect(battleScene.find(normalBattleMusic)).toHaveLength(0);
   });
 
   test('should have a className of grass-battle battle', () => {
     expect(battleScene).toHaveClassName('grass-battle battle');
   });
 
-  test('should render NormalBattleMusic when playMusic is true', () => {
-    expect(battleScene.find(NormalBattleMusic)).toHaveLength(1);
+  test('should render normalBattleMusic when playMusic is true', () => {
+    expect(battleScene.find(normalBattleMusic)).toHaveLength(1);
   });
 
   test('should have a child with className of test', () => {

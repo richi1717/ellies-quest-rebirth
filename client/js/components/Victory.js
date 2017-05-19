@@ -1,11 +1,11 @@
 import React from 'react';
-import { BattleVictoryMusic } from './SoundEffects';
+import { battleVictoryMusic } from './SoundEffects';
 
 export default function Victory() {
+  battleVictoryMusic();
   return (
     <div style={{ color: 'black' }}>
       You Win!!!!!!!
-      <BattleVictoryMusic />
     </div>
   );
 }

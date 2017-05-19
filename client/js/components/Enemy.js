@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import _assign from 'lodash.assign';
 // import classnames from 'classnames';
-import { EnemyAttackFX } from './SoundEffects';
+import { enemyAttackFX } from './SoundEffects';
 import dispatch from '../dispatch';
 import types from '../constants/actionTypes';
 // import setTimeoutHelper from '../helpers/time-out';
@@ -18,19 +18,13 @@ export default class Enemy extends Component {
       isAttackingHero2: false
     };
 
-    this.completePhase = (enemy, id) => {
-      dispatch({
-        type: types.UPDATE_ENEMY_STATS,
-        enemy,
-        id
-      });
-      dispatch({
-        type: types.SET_ATTACKER_AND_TARGET,
-        attacker: '',
-        target: '',
-        typeOfAttack: ''
-      });
-    };
+    // this.completePhase = (enemy, id) => {
+    //   dispatch({
+    //     type: types.END_HERO_TURN,
+    //     enemy,
+    //     id
+    //   });
+    // };
   }
   // getRandomTargetForAttack() {
   //   console.log('inside random');
@@ -126,25 +120,25 @@ export default class Enemy extends Component {
   //   })();
   // }
   //
-  enemyKilledFadeOut(e, enemy, id) {
-    const element = e;
-    element.style.opacity = 1;
-    element.style.display = 'block';
-
-    const fade = () => {
-      let val = parseFloat(element.style.opacity);
-
-      if (!((val - 0.01) < 0)) {
-        val -= 0.01;
-        element.style.opacity = val;
-        requestAnimationFrame(fade);
-      } else {
-        this.completePhase(enemy, id);
-      }
-    };
-
-    fade();
-  }
+  // enemyKilledFadeOut(e, enemy, id) {
+  //   const element = e;
+  //   element.style.opacity = 1;
+  //   element.style.display = 'block';
+  //
+  //   const fade = () => {
+  //     let val = parseFloat(element.style.opacity);
+  //
+  //     if (!((val - 0.01) < 0)) {
+  //       val -= 0.01;
+  //       element.style.opacity = val;
+  //       requestAnimationFrame(fade);
+  //     } else {
+  //       this.completePhase(enemy, id);
+  //     }
+  //   };
+  //
+  //   fade();
+  // }
   //
   // showDamageOverHead() {
   //   const STYLE = { display: 'none' };
@@ -159,20 +153,28 @@ export default class Enemy extends Component {
   // }
 
   enemyClick(event) {
-    const { enemyStats, characterStats, whoIsAttacking } = this.props.state;
-    const index = event.target.id.split('enemy')[1] - 1;
-    const enemy = enemyStats[index];
-    const { attacker } = whoIsAttacking;
-
-    if (attacker.includes('hero')) this.attackEnemy(enemy, attacker, characterStats, index);
+    // const { enemyStats, characterStats, whoIsAttacking } = this.props.state;
+    // const target = event.target.id;
+    // const index = target.split('enemy')[1] - 1;
+    // const enemy = enemyStats[index];
+    // const { attacker } = whoIsAttacking;
+    //
+    // if (attacker.includes('hero')) this.attackEnemy(target, enemy, attacker, characterStats, index);
   }
 
-  attackEnemy(enemy, attacker, characterStats, index) {
+  attackEnemy(target, enemy, attacker, characterStats, index) {
     const enemyCopy = _assign({}, enemy);
     const hero = characterStats[attacker.split('hero')[1] - 1];
     const dmg = damageCalculation(hero, enemyCopy);
     const killed = dmg >= enemyCopy.currentHp;
     enemyCopy.currentHp -= dmg;
+
+    dispatch({
+      type: types.SET_ATTACKER_AND_TARGET,
+      attacker,
+      target,
+      typeOfAttack: this.props.state.whoIsAttacking.typeOfAttack
+    });
 
     if (killed) {
       enemyCopy.currentHp = 0;
@@ -201,7 +203,7 @@ export default class Enemy extends Component {
           >
             {/*{this.showDamageOverHead()}*/}
           </button>
-          {attacker === enemyId && <EnemyAttackFX />}
+          {attacker === enemyId && <enemyAttackFX />}
         </div>
       );
     }

@@ -102,16 +102,17 @@
 .enemy1 {
   top: 32%;
   left: 22%;
+  z-index: 2;
 }
 
 .enemy1-movement {
   top: 32.5%;
-
 }
 
 .enemy2 {
   top: 48%;
   left: 22%;
+  z-index: 2;
 }
 
 .enemy2-movement {

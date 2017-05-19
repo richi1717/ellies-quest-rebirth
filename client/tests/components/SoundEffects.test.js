@@ -1,25 +1,25 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import {
-  EnemyAttackFX,
-  HeroAttackFX,
-  NormalBattleMusic,
-  BattleVictoryMusic,
-  FireMagicFX,
-  CureMagicFX,
-  CursorMovementFX,
-  LightningMagicFX,
-  BossBattleMusicPart1,
-  BossBattleMusicPart2,
-  GameOverMusic,
-  IntroMusic,
-  OverworldMusic
+  enemyAttackFX,
+  heroAttackFX,
+  normalBattleMusic,
+  battleVictoryMusic,
+  fireMagicFX,
+  cureMagicFX,
+  cursorMovementFX,
+  lightningMagicFX,
+  bossBattleMusicPart1,
+  bossBattleMusicPart2,
+  gameOverMusic,
+  introMusic,
+  overworldMusic
 } from '../../js/components/SoundEffects';
 
 describe('sounds/music helper function', () => {
-  describe('<EnemyAttackFX />', () => {
-    test('renders EnemyAttackFX component', () => {
-      const wrapper = shallow(<EnemyAttackFX />);
+  describe('<enemyAttackFX />', () => {
+    test('renders enemyAttackFX component', () => {
+      const wrapper = shallow(<enemyAttackFX />);
       expect(wrapper).toHaveLength(1);
       expect(wrapper.contains(
         <audio
@@ -33,9 +33,9 @@ describe('sounds/music helper function', () => {
     });
   });
 
-  describe('<HeroAttackFX />', () => {
-    test('renders HeroAttackFX component', () => {
-      const wrapper = shallow(<HeroAttackFX />);
+  describe('<heroAttackFX />', () => {
+    test('renders heroAttackFX component', () => {
+      const wrapper = shallow(<heroAttackFX />);
       expect(wrapper).toHaveLength(1);
       expect(wrapper.contains(
         <audio
@@ -49,9 +49,9 @@ describe('sounds/music helper function', () => {
     });
   });
 
-  describe('<NormalBattleMusic />', () => {
-    test('renders NormalBattleMusic component', () => {
-      const wrapper = shallow(<NormalBattleMusic />);
+  describe('<normalBattleMusic />', () => {
+    test('renders normalBattleMusic component', () => {
+      const wrapper = shallow(<normalBattleMusic />);
       expect(wrapper).toHaveLength(1);
       expect(wrapper.contains(
         <audio
@@ -65,9 +65,9 @@ describe('sounds/music helper function', () => {
     });
   });
 
-  describe('<BattleVictoryMusic />', () => {
-    test('renders BattleVictoryMusic component', () => {
-      const wrapper = shallow(<BattleVictoryMusic />);
+  describe('<battleVictoryMusic />', () => {
+    test('renders battleVictoryMusic component', () => {
+      const wrapper = shallow(<battleVictoryMusic />);
       expect(wrapper).toHaveLength(1);
       expect(wrapper.contains(
         <audio
@@ -81,9 +81,9 @@ describe('sounds/music helper function', () => {
     });
   });
 
-  describe('<FireMagicFX />', () => {
-    test('renders FireMagicFX component', () => {
-      const wrapper = shallow(<FireMagicFX />);
+  describe('<fireMagicFX />', () => {
+    test('renders fireMagicFX component', () => {
+      const wrapper = shallow(<fireMagicFX />);
       expect(wrapper).toHaveLength(1);
       expect(wrapper.contains(
         <audio
@@ -97,9 +97,9 @@ describe('sounds/music helper function', () => {
     });
   });
 
-  describe('<CureMagicFX />', () => {
-    test('renders CureMagicFX component', () => {
-      const wrapper = shallow(<CureMagicFX />);
+  describe('<cureMagicFX />', () => {
+    test('renders cureMagicFX component', () => {
+      const wrapper = shallow(<cureMagicFX />);
       expect(wrapper).toHaveLength(1);
       expect(wrapper.contains(
         <audio
@@ -113,9 +113,9 @@ describe('sounds/music helper function', () => {
     });
   });
 
-  describe('<CursorMovementFX />', () => {
-    test('renders CursorMovementFX component', () => {
-      const wrapper = shallow(<CursorMovementFX />);
+  describe('<cursorMovementFX />', () => {
+    test('renders cursorMovementFX component', () => {
+      const wrapper = shallow(<cursorMovementFX />);
       expect(wrapper).toHaveLength(1);
       expect(wrapper.contains(
         <audio
@@ -129,9 +129,9 @@ describe('sounds/music helper function', () => {
     });
   });
 
-  describe('<LightningMagicFX />', () => {
-    test('renders LightningMagicFX component', () => {
-      const wrapper = shallow(<LightningMagicFX />);
+  describe('<lightningMagicFX />', () => {
+    test('renders lightningMagicFX component', () => {
+      const wrapper = shallow(<lightningMagicFX />);
       expect(wrapper).toHaveLength(1);
       expect(wrapper.contains(
         <audio
@@ -145,9 +145,9 @@ describe('sounds/music helper function', () => {
     });
   });
 
-  describe('<BossBattleMusicPart1 />', () => {
-    test('renders BossBattleMusicPart1 component', () => {
-      const wrapper = shallow(<BossBattleMusicPart1 />);
+  describe('<bossBattleMusicPart1 />', () => {
+    test('renders bossBattleMusicPart1 component', () => {
+      const wrapper = shallow(<bossBattleMusicPart1 />);
       expect(wrapper).toHaveLength(1);
       expect(wrapper.contains(
         <audio
@@ -161,9 +161,9 @@ describe('sounds/music helper function', () => {
     });
   });
 
-  describe('<BossBattleMusicPart2 />', () => {
-    test('renders BossBattleMusicPart2 component', () => {
-      const wrapper = shallow(<BossBattleMusicPart2 />);
+  describe('<bossBattleMusicPart2 />', () => {
+    test('renders bossBattleMusicPart2 component', () => {
+      const wrapper = shallow(<bossBattleMusicPart2 />);
       expect(wrapper).toHaveLength(1);
       expect(wrapper.contains(
         <audio
@@ -177,9 +177,9 @@ describe('sounds/music helper function', () => {
     });
   });
 
-  describe('<GameOverMusic />', () => {
-    test('renders GameOverMusic component', () => {
-      const wrapper = shallow(<GameOverMusic />);
+  describe('<gameOverMusic />', () => {
+    test('renders gameOverMusic component', () => {
+      const wrapper = shallow(<gameOverMusic />);
       expect(wrapper).toHaveLength(1);
       expect(wrapper.contains(
         <audio
@@ -193,9 +193,9 @@ describe('sounds/music helper function', () => {
     });
   });
 
-  describe('<IntroMusic />', () => {
-    test('renders IntroMusic component', () => {
-      const wrapper = shallow(<IntroMusic />);
+  describe('<introMusic />', () => {
+    test('renders introMusic component', () => {
+      const wrapper = shallow(<introMusic />);
       expect(wrapper).toHaveLength(1);
       expect(wrapper.contains(
         <audio
@@ -209,9 +209,9 @@ describe('sounds/music helper function', () => {
     });
   });
 
-  describe('<OverworldMusic />', () => {
-    test('renders OverworldMusic component', () => {
-      const wrapper = shallow(<OverworldMusic />);
+  describe('<overworldMusic />', () => {
+    test('renders overworldMusic component', () => {
+      const wrapper = shallow(<overworldMusic />);
       expect(wrapper).toHaveLength(1);
       expect(wrapper.contains(
         <audio

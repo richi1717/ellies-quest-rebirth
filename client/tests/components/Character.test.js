@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 import dispatch from '../../js/dispatch';
 import Character from '../../js/components/Character';
 import types from '../../js/constants/actionTypes';
-import { HeroAttackFX } from '../../js/components/SoundEffects';
+import { heroAttackFX } from '../../js/components/SoundEffects';
 import Victory from '../../js/components/Victory';
 
 jest.mock('../../js/dispatch');
@@ -88,9 +88,9 @@ describe('<Character />', () => {
       expect(character.find(Victory)).toHaveLength(1);
     });
 
-    test('should have HeroAttackFX component when state.pos2 is true', () => {
+    test('should have heroAttackFX component when state.pos2 is true', () => {
       character.setState({ pos2: true });
-      expect(character.find(HeroAttackFX)).toHaveLength(1);
+      expect(character.find(heroAttackFX)).toHaveLength(1);
     });
   });
 });

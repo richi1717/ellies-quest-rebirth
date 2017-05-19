@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import attack from '../battleOrder/normalAttack';
 
 export default class BattleMenuListOfTargets extends Component {
   getRenderedListOfCharacters() {
@@ -39,7 +40,7 @@ export default class BattleMenuListOfTargets extends Component {
         enemyNames.push(
           <li key={enemy.attackerId}>
             <button
-              onClick={() => this.dispatchClickEvent(enemy.attackerId)}
+              onClick={() => attack(enemy.attackerId)}
               className="menu-select"
             >
               {enemy.name}
@@ -53,7 +54,7 @@ export default class BattleMenuListOfTargets extends Component {
   }
 
   dispatchClickEvent(id) {
-    document.getElementById(id).click();
+    attack(id);
   }
 
   isMoreThanFive() {

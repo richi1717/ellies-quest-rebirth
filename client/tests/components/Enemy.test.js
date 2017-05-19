@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import Enemy from '../../js/components/Enemy';
-import { EnemyAttackFX } from '../../js/components/SoundEffects';
+import { enemyAttackFX } from '../../js/components/SoundEffects';
 import dispatch from '../../js/dispatch';
 import damageCalculation from '../../js/helpers/damageCalc';
 
@@ -58,13 +58,13 @@ describe('<Enemy />', () => {
     expect(enemy.type()).toEqual(null);
   });
 
-  test('should have EnemyAttackFX if attacker is the same as the enemyId', () => {
+  test('should have enemyAttackFX if attacker is the same as the enemyId', () => {
     props.state.whoIsAttacking.attacker = 'enemy1';
     enemy = shallow(<Enemy {...props} />);
-    expect(enemy.find(EnemyAttackFX)).toHaveLength(1);
+    expect(enemy.find(enemyAttackFX)).toHaveLength(1);
   });
   //
-  // test('should have EnemyAttackFX if attacker is the same as the enemyId', () => {
+  // test('should have enemyAttackFX if attacker is the same as the enemyId', () => {
   //   props.state.whoIsAttacking.attacker = 'enemy1';
   //   enemy = shallow(<Enemy {...props} />);
   //   enemy.find('button').simulate('click', { target: { id: 'enemy1' } });

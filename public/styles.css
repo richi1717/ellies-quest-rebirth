@@ -23,7 +23,8 @@
   background-image: url("/resources/images/beach-battle.png"); }
 
 .battle-hero {
-  z-index: 1; }
+  z-index: 1;
+  transition: top 1s ease, left 1s ease; }
   .battle-hero.position1 {
     position: absolute;
     top: 30%; }
@@ -39,21 +40,21 @@
     left: 35%; }
   .battle-hero.hero-turn {
     left: 0; }
-  .battle-hero.attack-enemy0 {
-    top: 31%;
-    left: 65vw; }
   .battle-hero.attack-enemy1 {
-    top: 47%;
-    left: 65vw; }
+    top: 31%;
+    left: -140%; }
   .battle-hero.attack-enemy2 {
-    top: 43%;
-    left: 80vw; }
+    top: 47%;
+    left: -140%; }
   .battle-hero.attack-enemy3 {
-    top: 30%;
-    left: 78vw; }
+    top: 43%;
+    left: -170%; }
   .battle-hero.attack-enemy4 {
+    top: 30%;
+    left: -170%; }
+  .battle-hero.attack-enemy5 {
     top: 57%;
-    left: 78vw; }
+    left: -170%; }
   .battle-hero.red-boy {
     background-position: 6px 3px; }
   .battle-hero.white-girl {
@@ -63,6 +64,7 @@
   .battle-hero.attacking {
     background-position-x: -95px; }
   .battle-hero.attack-swing {
+    transition: top 1s ease, left 1s ease, background-position-x 0s ease 1s;
     background-position-x: -210px; }
   .battle-hero.defense {
     background-position-x: -310px; }
@@ -172,14 +174,16 @@
 
 .enemy1 {
   top: 32%;
-  left: 22%; }
+  left: 22%;
+  z-index: 2; }
 
 .enemy1-movement {
   top: 32.5%; }
 
 .enemy2 {
   top: 48%;
-  left: 22%; }
+  left: 22%;
+  z-index: 2; }
 
 .enemy2-movement {
   top: 48.5%; }
