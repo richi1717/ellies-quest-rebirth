@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { normalBattleMusic } from './SoundEffects';
 
 export default function BattleScene(props) {
+  props.playMusic && normalBattleMusic();
   return (
     <div className={`${props.battleScene}-battle battle`}>
-      {props.playMusic && <normalBattleMusic />}
       {props.children}
     </div>
   );

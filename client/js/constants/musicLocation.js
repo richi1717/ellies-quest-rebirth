@@ -1,7 +1,7 @@
 export default {
   enemyAttackFX: 'swipe.mp3',
   heroAttackFX: 'sword-slash.mp3',
-  normalBattleMusic: 'better-battle.m4a',
+  normalBattleMusic: '1-05 Battle.mp3',
   battleVictoryMusic: '1-06 Victory Fanfare.mp3',
   fireMagicFX: 'fire1.mp3',
   cureMagicFX: 'healingSpell.mp3',
