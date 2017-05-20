@@ -51,7 +51,8 @@ describe('<StatusWindow />', () => {
       .find('tbody')
       .at(1)
       .find('td')
-      .at(0)).toHaveClassName('menu-select character');
+      .at(0)
+      .find('button')).toHaveClassName('menu-select character');
   });
 
   test('should say HP in second table first th', () => {

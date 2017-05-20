@@ -1,5 +1,5 @@
 import React from 'react';
-import { battleVictoryMusic } from './SoundEffects';
+import { battleVictoryMusic } from '../helpers/soundEffects';
 
 export default function Victory() {
   battleVictoryMusic();

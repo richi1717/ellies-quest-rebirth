@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { normalBattleMusic } from './SoundEffects';
+import { normalBattleMusic } from '../helpers/soundEffects';
 
 export default function BattleScene(props) {
   props.playMusic && normalBattleMusic();

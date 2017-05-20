@@ -1,6 +1,6 @@
 import musicLocation from '../constants/musicLocation';
 
-function soundFXFactory(type) {
+export function soundFXFactory(type) {
   return () => {
     const audio = new Audio(`/resources/music/${musicLocation[type]}`);
     return audio.play();

@@ -1,7 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import BattleScene from '../../js/components/BattleScene';
-import { normalBattleMusic } from '../../js/components/SoundEffects';
+import { normalBattleMusic } from '../../js/helpers/soundEffects';
+
+jest.mock('../../js/helpers/soundEffects');
 
 describe('<BattleScene />', () => {
   let battleScene;
@@ -33,8 +35,8 @@ describe('<BattleScene />', () => {
     expect(battleScene).toHaveClassName('grass-battle battle');
   });
 
-  test('should render normalBattleMusic when playMusic is true', () => {
-    expect(battleScene.find(normalBattleMusic)).toHaveLength(1);
+  test('should call normalBattleMusic when playMusic is true', () => {
+    expect(normalBattleMusic).toHaveBeenCalled();
   });
 
   test('should have a child with className of test', () => {

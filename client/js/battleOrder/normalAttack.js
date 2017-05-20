@@ -65,20 +65,3 @@ export default function attack(target) {
 
   attackEnemy(target, defender, attacker, characterStats, index);
 }
-
-
-//
-// setHeroAttackingAnimation() {
-//   setTimeout(() => {
-//     this.setState({ pos2: true });
-//   }, 550);
-//   setTimeout(() => {
-//     dispatch({
-//       type: types.SET_ATTACKER_AND_TARGET,
-//       attacker: '',
-//       target: '',
-//       typeOfAttack: ''
-//     });
-//     this.setState({ pos2: false });
-//   }, 1300);
-// }

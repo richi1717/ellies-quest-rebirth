@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import _filter from 'lodash.filter';
-import dispatch from '../dispatch';
-import types from '../constants/actionTypes';
-import { heroAttackFX } from './SoundEffects';
-import Victory from './Victory';
+import { heroAttackFX } from '../helpers/soundEffects';
+// import Victory from './Victory';
 // import setTimeoutHelper from '../helpers/time-out';
 // import { damageCalculation, getBaseDamage } from '../helpers/damage-calc';
 

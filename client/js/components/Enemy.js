@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import _assign from 'lodash.assign';
 // import classnames from 'classnames';
-import { enemyAttackFX } from './SoundEffects';
-import dispatch from '../dispatch';
-import types from '../constants/actionTypes';
+import { enemyAttackFX } from '../helpers/soundEffects';
 // import setTimeoutHelper from '../helpers/time-out';
-import damageCalculation from '../helpers/damageCalc';
 
 export default class Enemy extends Component {
   constructor(props) {
@@ -152,58 +148,22 @@ export default class Enemy extends Component {
   //   );
   // }
 
-  enemyClick(event) {
-    // const { enemyStats, characterStats, whoIsAttacking } = this.props.state;
-    // const target = event.target.id;
-    // const index = target.split('enemy')[1] - 1;
-    // const enemy = enemyStats[index];
-    // const { attacker } = whoIsAttacking;
-    //
-    // if (attacker.includes('hero')) this.attackEnemy(target, enemy, attacker, characterStats, index);
-  }
-
-  attackEnemy(target, enemy, attacker, characterStats, index) {
-    const enemyCopy = _assign({}, enemy);
-    const hero = characterStats[attacker.split('hero')[1] - 1];
-    const dmg = damageCalculation(hero, enemyCopy);
-    const killed = dmg >= enemyCopy.currentHp;
-    enemyCopy.currentHp -= dmg;
-
-    dispatch({
-      type: types.SET_ATTACKER_AND_TARGET,
-      attacker,
-      target,
-      typeOfAttack: this.props.state.whoIsAttacking.typeOfAttack
-    });
-
-    if (killed) {
-      enemyCopy.currentHp = 0;
-      enemyCopy.killed = killed;
-      const element = document.getElementById(enemyCopy.attackerId);
-
-      this.enemyKilledFadeOut(element, enemyCopy, index);
-    } else {
-      this.completePhase(enemyCopy, index);
-    }
-  }
-
   render() {
     const { state, position } = this.props;
     const { attacker } = state.whoIsAttacking;
+    const enemyId = `enemy${position}`;
+    attacker === enemyId && enemyAttackFX();
 
     // const DMG_DISPLAY = document.getElementById(`dmg-display${this.props.position}`);
-    const enemyId = `enemy${position}`;
     if (!state.enemyStats[position - 1].killed) {
       return (
         <div>
-          <button
-            onClick={event => this.enemyClick(event)}
+          <div
             id={enemyId}
             className={`enemy-sprites ${this.props.classes} ${enemyId}`}
           >
             {/*{this.showDamageOverHead()}*/}
-          </button>
-          {attacker === enemyId && <enemyAttackFX />}
+          </div>
         </div>
       );
     }

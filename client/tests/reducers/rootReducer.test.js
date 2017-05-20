@@ -16,7 +16,7 @@ describe('rootReducer', () => {
       enemyStats: [{ yolo: true }],
       isBackgroundMusicOn: { data: false },
       whoIsAttacking: { attacker: 'hero1', target: 'monster2', typeOfAttack: 'attack' },
-      battleMenuAction: { selection: 'run', hero: '1' }
+      battleMenuAction: { selection: 'run' }
     };
     newState = {
       enemyInfo: { data: '' },
@@ -24,7 +24,7 @@ describe('rootReducer', () => {
       enemyStats: [],
       isBackgroundMusicOn: { data: true },
       whoIsAttacking: { attacker: 'hero2', target: '', typeOfAttack: 'magic' },
-      battleMenuAction: { selection: 'defend', hero: '2' }
+      battleMenuAction: { selection: 'defend' }
     };
   });
 
@@ -34,7 +34,7 @@ describe('rootReducer', () => {
       enemyStats: [],
       isBackgroundMusicOn: { data: false },
       whoIsAttacking: { attacker: '', target: '', typeOfAttack: '' },
-      battleMenuAction: { selection: '', hero: '' }
+      battleMenuAction: { selection: '' }
     });
   });
 
@@ -48,7 +48,7 @@ describe('rootReducer', () => {
       enemyStats: [],
       isBackgroundMusicOn: { data: false },
       whoIsAttacking: { attacker: '', target: '', typeOfAttack: '' },
-      battleMenuAction: { selection: '', hero: '' }
+      battleMenuAction: { selection: '' }
     });
   });
 
@@ -68,8 +68,7 @@ describe('rootReducer', () => {
   test('SET_BATTLE_MENU_ACTION > should update battleMenuAction', () => {
     expect(rootReducer(oldState, {
       type: types.SET_BATTLE_MENU_ACTION,
-      selection: 'defend',
-      hero: '2'
+      selection: 'defend'
     })).toEqual({
       characterStats: oldState.characterStats,
       enemyStats: oldState.enemyStats,

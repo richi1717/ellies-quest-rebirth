@@ -4,7 +4,6 @@ exports[`<BattleScene /> should match snapshot 1`] = `
 <div
   className="grass-battle battle"
 >
-  <NormalBattleMusic />
   <div
     className="test"
   />

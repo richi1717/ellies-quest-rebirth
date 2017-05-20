@@ -1,6 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import BattleMenuListOfTargets from '../../js/components/BattleMenuListOfTargets';
+import attack from '../../js/battleOrder/normalAttack';
+
+jest.mock('../../js/battleOrder/normalAttack');
 
 describe('<BattleMenuListOfTargets />', () => {
   const heroClick = jest.fn();
@@ -79,12 +82,12 @@ describe('<BattleMenuListOfTargets />', () => {
 
   test('should trigger click on hero element that has id that matches attackerId', () => {
     listOfTargets.find('button').at(0).simulate('click');
-    expect(heroClick).toHaveBeenCalled();
+    expect(attack).toHaveBeenCalledWith('h1');
   });
 
   test('should trigger click on enemy element that has id that matches attackerId', () => {
     listOfTargets.find('button').at(2).simulate('click');
-    expect(enemyClick).toHaveBeenCalled();
+    expect(attack).toHaveBeenLastCalledWith('e1');
   });
 
   test('should have hero names rendered first', () => {
