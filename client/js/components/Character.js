@@ -22,34 +22,11 @@ export default class Character extends Component {
     return !isHeroDeadAndNotBeingRevived;
   }
 
-  //
   setHeroAttackingAnimation() {
     setTimeout(() => {
       heroAttackFX();
     }, 800);
-    // setTimeout(() => {
-    //   // dispatch({
-    //   //   type: types.SET_ATTACKER_AND_TARGET,
-    //   //   attacker: '',
-    //   //   target: '',
-    //   //   typeOfAttack: ''
-    //   // });
-    //   this.setState({ pos2: false });
-    // }, 1300);
   }
-  //
-  // setNextTurnAfterHeroIsDone() {
-  //   setTimeOutHelper(1000, this.props.setPauseBetweenTurns, true);
-  //   setTimeOutHelper(1300, this.props.setListOfTurnOrder, this.props.getNextTurn);
-  //   setTimeOutHelper(1300, this.props.setNextTurnFromList, this.props.getListOfTurnOrder);
-  //   setTimeOutHelper(1300, this.props.setHeroAttacking, false, this.props.position);
-  // }
-  //
-  // handleHeroTurn() {
-  //   this.setHeroAttackingAnimation();
-  //   this.setNextTurnAfterHeroIsDone();
-  // }
-  //
   // handleEnemyAttacking(heroStats, position) {
   //   const DMG = this.getDamageAmount(heroStats.toJS());
   //   const DMG_DISPLAY = document.getElementById('dmg-display-hero' + position);
@@ -102,23 +79,6 @@ export default class Character extends Component {
   //   this.damageDisplayFadeIn(DMG_DISPLAY, 'restore');
   // }
   //
-  // getDamageAmount(heroStats) {
-  //   const POWER = 1/16;
-  //   const STR = this.props.isMenuDefendSelected ? this.props.enemyStr * 0.618 : this.props.enemyStr;
-  //   let damage = damageCalculation(POWER, heroStats.def, STR);
-  //   damage = damage >= heroStats.currentHp ? heroStats.currentHp : damage;
-  //   this.damage = damage;
-  //   return damage;
-  // }
-  //
-  // setInitialTurn() {
-  //   if (this.props.getListOfTurnOrder.toJS()[0] === ('hero' + this.props.position)) {
-  //     console.log('once');
-  //     this.props.setNextTurnFromList(this.props.getListOfTurnOrder);
-  //     this.props.setHeroAttacking(true, this.props.position);
-  //   }
-  // }
-  //
   // damageDisplayFadeIn(element, type, display) {
   //   element.style.opacity = 0;
   //   element.style.display = display || "block";
@@ -140,7 +100,6 @@ export default class Character extends Component {
   // }
 
   showDamageOverHead() {
-    // const STYLE = { display: 'none' };
     return (
       <div
         id={`dmg-display-hero${this.props.position}`}
@@ -152,9 +111,10 @@ export default class Character extends Component {
   }
 
   render() {
-    const { position, killed, classes, state, attackerId } = this.props;
-    const { whoIsAttacking } = state;
-    const isHeroAttacking = whoIsAttacking.target && whoIsAttacking.attacker === attackerId;
+    const { position, classes, state, attackerId } = this.props;
+    const { target, attacker, typeOfAttack } = state.whoIsAttacking;
+    const isHeroAttacking = target && attacker === attackerId && typeOfAttack === 'attack';
+    const killed = state.characterStats[position - 1].killed;
     isHeroAttacking && this.setHeroAttackingAnimation();
 
     const heroClass = {
@@ -162,8 +122,9 @@ export default class Character extends Component {
       'front-row': position < 3,
       'back-row': position >= 3,
       'dead': killed,
-      'attacking hero-turn': whoIsAttacking.attacker === attackerId,
-      [`attack-${whoIsAttacking.target}`]: isHeroAttacking,
+      'defense': this.props.defending,
+      'attacking hero-turn': attacker === attackerId,
+      [`attack-${target}`]: isHeroAttacking,
       'attack-swing': isHeroAttacking
     };
 
@@ -180,7 +141,7 @@ export default class Character extends Component {
 Character.propTypes = {
   position: PropTypes.number,
   classes: PropTypes.string,
-  killed: PropTypes.bool,
   state: PropTypes.object,
-  attackerId: PropTypes.string
+  attackerId: PropTypes.string,
+  defending: PropTypes.bool
 };

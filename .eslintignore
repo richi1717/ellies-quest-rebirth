@@ -5,5 +5,4 @@ public/bundle.js
 coverage/
 client/js/components/BattleMenuAttack.js
 client/js/components/BattleMenuItem.js
-client/js/components/BattleMenuTurn.js
 client/js/helpers/magic-function.js

@@ -1,66 +1,27 @@
-import React, { Component, PropTypes } from 'react';
-import filter from 'lodash.filter';
-import { DATA_BASE_URL_CHARACTERS } from '../constants/databaseUrls';
+import React, { PropTypes } from 'react';
 import Character from '../components/Character';
-import types from '../constants/actionTypes';
-import dispatch from '../dispatch';
 
-export default class CharacterSelection extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      done: false
-    };
-  }
-
-  componentWillMount() {
-    const url = `${DATA_BASE_URL_CHARACTERS}`;
-    this.serverRequest = fetch(url)
-      .then(response => response.json())
-      .then(data => {
-        this.setCharacters(data);
-        this.setState({ done: true });
-      });
-  }
-
-  componentWillUnmount() {
-    this.serverRequest.abort();
-  }
-
-  setCharacters(x) {
-    const playableCharacters = filter(x, { inPlay: true });
-
-    playableCharacters.map((character, id) => {
-      dispatch({
-        type: types.UPDATE_CHARACTER_STATS,
-        character,
-        id
-      });
-    });
-  }
-
-  renderCharacters(x) {
-    const characters = [];
+export default function CharacterSelection(props) {
+  function renderCharacters(characters) {
+    const charactersArray = [];
     let incr = 0;
 
-    x.map(character => {
+    characters.map(character => {
       incr++;
 
-      characters.push(
-        <Character position={incr} key={incr} state={this.props.state} {...character} />
+      charactersArray.push(
+        <Character position={incr} key={incr} state={props.state} {...character} />
       );
     });
 
-    return characters;
+    return charactersArray;
   }
 
-  render() {
-    return (
-      <div className="characters-container">
-        {this.state.done ? this.renderCharacters(this.props.state.characterStats) : null}
-      </div>
-    );
-  }
+  return (
+    <div className="characters-container">
+      {renderCharacters(props.state.characterStats)}
+    </div>
+  );
 }
 
 CharacterSelection.propTypes = {

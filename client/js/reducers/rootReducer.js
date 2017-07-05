@@ -9,7 +9,8 @@ const defaults = {
   enemyStats: [],
   isBackgroundMusicOn: { data: false },
   whoIsAttacking: { attacker: '', target: '', typeOfAttack: '' },
-  battleMenuAction: { selection: '' }
+  battleMenuAction: { selection: '' },
+  magicType: ''
 };
 
 export default function rootReducer(state = defaults, action) {
@@ -24,11 +25,14 @@ export default function rootReducer(state = defaults, action) {
       return _assign({}, state, { isBackgroundMusicOn: { data: action.isBackgroundMusicOn } });
     case types.SET_BATTLE_MENU_ACTION:
       return _assign({}, state, { battleMenuAction: { selection: action.selection } });
+    case types.SET_MAGIC_TYPE:
+      return _assign({}, state, { magicType: action.magicType });
     case types.END_HERO_TURN: {
       return _assign({}, state, {
         enemyStats: enemyStatsReducer(state.enemyStats, action),
         battleMenuAction: defaults.battleMenuAction,
-        whoIsAttacking: defaults.whoIsAttacking
+        whoIsAttacking: defaults.whoIsAttacking,
+        magicType: defaults.magicType
       });
     }
     case types.SET_ATTACKER_AND_TARGET:

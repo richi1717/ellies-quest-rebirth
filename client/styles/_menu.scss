@@ -115,13 +115,24 @@
 }
 
 .menu-select {
-  padding: 0 0px;
+  padding: 0 0;
   text-align: left;
   text-shadow: 2px 1px #8a8a7b;
   font-size: 22pt;
   span + span {
     height: auto;
   }
+
+  &.cannot {
+    color: #6e6e6e;
+  }
+}
+
+.magic-menu {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 10px;
 }
 
 .character-turn {
@@ -179,10 +190,10 @@
   left: 200px;
 }
 
-.menu-items-select {
+.menu-magic-targets {
   z-index: 2;
   bottom: 80px;
-  left: 250px;
+  left: 240px;
 }
 
 .menu-magic {

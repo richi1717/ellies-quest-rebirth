@@ -7,6 +7,7 @@ import StatusWindow from './StatusWindow';
 // import TimeOutHandler from './time-out';
 import BattleMenuTurn from './BattleMenuTurn';
 import BattleMenuAttack from './BattleMenuListOfTargets';
+import BattleMenuMagic from './BattleMenuMagic';
 // import BattleMenuItems from './BattleMenuItem';
 
 export default function App(props) {
@@ -21,6 +22,7 @@ export default function App(props) {
         <StatusWindow {...props} />
         <BattleMenuTurn {...props} />
         <BattleMenuAttack {...props} />
+        <BattleMenuMagic {...props} />
         {/*<BattleMenuItems />*/}
       </BattleScene>
     </div>

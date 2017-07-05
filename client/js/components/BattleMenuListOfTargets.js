@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import attack from '../battleOrder/normalAttack';
+import magicAttack from '../battleOrder/magicAttack';
 
 export default class BattleMenuListOfTargets extends Component {
   getRenderedListOfCharacters() {
@@ -40,7 +41,7 @@ export default class BattleMenuListOfTargets extends Component {
         enemyNames.push(
           <li key={enemy.attackerId}>
             <button
-              onClick={() => attack(enemy.attackerId)}
+              onClick={() => this.dispatchClickEvent(enemy.attackerId)}
               className="menu-select"
             >
               {enemy.name}
@@ -54,7 +55,18 @@ export default class BattleMenuListOfTargets extends Component {
   }
 
   dispatchClickEvent(id) {
-    attack(id);
+    const typeOfAttack = this.props.state.whoIsAttacking.typeOfAttack;
+
+    switch (typeOfAttack) {
+      case 'magic':
+        magicAttack(id);
+        break;
+      case 'attack':
+        attack(id);
+        break;
+      default:
+        break;
+    }
   }
 
   isMoreThanFive() {
@@ -67,16 +79,20 @@ export default class BattleMenuListOfTargets extends Component {
   }
 
   render() {
-    const { selection } = this.props.state.battleMenuAction;
+    const { battleMenuAction, magicType } = this.props.state;
+    const { selection } = battleMenuAction;
+    const isMagic = selection === 'magic' && magicType;
     const areItemsSelected = selection === 'items';
     const menuAttackClasses = {
       'battle-menu-turn': true,
       'menu-attack': true,
       'sub-menu': true,
       'more-than-five': !!this.isMoreThanFive(),
-      'menu-items-select': areItemsSelected
+      'menu-items-select': areItemsSelected,
+      'menu-magic-targets': isMagic
     };
-    if (selection && (selection !== 'run' && selection !== 'defend')) {
+
+    if (selection && (selection === 'attack' || isMagic)) {
       if (this.isMoreThanFive()) {
         return (
           <div label="yeah" className={classnames(menuAttackClasses)}>

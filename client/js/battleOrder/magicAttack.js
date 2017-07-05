@@ -1,8 +1,13 @@
 import dispatch, { getState } from '../dispatch';
 import types from '../constants/actionTypes';
-import { damageCalculation } from '../helpers/damageCalc';
+import { magicDamageCalculation } from '../helpers/damageCalc';
 
-function completePhase(enemy, id) {
+function completePhase(enemy, id, character, characterId) {
+  dispatch({
+    type: types.UPDATE_CHARACTER_STATS,
+    character,
+    id: characterId
+  });
   setTimeout(() => {
     dispatch({
       type: types.END_HERO_TURN,
@@ -12,11 +17,11 @@ function completePhase(enemy, id) {
   }, 1500);
 }
 
-function enemyKilledFadeOut(e, enemy, id) {
+function enemyKilledFadeOut(e, enemy, id, character, characterId) {
   const element = e;
   element.style.opacity = 1;
   element.style.display = 'block';
-  completePhase(enemy, id);
+  completePhase(enemy, id, character, characterId);
 
   const fade = () => {
     let val = parseFloat(element.style.opacity);
@@ -33,8 +38,10 @@ function enemyKilledFadeOut(e, enemy, id) {
 
 function attackEnemy(target, enemy, attacker, characterStats, index) {
   const enemyCopy = Object.assign({}, enemy);
-  const hero = characterStats[attacker.split('hero')[1] - 1];
-  const dmg = damageCalculation(hero, enemyCopy);
+  const heroId = attacker.split('hero')[1] - 1;
+  const hero = characterStats[heroId];
+  hero.currentMp -= getState().magicType.cost;
+  const dmg = magicDamageCalculation(hero, enemyCopy);
   const killed = dmg >= enemyCopy.currentHp;
   enemyCopy.currentHp -= dmg;
 
@@ -50,13 +57,13 @@ function attackEnemy(target, enemy, attacker, characterStats, index) {
     enemyCopy.killed = killed;
     const element = document.getElementById(enemyCopy.attackerId);
 
-    enemyKilledFadeOut(element, enemyCopy, index);
+    enemyKilledFadeOut(element, enemyCopy, index, hero, heroId);
   } else {
-    completePhase(enemyCopy, index);
+    completePhase(enemyCopy, index, hero, heroId);
   }
 }
 
-export default function attack(target) {
+export default function magicAttack(target) {
   const state = getState();
   const { enemyStats, characterStats, whoIsAttacking } = state;
   const index = target.split('enemy')[1] - 1;
